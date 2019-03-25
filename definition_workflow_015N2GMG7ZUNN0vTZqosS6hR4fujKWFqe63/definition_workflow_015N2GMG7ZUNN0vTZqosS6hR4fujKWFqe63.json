@@ -1,0 +1,669 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_015N2GMG7ZUNN0vTZqosS6hR4fujKWFqe63",
+    "name": "Get Switch VLAN Info",
+    "title": "Get Switch VLAN Info",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "scope": "local",
+          "name": "LoginPassword",
+          "type": "datatype.secure_string"
+        },
+        "unique_name": "variable_workflow_015QB231K4ILO2JFySGtkjwHo2sZ0ek37ZK",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "jadavis",
+          "scope": "local",
+          "name": "LoginUsername",
+          "type": "datatype.string"
+        },
+        "unique_name": "variable_workflow_015QB1PP1W5U04WoJaPFCsPnQers05jcKct",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "description": "Requires 'Create Switch VLAN Info Dashboard' as follow-on, adjunct workflow",
+      "display_name": "Get Switch VLAN Info",
+      "favorite": false,
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_015N2HULK01374PFD1vjFWv46KwXzAfWHKr",
+        "name": "Execute Terminal Command(s)",
+        "title": "Get Device file",
+        "type": "terminal.command",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "command_timeout": 60,
+          "commands": "PS1='prompt\u003e '\ncat devices.csv",
+          "continue_on_failure": false,
+          "description": "Logs into JumpServer which maintains the devices.csv file of switches to scan",
+          "display_name": "Get Device file",
+          "merge_commands": false,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "target": {
+            "override_workflow_target": true,
+            "override_workflow_target_group_criteria": false,
+            "target_id": "definition_target_015DKKL3AFSSR1VbhnX2LMZFE8cVkqXy3Ka",
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_015N3RHPEIOS63mwSbmj40b5ebPTzpZ2Z8v",
+        "name": "Replace String",
+        "title": "Replace String",
+        "type": "core.replacestring",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "description": "Removed commands and prompts from output",
+          "display_name": "Replace String",
+          "input_string": "$activity.definition_activity_015N2HULK01374PFD1vjFWv46KwXzAfWHKr.output.response_body$",
+          "replace_list": [
+            {
+              "replaced_string": "PS1='prompt\u003e '",
+              "replacement_string": ""
+            },
+            {
+              "replaced_string": "prompt\u003e",
+              "replacement_string": ""
+            },
+            {
+              "replaced_string": "cat devices.csv",
+              "replacement_string": ""
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_015N2JIKWHC706VCDXXsqvE3dRVwA92rguZ",
+        "name": "Read Table from Text",
+        "title": "Read Table from Text",
+        "type": "core.read_table_from_text",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "delimiters": [
+            {
+              "delimiter": ","
+            }
+          ],
+          "description": "Reads CSV contents and turns into an iterable table\n",
+          "display_name": "Read Table from Text",
+          "input_text": "$activity.definition_activity_015N3RHPEIOS63mwSbmj40b5ebPTzpZ2Z8v.output.result_string$",
+          "persist_output": true,
+          "populate_columns": false,
+          "table_columns": [
+            {
+              "column_name": "IPAddress",
+              "column_type": "string"
+            },
+            {
+              "column_name": "Hostname",
+              "column_type": "string"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_015N5ITRMSN0X0qnPHq1JEvRQjOzzVoe1Z0",
+        "name": "Delete from Table",
+        "title": "Delete from Table",
+        "type": "core.deleterowfromtable",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "description": "Removes empty entries from the table previously created",
+          "display_name": "Delete from Table",
+          "input_table": "$activity.definition_activity_015N2JIKWHC706VCDXXsqvE3dRVwA92rguZ.output.read_table_from_text$",
+          "rows": {
+            "rows_matching_criteria": true,
+            "where_clause": "IPAddress == ' '"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_015N6TPDIGJHM5VaJp7RGXLTWwCTzsEPDBo",
+        "name": "Write File",
+        "title": "Prep vlandata.xml",
+        "type": "terminal.write_file",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "content": "\u003cDocumentRoot\u003e\n",
+          "continue_on_failure": false,
+          "description": "Zero out any prior file and stage the XML header",
+          "display_name": "Prep vlandata.xml",
+          "encoding": "utf-8",
+          "file_name": "vlandata.xml",
+          "options": "overwrite",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_015N6PTT8OXSN1rgJbjREQmdJgxr3WoeEVH"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_015N3YB52V43O1DBs6Sk9p4EI7Ais4GvWGh",
+        "name": "For Each",
+        "title": "For Each",
+        "type": "logic.for_each",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "description": "Iterate over each row of the imported CSV that was converted to a table",
+          "display_name": "For Each",
+          "source_array": "$activity.definition_activity_015N2JIKWHC706VCDXXsqvE3dRVwA92rguZ.output.read_table_from_text$"
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_015N3ZRHJ65XA0pMI6eKOnggR7cV5ERboM4",
+            "name": "Execute Terminal Command(s)",
+            "title": "Execute Command on Target",
+            "type": "terminal.command",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "command_timeout": 60,
+              "commands": "ssh -o StrictHostKeyChecking=no -l $workflow.definition_workflow_015N2GMG7ZUNN0vTZqosS6hR4fujKWFqe63.local.variable_workflow_015QB1PP1W5U04WoJaPFCsPnQers05jcKct$ $activity.definition_activity_015N3YB52V43O1DBs6Sk9p4EI7Ais4GvWGh.input.source_array[@].IPAddress$ \"show vlan | xml\"\n$workflow.definition_workflow_015N2GMG7ZUNN0vTZqosS6hR4fujKWFqe63.local.variable_workflow_015QB231K4ILO2JFySGtkjwHo2sZ0ek37ZK$\n",
+              "continue_on_failure": false,
+              "description": "Use JumpServer to SSH through to target switch\nIgnore RSA key warning - provide username and command 'show vlan | xml' and password as one string\nCapture output",
+              "display_name": "Execute Command on Target",
+              "merge_commands": true,
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_015DKKL3AFSSR1VbhnX2LMZFE8cVkqXy3Ka"
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_015N5OYP1DCK33FdeVBtnwvfIwSFo5KrwO3",
+            "name": "Match Regular Expression",
+            "title": "Match Regular Expression",
+            "type": "core.matchregex",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "description": "Extract jump the XML results from the output (containing command, prompts, etc)",
+              "display_name": "Match Regular Expression",
+              "input_regex": "(?s)\u003c\\?xml.*reply\\\u003e",
+              "input_string": "$activity.definition_activity_015N3ZRHJ65XA0pMI6eKOnggR7cV5ERboM4.output.response_body$"
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_015N6WOOGNZJN1B7SICbZPZJjEWQkK2DUlU",
+            "name": "Condition Block",
+            "title": "Matched VLAN Output?",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Matched VLAN Output?"
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_015N6WOQSVBFW72sefQuqL01Oq1I3zJf5an",
+                "name": "Condition Branch",
+                "title": "Yes",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_015N5OYP1DCK33FdeVBtnwvfIwSFo5KrwO3.output.has_match$",
+                    "operator": "eq",
+                    "right_operand": true
+                  },
+                  "continue_on_failure": false,
+                  "description": "Did we get any good output from the device?\nWe may have had login or command issues - ignore those devices\n[Add functionality to handle and report those separately]",
+                  "display_name": "Yes"
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_015N6DX03V06950oHlzbeMb6l7QdiOM0PCn",
+                    "name": "Read Table from XML",
+                    "title": "Read Table from XML",
+                    "type": "corejava.read_table_from_xml",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "description": "Read in the XML output and parse into column data with specified data types",
+                      "display_name": "Read Table from XML",
+                      "input_xml": "$activity.definition_activity_015N5OYP1DCK33FdeVBtnwvfIwSFo5KrwO3.output.matching_strings[0]$",
+                      "persist_output": false,
+                      "populate_columns": false,
+                      "table_columns": [
+                        {
+                          "column_name": "vlanshowbr-vlanid",
+                          "column_type": "string",
+                          "zdate_type_format": ""
+                        },
+                        {
+                          "column_name": "vlanshowbr-vlanid-utf",
+                          "column_type": "string",
+                          "zdate_type_format": ""
+                        },
+                        {
+                          "column_name": "vlanshowbr-vlanname",
+                          "column_type": "string",
+                          "zdate_type_format": ""
+                        },
+                        {
+                          "column_name": "vlanshowbr-vlanstate",
+                          "column_type": "string",
+                          "zdate_type_format": ""
+                        },
+                        {
+                          "column_name": "vlanshowbr-shutstate",
+                          "column_type": "string",
+                          "zdate_type_format": ""
+                        },
+                        {
+                          "column_name": "vlanshowplist-ifidx",
+                          "column_type": "string",
+                          "zdate_type_format": ""
+                        }
+                      ],
+                      "xmlpath_query": "//ROW_vlanbrief"
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_015N6QJYV67BM5Keg42gNoDRffXHQlk1Rpx",
+                    "name": "For Each",
+                    "title": "For Each",
+                    "type": "logic.for_each",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "description": "For each row in the Output (XML) table...",
+                      "display_name": "For Each",
+                      "source_array": "$activity.definition_activity_015N6DX03V06950oHlzbeMb6l7QdiOM0PCn.output.read_table_from_xml$"
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_015N6OKO6QQZC63EZOhvLN64MxN6tptVLs4",
+                        "name": "Write File",
+                        "title": "Write vlandata.xml",
+                        "type": "terminal.write_file",
+                        "base_type": "activity",
+                        "properties": {
+                          "action_timeout": 180,
+                          "content": "\u003cRow\u003e\n\u003cHostname\u003e$activity.definition_activity_015N3YB52V43O1DBs6Sk9p4EI7Ais4GvWGh.input.source_array[@].Hostname$\u003c/Hostname\u003e\n\u003cHostIP\u003e$activity.definition_activity_015N3YB52V43O1DBs6Sk9p4EI7Ais4GvWGh.input.source_array[@].IPAddress$\u003c/HostIP\u003e\n\u003cVLAN\u003e$activity.definition_activity_015N6QJYV67BM5Keg42gNoDRffXHQlk1Rpx.input.source_array[@].vlanshowbr-vlanid-utf$\u003c/VLAN\u003e\n\u003cVLANName\u003e$activity.definition_activity_015N6QJYV67BM5Keg42gNoDRffXHQlk1Rpx.input.source_array[@].vlanshowbr-vlanname$\u003c/VLANName\u003e\n\u003cVLANState\u003e$activity.definition_activity_015N6QJYV67BM5Keg42gNoDRffXHQlk1Rpx.input.source_array[@].vlanshowbr-vlanstate$\u003c/VLANState\u003e\n\u003cVLANShutstate\u003e$activity.definition_activity_015N6QJYV67BM5Keg42gNoDRffXHQlk1Rpx.input.source_array[@].vlanshowbr-shutstate$\u003c/VLANShutstate\u003e\n\u003cVLANInterfaces\u003e$activity.definition_activity_015N6QJYV67BM5Keg42gNoDRffXHQlk1Rpx.input.source_array[@].vlanshowplist-ifidx$\u003c/VLANInterfaces\u003e\n\u003c/Row\u003e\n",
+                          "continue_on_failure": false,
+                          "description": "Write vlandata.xml file containing records of switch vlans and ports using our own XML schema",
+                          "display_name": "Write vlandata.xml",
+                          "encoding": "utf-8",
+                          "file_name": "vlandata.xml",
+                          "options": "append",
+                          "runtime_user": {
+                            "override_target_runtime_user": false,
+                            "target_default": true
+                          },
+                          "target": {
+                            "override_workflow_target": true,
+                            "target_id": "definition_target_015N6PTT8OXSN1rgJbjREQmdJgxr3WoeEVH"
+                          }
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_015N7VDUF2GQP6i8rXvzXhdTEK4SF4P417Z",
+        "name": "Write File",
+        "title": "Write closer vlandata.xml",
+        "type": "terminal.write_file",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "content": "\u003c/DocumentRoot\u003e\n",
+          "continue_on_failure": false,
+          "description": "Put an XML closing tag on the vlandata.xml file",
+          "display_name": "Write closer vlandata.xml",
+          "encoding": "utf-8",
+          "file_name": "vlandata.xml",
+          "options": "append",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_015N6PTT8OXSN1rgJbjREQmdJgxr3WoeEVH"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_015QAXDH3D9776xWivf5Ux5klfBay6t8X3J",
+        "name": "Create Switch VLAN Info Dashboard",
+        "title": "Create Switch VLAN Info Dashboard",
+        "type": "workflow.sub_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Create Switch VLAN Info Dashboard",
+          "input": {},
+          "target": {
+            "no_target": true,
+            "override_workflow_target": false
+          },
+          "workflow_id": "definition_workflow_015N7MQLWD2LM4CO5KtLUv4NkOfqnipKvwn"
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_0152LN3IWWYE81m9hsTLTjH38cMZV3oIryF": {
+      "unique_name": "definition_target_0152LN3IWWYE81m9hsTLTjH38cMZV3oIryF",
+      "name": "rtpnmlv-snmp",
+      "title": "rtpnmlv-snmp",
+      "type": "terminal.unix_linux_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "bash_shell": "/bin/bash",
+        "default_runtime_user_id": "definition_runtime_user_0152LM63T55JJ2qo3gCic0uJ03ZJ08nUJ71",
+        "display_name": "rtpnmlv-snmp",
+        "host": "as-rtp-rtpnmlv-snmp.cisco.com",
+        "port": 22
+      }
+    },
+    "definition_target_015DKKL3AFSSR1VbhnX2LMZFE8cVkqXy3Ka": {
+      "unique_name": "definition_target_015DKKL3AFSSR1VbhnX2LMZFE8cVkqXy3Ka",
+      "name": "clusjump",
+      "title": "clusjump",
+      "type": "terminal.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_0152LM63T55JJ2qo3gCic0uJ03ZJ08nUJ71",
+        "display_name": "clusjump",
+        "host": "10.122.6.62",
+        "port": 22,
+        "prompt_pattern": "prompt\u003e ",
+        "protocol": "ssh",
+        "succeeded_prompt_patterns": [
+          "\\[jadavis\\@as-rtp-clusjump.*?\\$ ",
+          "prompt\\$ "
+        ]
+      }
+    },
+    "definition_target_015N6PTT8OXSN1rgJbjREQmdJgxr3WoeEVH": {
+      "unique_name": "definition_target_015N6PTT8OXSN1rgJbjREQmdJgxr3WoeEVH",
+      "name": "clusjump",
+      "title": "clusjump",
+      "type": "terminal.unix_linux_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "bash_shell": "/usr/bin/bash",
+        "default_runtime_user_id": "definition_runtime_user_0152LM63T55JJ2qo3gCic0uJ03ZJ08nUJ71",
+        "display_name": "clusjump",
+        "host": "10.122.6.62",
+        "port": 22
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_0152LM63T55JJ2qo3gCic0uJ03ZJ08nUJ71": {
+      "unique_name": "definition_runtime_user_0152LM63T55JJ2qo3gCic0uJ03ZJ08nUJ71",
+      "name": "RTPNML jadavis regular",
+      "title": "RTPNML jadavis regular",
+      "type": "runtime_user.terminal_password_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "RTPNML jadavis regular"
+      }
+    }
+  },
+  "subworkflows": [
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_015N7MQLWD2LM4CO5KtLUv4NkOfqnipKvwn",
+        "name": "Create Switch VLAN Info Dashboard",
+        "title": "Create Switch VLAN Info Dashboard",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "local",
+              "name": "HTMLTemplate",
+              "type": "datatype.string"
+            },
+            "unique_name": "variable_workflow_015NW2IOFJLSO6u2LJ3X21HuHbu1oHCcAcL",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "Create Switch VLAN Info Dashboard",
+          "favorite": false,
+          "target": {
+            "execute_on_target_group": false,
+            "execute_on_workflow_target": false,
+            "no_target": true,
+            "specify_on_workflow_start": false
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_015NWAJSDXNJN4vibToTDkKPJXlM492dyFe",
+            "name": "Format Date",
+            "title": "Format Date",
+            "type": "core.format_date",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Format Date",
+              "format_string": "Mon, 02 Jan 2006 15:04:05 MST",
+              "original_date": "$workflow.definition_workflow_015N7MQLWD2LM4CO5KtLUv4NkOfqnipKvwn.output.start_time$",
+              "use_custom_format": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_015NV9MHLUEJ47ExXzN8gXtOtJlNHIEW8W6",
+            "name": "Execute Terminal Command(s)",
+            "title": "Read vlandata.xml",
+            "type": "terminal.command",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "command_timeout": 60,
+              "commands": "cat vlandata.xml",
+              "continue_on_failure": false,
+              "display_name": "Read vlandata.xml",
+              "merge_commands": false,
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_015DKKL3AFSSR1VbhnX2LMZFE8cVkqXy3Ka"
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_015NV72A3HFH96SL4yWGnAdaAARgznoFdVg",
+            "name": "Replace String",
+            "title": "Replace String",
+            "type": "core.replacestring",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Replace String",
+              "input_string": "$activity.definition_activity_015NV9MHLUEJ47ExXzN8gXtOtJlNHIEW8W6.output.response_body$",
+              "replace_list": [
+                {
+                  "replaced_string": "cat vlandata.cmd",
+                  "replacement_string": ""
+                },
+                {
+                  "replaced_string": "prompt$ ",
+                  "replacement_string": ""
+                },
+                {
+                  "replaced_string": "\\[jadavis@as-rtp-clusjump ~\\]\\$",
+                  "replacement_string": ""
+                },
+                {
+                  "replaced_string": "[jadavis@as-rtp-clusjump ~]$",
+                  "replacement_string": ""
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_015NV5H7CVQ4X5sicJgvER6fuEntTRkN3sv",
+            "name": "XSL Transform",
+            "title": "XSL Transform",
+            "type": "core.xsl_transform",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "XSL Transform",
+              "document": "$activity.definition_activity_015NV72A3HFH96SL4yWGnAdaAARgznoFdVg.output.result_string$",
+              "stylesheet": "\u003c?xml version=\"1.0\"?\u003e\n\u003c!DOCTYPE xsl:stylesheet PUBLIC \"Unofficial XSLT 1.0 DTD\" \"http://www.w3.org/1999/11/xslt10.dtd\"\u003e\n\u003c!-- VLAN data to table (XSLT)-v2.xml\nXSLT Transform that takes Cisco Action Orchestrator VLAN data and creates simple HTML Table output\n     \nInput data format:\n     \n\u003cDocumentRoot\u003e\n\t\u003cRow\u003e\n\t\t\u003cHostname\u003eas-rtp-rtpnml-7k-core2\u003c/Hostname\u003e\n\t\t\u003cHostIP\u003e10.122.25.70\u003c/HostIP\u003e\n\t\t\u003cVLAN\u003e1\u003c/VLAN\u003e\n\t\t\u003cVLANName\u003edefault\u003c/VLANName\u003e\n\t\t\u003cVLANState\u003eactive\u003c/VLANState\u003e\n\t\t\u003cVLANShutstate\u003enoshutdown\u003c/VLANShutstate\u003e\n\t\t\u003cVLANInterfaces\u003eEthernet7/20\u003c/VLANInterfaces\u003e\n    \u003c/Row\u003e\n     ...\n\u003c/DocumentRoot\u003e     \n\nVersion Information:     \n     v1 2019-0310 jadavis     Initial release\n     v2 2019-0311 jadavis     Updated to output as table with user-configurable number of columns\n     \n--\u003e\n\u003cxsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\"\u003e\n\t\u003cxsl:output method=\"html\"/\u003e\n\t\u003c!-- Change value (20) to suite maximum number of columns in HTML table output --\u003e\n\t\u003cxsl:variable name=\"MaxColumnCount\"\u003e20\u003c/xsl:variable\u003e\n\t\u003cxsl:key name=\"VLANnumber\" match=\"VLAN\" use=\".\"/\u003e\n\t\u003cxsl:template match=\"/DocumentRoot\"\u003e\n\t\t\u003ctable border=\"1\"\u003e\n\t\t\t\u003cxsl:for-each select=\"Row/VLAN[generate-id()=generate-id(key('VLANnumber',.))]\"\u003e\n\t\t\t\t\u003cxsl:sort select=\"key('VLANnumber',.)\" data-type=\"number\" order=\"ascending\"/\u003e\n\t\t\t\t\u003cxsl:if test=\"position() mod $MaxColumnCount = 1\"\u003e\n\t\t\t\t\t\u003cxsl:text disable-output-escaping=\"yes\"\u003e\u003c![CDATA[\u003ctr\u003e]]\u003e\u003c/xsl:text\u003e\n\t\t\t\t\t\u003ctd class=\"label\"\u003eVLAN Number:\u003cbr/\u003e\n\t\t\t\t\t\tSwitch Usage Count:\u003c/td\u003e\n\t\t\t\t\t\u003ctd\u003e\n\t\t\t\t\t\t\u003cxsl:value-of select=\".\"/\u003e\n\t\t\t\t\t\t\u003cbr/\u003e\n\t\t\t\t\t\t\u003cxsl:value-of select=\"count(../../Row[VLAN=current()])\"/\u003e\n\t\t\t\t\t\u003c/td\u003e\n\t\t\t\t\u003c/xsl:if\u003e\n\t\t\t\t\u003cxsl:if test=\"position() mod $MaxColumnCount \u0026gt; 1\"\u003e\n\t\t\t\t\t\u003ctd\u003e\n\t\t\t\t\t\t\u003cxsl:value-of select=\".\"/\u003e\n\t\t\t\t\t\t\u003cbr/\u003e\n\t\t\t\t\t\t\u003cxsl:value-of select=\"count(../../Row[VLAN=current()])\"/\u003e\n\t\t\t\t\t\u003c/td\u003e\n\t\t\t\t\u003c/xsl:if\u003e\n\t\t\t\t\u003cxsl:if test=\"position() mod $MaxColumnCount = 0\"\u003e\n\t\t\t\t\t\u003cxsl:text disable-output-escaping=\"yes\"\u003e\u003c![CDATA[\u003c/tr\u003e]]\u003e\u003c/xsl:text\u003e\n\t\t\t\t\u003c/xsl:if\u003e\n\t\t\t\u003c/xsl:for-each\u003e\n\t\t\u003c/table\u003e\n\t\u003c/xsl:template\u003e\n\u003c/xsl:stylesheet\u003e\n"
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_015NW2LZPFDND3XvSW7mxwa0mnooIhPDlOX",
+            "name": "Set Variables",
+            "title": "Set HTMLTemplate",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Set HTMLTemplate",
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_015N7MQLWD2LM4CO5KtLUv4NkOfqnipKvwn.local.variable_workflow_015NW2IOFJLSO6u2LJ3X21HuHbu1oHCcAcL$",
+                  "variable_value_new": "\u003c!doctype html\u003e\n\u003chtml\u003e\n\u003c!-- Filename: TEMPLATE-VLAN usage report.html\n     v1\t2019-0311\tjadavis@cisco.com\tInitial Release\n--\u003e\n\t\u003chead\u003e\n\t\t\u003cmeta charset=\"utf-8\"\u003e\n\u003c!-- Always force latest IE rendering engine or request Chrome Frame --\u003e\n\t\t\u003cmeta content=\"IE=edge,chrome=1\" http-equiv=\"X-UA-Compatible\"\u003e\u003cmeta http-equiv=\"refresh\" content=\"30\"\u003e\n\u003c!-- Use title if it's in the page YAML frontmatter --\u003e\n\t\t\u003ctitle\u003e\n\t\t\tVLAN Usage report\n\t\t\u003c/title\u003e\n\t\t\u003cstyle type=\"text/css\"\u003e\n\t\t\t* {\n\t\t\t    box-sizing: border-box;\n\t\t\t  }\n\t\t\t\n\t\t\t  body{\n\t\t\t    background-color: #000000;\n\t\t\t    color: #ffffff;\n\t\t\t    font-family: Helvetica, Arial, Sans-Serif;\n\t\t\t    padding: 60px;\n\t\t\t    padding-bottom: 0;\n\t\t\t  }\n\t\t\t\n\t\t\t  h1 {\n\t\t\t    text-align: center;\n\t\t\t    font-size: 70px;\n\t\t\t    font-weight: normal;\n\t\t\t    padding: 0;\n\t\t\t    margin: 0 0 40px 0;\n\t\t\t  }\n\t\t\t\n\t\t\t\n\t\t\t  table {\n\t\t\t\tclear: both;\n\t\t\t    border-collapse: collapse;\n\t\t\t  }\n\t\t\t  \n\t\t\t  td {\n\t\t\t    padding: 0 5px 10px 5px;\n\t\t\t    width: 150px;\n\t\t\t  }\n\t\t\t  \n\t\t\t  td.label {\n\t\t\t\ttext-align: left;\n\t\t\t\tfont-size: 16px;\n\t\t\t\tbackground-color: LightSteelBlue;\n\t\t\t\tpadding: 0 10px 10px 10px;\n\t\t\t  }\t\t  \n\t\t\t  \t\t  \n\t\t\t  .red {\n\t\t\t  \tbackground-color: red;\n\t\t\t  }\n\t\t\t  \n\t\t\t  .yellow {\n\t\t\t  \tbackground-color: yellow;\n\t\t\t  }\n\t\t\t  \n\t\t\t  .green {\n\t\t\t  \tbackground-color: green;\n\t\t\t  }\n\t\t\u003c/style\u003e\n\t\u003c/head\u003e\n\t\u003cbody\u003e\n\t\t\u003ch1\u003e\n\t\t\tVLAN Usage Report\n\t\t\u003c/h1\u003e\n\t\t###TABLE###\n\t\t\u003cp\u003e\n\t\t\t\u003cp\u003e\n\t\t\t\t\u003cp style=\"text-align:right\"\u003e\n\t\t\t\t\tData obtained by Action Orchestrator\u003cbr\u003eA Cisco CloudCenter module\n\t\t\t\t\u003c/p\u003e\n\t\t\t\t\u003cp style=\"text-align:right\"\u003e\n\t\t\t\t\tLast Run: ###TIMESTAMP###\n\t\t\t\t\u003c/p\u003e\n\t\u003c/body\u003e\n\u003c/html\u003e"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_015NW9UG7PHCS2ymIyEsmczfavEtsXtCCmQ",
+            "name": "Replace String",
+            "title": "Replace String",
+            "type": "core.replacestring",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Replace String",
+              "input_string": "$workflow.definition_workflow_015N7MQLWD2LM4CO5KtLUv4NkOfqnipKvwn.local.variable_workflow_015NW2IOFJLSO6u2LJ3X21HuHbu1oHCcAcL$",
+              "replace_list": [
+                {
+                  "replaced_string": "###TABLE###",
+                  "replacement_string": "$activity.definition_activity_015NV5H7CVQ4X5sicJgvER6fuEntTRkN3sv.output.output_document$"
+                },
+                {
+                  "replaced_string": "###TIMESTAMP###",
+                  "replacement_string": "$activity.definition_activity_015NWAJSDXNJN4vibToTDkKPJXlM492dyFe.output.result$"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_015NWINMA66QN6LKkTaP6MJzGU2sYrCLEh7",
+            "name": "Write File",
+            "title": "Write File",
+            "type": "terminal.write_file",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "content": "$activity.definition_activity_015NW9UG7PHCS2ymIyEsmczfavEtsXtCCmQ.output.result_string$",
+              "continue_on_failure": false,
+              "display_name": "Write File",
+              "encoding": "utf-8",
+              "file_name": "/var/www/html/VLANUsageReport.html",
+              "options": "overwrite",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_0152LN3IWWYE81m9hsTLTjH38cMZV3oIryF"
+              }
+            },
+            "object_type": "definition_activity"
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    }
+  ]
+}
