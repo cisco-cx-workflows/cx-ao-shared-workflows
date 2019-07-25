@@ -1,0 +1,128 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_018OU4D7MGKAE4LyoTYxFGcXibF1VGU1FrN",
+    "name": "InfluxDB - Insert_Data",
+    "title": "InfluxDB - Insert_Data",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "s",
+          "scope": "input",
+          "name": "precision",
+          "type": "datatype.string",
+          "description": "s=seconds"
+        },
+        "unique_name": "variable_workflow_018OU6AKVHO516zJuagpxSBwUOlKVxgprqm",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "measurements_to_write",
+          "type": "datatype.string"
+        },
+        "unique_name": "variable_workflow_018OU6KLDINN03IqjZwLGd4l3eMLqsuCc8P",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "METRICS",
+          "scope": "input",
+          "name": "database",
+          "type": "datatype.string"
+        },
+        "unique_name": "variable_workflow_018OU5DB2BJ7E6pw3qKoE1RRSt3CRmoR08K",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "InfluxDB - Insert_Data",
+      "favorite": false,
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_018VDK3M42NPO70bM3NvipPggSV5APeW3Io",
+        "name": "Replace String",
+        "title": "Offset Spaces",
+        "type": "core.replacestring",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Offset Spaces",
+          "input_string": "$workflow.definition_workflow_018OU4D7MGKAE4LyoTYxFGcXibF1VGU1FrN.input.variable_workflow_018OU6KLDINN03IqjZwLGd4l3eMLqsuCc8P$",
+          "replace_list": [
+            {
+              "replaced_string": " ",
+              "replacement_string": "\\ "
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_018VDKFE5159V1j6BKZZ8taJfPnWf5uK44I",
+        "name": "Replace String",
+        "title": "Fix Value",
+        "type": "core.replacestring",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Fix Value",
+          "input_string": "$activity.definition_activity_018VDK3M42NPO70bM3NvipPggSV5APeW3Io.output.result_string$",
+          "replace_list": [
+            {
+              "replaced_string": "\\ value=",
+              "replacement_string": "value="
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_018OU6PE4RTFS373E6pCPzQ6e40JZ2JiRr7",
+        "name": "HTTP Request",
+        "title": "Insert measurement",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "body": "$activity.definition_activity_018VDKFE5159V1j6BKZZ8taJfPnWf5uK44I.output.result_string$",
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "display_name": "Insert measurement",
+          "method": "POST",
+          "relative_url": "write?db=$workflow.definition_workflow_018OU4D7MGKAE4LyoTYxFGcXibF1VGU1FrN.input.variable_workflow_018OU5DB2BJ7E6pw3qKoE1RRSt3CRmoR08K$\u0026precision=$workflow.definition_workflow_018OU4D7MGKAE4LyoTYxFGcXibF1VGU1FrN.input.variable_workflow_018OU6AKVHO516zJuagpxSBwUOlKVxgprqm$",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "target": {
+            "override_workflow_target": false,
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  }
+}
