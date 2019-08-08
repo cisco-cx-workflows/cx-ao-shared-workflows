@@ -1,0 +1,130 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_0197IKQ6NTGU17fuQDa8C4QYvTKVAa4TMOE",
+    "name": "Concate and Replace",
+    "title": "Concate and Replace",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "string_to_build_on",
+          "type": "datatype.string"
+        },
+        "unique_name": "variable_workflow_0197ILJ60D1NE3E3dwN8qlzDxhxJqrAbEhG",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "\u003cth\u003esome row 1\u003c/th\u003e\n\u003cth\u003e some row 2\u003c/th\u003e\n\u003cth\u003e some row 3\u003c/th\u003e\n\u003cth\u003e some row 4\u003c/th\u003e",
+          "scope": "local",
+          "name": "source_string",
+          "type": "datatype.string"
+        },
+        "unique_name": "variable_workflow_0197INSYVUP616oiTLHLOKkLZpumiRS4SDq",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "#####HEADER#####",
+          "scope": "local",
+          "name": "template_to_replace",
+          "type": "datatype.string"
+        },
+        "unique_name": "variable_workflow_0197IOY7E6ZW92HqkudVahQ4H9V0vjeza1C",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Concate and Replace",
+      "favorite": false,
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_0197INVLU5N4M5wg6kvNGTfe9QjH06IZobT",
+        "name": "Match Regular Expression",
+        "title": "Match Regular Expression",
+        "type": "core.matchregex",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Match Regular Expression",
+          "input_regex": "\u003cth\u003e.*\u003c/th\u003e",
+          "input_string": "$workflow.definition_workflow_0197IKQ6NTGU17fuQDa8C4QYvTKVAa4TMOE.local.variable_workflow_0197INSYVUP616oiTLHLOKkLZpumiRS4SDq$"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_0197IO2MRUQ3N182Vtk6cFSOUD5qMXzP55e",
+        "name": "For Each",
+        "title": "For Each",
+        "type": "logic.for_each",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "For Each",
+          "source_array": "$activity.definition_activity_0197INVLU5N4M5wg6kvNGTfe9QjH06IZobT.output.matching_strings$"
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_0197IO879LA5D1npjCvpkYQJ9sogP38ruyH",
+            "name": "Set Variables",
+            "title": "Set Variables",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Set Variables",
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_0197IKQ6NTGU17fuQDa8C4QYvTKVAa4TMOE.local.variable_workflow_0197ILJ60D1NE3E3dwN8qlzDxhxJqrAbEhG$",
+                  "variable_value_new": "$workflow.definition_workflow_0197IKQ6NTGU17fuQDa8C4QYvTKVAa4TMOE.local.variable_workflow_0197ILJ60D1NE3E3dwN8qlzDxhxJqrAbEhG$\n$activity.definition_activity_0197IO2MRUQ3N182Vtk6cFSOUD5qMXzP55e.input.source_array[@]$"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_0197IOMLJPT1O2OgSE9m7P9RYoYAI2NI5qQ",
+        "name": "Replace String",
+        "title": "Replace String",
+        "type": "core.replacestring",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Replace String",
+          "input_string": "$workflow.definition_workflow_0197IKQ6NTGU17fuQDa8C4QYvTKVAa4TMOE.local.variable_workflow_0197IOY7E6ZW92HqkudVahQ4H9V0vjeza1C$",
+          "replace_list": [
+            {
+              "replaced_string": "#####HEADER#####",
+              "replacement_string": "$workflow.definition_workflow_0197IKQ6NTGU17fuQDa8C4QYvTKVAa4TMOE.local.variable_workflow_0197ILJ60D1NE3E3dwN8qlzDxhxJqrAbEhG$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  }
+}
