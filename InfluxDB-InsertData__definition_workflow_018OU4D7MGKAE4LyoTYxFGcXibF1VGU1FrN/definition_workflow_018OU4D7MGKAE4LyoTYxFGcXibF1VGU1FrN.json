@@ -13,7 +13,8 @@
           "scope": "input",
           "name": "precision",
           "type": "datatype.string",
-          "description": "s=seconds"
+          "description": "s=seconds",
+          "is_required": false
         },
         "unique_name": "variable_workflow_018OU6AKVHO516zJuagpxSBwUOlKVxgprqm",
         "object_type": "variable_workflow"
@@ -24,7 +25,8 @@
           "value": "",
           "scope": "input",
           "name": "measurements_to_write",
-          "type": "datatype.string"
+          "type": "datatype.string",
+          "is_required": false
         },
         "unique_name": "variable_workflow_018OU6KLDINN03IqjZwLGd4l3eMLqsuCc8P",
         "object_type": "variable_workflow"
@@ -35,7 +37,8 @@
           "value": "METRICS",
           "scope": "input",
           "name": "database",
-          "type": "datatype.string"
+          "type": "datatype.string",
+          "is_required": false
         },
         "unique_name": "variable_workflow_018OU5DB2BJ7E6pw3qKoE1RRSt3CRmoR08K",
         "object_type": "variable_workflow"
@@ -70,7 +73,8 @@
               "replaced_string": " ",
               "replacement_string": "\\ "
             }
-          ]
+          ],
+          "skip_execution": false
         },
         "object_type": "definition_activity"
       },
@@ -87,9 +91,10 @@
           "replace_list": [
             {
               "replaced_string": "\\ value=",
-              "replacement_string": "value="
+              "replacement_string": " value="
             }
-          ]
+          ],
+          "skip_execution": false
         },
         "object_type": "definition_activity"
       },
@@ -108,11 +113,12 @@
           "continue_on_failure": false,
           "display_name": "Insert measurement",
           "method": "POST",
-          "relative_url": "write?db=$workflow.definition_workflow_018OU4D7MGKAE4LyoTYxFGcXibF1VGU1FrN.input.variable_workflow_018OU5DB2BJ7E6pw3qKoE1RRSt3CRmoR08K$\u0026precision=$workflow.definition_workflow_018OU4D7MGKAE4LyoTYxFGcXibF1VGU1FrN.input.variable_workflow_018OU6AKVHO516zJuagpxSBwUOlKVxgprqm$",
+          "relative_url": "write?db=$workflow.definition_workflow_018OU4D7MGKAE4LyoTYxFGcXibF1VGU1FrN.input.variable_workflow_018OU5DB2BJ7E6pw3qKoE1RRSt3CRmoR08K$&precision=$workflow.definition_workflow_018OU4D7MGKAE4LyoTYxFGcXibF1VGU1FrN.input.variable_workflow_018OU6AKVHO516zJuagpxSBwUOlKVxgprqm$",
           "runtime_user": {
             "override_target_runtime_user": false,
             "target_default": true
           },
+          "skip_execution": false,
           "target": {
             "override_workflow_target": false,
             "use_workflow_target": true
