@@ -1,0 +1,681 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01AT6VMP1OB854TKDWck2d2WrCfmRt7ywv6",
+    "name": "Backup AO ArangoDB",
+    "title": "Backup AO ArangoDB",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "Null Placeholder",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AT7P5FUJKM11tm2abgqrGlxzRU8hKgc3P",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "*****",
+          "scope": "input",
+          "name": "Webex Room Id",
+          "type": "datatype.secure_string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01ATCWELQHFVG6Fzq4qOGk33qSYvlWeqMOK",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "/path/AO-BACKUPS",
+          "scope": "input",
+          "name": "StoragePath",
+          "type": "datatype.string",
+          "description": "Directory location to store ArangoDB backup contents",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01ATEBND0VU5M5HGG5LN8FebVU9A1xifHml",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "192.168.0.1",
+          "scope": "input",
+          "name": "AOServer",
+          "type": "datatype.string",
+          "description": "Hostname or IP Address of the Action Orchestrator 'Master-1' node",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01AT742IIXVQS0vfxULcINvP34zHKGIN4PN",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 47908,
+          "scope": "input",
+          "name": "ArangoDB Port",
+          "type": "datatype.integer",
+          "description": "TCP Port number that AO's ArangoDB is listening on.  You may need to expose this port in Kubernetes\n\nFrom AO Master-1 node, as root:\nkubectl edit service -n cisco pers-arangodb\n\nUpdate the spec/type: from 'ClusterIP' to 'nodePort'.   Then save changes.  Return to edit and observe the new spec/ports/nodePort value\n\n[Use operating system level 'netstat -an' to double-check the port listener]\n",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AT7BK4Y43976jxInr9vbOiy6AduZIWq4V",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "*****",
+          "scope": "input",
+          "name": "ArangoDB root password",
+          "type": "datatype.secure_string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01AT7C01148FT17HDePRTti6Br5hLTglmhB",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Backup AO ArangoDB",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "no_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01AT7P9GVZQUW3qdrKyFmdS9Uhp6ECEsMqn",
+        "name": "Set Variables",
+        "title": "Set Variables",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Variables",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01AT6VMP1OB854TKDWck2d2WrCfmRt7ywv6.local.variable_workflow_01AT7P5FUJKM11tm2abgqrGlxzRU8hKgc3P$",
+              "variable_value_new": " "
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AT7QFXBNYLZ2hPlgKyGY77UIYreDWtlj5",
+        "name": "Calculate Date",
+        "title": "Calculate Date",
+        "type": "core.calculate_date",
+        "base_type": "activity",
+        "properties": {
+          "adjustment": -14400,
+          "continue_on_failure": false,
+          "display_name": "Calculate Date",
+          "original_date": "$activity.definition_activity_01AT7P9GVZQUW3qdrKyFmdS9Uhp6ECEsMqn.output.start_time$",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AT7ODCJSREL3EUZ1sjWJJVVRq74T2Vg4F",
+        "name": "Format Date",
+        "title": "Format Date",
+        "type": "core.format_date",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "custom_format": "20180102-1504",
+          "display_name": "Format Date",
+          "original_date": "$activity.definition_activity_01AT7QFXBNYLZ2hPlgKyGY77UIYreDWtlj5.output.result$",
+          "skip_execution": false,
+          "use_custom_format": true
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AT7GHQODO937c7phimj6G5ZOOvOgIpaKf",
+        "name": "Execute Terminal Command(s)",
+        "title": "Execute Terminal Command(s)",
+        "type": "terminal.command",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "command_timeout": 170,
+          "commands": "arangodump --server.endpoint tcp://$workflow.definition_workflow_01AT6VMP1OB854TKDWck2d2WrCfmRt7ywv6.input.variable_workflow_01AT742IIXVQS0vfxULcINvP34zHKGIN4PN$:$workflow.definition_workflow_01AT6VMP1OB854TKDWck2d2WrCfmRt7ywv6.input.variable_workflow_01AT7BK4Y43976jxInr9vbOiy6AduZIWq4V$ --server.database tenant_1 --output-directory \"$workflow.definition_workflow_01AT6VMP1OB854TKDWck2d2WrCfmRt7ywv6.input.variable_workflow_01ATEBND0VU5M5HGG5LN8FebVU9A1xifHml$/ao-dbbackup-$activity.definition_activity_01AT7ODCJSREL3EUZ1sjWJJVVRq74T2Vg4F.output.result$\"",
+          "continue_on_failure": false,
+          "display_name": "Execute Terminal Command(s)",
+          "merge_commands": false,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01ATEE3Q3MH8210NeuqSggpe4bE8W6ATErQ"
+          },
+          "user_responses": [
+            {
+              "user_expect": "Please specify a password:",
+              "user_response": "$workflow.definition_workflow_01AT6VMP1OB854TKDWck2d2WrCfmRt7ywv6.input.variable_workflow_01AT7C01148FT17HDePRTti6Br5hLTglmhB$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AT7WA7U0F583jLONLXImcaJXLIWXWosZE",
+        "name": "Match Regular Expression",
+        "title": "Match Results",
+        "type": "core.matchregex",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Match Results",
+          "input_regex": "in (\\d+\\.\\d+) s, wrote (\\d+) byte",
+          "input_string": "$activity.definition_activity_01AT7GHQODO937c7phimj6G5ZOOvOgIpaKf.output.response_body$",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01AT7WXCHKQSD01DWjOu1KDaWWC52QKPkHD",
+        "name": "Condition Block",
+        "title": "Completion Status",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Completion Status",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01AT7WXF045WD7JDlffxeFLQ2782Qu2sYwF",
+            "name": "Condition Branch",
+            "title": "Good",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AT7WA7U0F583jLONLXImcaJXLIWXWosZE.output.has_match$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Good",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01AT7Y0NUBV545Eoi44qaZivAsupJXmcg0w",
+                "name": "JSONPath Query",
+                "title": "JSONPath Query",
+                "type": "corejava.jsonpathquery",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "JSONPath Query",
+                  "input_json": "$activity.definition_activity_01AT7WA7U0F583jLONLXImcaJXLIWXWosZE.output.match_groups$",
+                  "jsonpath_queries": [
+                    {
+                      "jsonpath_query": "$..Group1",
+                      "jsonpath_query_name": "RunTime",
+                      "jsonpath_query_type": "string"
+                    },
+                    {
+                      "jsonpath_query": "$..Group2",
+                      "jsonpath_query_name": "BytesArchived",
+                      "jsonpath_query_type": "string"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01ATCM1X7UW5N399gRDpin1g1F8ZpfJ8xh3",
+                "name": "Convert Bytes to Larger",
+                "title": "Convert Bytes to Larger",
+                "type": "workflow.sub_workflow",
+                "base_type": "subworkflow",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Convert Bytes to Larger",
+                  "input": {
+                    "variable_workflow_01ATBAU02SZ7E6cr5WpRPtGcuMUonmkHChi": "$activity.definition_activity_01AT7Y0NUBV545Eoi44qaZivAsupJXmcg0w.output.jsonpath_queries.BytesArchived$"
+                  },
+                  "runtime_user": {
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "no_target": true
+                  },
+                  "workflow_id": "definition_workflow_01ATB5AMXVIU45GDt0Sj52arPFmlH0yWyCn"
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01ATCMET195X46K1sp0LKDohI5zVtwybPqS",
+                "name": "JSONPath Query",
+                "title": "JSONPath Query",
+                "type": "corejava.jsonpathquery",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "JSONPath Query",
+                  "input_json": "$activity.definition_activity_01ATCM1X7UW5N399gRDpin1g1F8ZpfJ8xh3.output.variable_workflow_01ATCL8FKRUDM1T8wwPFFtS1yGAYgjW9Y8e$",
+                  "jsonpath_queries": [
+                    {
+                      "jsonpath_query": "$[0].Base10",
+                      "jsonpath_query_name": "Size",
+                      "jsonpath_query_type": "string"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01ATCTWZ0FLLM1rkjDZuxT6oB76IlNsUQOh",
+                "name": "Send Message to Webex Teams Space",
+                "title": "Send Message to Webex Teams Space",
+                "type": "workflow.sub_workflow",
+                "base_type": "subworkflow",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Send Message to Webex Teams Space",
+                  "input": {
+                    "variable_workflow_01764FI11TPZF4BPV0azs3NHmxoGWhqvN4w": "$global.variable_018Z4JRPE5H9F505angCMVYI2V17ihaCNAI.global.variable_018Z4JRPE5H9F505angCMVYI2V17ihaCNAI$",
+                    "variable_workflow_01764FUD5O5413FTvzELF6caPzNRZu2g19H": "$workflow.definition_workflow_01AT6VMP1OB854TKDWck2d2WrCfmRt7ywv6.input.variable_workflow_01ATCWELQHFVG6Fzq4qOGk33qSYvlWeqMOK$",
+                    "variable_workflow_01764GAZJXCJT0f1xzqFB7Vu0xqkzEwBH5U": "AO ArangoDB archive workflow FINISHED: $activity.definition_activity_01ATCMET195X46K1sp0LKDohI5zVtwybPqS.output.jsonpath_queries.Size$ archived in $activity.definition_activity_01AT7Y0NUBV545Eoi44qaZivAsupJXmcg0w.output.jsonpath_queries.RunTime$ seconds.",
+                    "variable_workflow_01764GM6ETXVW1TkjsAICdtQ2NKBeFMkmT7": ""
+                  },
+                  "runtime_user": {
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "no_target": true
+                  },
+                  "workflow_id": "definition_workflow_01764CXB0P98B3XCSqGHrL9IdOqehT4b9FE"
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01AT7WXFYDYWG60U5uZa7IEk4nI0dewZ4nw",
+            "name": "Condition Branch",
+            "title": "Bad",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01AT7WA7U0F583jLONLXImcaJXLIWXWosZE.output.has_match$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": false,
+              "display_name": "Bad",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01ATCXAQBCMRZ0aAhBgadp7JD2pOBPE2JIk",
+                "name": "Send Message to Webex Teams Space",
+                "title": "Send Message to Webex Teams Space",
+                "type": "workflow.sub_workflow",
+                "base_type": "subworkflow",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Send Message to Webex Teams Space",
+                  "input": {
+                    "variable_workflow_01764FI11TPZF4BPV0azs3NHmxoGWhqvN4w": "$global.variable_018Z4JRPE5H9F505angCMVYI2V17ihaCNAI.global.variable_018Z4JRPE5H9F505angCMVYI2V17ihaCNAI$",
+                    "variable_workflow_01764FUD5O5413FTvzELF6caPzNRZu2g19H": "$workflow.definition_workflow_01AT6VMP1OB854TKDWck2d2WrCfmRt7ywv6.input.variable_workflow_01ATCWELQHFVG6Fzq4qOGk33qSYvlWeqMOK$",
+                    "variable_workflow_01764GAZJXCJT0f1xzqFB7Vu0xqkzEwBH5U": "",
+                    "variable_workflow_01764GM6ETXVW1TkjsAICdtQ2NKBeFMkmT7": "AO ArangoDB archive workflow **FAILED** - check workflow and logs"
+                  },
+                  "runtime_user": {
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "no_target": true
+                  },
+                  "workflow_id": "definition_workflow_01764CXB0P98B3XCSqGHrL9IdOqehT4b9FE"
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_0152LAMH98U2G02i9sruoN362fwRGkShcaE",
+      "category_017K20UOWV8IQ3QOLqa50JfUtGb0oZmtFGk"
+    ]
+  },
+  "categories": {
+    "category_0152LAMH98U2G02i9sruoN362fwRGkShcaE": {
+      "unique_name": "category_0152LAMH98U2G02i9sruoN362fwRGkShcaE",
+      "name": "RTPNML",
+      "title": "RTPNML",
+      "type": "basic.category",
+      "base_type": "category",
+      "description": "Workflows that are useful for RTP Network Management Lab adminitration",
+      "category_type": "custom",
+      "object_type": "category"
+    },
+    "category_017K20UOWV8IQ3QOLqa50JfUtGb0oZmtFGk": {
+      "unique_name": "category_017K20UOWV8IQ3QOLqa50JfUtGb0oZmtFGk",
+      "name": "WIP",
+      "title": "WIP",
+      "type": "basic.category",
+      "base_type": "category",
+      "description": "Work In Progress",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "targets": {
+    "definition_target_01764CSSI02AW1ZLEttzoDohKoXx6l3sK2L": {
+      "unique_name": "definition_target_01764CSSI02AW1ZLEttzoDohKoXx6l3sK2L",
+      "name": "Webex Teams API Server",
+      "title": "Webex Teams API Server",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": true,
+        "display_name": "Webex Teams API Server",
+        "host": "api.ciscospark.com",
+        "no_runtime_user": true,
+        "protocol": "https",
+        "proxy_url": "http://proxy-rtp-1.cisco.com:8080"
+      }
+    },
+    "definition_target_01ATEE3Q3MH8210NeuqSggpe4bE8W6ATErQ": {
+      "unique_name": "definition_target_01ATEE3Q3MH8210NeuqSggpe4bE8W6ATErQ",
+      "name": "Backup Server",
+      "title": "Backup Server",
+      "type": "terminal.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01ATEG9C17X0M4E1qvuYtE0vUehRFlT0kDg",
+        "description": "General CentOS VM with adequate storage to backup ArangoDB [eg. 10GB] and the arangodb3-client package\n\n# yum install arangodb3-client",
+        "display_name": "Backup Server",
+        "host": "10.122.6.226",
+        "port": 22,
+        "protocol": "ssh"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01ATEG9C17X0M4E1qvuYtE0vUehRFlT0kDg": {
+      "unique_name": "definition_runtime_user_01ATEG9C17X0M4E1qvuYtE0vUehRFlT0kDg",
+      "name": "Backup Server Login",
+      "title": "Backup Server Login",
+      "type": "runtime_user.terminal_password_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "Backup Server Login",
+        "password": "*****",
+        "user": "*****"
+      }
+    }
+  },
+  "variables": {
+    "variable_018Z4JRPE5H9F505angCMVYI2V17ihaCNAI": {
+      "unique_name": "variable_018Z4JRPE5H9F505angCMVYI2V17ihaCNAI",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "RTPNMLbot Webex Access Token",
+        "type": "datatype.secure_string",
+        "is_required": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "subworkflows": [
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01ATB5AMXVIU45GDt0Sj52arPFmlH0yWyCn",
+        "name": "Convert Bytes to Larger",
+        "title": "Convert Bytes to Larger",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "JSONResults",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01ATCL8FKRUDM1T8wwPFFtS1yGAYgjW9Y8e",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "1073741824",
+              "scope": "input",
+              "name": "Value(s)",
+              "type": "datatype.string",
+              "description": "Input values to convert to larger xByte values.\nIf needing to convert multiple values, separate with commas.\nEg.\n1, 1024, 500000, 1048576, 50000000, 1073741824, 5000000000, 1099511627776, 5000000000000",
+              "is_required": true
+            },
+            "unique_name": "variable_workflow_01ATBAU02SZ7E6cr5WpRPtGcuMUonmkHChi",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "Convert Bytes to Larger",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "specify_on_workflow_start": false,
+            "target_default": true
+          },
+          "target": {
+            "execute_on_target_group": false,
+            "execute_on_workflow_target": false,
+            "no_target": true,
+            "specify_on_workflow_start": false
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01ATB5OYWHYV00Z3G1w8f965tuQGGRX0QUP",
+            "name": "Execute Python Script",
+            "title": "Execute Python Script",
+            "type": "python3.script",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Execute Python Script",
+              "script": "import math as m\nimport sys\nimport json\n\n\nMULTIPLES = [\"B\", \"k{}B\", \"M{}B\", \"G{}B\", \"T{}B\", \"P{}B\", \"E{}B\", \"Z{}B\", \"Y{}B\"]\n\n\ndef humanbytes(i, binary=False, precision=2):\n    base = 1024 if binary else 1000\n    multiple = m.trunc(m.log2(i) / m.log2(base))\n    value = i / m.pow(base, multiple)\n    suffix = MULTIPLES[multiple].format(\"i\" if binary else \"\")\n    return f\"{value:.{precision}f} {suffix}\"\n\ninputstring = str(sys.argv[1])\n#print(\"string: \" + inputstring)\n\ninputlist = [int(s) for s in inputstring.split(',')]\n\njsonlist = []\nfor i in inputlist:\n    d = {}\n    d['value']=i\n    d['Base10']=humanbytes(i)\n    d['Base2']=humanbytes(i,binary=True)\n    jsonlist.append(d)\nprint(json.dumps(jsonlist))",
+              "script_arguments": [
+                "$workflow.definition_workflow_01ATB5AMXVIU45GDt0Sj52arPFmlH0yWyCn.input.variable_workflow_01ATBAU02SZ7E6cr5WpRPtGcuMUonmkHChi$"
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01ATCLB26Q3975wtqgbHJmxJL9yzMj2YFDS",
+            "name": "Set Variables",
+            "title": "Set Output JSONResults",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Set Output JSONResults",
+              "skip_execution": false,
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01ATB5AMXVIU45GDt0Sj52arPFmlH0yWyCn.output.variable_workflow_01ATCL8FKRUDM1T8wwPFFtS1yGAYgjW9Y8e$",
+                  "variable_value_new": "$activity.definition_activity_01ATB5OYWHYV00Z3G1w8f965tuQGGRX0QUP.output.response_body$"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    },
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01764CXB0P98B3XCSqGHrL9IdOqehT4b9FE",
+        "name": "Send Message to Webex Teams Space",
+        "title": "Send Message to Webex Teams Space",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "Markdown",
+              "type": "datatype.string",
+              "description": "Mark-down, formatted text",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01764GM6ETXVW1TkjsAICdtQ2NKBeFMkmT7",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.secure_string",
+            "properties": {
+              "value": "*****",
+              "scope": "input",
+              "name": "Access Token",
+              "type": "datatype.secure_string",
+              "description": "Access Token for user sending message - used in Authorization header as Bearer key",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01764FI11TPZF4BPV0azs3NHmxoGWhqvN4w",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "Y2lzY29zcGFyazovL3VzL1JPT00vNjU5OWMxMzAtMzYxMS0xMWU5LTkzYjUtNDk3ZDAxZWQ2ODZj",
+              "scope": "input",
+              "name": "Room Id",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01764FUD5O5413FTvzELF6caPzNRZu2g19H",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "Text",
+              "type": "datatype.string",
+              "description": "Raw, unformatted text to send",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01764GAZJXCJT0f1xzqFB7Vu0xqkzEwBH5U",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "Send Message to Webex Teams Space",
+          "favorite": false,
+          "target": {
+            "execute_on_target_group": false,
+            "execute_on_workflow_target": false,
+            "no_target": true,
+            "specify_on_workflow_start": false
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01764GV9W1P287dL727RWPySMoHM546XyJQ",
+            "name": "HTTP Request",
+            "title": "HTTP Request",
+            "type": "web-service.http_request",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "allow_auto_redirect": true,
+              "body": "{\n  \"roomId\": \"$workflow.definition_workflow_01764CXB0P98B3XCSqGHrL9IdOqehT4b9FE.input.variable_workflow_01764FUD5O5413FTvzELF6caPzNRZu2g19H$\",\n  \"text\": \"$workflow.definition_workflow_01764CXB0P98B3XCSqGHrL9IdOqehT4b9FE.input.variable_workflow_01764GAZJXCJT0f1xzqFB7Vu0xqkzEwBH5U$\",\n  \"markdown\": \"$workflow.definition_workflow_01764CXB0P98B3XCSqGHrL9IdOqehT4b9FE.input.variable_workflow_01764GM6ETXVW1TkjsAICdtQ2NKBeFMkmT7$\"\n}",
+              "content_type": "application/json",
+              "continue_on_error_status_code": false,
+              "continue_on_failure": false,
+              "custom_headers": [
+                {
+                  "name": "Authorization",
+                  "value": "Bearer $workflow.definition_workflow_01764CXB0P98B3XCSqGHrL9IdOqehT4b9FE.input.variable_workflow_01764FI11TPZF4BPV0azs3NHmxoGWhqvN4w$"
+                }
+              ],
+              "display_name": "HTTP Request",
+              "method": "POST",
+              "relative_url": "/v1/messages",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01764CSSI02AW1ZLEttzoDohKoXx6l3sK2L"
+              }
+            },
+            "object_type": "definition_activity"
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    }
+  ]
+}
