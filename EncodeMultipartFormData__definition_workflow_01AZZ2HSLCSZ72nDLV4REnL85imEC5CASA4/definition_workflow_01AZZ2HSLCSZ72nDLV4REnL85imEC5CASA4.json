@@ -13,6 +13,7 @@
           "scope": "output",
           "name": "output_content_length_header",
           "type": "datatype.string",
+          "description": "content length header for API",
           "is_required": false
         },
         "unique_name": "variable_workflow_01AZZ7JRZWPX33k4pffInzT0OfM09PIjXUO",
@@ -25,6 +26,7 @@
           "scope": "input",
           "name": "file_field",
           "type": "datatype.string",
+          "description": "field name for the API call",
           "is_required": true
         },
         "unique_name": "variable_workflow_01AZZ3YUS49YU2rJLwmvpRXjjjIFBICgdqC",
@@ -37,6 +39,7 @@
           "scope": "input",
           "name": "file_name",
           "type": "datatype.string",
+          "description": "name of the file with extension",
           "is_required": true
         },
         "unique_name": "variable_workflow_01AZZ47DFG9AA3LM3vPfnhHYhEsLa36Oaf7",
@@ -49,6 +52,7 @@
           "scope": "input",
           "name": "file_contents",
           "type": "datatype.string",
+          "description": "Contents of the file itself.",
           "is_required": true
         },
         "unique_name": "variable_workflow_01AZZ4HJZ2AMF1GM5XB456l4BicxWlom4Jh",
@@ -61,6 +65,7 @@
           "scope": "output",
           "name": "output_body_data",
           "type": "datatype.string",
+          "description": "encoded body to be passed into API call",
           "is_required": false
         },
         "unique_name": "variable_workflow_01AZZ73K5IMR85XVgHaTyGpaLXh3B7xgOus",
@@ -73,6 +78,7 @@
           "scope": "output",
           "name": "output_content_type_header",
           "type": "datatype.string",
+          "description": "content type header for API",
           "is_required": false
         },
         "unique_name": "variable_workflow_01AZZ7BK6LBB62XhXYK7EhshX40gPo9Lmax",
@@ -84,6 +90,7 @@
         "is_atomic": false
       },
       "delete_workflow_instance": false,
+      "description": "This takes in a file name, field name for the file, and contents of the file and encodes it for API usage. You will get back the content-type and content-length headers as well as the encoded payload. ",
       "display_name": "AO.General - Encode_Multipart_Form_Data",
       "runtime_user": {
         "override_target_runtime_user": false,
