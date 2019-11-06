@@ -10,30 +10,6 @@
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
-          "scope": "local",
-          "name": "local_variable_json",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01AP3PRVKDB756b5y0uT4zVksy5gBwGAqfN",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "local_modified_props",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01AP3VWX27SDP4uWHbi0jblQUKdGnF7s36K",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
           "scope": "output",
           "name": "output_workflow_output_json",
           "type": "datatype.string",
@@ -90,6 +66,30 @@
           "is_required": true
         },
         "unique_name": "variable_workflow_01AP35MNKLMW320z99VsYekapiMUxFPwMGs",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "local_variable_json",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AP3PRVKDB756b5y0uT4zVksy5gBwGAqfN",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "local_modified_props",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AP3VWX27SDP4uWHbi0jblQUKdGnF7s36K",
         "object_type": "variable_workflow"
       }
     ],
@@ -164,18 +164,6 @@
         "object_type": "definition_activity"
       },
       {
-        "unique_name": "definition_activity_01BAHKD5QGS4E7aYkCMredD5UROsxwGddKh",
-        "name": "Completed",
-        "title": "Completed",
-        "type": "logic.completed",
-        "base_type": "activity",
-        "properties": {
-          "completion_type": "succeeded",
-          "display_name": "Completed"
-        },
-        "object_type": "definition_activity"
-      },
-      {
         "unique_name": "definition_activity_01AP3HNL6KOIK4DSI1ad3ZzgyTFPzuKOO01",
         "name": "Condition Block",
         "title": "If variables exist",
@@ -220,7 +208,7 @@
                   "continue_on_failure": false,
                   "display_name": "AO API - Get Variable Data",
                   "method": "GET",
-                  "relative_url": "/v1/workflows/start_config?workflow_id=[$activity.definition_activity_01AP3F8HGNYBG0WMZV4wRwR0jA1DSTkzGcB.output.jsonpath_queries.workflow_id$]",
+                  "relative_url": "/v1/workflows/start_config?workflow_id=$activity.definition_activity_01AP3F8HGNYBG0WMZV4wRwR0jA1DSTkzGcB.output.jsonpath_queries.workflow_id$",
                   "runtime_user": {
                     "override_target_runtime_user": false,
                     "target_default": true
