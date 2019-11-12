@@ -1,0 +1,147 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01BH8K2OA6DHG3HcJZihdJd47pWbzxD1KqI",
+    "name": "SmartSheet.API-Get_Row",
+    "title": "SmartSheet.API-Get_Row",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "1745480666376068",
+          "scope": "input",
+          "name": "input_sheet_id",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BH8KP6PVV2S1UVOg3W5pgtIDBZQUDSG3Q",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "4873460261906308",
+          "scope": "input",
+          "name": "input_row_id",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BH8L14RBFC53ZAad5xRhUflGDLzOyhxbp",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "output_json_message",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BH8L6PTZJ223SWLCksMmvmltaeC99Cu4s",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "SmartSheet.API-Get_Row",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01BH8L9B4NUO04Ye8yOMFhHR9KjRrjWeYiC",
+        "name": "HTTP Request",
+        "title": "Get Row",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "custom_headers": [
+            {
+              "name": "Authorization",
+              "value": "$global.variable_01BH8EUXRLYVG4i2yhzCT94Ff3G7xjIsWap.global.variable_01BH8EUXRLYVG4i2yhzCT94Ff3G7xjIsWap$"
+            }
+          ],
+          "display_name": "Get Row",
+          "method": "GET",
+          "relative_url": "/sheets/$workflow.definition_workflow_01BH8K2OA6DHG3HcJZihdJd47pWbzxD1KqI.input.variable_workflow_01BH8KP6PVV2S1UVOg3W5pgtIDBZQUDSG3Q$/rows/$workflow.definition_workflow_01BH8K2OA6DHG3HcJZihdJd47pWbzxD1KqI.input.variable_workflow_01BH8L14RBFC53ZAad5xRhUflGDLzOyhxbp$",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BH8MJFVGLML6RQ5QOjicZH1PsLMaFl5aj",
+        "name": "Set Variables",
+        "title": "Set output",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set output",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01BH8K2OA6DHG3HcJZihdJd47pWbzxD1KqI.output.variable_workflow_01BH8L6PTZJ223SWLCksMmvmltaeC99Cu4s$",
+              "variable_value_new": "$activity.definition_activity_01BH8L9B4NUO04Ye8yOMFhHR9KjRrjWeYiC.output.response_body$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_01BH8C5JJ92P84mHmbbzivdwIEq0eIJd5DU"
+    ]
+  },
+  "categories": {
+    "category_01BH8C5JJ92P84mHmbbzivdwIEq0eIJd5DU": {
+      "unique_name": "category_01BH8C5JJ92P84mHmbbzivdwIEq0eIJd5DU",
+      "name": "SmartSheet.API",
+      "title": "SmartSheet.API",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "variables": {
+    "variable_01BH8EUXRLYVG4i2yhzCT94Ff3G7xjIsWap": {
+      "unique_name": "variable_01BH8EUXRLYVG4i2yhzCT94Ff3G7xjIsWap",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "SmartSheet.API.Token.Header",
+        "type": "datatype.secure_string",
+        "is_required": false
+      },
+      "object_type": "variable"
+    }
+  }
+}
