@@ -9,6 +9,78 @@
       {
         "schema_id": "datatype.string",
         "properties": {
+          "value": "vms?filter[]=name=cx-ao-bc-03",
+          "scope": "input",
+          "name": "input_complete_query",
+          "type": "datatype.string",
+          "description": "pass in complete query string if you know it already and don't need it constructed",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BHAQT4CA0XB1avPhPqFw7IRjnN9ukoV00",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "tabletype_01BH1HKDVRAM45pIhPOFo6RWSCbZATpyLug",
+        "properties": {
+          "scope": "input",
+          "name": "input_query_control_attributes",
+          "type": "datatype.table",
+          "description": "attributes to control the return values.\n\nPossible attributes:\n\noffset\nlimit\nattributes\nexpand\nsort_by\nsort_order\nsort_options\n\n\nNOTE: Filter[] is separate in the collectionFilter input\nNOTE: If you want multiple of one field, just make it a comma separated list... ie:\n\nipaddresses,lans,storage\n",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BH1IZPOXENS1RFbPyV8vL6XcVMYGzYDsM",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "tabletype_01BH1KABZX7NN0UxFxa7g13ZdwOWuuA8Rdy",
+        "properties": {
+          "scope": "output",
+          "name": "output_vm_list",
+          "type": "datatype.table",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BH1KFLVF2195trnMyLtWUpSzINqath6y3",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "output_json_response_message",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BH1JO5IA69I46NVrSWQ0IKGQnbVmWmZaw",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "=",
+          "scope": "local",
+          "name": "local_default_operator",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BH1JJ1G7QPE6gPzIDhn5OdE9yOESlvZCe",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 1,
+          "scope": "local",
+          "name": "ELSE",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BHARRAQT8KU6lAyoF3xZ4jsMVFRu95fwa",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
           "value": "",
           "scope": "local",
           "name": "local_end_point",
@@ -44,27 +116,14 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.string",
+        "schema_id": "tabletype_01BH1I78XLS4H6i1fPKHrb0gfnnMFsIYphg",
         "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "local_query_string",
-          "type": "datatype.string",
+          "scope": "input",
+          "name": "input_query_collection_filter",
+          "type": "datatype.table",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "=",
-          "scope": "local",
-          "name": "local_default_operator",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BH1JJ1G7QPE6gPzIDhn5OdE9yOESlvZCe",
+        "unique_name": "variable_workflow_01BH1IN31MN6Q7FGIZLIp01AWeNGmL5qsBG",
         "object_type": "variable_workflow"
       },
       {
@@ -80,49 +139,15 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "tabletype_01BH1I78XLS4H6i1fPKHrb0gfnnMFsIYphg",
-        "properties": {
-          "scope": "input",
-          "name": "input_query_collection_filter",
-          "type": "datatype.table",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BH1IN31MN6Q7FGIZLIp01AWeNGmL5qsBG",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "tabletype_01BH1KABZX7NN0UxFxa7g13ZdwOWuuA8Rdy",
-        "properties": {
-          "scope": "output",
-          "name": "output_vm_list",
-          "type": "datatype.table",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BH1KFLVF2195trnMyLtWUpSzINqath6y3",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
-          "scope": "output",
-          "name": "output_json_response_message",
+          "scope": "local",
+          "name": "local_query_string",
           "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01BH1JO5IA69I46NVrSWQ0IKGQnbVmWmZaw",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "tabletype_01BH1HKDVRAM45pIhPOFo6RWSCbZATpyLug",
-        "properties": {
-          "scope": "input",
-          "name": "input_query_control_attributes",
-          "type": "datatype.table",
-          "description": "attributes to control the return values.\n\nPossible attributes:\n\noffset\nlimit\nattributes\nexpand\nsort_by\nsort_order\nsort_options\n\n\nNOTE: Filter[] is separate in the collectionFilter input\nNOTE: If you want multiple of one field, just make it a comma separated list... ie:\n\nipaddresses,lans,storage\n",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BH1IZPOXENS1RFbPyV8vL6XcVMYGzYDsM",
+        "unique_name": "variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe",
         "object_type": "variable_workflow"
       }
     ],
@@ -199,151 +224,225 @@
         ]
       },
       {
-        "unique_name": "definition_activity_01BH2OYTEWQVS4Rd3iTWZFhGWT8UKKqcEax",
-        "name": "Group",
-        "title": "Control Attribute Setup",
-        "type": "logic.group",
+        "unique_name": "definition_activity_01BHAQYRBLID71V4gANosP1omnSXWs3R5tN",
+        "name": "Condition Block",
+        "title": "If complete query input",
+        "type": "logic.if_else",
         "base_type": "activity",
         "properties": {
-          "continue_on_failure": true,
-          "display_name": "Control Attribute Setup",
+          "continue_on_failure": false,
+          "display_name": "If complete query input",
           "skip_execution": false
         },
         "object_type": "definition_activity",
-        "actions": [
+        "blocks": [
           {
-            "unique_name": "definition_activity_01BH1LG6XQ3R0692KddKMC0ji9IlsE3vWVY",
-            "name": "Condition Block",
-            "title": "If control attributes",
-            "type": "logic.if_else",
+            "unique_name": "definition_activity_01BHAQYSZ6ND50XaASzH4sje5QatwmSuCEU",
+            "name": "Condition Branch",
+            "title": "Condition Branch",
+            "type": "logic.condition_block",
             "base_type": "activity",
             "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.input.variable_workflow_01BHAQT4CA0XB1avPhPqFw7IRjnN9ukoV00$",
+                "operator": "ne",
+                "right_operand": ""
+              },
               "continue_on_failure": false,
-              "display_name": "If control attributes",
+              "display_name": "Condition Branch",
               "skip_execution": false
             },
             "object_type": "definition_activity",
-            "blocks": [
+            "actions": [
               {
-                "unique_name": "definition_activity_01BH1LG8Q0KOB60DIzi5ymPtFqlEFQvemZs",
-                "name": "Condition Branch",
-                "title": "THEN",
-                "type": "logic.condition_block",
+                "unique_name": "definition_activity_01BHAR97J101Y1vq8kFp8mNypMRjBvksARh",
+                "name": "Set Variables",
+                "title": "Passthrough Query",
+                "type": "core.set_multiple_variables",
                 "base_type": "activity",
                 "properties": {
-                  "condition": {
-                    "left_operand": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.input.variable_workflow_01BH1IZPOXENS1RFbPyV8vL6XcVMYGzYDsM[0].attribute$",
-                    "operator": "ne",
-                    "right_operand": ""
-                  },
                   "continue_on_failure": false,
-                  "display_name": "THEN",
+                  "display_name": "Passthrough Query",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$",
+                      "variable_value_new": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.input.variable_workflow_01BHAQT4CA0XB1avPhPqFw7IRjnN9ukoV00$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01BHAQYTKOJS10zXc63VL4tyuKNIQKhzsSh",
+            "name": "Condition Branch",
+            "title": "ELSE",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BHARRAQT8KU6lAyoF3xZ4jsMVFRu95fwa$",
+                "operator": "eq",
+                "right_operand": 1
+              },
+              "continue_on_failure": false,
+              "display_name": "ELSE",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01BH2OYTEWQVS4Rd3iTWZFhGWT8UKKqcEax",
+                "name": "Group",
+                "title": "Control Attribute Setup",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": true,
+                  "display_name": "Control Attribute Setup",
                   "skip_execution": false
                 },
                 "object_type": "definition_activity",
                 "actions": [
                   {
-                    "unique_name": "definition_activity_01BH1QNUI7JYR1Ui4VZKJbTudqVrkvYlbmt",
-                    "name": "For Each",
-                    "title": "For Each Control Attribute",
-                    "type": "logic.for_each",
+                    "unique_name": "definition_activity_01BH1LG6XQ3R0692KddKMC0ji9IlsE3vWVY",
+                    "name": "Condition Block",
+                    "title": "If control attributes",
+                    "type": "logic.if_else",
                     "base_type": "activity",
                     "properties": {
                       "continue_on_failure": false,
-                      "display_name": "For Each Control Attribute",
-                      "skip_execution": false,
-                      "source_array": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.input.variable_workflow_01BH1IZPOXENS1RFbPyV8vL6XcVMYGzYDsM$"
+                      "display_name": "If control attributes",
+                      "skip_execution": false
                     },
                     "object_type": "definition_activity",
-                    "actions": [
+                    "blocks": [
                       {
-                        "unique_name": "definition_activity_01BH1RIBDI2JE5MI7Ye3QE4OWyi17lggXWK",
-                        "name": "Condition Block",
-                        "title": "If only ? in query",
-                        "type": "logic.if_else",
+                        "unique_name": "definition_activity_01BH1LG8Q0KOB60DIzi5ymPtFqlEFQvemZs",
+                        "name": "Condition Branch",
+                        "title": "THEN",
+                        "type": "logic.condition_block",
                         "base_type": "activity",
                         "properties": {
+                          "condition": {
+                            "left_operand": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.input.variable_workflow_01BH1IZPOXENS1RFbPyV8vL6XcVMYGzYDsM[0].attribute$",
+                            "operator": "ne",
+                            "right_operand": ""
+                          },
                           "continue_on_failure": false,
-                          "display_name": "If only ? in query",
+                          "display_name": "THEN",
                           "skip_execution": false
                         },
                         "object_type": "definition_activity",
-                        "blocks": [
+                        "actions": [
                           {
-                            "unique_name": "definition_activity_01BH1RICKXQZL0z33fhgXm69wpj40MwT7Z7",
-                            "name": "Condition Branch",
-                            "title": "THEN",
-                            "type": "logic.condition_block",
+                            "unique_name": "definition_activity_01BH1QNUI7JYR1Ui4VZKJbTudqVrkvYlbmt",
+                            "name": "For Each",
+                            "title": "For Each Control Attribute",
+                            "type": "logic.for_each",
                             "base_type": "activity",
                             "properties": {
-                              "condition": {
-                                "left_operand": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$",
-                                "operator": "eq",
-                                "right_operand": ""
-                              },
                               "continue_on_failure": false,
-                              "display_name": "THEN",
-                              "skip_execution": false
+                              "display_name": "For Each Control Attribute",
+                              "skip_execution": false,
+                              "source_array": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.input.variable_workflow_01BH1IZPOXENS1RFbPyV8vL6XcVMYGzYDsM$"
                             },
                             "object_type": "definition_activity",
                             "actions": [
                               {
-                                "unique_name": "definition_activity_01BH1SIHD2BEV4EQDTIJttWPzn0VF91klDI",
-                                "name": "Set Variables",
-                                "title": "Start Query",
-                                "type": "core.set_multiple_variables",
+                                "unique_name": "definition_activity_01BH1RIBDI2JE5MI7Ye3QE4OWyi17lggXWK",
+                                "name": "Condition Block",
+                                "title": "If only ? in query",
+                                "type": "logic.if_else",
                                 "base_type": "activity",
                                 "properties": {
                                   "continue_on_failure": false,
-                                  "display_name": "Start Query",
-                                  "skip_execution": false,
-                                  "variables_to_update": [
-                                    {
-                                      "variable_to_update": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$",
-                                      "variable_value_new": "?$activity.definition_activity_01BH1QNUI7JYR1Ui4VZKJbTudqVrkvYlbmt.input.source_array[@].attribute$=$activity.definition_activity_01BH1QNUI7JYR1Ui4VZKJbTudqVrkvYlbmt.input.source_array[@].value$"
-                                    }
-                                  ]
+                                  "display_name": "If only ? in query",
+                                  "skip_execution": false
                                 },
-                                "object_type": "definition_activity"
-                              }
-                            ]
-                          },
-                          {
-                            "unique_name": "definition_activity_01BH1RID3MURT2SQxOhijGAcxyaPHCrwtlr",
-                            "name": "Condition Branch",
-                            "title": "Else",
-                            "type": "logic.condition_block",
-                            "base_type": "activity",
-                            "properties": {
-                              "condition": {
-                                "left_operand": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$",
-                                "operator": "ne",
-                                "right_operand": ""
-                              },
-                              "continue_on_failure": false,
-                              "display_name": "Else",
-                              "skip_execution": false
-                            },
-                            "object_type": "definition_activity",
-                            "actions": [
-                              {
-                                "unique_name": "definition_activity_01BH1TQJRMQM66RrgtdjFCs4eqH0FVyNJvO",
-                                "name": "Set Variables",
-                                "title": "Continue Query",
-                                "type": "core.set_multiple_variables",
-                                "base_type": "activity",
-                                "properties": {
-                                  "continue_on_failure": false,
-                                  "display_name": "Continue Query",
-                                  "skip_execution": false,
-                                  "variables_to_update": [
-                                    {
-                                      "variable_to_update": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$",
-                                      "variable_value_new": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$\u0026$activity.definition_activity_01BH1QNUI7JYR1Ui4VZKJbTudqVrkvYlbmt.input.source_array[@].attribute$=$activity.definition_activity_01BH1QNUI7JYR1Ui4VZKJbTudqVrkvYlbmt.input.source_array[@].value$"
-                                    }
-                                  ]
-                                },
-                                "object_type": "definition_activity"
+                                "object_type": "definition_activity",
+                                "blocks": [
+                                  {
+                                    "unique_name": "definition_activity_01BH1RICKXQZL0z33fhgXm69wpj40MwT7Z7",
+                                    "name": "Condition Branch",
+                                    "title": "THEN",
+                                    "type": "logic.condition_block",
+                                    "base_type": "activity",
+                                    "properties": {
+                                      "condition": {
+                                        "left_operand": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$",
+                                        "operator": "eq",
+                                        "right_operand": ""
+                                      },
+                                      "continue_on_failure": false,
+                                      "display_name": "THEN",
+                                      "skip_execution": false
+                                    },
+                                    "object_type": "definition_activity",
+                                    "actions": [
+                                      {
+                                        "unique_name": "definition_activity_01BH1SIHD2BEV4EQDTIJttWPzn0VF91klDI",
+                                        "name": "Set Variables",
+                                        "title": "Start Query",
+                                        "type": "core.set_multiple_variables",
+                                        "base_type": "activity",
+                                        "properties": {
+                                          "continue_on_failure": false,
+                                          "display_name": "Start Query",
+                                          "skip_execution": false,
+                                          "variables_to_update": [
+                                            {
+                                              "variable_to_update": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$",
+                                              "variable_value_new": "?$activity.definition_activity_01BH1QNUI7JYR1Ui4VZKJbTudqVrkvYlbmt.input.source_array[@].attribute$=$activity.definition_activity_01BH1QNUI7JYR1Ui4VZKJbTudqVrkvYlbmt.input.source_array[@].value$"
+                                            }
+                                          ]
+                                        },
+                                        "object_type": "definition_activity"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "unique_name": "definition_activity_01BH1RID3MURT2SQxOhijGAcxyaPHCrwtlr",
+                                    "name": "Condition Branch",
+                                    "title": "Else",
+                                    "type": "logic.condition_block",
+                                    "base_type": "activity",
+                                    "properties": {
+                                      "condition": {
+                                        "left_operand": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$",
+                                        "operator": "ne",
+                                        "right_operand": ""
+                                      },
+                                      "continue_on_failure": false,
+                                      "display_name": "Else",
+                                      "skip_execution": false
+                                    },
+                                    "object_type": "definition_activity",
+                                    "actions": [
+                                      {
+                                        "unique_name": "definition_activity_01BH1TQJRMQM66RrgtdjFCs4eqH0FVyNJvO",
+                                        "name": "Set Variables",
+                                        "title": "Continue Query",
+                                        "type": "core.set_multiple_variables",
+                                        "base_type": "activity",
+                                        "properties": {
+                                          "continue_on_failure": false,
+                                          "display_name": "Continue Query",
+                                          "skip_execution": false,
+                                          "variables_to_update": [
+                                            {
+                                              "variable_to_update": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$",
+                                              "variable_value_new": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$\u0026$activity.definition_activity_01BH1QNUI7JYR1Ui4VZKJbTudqVrkvYlbmt.input.source_array[@].attribute$=$activity.definition_activity_01BH1QNUI7JYR1Ui4VZKJbTudqVrkvYlbmt.input.source_array[@].value$"
+                                            }
+                                          ]
+                                        },
+                                        "object_type": "definition_activity"
+                                      }
+                                    ]
+                                  }
+                                ]
                               }
                             ]
                           }
@@ -352,157 +451,157 @@
                     ]
                   }
                 ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "unique_name": "definition_activity_01BH2P7S4JIFL0KOYkMkJtM86UmR2fWb37o",
-        "name": "Group",
-        "title": "Filter Setup",
-        "type": "logic.group",
-        "base_type": "activity",
-        "properties": {
-          "continue_on_failure": true,
-          "display_name": "Filter Setup",
-          "skip_execution": false
-        },
-        "object_type": "definition_activity",
-        "actions": [
-          {
-            "unique_name": "definition_activity_01BH2P7TUK4CU4aoa8u0rgpfCOzRO8xkquB",
-            "name": "Condition Block",
-            "title": "If filters",
-            "type": "logic.if_else",
-            "base_type": "activity",
-            "properties": {
-              "continue_on_failure": false,
-              "display_name": "If filters",
-              "skip_execution": false
-            },
-            "object_type": "definition_activity",
-            "blocks": [
+              },
               {
-                "unique_name": "definition_activity_01BH2P7UDCLJU1SUzHTJ9VnA7OuQgk6Rg0r",
-                "name": "Condition Branch",
-                "title": "THEN",
-                "type": "logic.condition_block",
+                "unique_name": "definition_activity_01BH2P7S4JIFL0KOYkMkJtM86UmR2fWb37o",
+                "name": "Group",
+                "title": "Filter Setup",
+                "type": "logic.group",
                 "base_type": "activity",
                 "properties": {
-                  "condition": {
-                    "left_operand": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.input.variable_workflow_01BH1IN31MN6Q7FGIZLIp01AWeNGmL5qsBG[0].attribute$",
-                    "operator": "ne",
-                    "right_operand": ""
-                  },
-                  "continue_on_failure": false,
-                  "display_name": "THEN",
+                  "continue_on_failure": true,
+                  "display_name": "Filter Setup",
                   "skip_execution": false
                 },
                 "object_type": "definition_activity",
                 "actions": [
                   {
-                    "unique_name": "definition_activity_01BH2P7UZYFV06WOtBmNp00DiR1zx4s9lgt",
-                    "name": "For Each",
-                    "title": "For Each Filter",
-                    "type": "logic.for_each",
+                    "unique_name": "definition_activity_01BH2P7TUK4CU4aoa8u0rgpfCOzRO8xkquB",
+                    "name": "Condition Block",
+                    "title": "If filters",
+                    "type": "logic.if_else",
                     "base_type": "activity",
                     "properties": {
                       "continue_on_failure": false,
-                      "display_name": "For Each Filter",
-                      "skip_execution": false,
-                      "source_array": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.input.variable_workflow_01BH1IN31MN6Q7FGIZLIp01AWeNGmL5qsBG$"
+                      "display_name": "If filters",
+                      "skip_execution": false
                     },
                     "object_type": "definition_activity",
-                    "actions": [
+                    "blocks": [
                       {
-                        "unique_name": "definition_activity_01BH2P7W3C4620rWdWEc74FpjoXgKO0a9yA",
-                        "name": "Condition Block",
-                        "title": "If only ? in query",
-                        "type": "logic.if_else",
+                        "unique_name": "definition_activity_01BH2P7UDCLJU1SUzHTJ9VnA7OuQgk6Rg0r",
+                        "name": "Condition Branch",
+                        "title": "THEN",
+                        "type": "logic.condition_block",
                         "base_type": "activity",
                         "properties": {
+                          "condition": {
+                            "left_operand": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.input.variable_workflow_01BH1IN31MN6Q7FGIZLIp01AWeNGmL5qsBG[0].attribute$",
+                            "operator": "ne",
+                            "right_operand": ""
+                          },
                           "continue_on_failure": false,
-                          "display_name": "If only ? in query",
+                          "display_name": "THEN",
                           "skip_execution": false
                         },
                         "object_type": "definition_activity",
-                        "blocks": [
+                        "actions": [
                           {
-                            "unique_name": "definition_activity_01BH2P7WM97962Z0Gx7cSlZGogGlEO2Fhho",
-                            "name": "Condition Branch",
-                            "title": "THEN",
-                            "type": "logic.condition_block",
+                            "unique_name": "definition_activity_01BH2P7UZYFV06WOtBmNp00DiR1zx4s9lgt",
+                            "name": "For Each",
+                            "title": "For Each Filter",
+                            "type": "logic.for_each",
                             "base_type": "activity",
                             "properties": {
-                              "condition": {
-                                "left_operand": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$",
-                                "operator": "eq",
-                                "right_operand": ""
-                              },
                               "continue_on_failure": false,
-                              "display_name": "THEN",
-                              "skip_execution": false
+                              "display_name": "For Each Filter",
+                              "skip_execution": false,
+                              "source_array": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.input.variable_workflow_01BH1IN31MN6Q7FGIZLIp01AWeNGmL5qsBG$"
                             },
                             "object_type": "definition_activity",
                             "actions": [
                               {
-                                "unique_name": "definition_activity_01BH2P7X80ZYO1PUlUrZRlvZyB4Ta7EetTJ",
-                                "name": "Set Variables",
-                                "title": "Start Query",
-                                "type": "core.set_multiple_variables",
+                                "unique_name": "definition_activity_01BH2P7W3C4620rWdWEc74FpjoXgKO0a9yA",
+                                "name": "Condition Block",
+                                "title": "If only ? in query",
+                                "type": "logic.if_else",
                                 "base_type": "activity",
                                 "properties": {
                                   "continue_on_failure": false,
-                                  "display_name": "Start Query",
-                                  "skip_execution": false,
-                                  "variables_to_update": [
-                                    {
-                                      "variable_to_update": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$",
-                                      "variable_value_new": "?filter[]=$activity.definition_activity_01BH2P7UZYFV06WOtBmNp00DiR1zx4s9lgt.input.source_array[@].attribute$$activity.definition_activity_01BH2P7UZYFV06WOtBmNp00DiR1zx4s9lgt.input.source_array[@].operator$$activity.definition_activity_01BH2P7UZYFV06WOtBmNp00DiR1zx4s9lgt.input.source_array[@].value$"
-                                    }
-                                  ]
+                                  "display_name": "If only ? in query",
+                                  "skip_execution": false
                                 },
-                                "object_type": "definition_activity"
-                              }
-                            ]
-                          },
-                          {
-                            "unique_name": "definition_activity_01BH2P7XYFNIG6k2R6qJyNqLxMwWkx4HwuF",
-                            "name": "Condition Branch",
-                            "title": "Else",
-                            "type": "logic.condition_block",
-                            "base_type": "activity",
-                            "properties": {
-                              "condition": {
-                                "left_operand": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$",
-                                "operator": "ne",
-                                "right_operand": ""
-                              },
-                              "continue_on_failure": false,
-                              "display_name": "Else",
-                              "skip_execution": false
-                            },
-                            "object_type": "definition_activity",
-                            "actions": [
-                              {
-                                "unique_name": "definition_activity_01BH2P7YNYS1741cISKs6eTqUX2jDi6ESRj",
-                                "name": "Set Variables",
-                                "title": "Continue Query",
-                                "type": "core.set_multiple_variables",
-                                "base_type": "activity",
-                                "properties": {
-                                  "continue_on_failure": false,
-                                  "display_name": "Continue Query",
-                                  "skip_execution": false,
-                                  "variables_to_update": [
-                                    {
-                                      "variable_to_update": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$",
-                                      "variable_value_new": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$\u0026filter[]=$activity.definition_activity_01BH2P7UZYFV06WOtBmNp00DiR1zx4s9lgt.input.source_array[@].attribute$$activity.definition_activity_01BH2P7UZYFV06WOtBmNp00DiR1zx4s9lgt.input.source_array[@].operator$$activity.definition_activity_01BH2P7UZYFV06WOtBmNp00DiR1zx4s9lgt.input.source_array[@].value$"
-                                    }
-                                  ]
-                                },
-                                "object_type": "definition_activity"
+                                "object_type": "definition_activity",
+                                "blocks": [
+                                  {
+                                    "unique_name": "definition_activity_01BH2P7WM97962Z0Gx7cSlZGogGlEO2Fhho",
+                                    "name": "Condition Branch",
+                                    "title": "THEN",
+                                    "type": "logic.condition_block",
+                                    "base_type": "activity",
+                                    "properties": {
+                                      "condition": {
+                                        "left_operand": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$",
+                                        "operator": "eq",
+                                        "right_operand": ""
+                                      },
+                                      "continue_on_failure": false,
+                                      "display_name": "THEN",
+                                      "skip_execution": false
+                                    },
+                                    "object_type": "definition_activity",
+                                    "actions": [
+                                      {
+                                        "unique_name": "definition_activity_01BH2P7X80ZYO1PUlUrZRlvZyB4Ta7EetTJ",
+                                        "name": "Set Variables",
+                                        "title": "Start Query",
+                                        "type": "core.set_multiple_variables",
+                                        "base_type": "activity",
+                                        "properties": {
+                                          "continue_on_failure": false,
+                                          "display_name": "Start Query",
+                                          "skip_execution": false,
+                                          "variables_to_update": [
+                                            {
+                                              "variable_to_update": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$",
+                                              "variable_value_new": "?filter[]=$activity.definition_activity_01BH2P7UZYFV06WOtBmNp00DiR1zx4s9lgt.input.source_array[@].attribute$$activity.definition_activity_01BH2P7UZYFV06WOtBmNp00DiR1zx4s9lgt.input.source_array[@].operator$$activity.definition_activity_01BH2P7UZYFV06WOtBmNp00DiR1zx4s9lgt.input.source_array[@].value$"
+                                            }
+                                          ]
+                                        },
+                                        "object_type": "definition_activity"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "unique_name": "definition_activity_01BH2P7XYFNIG6k2R6qJyNqLxMwWkx4HwuF",
+                                    "name": "Condition Branch",
+                                    "title": "Else",
+                                    "type": "logic.condition_block",
+                                    "base_type": "activity",
+                                    "properties": {
+                                      "condition": {
+                                        "left_operand": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$",
+                                        "operator": "ne",
+                                        "right_operand": ""
+                                      },
+                                      "continue_on_failure": false,
+                                      "display_name": "Else",
+                                      "skip_execution": false
+                                    },
+                                    "object_type": "definition_activity",
+                                    "actions": [
+                                      {
+                                        "unique_name": "definition_activity_01BH2P7YNYS1741cISKs6eTqUX2jDi6ESRj",
+                                        "name": "Set Variables",
+                                        "title": "Continue Query",
+                                        "type": "core.set_multiple_variables",
+                                        "base_type": "activity",
+                                        "properties": {
+                                          "continue_on_failure": false,
+                                          "display_name": "Continue Query",
+                                          "skip_execution": false,
+                                          "variables_to_update": [
+                                            {
+                                              "variable_to_update": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$",
+                                              "variable_value_new": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.local.variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe$\u0026filter[]=$activity.definition_activity_01BH2P7UZYFV06WOtBmNp00DiR1zx4s9lgt.input.source_array[@].attribute$$activity.definition_activity_01BH2P7UZYFV06WOtBmNp00DiR1zx4s9lgt.input.source_array[@].operator$$activity.definition_activity_01BH2P7UZYFV06WOtBmNp00DiR1zx4s9lgt.input.source_array[@].value$"
+                                            }
+                                          ]
+                                        },
+                                        "object_type": "definition_activity"
+                                      }
+                                    ]
+                                  }
+                                ]
                               }
                             ]
                           }
@@ -769,11 +868,6 @@
       "description": "Collection Filter.\n\nInput as attribute,operator, value triples\n\nIf you want \"and\" input just the attribute name, ie\" name\"\nif you want \"or\" input the or with the attribute name and a space. ie \"or name\"\nSupported operators are =, !=, \u003c , \u003c=, \u003e=, and \u003e\n\nYou can search with strings in values and wildcards of % are supported by API.\nInput strings with single quotes\nInput numbers or boolean with no quotes\n\n\nSee more examples/info at \nhttp://manageiq.org/docs/reference/latest/api/overview/filtering.html",
       "columns": [
         {
-          "name": "attribute",
-          "title": "attribute",
-          "type": "string"
-        },
-        {
           "name": "operator",
           "title": "operator",
           "type": "string"
@@ -781,6 +875,11 @@
         {
           "name": "value",
           "title": "value",
+          "type": "string"
+        },
+        {
+          "name": "attribute",
+          "title": "attribute",
           "type": "string"
         }
       ],
@@ -793,13 +892,13 @@
       "display_name": "cloud.forms.vm.list",
       "columns": [
         {
-          "name": "resource",
-          "title": "resource",
+          "name": "ID",
+          "title": "ID",
           "type": "string"
         },
         {
-          "name": "ID",
-          "title": "ID",
+          "name": "resource",
+          "title": "resource",
           "type": "string"
         }
       ],
