@@ -1,0 +1,253 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01BH7A5UDYGWV2liG0xqxxU69MAKSKM64z1",
+    "name": "Cloud.Forms.API - Control_VM",
+    "title": "Cloud.Forms.API - Control_VM",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "output_task_href",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BH7KH995ABV4f5WG9jjO7CsZeRSKKBFKu",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "output_href",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BH7L4X8B9HN0Y8hYo7dJf0UmXr6X9O04D",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "input_id",
+          "type": "datatype.string",
+          "description": "VM ID",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BH7BZKPMQ7O38J5FNgcVy3VLy6fHQTyOk",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "start",
+          "scope": "input",
+          "name": "input_vm_action",
+          "type": "datatype.string",
+          "description": "Options:\nstart\nstop\nsuspend",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BH7CETK85UM0ai7b2TakAYALvbc0lSK53",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "output_json_message",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BH7CQ1B3Z6P0OIjimPIR1FZx2eu71KmBp",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "output_message",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BH7K8EV2ET173pHQn9le1uV8x8IfPAIio",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "output_task_id",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BH7KCX6DZX86TX0JPMbPjiVtYXaM0lnHu",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Cloud.Forms.API - Control_VM",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01BH7DHNXCYI329RdqOxtDKAk3QX0ahZtzR",
+        "name": "To Lower",
+        "title": "Action to Lower",
+        "type": "core.string2lower",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Action to Lower",
+          "skip_execution": false,
+          "source": "$workflow.definition_workflow_01BH7A5UDYGWV2liG0xqxxU69MAKSKM64z1.input.variable_workflow_01BH7CETK85UM0ai7b2TakAYALvbc0lSK53$"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BH7EEEWEDSB2VZ9TQvo3eVFxViQ3UDfCJ",
+        "name": "HTTP Request",
+        "title": "POST - Control_VM",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "body": "{\n \"action\": \"$activity.definition_activity_01BH7DHNXCYI329RdqOxtDKAk3QX0ahZtzR.output.lowercase_text$\"\n}",
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "custom_headers": [
+            {
+              "name": "X-Auth-Token",
+              "value": "$global.variable_01BH0I4MN1OF82LuH4MFcQK3285pdZsKUdf.global.variable_01BH0I4MN1OF82LuH4MFcQK3285pdZsKUdf$"
+            }
+          ],
+          "display_name": "POST - Control_VM",
+          "method": "POST",
+          "relative_url": "vms/$workflow.definition_workflow_01BH7A5UDYGWV2liG0xqxxU69MAKSKM64z1.input.variable_workflow_01BH7BZKPMQ7O38J5FNgcVy3VLy6fHQTyOk$",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BH7G4RHSN6Y5iftUpcxWP2ukyICxuT2Tk",
+        "name": "JSONPath Query",
+        "title": "Get Output",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Get Output",
+          "input_json": "$activity.definition_activity_01BH7EEEWEDSB2VZ9TQvo3eVFxViQ3UDfCJ.output.response_body$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "$..success",
+              "jsonpath_query_name": "success",
+              "jsonpath_query_type": "string"
+            },
+            {
+              "jsonpath_query": "$..message",
+              "jsonpath_query_name": "message",
+              "jsonpath_query_type": "string"
+            },
+            {
+              "jsonpath_query": "$..href",
+              "jsonpath_query_name": "href",
+              "jsonpath_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BH7LRIWNW5M6BfAm4kB5kQZ8hKFRyUO4T",
+        "name": "Set Variables",
+        "title": "Set Output",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Output",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01BH7A5UDYGWV2liG0xqxxU69MAKSKM64z1.output.variable_workflow_01BH7CQ1B3Z6P0OIjimPIR1FZx2eu71KmBp$",
+              "variable_value_new": "$activity.definition_activity_01BH7EEEWEDSB2VZ9TQvo3eVFxViQ3UDfCJ.output.response_body$"
+            },
+            {
+              "variable_to_update": "$workflow.definition_workflow_01BH7A5UDYGWV2liG0xqxxU69MAKSKM64z1.output.variable_workflow_01BH7L4X8B9HN0Y8hYo7dJf0UmXr6X9O04D$",
+              "variable_value_new": "$activity.definition_activity_01BH7G4RHSN6Y5iftUpcxWP2ukyICxuT2Tk.output.jsonpath_queries.href$"
+            },
+            {
+              "variable_to_update": "$workflow.definition_workflow_01BH7A5UDYGWV2liG0xqxxU69MAKSKM64z1.output.variable_workflow_01BH7K8EV2ET173pHQn9le1uV8x8IfPAIio$",
+              "variable_value_new": "$activity.definition_activity_01BH7G4RHSN6Y5iftUpcxWP2ukyICxuT2Tk.output.jsonpath_queries.message$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_01BH0G2NKWYA01reVISoqWn3Wt1YYsQCZo9"
+    ]
+  },
+  "categories": {
+    "category_01BH0G2NKWYA01reVISoqWn3Wt1YYsQCZo9": {
+      "unique_name": "category_01BH0G2NKWYA01reVISoqWn3Wt1YYsQCZo9",
+      "name": "Cloud.Forms.API",
+      "title": "Cloud.Forms.API",
+      "type": "basic.category",
+      "base_type": "category",
+      "description": "cloud forms API",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "variables": {
+    "variable_01BH0I4MN1OF82LuH4MFcQK3285pdZsKUdf": {
+      "unique_name": "variable_01BH0I4MN1OF82LuH4MFcQK3285pdZsKUdf",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "Cloud.Forms.API.Auth.Token",
+        "type": "datatype.secure_string",
+        "is_required": false
+      },
+      "object_type": "variable"
+    }
+  }
+}
