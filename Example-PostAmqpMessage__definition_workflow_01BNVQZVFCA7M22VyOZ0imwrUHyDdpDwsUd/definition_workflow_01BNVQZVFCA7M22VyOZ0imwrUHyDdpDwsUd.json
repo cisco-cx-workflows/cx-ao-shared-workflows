@@ -1,0 +1,72 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01BNVQZVFCA7M22VyOZ0imwrUHyDdpDwsUd",
+    "name": "example-post_amqp_message",
+    "title": "example-post_amqp_message",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "hey",
+          "scope": "input",
+          "name": "message",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BNVRPCX7IKI5p1oMiFD4Bxl8nC61loSdM",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "example-post_amqp_message",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "amqp.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01BNVRX9YM3MW69dkzPG1zdkb6558AxzekA",
+        "name": "Publish AMQP Message",
+        "title": "Publish AMQP Message",
+        "type": "amqp.publish_message",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "body": "$workflow.definition_workflow_01BNVQZVFCA7M22VyOZ0imwrUHyDdpDwsUd.input.variable_workflow_01BNVRPCX7IKI5p1oMiFD4Bxl8nC61loSdM$",
+          "continue_on_failure": false,
+          "delivery_mode": 1,
+          "display_name": "Publish AMQP Message",
+          "exchange_name": "test_exchange",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  }
+}
