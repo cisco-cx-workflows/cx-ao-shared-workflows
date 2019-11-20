@@ -10,12 +10,113 @@
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
+          "scope": "input",
+          "name": "input_override_target_id",
+          "type": "datatype.string",
+          "description": "ID of target to override with",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BBUGV1R84U45AWJgQk6DyFlxHTJuItNXC",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "input_override_start_point",
+          "type": "datatype.string",
+          "description": "specify a start point",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BBUGL9DNP881Bn3VZ50EvmFWroIdhCr8A",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "local_start_workflow_json_payload",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BBUK81NSPAU4Oacys3ddqWsbHFBYSMf41",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "output_workflow_output_json",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AP5JETB7AO96YkEqMTvOMMy2MF32ApcHF",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
           "scope": "output",
           "name": "output_workflow_instance_id",
           "type": "datatype.string",
           "is_required": false
         },
         "unique_name": "variable_workflow_01APQ2T4C9NS10VygOUQ1UrqGlIi8Bh9gVq",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "{\n \"input1\": \"some value\",\n \"input2\": \"some other value\"\n}",
+          "scope": "input",
+          "name": "input_variable_json",
+          "type": "datatype.string",
+          "description": "Inputs as a JSON object\nIf not inputs, use {}",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01AP34R6234647ULcULPNDy956ARTvFsrT1",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "input_override_runtime_user_id",
+          "type": "datatype.string",
+          "description": "If need to override runtime user. ID only",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BBUG9K6RJNZ0s5uV9CcT7RvT4v6n980yl",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Test_Plugin",
+          "scope": "input",
+          "name": "workflow_name",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01AP33TDH45976FA0c08I6UErtE19arjhwk",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "async",
+          "scope": "input",
+          "name": "execute_workflow_sync",
+          "type": "datatype.string",
+          "description": "options:\nsync\nasync",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01AP35MNKLMW320z99VsYekapiMUxFPwMGs",
         "object_type": "variable_workflow"
       },
       {
@@ -45,82 +146,6 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "Test_Plugin",
-          "scope": "input",
-          "name": "workflow_name",
-          "type": "datatype.string",
-          "is_required": true
-        },
-        "unique_name": "variable_workflow_01AP33TDH45976FA0c08I6UErtE19arjhwk",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "input_override_runtime_user_id",
-          "type": "datatype.string",
-          "description": "If need to override runtime user. ID only",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BBUG9K6RJNZ0s5uV9CcT7RvT4v6n980yl",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "input_override_start_point",
-          "type": "datatype.string",
-          "description": "specify a start point",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BBUGL9DNP881Bn3VZ50EvmFWroIdhCr8A",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "{\n \"input1\": \"some value\",\n \"input2\": \"some other value\"\n}",
-          "scope": "input",
-          "name": "input_variable_json",
-          "type": "datatype.string",
-          "description": "Inputs as a JSON object\nIf not inputs, use {}",
-          "is_required": true
-        },
-        "unique_name": "variable_workflow_01AP34R6234647ULcULPNDy956ARTvFsrT1",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "output",
-          "name": "output_workflow_output_json",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01AP5JETB7AO96YkEqMTvOMMy2MF32ApcHF",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "input_override_target_id",
-          "type": "datatype.string",
-          "description": "ID of target to override with",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BBUGV1R84U45AWJgQk6DyFlxHTJuItNXC",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
           "value": "",
           "scope": "local",
           "name": "local_modified_props",
@@ -128,31 +153,6 @@
           "is_required": false
         },
         "unique_name": "variable_workflow_01AP3VWX27SDP4uWHbi0jblQUKdGnF7s36K",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "local_start_workflow_json_payload",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BBUK81NSPAU4Oacys3ddqWsbHFBYSMf41",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "async",
-          "scope": "input",
-          "name": "execute_workflow_sync",
-          "type": "datatype.string",
-          "description": "options:\nsync\nasync",
-          "is_required": true
-        },
-        "unique_name": "variable_workflow_01AP35MNKLMW320z99VsYekapiMUxFPwMGs",
         "object_type": "variable_workflow"
       }
     ],
@@ -753,7 +753,7 @@
                 "properties": {
                   "action_timeout": 180,
                   "allow_auto_redirect": true,
-                  "body": "{\n  \"input_variables\": $workflow.definition_workflow_01AP32MLFSTT019UbRkKy93Qo1ATRkUWH1Z.local.variable_workflow_01AP3PRVKDB756b5y0uT4zVksy5gBwGAqfN$\n}",
+                  "body": "$workflow.definition_workflow_01AP32MLFSTT019UbRkKy93Qo1ATRkUWH1Z.local.variable_workflow_01BBUK81NSPAU4Oacys3ddqWsbHFBYSMf41$",
                   "content_type": "application/json",
                   "continue_on_error_status_code": false,
                   "continue_on_failure": false,
@@ -897,7 +897,7 @@
                 "properties": {
                   "action_timeout": 180,
                   "allow_auto_redirect": true,
-                  "body": "{\n \"input_variables\": $workflow.definition_workflow_01AP32MLFSTT019UbRkKy93Qo1ATRkUWH1Z.local.variable_workflow_01AP3PRVKDB756b5y0uT4zVksy5gBwGAqfN$\n}",
+                  "body": "$workflow.definition_workflow_01AP32MLFSTT019UbRkKy93Qo1ATRkUWH1Z.local.variable_workflow_01BBUK81NSPAU4Oacys3ddqWsbHFBYSMf41$",
                   "content_type": "application/json",
                   "continue_on_error_status_code": false,
                   "continue_on_failure": false,
