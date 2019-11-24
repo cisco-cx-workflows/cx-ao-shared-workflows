@@ -165,6 +165,11 @@
       "display_name": "Failed.Imported.Atomic.Adapter.WF",
       "columns": [
         {
+          "name": "name",
+          "title": "name",
+          "type": "string"
+        },
+        {
           "name": "path",
           "title": "path",
           "type": "string"
@@ -172,11 +177,6 @@
         {
           "name": "wf_json",
           "title": "wf_json",
-          "type": "string"
-        },
-        {
-          "name": "name",
-          "title": "name",
           "type": "string"
         }
       ],
@@ -219,6 +219,18 @@
             "object_type": "variable_workflow"
           },
           {
+            "schema_id": "datatype.boolean",
+            "properties": {
+              "value": false,
+              "scope": "local",
+              "name": "local_import_ok",
+              "type": "datatype.boolean",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01BRBYKGSVSGG0gfjKrPzAur145NvM87Ff2",
+            "object_type": "variable_workflow"
+          },
+          {
             "schema_id": "datatype.integer",
             "properties": {
               "value": 3,
@@ -233,14 +245,25 @@
           {
             "schema_id": "datatype.string",
             "properties": {
-              "value": "false",
+              "value": "kubernetes",
               "scope": "input",
-              "name": "input_import_as_new",
+              "name": "input_adapter_name",
               "type": "datatype.string",
-              "description": "true\nfalse",
+              "description": "options:\naci\nappd\nazure\nccs\ncpo\ndmj\ndnac\nkubernetes\nmeraki\nnso\nopenshift\nopenstack\nserivcenow\nterraform\nucsd\nvmware",
               "is_required": true
             },
-            "unique_name": "variable_workflow_01BOPK2QJH9093MnQwOWdtIwQkFi8SGd7l0",
+            "unique_name": "variable_workflow_01BOOUNN2VZGN35d0oQ0RnftlPbqjvSFTM4",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "tabletype_01BRC7S0HFH0F7SM81pR6OeXBHIsaCniy52",
+            "properties": {
+              "scope": "local",
+              "name": "local_failed_imported_wf",
+              "type": "datatype.table",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01BRC87I338501UHIcHNxnY7Ampb5BPQn5r",
             "object_type": "variable_workflow"
           },
           {
@@ -258,14 +281,13 @@
           {
             "schema_id": "datatype.string",
             "properties": {
-              "value": "kubernetes",
-              "scope": "input",
-              "name": "input_adapter_name",
+              "value": "",
+              "scope": "output",
+              "name": "output_results",
               "type": "datatype.string",
-              "description": "options:\naci\nappd\nazure\nccs\ncpo\ndmj\ndnac\nkubernetes\nmeraki\nnso\nopenshift\nopenstack\nserivcenow\nterraform\nucsd\nvmware",
-              "is_required": true
+              "is_required": false
             },
-            "unique_name": "variable_workflow_01BOOUNN2VZGN35d0oQ0RnftlPbqjvSFTM4",
+            "unique_name": "variable_workflow_01BRBH2Z7MY5H2S1C1Uobk2UemlTefpHTzO",
             "object_type": "variable_workflow"
           },
           {
@@ -281,15 +303,16 @@
             "object_type": "variable_workflow"
           },
           {
-            "schema_id": "datatype.boolean",
+            "schema_id": "datatype.string",
             "properties": {
-              "value": false,
-              "scope": "local",
-              "name": "local_import_ok",
-              "type": "datatype.boolean",
-              "is_required": false
+              "value": "false",
+              "scope": "input",
+              "name": "input_import_as_new",
+              "type": "datatype.string",
+              "description": "true\nfalse",
+              "is_required": true
             },
-            "unique_name": "variable_workflow_01BRBYKGSVSGG0gfjKrPzAur145NvM87Ff2",
+            "unique_name": "variable_workflow_01BOPK2QJH9093MnQwOWdtIwQkFi8SGd7l0",
             "object_type": "variable_workflow"
           },
           {
@@ -302,29 +325,6 @@
               "is_required": false
             },
             "unique_name": "variable_workflow_01BOPKA2LX5ZN61YhH73yOLErQW1TL8jOrU",
-            "object_type": "variable_workflow"
-          },
-          {
-            "schema_id": "datatype.string",
-            "properties": {
-              "value": "",
-              "scope": "output",
-              "name": "output_results",
-              "type": "datatype.string",
-              "is_required": false
-            },
-            "unique_name": "variable_workflow_01BRBH2Z7MY5H2S1C1Uobk2UemlTefpHTzO",
-            "object_type": "variable_workflow"
-          },
-          {
-            "schema_id": "tabletype_01BRC7S0HFH0F7SM81pR6OeXBHIsaCniy52",
-            "properties": {
-              "scope": "local",
-              "name": "local_failed_imported_wf",
-              "type": "datatype.table",
-              "is_required": false
-            },
-            "unique_name": "variable_workflow_01BRC87I338501UHIcHNxnY7Ampb5BPQn5r",
             "object_type": "variable_workflow"
           }
         ],
