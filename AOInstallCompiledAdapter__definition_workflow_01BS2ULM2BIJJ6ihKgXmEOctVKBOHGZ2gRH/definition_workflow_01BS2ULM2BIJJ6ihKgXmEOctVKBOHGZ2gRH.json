@@ -1,0 +1,1057 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH",
+    "name": "AO.General-Install_Compiled_Adapter",
+    "title": "AO.General-Install_Compiled_Adapter",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "input_compiled_adapter_container_repo",
+          "type": "datatype.string",
+          "description": "if adapter is already compiled and updated, you can just use this container repo location to install",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BT5YCCSNZ3B4wo7NrBF5O6PZvjdQAKNgM",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "webexteams",
+          "scope": "input",
+          "name": "input_adapter_name",
+          "type": "datatype.string",
+          "description": "name of folder to extract to. ",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BS38EAQJ0BP4hTvGJkeRegLoqlUKA2XXF",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "local",
+          "name": "local_schema_created",
+          "type": "datatype.boolean",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BSXTGFF9UQZ5Zudz1uToLhtH6GPArtMq0",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "local",
+          "name": "local_bypass_schema_creation",
+          "type": "datatype.boolean",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01CA7HYIEHVAZ3HpJXB2RTEoPIUZSPUm2vo",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "local_json",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BSX9TF35TE87i8d0RkVEmMCYzDPIGDHHq",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "local_api_calls",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BSXU5U72Y481sI5Ez3zXIJ3i8oHn8KoB0",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "python",
+          "scope": "input",
+          "name": "input_adapter_language",
+          "type": "datatype.string",
+          "description": "currently only supports python to compile. Supports anything if already compiled",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BT5ZTT4IDLK47ShHBebYBhiffXYv7nkgv",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 5,
+          "scope": "local",
+          "name": "local_max_api_calls",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BSXTWF6C7845x8GBOlRWkRC5flqTXBNVL",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 1,
+          "scope": "local",
+          "name": "ELSE",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BT64RFCI5JM3u3cSF9h6wHgZo7Ce73DAp",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "shaurobe/ao-webex-teams-adapter",
+          "scope": "input",
+          "name": "input_container_repo_to_compile_to",
+          "type": "datatype.string",
+          "description": "repository to use to store compiled container. If access to the internet use the default otherwise use a repo you would have access to",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BS2XD2S6ZIP3RBDBB5DVLWVG6SDk3BkGs",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "tabletype_01BT7BSYUBTE64EYEoxydG7HW7vLF4j1RsS",
+        "properties": {
+          "value": [
+            {
+              "column_data": {
+                "dockerURL": "containers.cisco.com",
+                "password": "mypass",
+                "username": "myuser"
+              }
+            }
+          ],
+          "scope": "input",
+          "name": "input_docker_login_information",
+          "type": "datatype.table",
+          "description": "needed if you need to compile. This will login your master node to your container repo",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BT7CEA39G3D0a3Lrx8YfRn3KhZP5o7wlW",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "/root/webex-teams-adapter.tar.gz",
+          "scope": "input",
+          "name": "input_archive_file_location",
+          "type": "datatype.string",
+          "description": "File location of archive. Should be on one of your K8S master nodes",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BS2W8HFYHX70iHZssNnJho0cnhBCNvLsW",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "cisco",
+          "scope": "input",
+          "name": "input_kubernetes_namespace_to_install_to",
+          "type": "datatype.string",
+          "description": "namespace for your AO install. ",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BS33CYRKRVM65CMTV3jyVggpJI8qGxyL8",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "description": "Source system: CX-AO-DEV-02.cisco.com",
+      "display_name": "AO.General-Install_Compiled_Adapter",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01BS370E242Q16Kqvgz73pW07LemCdC2Cig",
+        "name": "Execute Terminal Command(s)",
+        "title": "Extract Adapter Archive",
+        "type": "terminal.command",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "command_timeout": 60,
+          "commands": "sudo -i\nmkdir $workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BS38EAQJ0BP4hTvGJkeRegLoqlUKA2XXF$\ntar -C $workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BS38EAQJ0BP4hTvGJkeRegLoqlUKA2XXF$ -zxvf $workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BS2W8HFYHX70iHZssNnJho0cnhBCNvLsW$",
+          "continue_on_failure": false,
+          "display_name": "Extract Adapter Archive",
+          "merge_commands": false,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01CA7I3B88RFP7QhkDck0EnvYokVyzGYYGN",
+        "name": "Condition Block",
+        "title": "If bypass schema",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "If bypass schema",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01CA7I3D3PXG61tNJc1TwsiNxxWNaRX17x4",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.local.variable_workflow_01CA7HYIEHVAZ3HpJXB2RTEoPIUZSPUm2vo$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01CA7I3DWIVUT5QrQrCvvHdPnWJob9Q7Ae5",
+            "name": "Condition Branch",
+            "title": "Else",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.local.variable_workflow_01CA7HYIEHVAZ3HpJXB2RTEoPIUZSPUm2vo$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": false,
+              "display_name": "Else",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01BT5W66CLHV04Ok1lpPLwSxCmtdVo74HR6",
+                "name": "Group",
+                "title": "Adapter Schema Install",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Adapter Schema Install",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01BS39QVZ45T10Q2x4CqCcIKaBvnUD13sle",
+                    "name": "Execute Terminal Command(s)",
+                    "title": "List Schema Files",
+                    "type": "terminal.command",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "command_timeout": 60,
+                      "commands": "sudo -i\ncd $workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BS38EAQJ0BP4hTvGJkeRegLoqlUKA2XXF$/schemas\nls -A1",
+                      "continue_on_failure": false,
+                      "display_name": "List Schema Files",
+                      "merge_commands": false,
+                      "runtime_user": {
+                        "override_target_runtime_user": false,
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "target": {
+                        "override_workflow_target": true,
+                        "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+                      }
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01BS3NAFJZ2OZ7g5q4SyS5JCbnGdStD9EmE",
+                    "name": "Match Regular Expression",
+                    "title": "Get JSON files",
+                    "type": "core.matchregex",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Get JSON files",
+                      "input_regex": "(?m)^.*.json$",
+                      "input_string": "$activity.definition_activity_01BS39QVZ45T10Q2x4CqCcIKaBvnUD13sle.output.response_body$",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01BS3QLHR30YK2YdaMH1ezjlju49kD7Mn03",
+                    "name": "For Each",
+                    "title": "For Each Schema File",
+                    "type": "logic.for_each",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "For Each Schema File",
+                      "skip_execution": false,
+                      "source_array": "$activity.definition_activity_01BS3NAFJZ2OZ7g5q4SyS5JCbnGdStD9EmE.output.matching_strings$"
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01BS3R5LV4P5A3oRiy6E0y1ksLpARbEpdgE",
+                        "name": "Execute Terminal Command(s)",
+                        "title": "CAT JSON Schema File",
+                        "type": "terminal.command",
+                        "base_type": "activity",
+                        "properties": {
+                          "action_timeout": 180,
+                          "command_timeout": 60,
+                          "commands": "sudo -i\ncat $workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BS38EAQJ0BP4hTvGJkeRegLoqlUKA2XXF$/schemas/$activity.definition_activity_01BS3QLHR30YK2YdaMH1ezjlju49kD7Mn03.input.source_array[@]$\n",
+                          "continue_on_failure": false,
+                          "display_name": "CAT JSON Schema File",
+                          "merge_commands": false,
+                          "runtime_user": {
+                            "override_target_runtime_user": false,
+                            "target_default": true
+                          },
+                          "skip_execution": false,
+                          "target": {
+                            "override_workflow_target": true,
+                            "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+                          }
+                        },
+                        "object_type": "definition_activity"
+                      },
+                      {
+                        "unique_name": "definition_activity_01BS3QV8SBQ3M5KQy3qzqLa6IJhPgy8Zh3J",
+                        "name": "Match Regular Expression",
+                        "title": "Match JSON File",
+                        "type": "core.matchregex",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Match JSON File",
+                          "input_regex": "{(.*\\n){0,}}",
+                          "input_string": "$activity.definition_activity_01BS3R5LV4P5A3oRiy6E0y1ksLpARbEpdgE.output.response_body$",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity"
+                      },
+                      {
+                        "unique_name": "definition_activity_01BSX9X5ZKN4N5aElDphxxCW5JFruWyYGN6",
+                        "name": "Set Variables",
+                        "title": "Reset Loop Vars",
+                        "type": "core.set_multiple_variables",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Reset Loop Vars",
+                          "skip_execution": false,
+                          "variables_to_update": [
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.local.variable_workflow_01BSX9TF35TE87i8d0RkVEmMCYzDPIGDHHq$",
+                              "variable_value_new": "$activity.definition_activity_01BS3QV8SBQ3M5KQy3qzqLa6IJhPgy8Zh3J.output.matching_strings[0]$"
+                            },
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.local.variable_workflow_01BSXTGFF9UQZ5Zudz1uToLhtH6GPArtMq0$",
+                              "variable_value_new": false
+                            },
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.local.variable_workflow_01BSXU5U72Y481sI5Ez3zXIJ3i8oHn8KoB0$",
+                              "variable_value_new": 0
+                            }
+                          ]
+                        },
+                        "object_type": "definition_activity"
+                      },
+                      {
+                        "unique_name": "definition_activity_01BSXUKXVCKYN5Yk8L7IxKb2wPYYm0VepvD",
+                        "name": "While Loop",
+                        "title": "While !Schema Created AND Tries\u003cMax",
+                        "type": "logic.while",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "While !Schema Created AND Tries\u003cMax",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity",
+                        "blocks": [
+                          {
+                            "unique_name": "definition_activity_01BSXUKZLQJPQ2T5Bl7v1yPCrDiwS4hzEk7",
+                            "name": "Condition Branch",
+                            "title": "DO",
+                            "type": "logic.condition_block",
+                            "base_type": "activity",
+                            "properties": {
+                              "condition": {
+                                "left_operand": {
+                                  "left_operand": "$workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.local.variable_workflow_01BSXTGFF9UQZ5Zudz1uToLhtH6GPArtMq0$",
+                                  "operator": "eq",
+                                  "right_operand": false
+                                },
+                                "operator": "and",
+                                "right_operand": {
+                                  "left_operand": "$workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.local.variable_workflow_01BSXU5U72Y481sI5Ez3zXIJ3i8oHn8KoB0$",
+                                  "operator": "lt",
+                                  "right_operand": "$workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.local.variable_workflow_01BSXTWF6C7845x8GBOlRWkRC5flqTXBNVL$"
+                                }
+                              },
+                              "continue_on_failure": false,
+                              "display_name": "DO",
+                              "skip_execution": false
+                            },
+                            "object_type": "definition_activity",
+                            "actions": [
+                              {
+                                "unique_name": "definition_activity_01BSXJKKGSGQN7heDc6LKXrcGTr4C0rEubG",
+                                "name": "HTTP Request",
+                                "title": "Install Schema via API",
+                                "type": "web-service.http_request",
+                                "base_type": "activity",
+                                "properties": {
+                                  "action_timeout": 180,
+                                  "allow_auto_redirect": true,
+                                  "body": "$activity.definition_activity_01BS3QV8SBQ3M5KQy3qzqLa6IJhPgy8Zh3J.output.matching_strings[0]$",
+                                  "content_type": "application/json",
+                                  "continue_on_error_status_code": false,
+                                  "continue_on_failure": true,
+                                  "display_name": "Install Schema via API",
+                                  "method": "POST",
+                                  "relative_url": "/v1/schemas",
+                                  "runtime_user": {
+                                    "override_target_runtime_user": false,
+                                    "target_default": true
+                                  },
+                                  "skip_execution": false,
+                                  "target": {
+                                    "override_workflow_target": true,
+                                    "target_id": "definition_target_01BSXGPYQQPVI3VvwMzXt327vcQhXemIvsm"
+                                  }
+                                },
+                                "object_type": "definition_activity"
+                              },
+                              {
+                                "unique_name": "definition_activity_01BSXW0CRWDTM1enz2pdvsNJUBIrj0UoP3T",
+                                "name": "Condition Block",
+                                "title": "if schema created",
+                                "type": "logic.if_else",
+                                "base_type": "activity",
+                                "properties": {
+                                  "continue_on_failure": false,
+                                  "display_name": "if schema created",
+                                  "skip_execution": false
+                                },
+                                "object_type": "definition_activity",
+                                "blocks": [
+                                  {
+                                    "unique_name": "definition_activity_01BSXW0EKXA1L50mFXqUQKV4NyycFkql3BD",
+                                    "name": "Condition Branch",
+                                    "title": "THEN",
+                                    "type": "logic.condition_block",
+                                    "base_type": "activity",
+                                    "properties": {
+                                      "condition": {
+                                        "left_operand": "$activity.definition_activity_01BSXJKKGSGQN7heDc6LKXrcGTr4C0rEubG.output.succeeded$",
+                                        "operator": "eq",
+                                        "right_operand": true
+                                      },
+                                      "continue_on_failure": false,
+                                      "display_name": "THEN",
+                                      "skip_execution": false
+                                    },
+                                    "object_type": "definition_activity",
+                                    "actions": [
+                                      {
+                                        "unique_name": "definition_activity_01BSXWTBQDCVH0ufSysBRtpN8XqPv8yDmdB",
+                                        "name": "Set Variables",
+                                        "title": "Set Schema OK",
+                                        "type": "core.set_multiple_variables",
+                                        "base_type": "activity",
+                                        "properties": {
+                                          "continue_on_failure": false,
+                                          "display_name": "Set Schema OK",
+                                          "skip_execution": false,
+                                          "variables_to_update": [
+                                            {
+                                              "variable_to_update": "$workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.local.variable_workflow_01BSXTGFF9UQZ5Zudz1uToLhtH6GPArtMq0$",
+                                              "variable_value_new": true
+                                            }
+                                          ]
+                                        },
+                                        "object_type": "definition_activity"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "unique_name": "definition_activity_01BSXW0FE63OE0rhtc6HxyZvp1BRooCWqdc",
+                                    "name": "Condition Branch",
+                                    "title": "else",
+                                    "type": "logic.condition_block",
+                                    "base_type": "activity",
+                                    "properties": {
+                                      "condition": {
+                                        "left_operand": "$activity.definition_activity_01BSXJKKGSGQN7heDc6LKXrcGTr4C0rEubG.output.succeeded$",
+                                        "operator": "eq",
+                                        "right_operand": false
+                                      },
+                                      "continue_on_failure": false,
+                                      "display_name": "else",
+                                      "skip_execution": false
+                                    },
+                                    "object_type": "definition_activity",
+                                    "actions": [
+                                      {
+                                        "unique_name": "definition_activity_01BSXX4PP2NPQ0sNl74U061z9hpwk4SMnlf",
+                                        "name": "Set Variables",
+                                        "title": "Set Schema Not OK",
+                                        "type": "core.set_multiple_variables",
+                                        "base_type": "activity",
+                                        "properties": {
+                                          "continue_on_failure": false,
+                                          "display_name": "Set Schema Not OK",
+                                          "skip_execution": false,
+                                          "variables_to_update": [
+                                            {
+                                              "variable_to_update": "$workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.local.variable_workflow_01BSXU5U72Y481sI5Ez3zXIJ3i8oHn8KoB0$",
+                                              "variable_value_new": "$workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.local.variable_workflow_01BSXU5U72Y481sI5Ez3zXIJ3i8oHn8KoB0$+1"
+                                            }
+                                          ]
+                                        },
+                                        "object_type": "definition_activity"
+                                      },
+                                      {
+                                        "unique_name": "definition_activity_01BSXXICO659E02o4jALlh08mvoSYqacuAI",
+                                        "name": "Sleep",
+                                        "title": "Pause for 30 seconds",
+                                        "type": "core.sleep",
+                                        "base_type": "activity",
+                                        "properties": {
+                                          "continue_on_failure": false,
+                                          "display_name": "Pause for 30 seconds",
+                                          "skip_execution": false,
+                                          "sleep_interval": 30
+                                        },
+                                        "object_type": "definition_activity"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "unique_name": "definition_activity_01BSX1DTE0MZM3e8bGBlg177rnhem2cyX6o",
+                        "name": "Completed",
+                        "title": "Completed",
+                        "type": "logic.completed",
+                        "base_type": "activity",
+                        "properties": {
+                          "completion_type": "succeeded",
+                          "display_name": "Completed"
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01BT60ONSEYMX3ZurG2WVgFzvFmbR4VcErT",
+        "name": "Condition Block",
+        "title": "if !already compiled",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if !already compiled",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01BT60OPRY5UO2pEuukzMQE7NeNZeUzo1UV",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BT5YCCSNZ3B4wo7NrBF5O6PZvjdQAKNgM$",
+                "operator": "eq",
+                "right_operand": ""
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01BT5WU3X3UBC4JNibB7S0auOVt7c6pd7Ad",
+                "name": "Group",
+                "title": "Compile Adapter",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Compile Adapter",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01BT63RR3Z4Z84V8y1QAXCxVeCkFVWatvah",
+                    "name": "Condition Block",
+                    "title": "Compile based on Code",
+                    "type": "logic.if_else",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Compile based on Code",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "blocks": [
+                      {
+                        "unique_name": "definition_activity_01BT63RSOUUKR0YxbgQHpUNzXhlacsAy4jx",
+                        "name": "Condition Branch",
+                        "title": "Python",
+                        "type": "logic.condition_block",
+                        "base_type": "activity",
+                        "properties": {
+                          "condition": {
+                            "left_operand": "$workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BT5ZTT4IDLK47ShHBebYBhiffXYv7nkgv$",
+                            "operator": "eq",
+                            "right_operand": "python"
+                          },
+                          "continue_on_failure": false,
+                          "display_name": "Python",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity",
+                        "actions": [
+                          {
+                            "unique_name": "definition_activity_01BT68QH1G1Z63XCSVN3EMuY0W0hG9zxPAH",
+                            "name": "Execute Terminal Command(s)",
+                            "title": "Upgrade PIP",
+                            "type": "terminal.command",
+                            "base_type": "activity",
+                            "properties": {
+                              "action_timeout": 180,
+                              "command_timeout": 60,
+                              "commands": "sudo -i\npip install  --upgrade pip\npip install wheel\npip install --upgrade setuptools",
+                              "continue_on_failure": false,
+                              "display_name": "Upgrade PIP",
+                              "merge_commands": false,
+                              "runtime_user": {
+                                "override_target_runtime_user": false,
+                                "target_default": true
+                              },
+                              "skip_execution": false,
+                              "target": {
+                                "override_workflow_target": true,
+                                "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+                              }
+                            },
+                            "object_type": "definition_activity"
+                          },
+                          {
+                            "unique_name": "definition_activity_01BT6CWUTHT3J592GWTBs4fCPxxFwsiHuIZ",
+                            "name": "Execute Terminal Command(s)",
+                            "title": "Login to Docker",
+                            "type": "terminal.command",
+                            "base_type": "activity",
+                            "properties": {
+                              "action_timeout": 180,
+                              "command_timeout": 60,
+                              "commands": "sudo -i\ndocker login -u=\"$workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BT7CEA39G3D0a3Lrx8YfRn3KhZP5o7wlW[0].username$\" -p=\"$workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BT7CEA39G3D0a3Lrx8YfRn3KhZP5o7wlW[0].password$\" $workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BT7CEA39G3D0a3Lrx8YfRn3KhZP5o7wlW[0].dockerURL$",
+                              "continue_on_failure": false,
+                              "display_name": "Login to Docker",
+                              "merge_commands": false,
+                              "runtime_user": {
+                                "override_target_runtime_user": false,
+                                "target_default": true
+                              },
+                              "skip_execution": false,
+                              "target": {
+                                "override_workflow_target": true,
+                                "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+                              }
+                            },
+                            "object_type": "definition_activity"
+                          },
+                          {
+                            "unique_name": "definition_activity_01BT65J4TT3UA7W1UYgXsshgpewlRYBcvH2",
+                            "name": "Execute Terminal Command(s)",
+                            "title": "Compile Python code",
+                            "type": "terminal.command",
+                            "base_type": "activity",
+                            "properties": {
+                              "action_timeout": 180,
+                              "command_timeout": 60,
+                              "commands": "sudo -i\ncd $workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BS38EAQJ0BP4hTvGJkeRegLoqlUKA2XXF$\npython setup.py bdist_wheel\n",
+                              "continue_on_failure": false,
+                              "display_name": "Compile Python code",
+                              "merge_commands": false,
+                              "runtime_user": {
+                                "override_target_runtime_user": false,
+                                "target_default": true
+                              },
+                              "skip_execution": false,
+                              "target": {
+                                "override_workflow_target": true,
+                                "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+                              }
+                            },
+                            "object_type": "definition_activity"
+                          },
+                          {
+                            "unique_name": "definition_activity_01BT6ABA3RQJ01Hn8qeiphVlxQkaPdUeCGd",
+                            "name": "Execute Terminal Command(s)",
+                            "title": "Compile Container",
+                            "type": "terminal.command",
+                            "base_type": "activity",
+                            "properties": {
+                              "action_timeout": 180,
+                              "command_timeout": 60,
+                              "commands": "sudo -i\ncd $workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BS38EAQJ0BP4hTvGJkeRegLoqlUKA2XXF$\ndocker build . -t $workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BS2XD2S6ZIP3RBDBB5DVLWVG6SDk3BkGs$ -f Dockerfile\n",
+                              "continue_on_failure": false,
+                              "display_name": "Compile Container",
+                              "merge_commands": false,
+                              "runtime_user": {
+                                "override_target_runtime_user": false,
+                                "target_default": true
+                              },
+                              "skip_execution": false,
+                              "target": {
+                                "override_workflow_target": true,
+                                "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+                              }
+                            },
+                            "object_type": "definition_activity"
+                          },
+                          {
+                            "unique_name": "definition_activity_01BT6GDF4MXFO5IB0NkKAsF2Lv5rfcm2jMY",
+                            "name": "Execute Terminal Command(s)",
+                            "title": "Push Container to Repo",
+                            "type": "terminal.command",
+                            "base_type": "activity",
+                            "properties": {
+                              "action_timeout": 180,
+                              "command_timeout": 60,
+                              "commands": "sudo -i\ncd $workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BS38EAQJ0BP4hTvGJkeRegLoqlUKA2XXF$\ndocker push $workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BS2XD2S6ZIP3RBDBB5DVLWVG6SDk3BkGs$",
+                              "continue_on_failure": false,
+                              "display_name": "Push Container to Repo",
+                              "merge_commands": false,
+                              "runtime_user": {
+                                "override_target_runtime_user": false,
+                                "target_default": true
+                              },
+                              "skip_execution": false,
+                              "target": {
+                                "override_workflow_target": true,
+                                "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+                              }
+                            },
+                            "object_type": "definition_activity"
+                          }
+                        ]
+                      },
+                      {
+                        "unique_name": "definition_activity_01BT63RT90YCB395ylSUwjafIchFlu2G14n",
+                        "name": "Condition Branch",
+                        "title": "Else",
+                        "type": "logic.condition_block",
+                        "base_type": "activity",
+                        "properties": {
+                          "condition": {
+                            "left_operand": "$workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.local.variable_workflow_01BT64RFCI5JM3u3cSF9h6wHgZo7Ce73DAp$",
+                            "operator": "ne",
+                            "right_operand": 1
+                          },
+                          "continue_on_failure": false,
+                          "display_name": "Else",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity",
+                        "actions": [
+                          {
+                            "unique_name": "definition_activity_01BT652XOALPF3AKw3DEor07ah9vJ5r3ysY",
+                            "name": "Failed",
+                            "title": "Completed",
+                            "type": "logic.completed",
+                            "base_type": "activity",
+                            "properties": {
+                              "completion_type": "failed-completed",
+                              "display_name": "Failed",
+                              "result_message": "Currently we do not support this language for compilation. You need to already compile it and post it to a container repo."
+                            },
+                            "object_type": "definition_activity"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01BT6000ZOL7M2fV0o6MWmbQxH3jJcU50Wq",
+        "name": "Group",
+        "title": "Deploy Adapter via YAML",
+        "type": "logic.group",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Deploy Adapter via YAML",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01BT6J2HZKN7E054mHLFrZIXAL6NSHB5Q4h",
+            "name": "Execute Terminal Command(s)",
+            "title": "get YAML",
+            "type": "terminal.command",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "command_timeout": 60,
+              "commands": "sudo -i\ncd $workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BS38EAQJ0BP4hTvGJkeRegLoqlUKA2XXF$/yaml\nls -A1",
+              "continue_on_failure": false,
+              "display_name": "get YAML",
+              "merge_commands": false,
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01BT6L2WTZLHU5gDJBDUWczpw38un8cczL6",
+            "name": "Match Regular Expression",
+            "title": "Get Yaml File",
+            "type": "core.matchregex",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Get Yaml File",
+              "input_regex": "(?m)^[^cd].*.yaml$",
+              "input_string": "$activity.definition_activity_01BT6J2HZKN7E054mHLFrZIXAL6NSHB5Q4h.output.response_body$",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01CA7JOJU49ND1ELEbV2jC27oIAkWw5GRVa",
+            "name": "Replace String",
+            "title": "Offset Directories",
+            "type": "core.replacestring",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Offset Directories",
+              "input_string": "$workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BS2XD2S6ZIP3RBDBB5DVLWVG6SDk3BkGs$",
+              "replace_list": [
+                {
+                  "replaced_string": "/",
+                  "replacement_string": "\\/"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01BT6HKYFCCYU2vRB9vqb3OZfpUJjd0mV3J",
+            "name": "Execute Terminal Command(s)",
+            "title": "Update Image Tag and Apply YAML",
+            "type": "terminal.command",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "command_timeout": 60,
+              "commands": "sudo -i\ncd $workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BS38EAQJ0BP4hTvGJkeRegLoqlUKA2XXF$\nsed i 's/image: .*$/image: $activity.definition_activity_01CA7JOJU49ND1ELEbV2jC27oIAkWw5GRVa.output.result_string$:latest/' $activity.definition_activity_01BT6L2WTZLHU5gDJBDUWczpw38un8cczL6.output.matching_strings[0]$\nkubectl create -f $activity.definition_activity_01BT6L2WTZLHU5gDJBDUWczpw38un8cczL6.output.matching_strings[0]$ -n $workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BS33CYRKRVM65CMTV3jyVggpJI8qGxyL8$",
+              "continue_on_failure": false,
+              "display_name": "Update Image Tag and Apply YAML",
+              "merge_commands": false,
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+              }
+            },
+            "object_type": "definition_activity"
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_01APQ1SF3EVRH4WYM1c0JtOZbGDtxU0sJQd"
+    ]
+  },
+  "categories": {
+    "category_01APQ1SF3EVRH4WYM1c0JtOZbGDtxU0sJQd": {
+      "unique_name": "category_01APQ1SF3EVRH4WYM1c0JtOZbGDtxU0sJQd",
+      "name": "AO.General.Utilities",
+      "title": "AO.General.Utilities",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "targets": {
+    "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ": {
+      "unique_name": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ",
+      "name": "Default.AO.Install.Adapter.Master.Target",
+      "title": "Default.AO.Install.Adapter.Master.Target",
+      "type": "terminal.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01BS30VDNPJDJ5OnhfT3fTnIbt9D9yAjlaz",
+        "display_name": "Default.AO.Install.Adapter.Master.Target",
+        "host": "10.122.138.194",
+        "port": 22,
+        "protocol": "ssh"
+      }
+    },
+    "definition_target_01BSXGPYQQPVI3VvwMzXt327vcQhXemIvsm": {
+      "unique_name": "definition_target_01BSXGPYQQPVI3VvwMzXt327vcQhXemIvsm",
+      "name": "AO.API.For.Adapter.Install",
+      "title": "AO.API.For.Adapter.Install",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01BAH9BEAEBRG6TqVWqAjXCBrC9no36TC0O",
+        "disable_certificate_validation": true,
+        "display_name": "AO.API.For.Adapter.Install",
+        "host": "cx-ao-dev-02.cisco.com",
+        "no_runtime_user": false,
+        "path": "be-console/api",
+        "port": 32096,
+        "protocol": "https"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01BAH9BEAEBRG6TqVWqAjXCBrC9no36TC0O": {
+      "unique_name": "definition_runtime_user_01BAH9BEAEBRG6TqVWqAjXCBrC9no36TC0O",
+      "name": "AO API User",
+      "title": "AO API User",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "auth_option": "*****",
+        "basic_password": "*****",
+        "basic_username": "*****",
+        "display_name": "AO API User"
+      }
+    },
+    "definition_runtime_user_01BS30VDNPJDJ5OnhfT3fTnIbt9D9yAjlaz": {
+      "unique_name": "definition_runtime_user_01BS30VDNPJDJ5OnhfT3fTnIbt9D9yAjlaz",
+      "name": "Default.AO.Install.Adapter.User",
+      "title": "Default.AO.Install.Adapter.User",
+      "type": "runtime_user.terminal_password_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "Default.AO.Install.Adapter.User",
+        "password": "*****",
+        "user": "*****"
+      }
+    }
+  },
+  "table_types": {
+    "tabletype_01BT7BSYUBTE64EYEoxydG7HW7vLF4j1RsS": {
+      "unique_name": "tabletype_01BT7BSYUBTE64EYEoxydG7HW7vLF4j1RsS",
+      "data_type": "datatype.tabletype",
+      "display_name": "Docker.Login.Information",
+      "columns": [
+        {
+          "name": "dockerURL",
+          "title": "dockerURL",
+          "type": "string"
+        },
+        {
+          "name": "password",
+          "title": "password",
+          "type": "string"
+        },
+        {
+          "name": "username",
+          "title": "username",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    }
+  }
+}
