@@ -7,41 +7,15 @@
     "base_type": "workflow",
     "variables": [
       {
-        "schema_id": "datatype.boolean",
+        "schema_id": "datatype.string",
         "properties": {
-          "value": false,
+          "value": "",
           "scope": "local",
-          "name": "local_bypass_schema_creation",
-          "type": "datatype.boolean",
+          "name": "local_json",
+          "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01CA7HYIEHVAZ3HpJXB2RTEoPIUZSPUm2vo",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "python",
-          "scope": "input",
-          "name": "input_adapter_language",
-          "type": "datatype.string",
-          "description": "currently only supports python to compile. Supports anything if already compiled",
-          "is_required": true
-        },
-        "unique_name": "variable_workflow_01BT5ZTT4IDLK47ShHBebYBhiffXYv7nkgv",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "cisco",
-          "scope": "input",
-          "name": "input_kubernetes_namespace_to_install_to",
-          "type": "datatype.string",
-          "description": "namespace for your AO install. ",
-          "is_required": true
-        },
-        "unique_name": "variable_workflow_01BS33CYRKRVM65CMTV3jyVggpJI8qGxyL8",
+        "unique_name": "variable_workflow_01BSX9TF35TE87i8d0RkVEmMCYzDPIGDHHq",
         "object_type": "variable_workflow"
       },
       {
@@ -59,6 +33,19 @@
       {
         "schema_id": "datatype.string",
         "properties": {
+          "value": "/root/webex-teams-adapter.tar.gz",
+          "scope": "input",
+          "name": "input_archive_file_location",
+          "type": "datatype.string",
+          "description": "File location of archive. Should be on one of your K8S master nodes",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BS2W8HFYHX70iHZssNnJho0cnhBCNvLsW",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
           "value": "webexteams",
           "scope": "input",
           "name": "input_adapter_name",
@@ -67,42 +54,6 @@
           "is_required": true
         },
         "unique_name": "variable_workflow_01BS38EAQJ0BP4hTvGJkeRegLoqlUKA2XXF",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 1,
-          "scope": "local",
-          "name": "ELSE",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BT64RFCI5JM3u3cSF9h6wHgZo7Ce73DAp",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "local_json",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BSX9TF35TE87i8d0RkVEmMCYzDPIGDHHq",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.boolean",
-        "properties": {
-          "value": false,
-          "scope": "local",
-          "name": "local_schema_created",
-          "type": "datatype.boolean",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BSXTGFF9UQZ5Zudz1uToLhtH6GPArtMq0",
         "object_type": "variable_workflow"
       },
       {
@@ -129,13 +80,38 @@
       {
         "schema_id": "datatype.integer",
         "properties": {
-          "value": 5,
+          "value": 1,
           "scope": "local",
-          "name": "local_max_api_calls",
+          "name": "ELSE",
           "type": "datatype.integer",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01BSXTWF6C7845x8GBOlRWkRC5flqTXBNVL",
+        "unique_name": "variable_workflow_01BT64RFCI5JM3u3cSF9h6wHgZo7Ce73DAp",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "cisco",
+          "scope": "input",
+          "name": "input_kubernetes_namespace_to_install_to",
+          "type": "datatype.string",
+          "description": "namespace for your AO install. ",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BS33CYRKRVM65CMTV3jyVggpJI8qGxyL8",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "local",
+          "name": "local_bypass_schema_creation",
+          "type": "datatype.boolean",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01CA7HYIEHVAZ3HpJXB2RTEoPIUZSPUm2vo",
         "object_type": "variable_workflow"
       },
       {
@@ -152,16 +128,15 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.string",
+        "schema_id": "datatype.integer",
         "properties": {
-          "value": "/root/webex-teams-adapter.tar.gz",
-          "scope": "input",
-          "name": "input_archive_file_location",
-          "type": "datatype.string",
-          "description": "File location of archive. Should be on one of your K8S master nodes",
-          "is_required": true
+          "value": 5,
+          "scope": "local",
+          "name": "local_max_api_calls",
+          "type": "datatype.integer",
+          "is_required": false
         },
-        "unique_name": "variable_workflow_01BS2W8HFYHX70iHZssNnJho0cnhBCNvLsW",
+        "unique_name": "variable_workflow_01BSXTWF6C7845x8GBOlRWkRC5flqTXBNVL",
         "object_type": "variable_workflow"
       },
       {
@@ -175,6 +150,31 @@
           "is_required": false
         },
         "unique_name": "variable_workflow_01BS2XD2S6ZIP3RBDBB5DVLWVG6SDk3BkGs",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "local",
+          "name": "local_schema_created",
+          "type": "datatype.boolean",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BSXTGFF9UQZ5Zudz1uToLhtH6GPArtMq0",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "python",
+          "scope": "input",
+          "name": "input_adapter_language",
+          "type": "datatype.string",
+          "description": "currently only supports python to compile. Supports anything if already compiled",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BT5ZTT4IDLK47ShHBebYBhiffXYv7nkgv",
         "object_type": "variable_workflow"
       }
     ],
@@ -957,7 +957,7 @@
             "properties": {
               "action_timeout": 180,
               "command_timeout": 60,
-              "commands": "sudo -i\ncd $workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BS38EAQJ0BP4hTvGJkeRegLoqlUKA2XXF$\nsed i 's/image: .*$/image: $activity.definition_activity_01CA7JOJU49ND1ELEbV2jC27oIAkWw5GRVa.output.result_string$:latest/' $activity.definition_activity_01BT6L2WTZLHU5gDJBDUWczpw38un8cczL6.output.matching_strings[0]$\nkubectl create -f $activity.definition_activity_01BT6L2WTZLHU5gDJBDUWczpw38un8cczL6.output.matching_strings[0]$ -n $workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BS33CYRKRVM65CMTV3jyVggpJI8qGxyL8$",
+              "commands": "sudo -i\ncd $workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BS38EAQJ0BP4hTvGJkeRegLoqlUKA2XXF$/yaml\nsed -i 's/image: .*$/image: $activity.definition_activity_01CA7JOJU49ND1ELEbV2jC27oIAkWw5GRVa.output.result_string$:latest/' $activity.definition_activity_01BT6L2WTZLHU5gDJBDUWczpw38un8cczL6.output.matching_strings[0]$\nkubectl apply -f $activity.definition_activity_01BT6L2WTZLHU5gDJBDUWczpw38un8cczL6.output.matching_strings[0]$ -n $workflow.definition_workflow_01BS2ULM2BIJJ6ihKgXmEOctVKBOHGZ2gRH.input.variable_workflow_01BS33CYRKRVM65CMTV3jyVggpJI8qGxyL8$",
               "continue_on_failure": false,
               "display_name": "Update Image Tag and Apply YAML",
               "merge_commands": false,
