@@ -1,0 +1,116 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01DCG209912116Y98iWSegOT5nNTTJ4NoEC",
+    "name": "AO.General - String_Lowercase",
+    "title": "AO.General - String_Lowercase",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input string",
+          "type": "datatype.string",
+          "description": "String to lowercase",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01DCG4BGZSGC677TCdxfoWgaGK2rAc6MBcH",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Lowercase Result",
+          "type": "datatype.string",
+          "description": "results",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01DCG4NKSI6TY6NBolDYXCiG4vV0Go9jZh9",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "AO.General - String_Lowercase",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01DCG3TM2WXIZ41hkhII7oKMpHjs11AOSua",
+        "name": "Execute Python Script",
+        "title": "Lowercase",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Lowercase",
+          "script": "import sys\nstring=sys.argv[1]\noutput=string.lower()",
+          "script_arguments": [
+            "$workflow.definition_workflow_01DCG209912116Y98iWSegOT5nNTTJ4NoEC.input.variable_workflow_01DCG4BGZSGC677TCdxfoWgaGK2rAc6MBcH$"
+          ],
+          "script_queries": [
+            {
+              "script_query": "output",
+              "script_query_name": "output",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01DCG5U58DOKN5tOKBkFHln5fUYDEEdh6Sz",
+        "name": "Set Variables",
+        "title": "Set Output",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Output",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01DCG209912116Y98iWSegOT5nNTTJ4NoEC.output.variable_workflow_01DCG4NKSI6TY6NBolDYXCiG4vV0Go9jZh9$",
+              "variable_value_new": "$activity.definition_activity_01DCG3TM2WXIZ41hkhII7oKMpHjs11AOSua.output.script_queries.output$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_01APQ1SF3EVRH4WYM1c0JtOZbGDtxU0sJQd"
+    ]
+  },
+  "categories": {
+    "category_01APQ1SF3EVRH4WYM1c0JtOZbGDtxU0sJQd": {
+      "unique_name": "category_01APQ1SF3EVRH4WYM1c0JtOZbGDtxU0sJQd",
+      "name": "AO.General.Utilities",
+      "title": "AO.General.Utilities",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  }
+}
