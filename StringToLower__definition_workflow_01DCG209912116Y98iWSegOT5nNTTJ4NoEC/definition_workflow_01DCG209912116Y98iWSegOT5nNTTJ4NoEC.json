@@ -10,19 +10,6 @@
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
-          "scope": "input",
-          "name": "Input string",
-          "type": "datatype.string",
-          "description": "String to lowercase",
-          "is_required": true
-        },
-        "unique_name": "variable_workflow_01DCG4BGZSGC677TCdxfoWgaGK2rAc6MBcH",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
           "scope": "output",
           "name": "Lowercase Result",
           "type": "datatype.string",
@@ -31,6 +18,19 @@
         },
         "unique_name": "variable_workflow_01DCG4NKSI6TY6NBolDYXCiG4vV0Go9jZh9",
         "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input string",
+          "type": "datatype.string",
+          "description": "String to lowercase",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01DCG4BGZSGC677TCdxfoWgaGK2rAc6MBcH",
+        "object_type": "variable_workflow"
       }
     ],
     "properties": {
@@ -38,6 +38,7 @@
         "is_atomic": false
       },
       "delete_workflow_instance": false,
+      "description": "Takes in a string and converts it to lowercase",
       "display_name": "AO.General - String_Lowercase",
       "runtime_user": {
         "override_target_runtime_user": false,
