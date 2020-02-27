@@ -9,18 +9,6 @@
       {
         "schema_id": "datatype.boolean",
         "properties": {
-          "value": true,
-          "scope": "local",
-          "name": "ELSE",
-          "type": "datatype.boolean",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01E03873M5OF07k3xsLQicUbXHkV73tu5VP",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.boolean",
-        "properties": {
           "value": false,
           "scope": "local",
           "name": "local_needs_article",
@@ -49,7 +37,7 @@
           "scope": "local",
           "name": "local_days_to_begin_warning",
           "type": "datatype.integer",
-          "description": "how many months before expiration do you start to receive a warning",
+          "description": "how many days before expiration do you start to receive a warning",
           "is_required": false
         },
         "unique_name": "variable_workflow_01E020VDFNYRF3S0GUn12Y9oyHyNsJTrsbM",
@@ -77,6 +65,18 @@
           "is_required": false
         },
         "unique_name": "variable_workflow_01E02UGX6ERQ03LN403skIEx3GoYwiDTtAc",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": true,
+          "scope": "local",
+          "name": "ELSE",
+          "type": "datatype.boolean",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01E03873M5OF07k3xsLQicUbXHkV73tu5VP",
         "object_type": "variable_workflow"
       }
     ],
