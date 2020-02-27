@@ -1,0 +1,621 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG",
+    "name": "CCS - Check_Kubernetes_Certificate_Expiration",
+    "title": "CCS - Check_Kubernetes_Certificate_Expiration",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": true,
+          "scope": "local",
+          "name": "ELSE",
+          "type": "datatype.boolean",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01E03873M5OF07k3xsLQicUbXHkV73tu5VP",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "local",
+          "name": "local_needs_article",
+          "type": "datatype.boolean",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01E038XEMH0UG6lDMCKheame9KBaYBznrR7",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "someone@example.com",
+          "scope": "local",
+          "name": "local_email_to_send_report",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01E01XDXZYTRS6lfyFJ03bjwRcWWX8Z2xlV",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 90,
+          "scope": "local",
+          "name": "local_days_to_begin_warning",
+          "type": "datatype.integer",
+          "description": "how many months before expiration do you start to receive a warning",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01E020VDFNYRF3S0GUn12Y9oyHyNsJTrsbM",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "\n",
+          "scope": "local",
+          "name": "local_cr",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01E0238R8E7PU0IAAQ2gO4ISkvW5bIsgjBq",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "local_report_text",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01E02UGX6ERQ03LN403skIEx3GoYwiDTtAc",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "description": "1. Configure local_email_to_send to your email\n2. Configure targets",
+      "display_name": "CCS - Check_Kubernetes_Certificate_Expiration",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01E0208Z4Q5DL3G49GXUKPjv3PWw2cB7NhR",
+        "name": "Format Date",
+        "title": "Get Current Date",
+        "type": "core.format_date",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Get Current Date",
+          "format_string": "2006-01-02",
+          "original_date": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.output.start_time$",
+          "skip_execution": false,
+          "use_custom_format": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01E02PEE86G2T2H8oqWQBV8Wpa13GAx2u33",
+        "name": "Execute Linux/Unix SSH Script",
+        "title": "Run cert check script",
+        "type": "terminal.ssh_script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Run cert check script",
+          "multiple_arguments": false,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "script": "for crt in /etc/kubernetes/pki/*.crt; do\n     printf '%s: %s\\n' \\\n     \"$(date --date=\"$(openssl x509 -enddate -noout -in \"$crt\"|cut -d= -f 2)\" --iso-8601)\" \\\n     \"$crt\"\ndone | sort",
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01E02QI2W3N1T4QGWiFkq4T7sTcXKwkLkoo"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01E02T6QIOC8L5cCDcr4QgBXYkCGYt6ektO",
+        "name": "Match Regular Expression",
+        "title": "Match Certs and Dates",
+        "type": "core.matchregex",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Match Certs and Dates",
+          "input_regex": "(?m)^[\\d\\d\\d\\d-\\d\\d-\\d\\d:].*$",
+          "input_string": "$activity.definition_activity_01E02PEE86G2T2H8oqWQBV8Wpa13GAx2u33.output.response_body$",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01E02UKC3FJ4P1T5zIk51pEc2fS8uUJ5quN",
+        "name": "Set Variables",
+        "title": "Start Report",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Start Report",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E02UGX6ERQ03LN403skIEx3GoYwiDTtAc$",
+              "variable_value_new": "\u003clink rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\" integrity=\"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u\" crossorigin=\"anonymous\"\u003e\n\u003cscript src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\" integrity=\"sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa\" crossorigin=\"anonymous\"\u003e\u003c/script\u003e\n\u003ch2\u003eKubernetes Certificate Report\u003c/h2\u003e\u003cbr/\u003e\nProcessing Certs....\u003cbr/\u003e\n\u003ctable border=\"2\" class=\"table table-striped\"\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003eCertificate\u003c/th\u003e\n\u003cth\u003eExpiration Date\u003c/th\u003e\n\u003cth\u003eStatus\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01E02TM2Z45G35oURJuFxJXxjlGQdZ6j9cJ",
+        "name": "For Each",
+        "title": "For Each Cert",
+        "type": "logic.for_each",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "For Each Cert",
+          "skip_execution": false,
+          "source_array": "$activity.definition_activity_01E02T6QIOC8L5cCDcr4QgBXYkCGYt6ektO.output.matching_strings$"
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01E02TTT3YB5L4FHMbw4QRMDeyYphxhM5zl",
+            "name": "Split String",
+            "title": "Split at :",
+            "type": "core.splitstring",
+            "base_type": "activity",
+            "properties": {
+              "boundaries": [
+                {
+                  "boundary": ":"
+                }
+              ],
+              "continue_on_failure": false,
+              "display_name": "Split at :",
+              "input_string": "$activity.definition_activity_01E02TM2Z45G35oURJuFxJXxjlGQdZ6j9cJ.input.source_array[@]$",
+              "remove_empty": true,
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01E02VWWU30EV4RPT9RFbexGhKqk1Q6CvrN",
+            "name": "Parse Date",
+            "title": "Parse Cert Date",
+            "type": "core.parse_date",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Parse Cert Date",
+              "format_string": "2006-01-02",
+              "input_string": "$activity.definition_activity_01E02TTT3YB5L4FHMbw4QRMDeyYphxhM5zl.output.parts[0]$",
+              "skip_execution": false,
+              "use_custom_format": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01E02X5VJWVUQ1zq8wvVNjPRw2cYYjiAOe6",
+            "name": "Calculate Date Time Difference",
+            "title": "Get Date Diff",
+            "type": "core.calculate_date_time_difference",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Get Date Diff",
+              "original_date": "$activity.definition_activity_01E02VWWU30EV4RPT9RFbexGhKqk1Q6CvrN.output.result$",
+              "skip_execution": false,
+              "subtract_date": "$activity.definition_activity_01E0208Z4Q5DL3G49GXUKPjv3PWw2cB7NhR.output.start_time$"
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01E03VCW16VFE59mCzzEui8G1rvFcdnLaj6",
+            "name": "Calculate Date",
+            "title": "Get Expire Date",
+            "type": "core.calculate_date",
+            "base_type": "activity",
+            "properties": {
+              "adjustment": 31536000,
+              "continue_on_failure": false,
+              "display_name": "Get Expire Date",
+              "original_date": "$activity.definition_activity_01E02VWWU30EV4RPT9RFbexGhKqk1Q6CvrN.output.result$",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01E02WNYEUQ5E4oXfrRtC8Vzwykm3LTu41n",
+            "name": "Condition Block",
+            "title": "Determine date issue with cert",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Determine date issue with cert",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_01E02WO28C9VN7dsdczWjyht2x7L6u3zIFM",
+                "name": "Condition Branch",
+                "title": "NO ISSUE",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01E02X5VJWVUQ1zq8wvVNjPRw2cYYjiAOe6.output.days$",
+                    "operator": "gt",
+                    "right_operand": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E020VDFNYRF3S0GUn12Y9oyHyNsJTrsbM$"
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "NO ISSUE",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01E02WL4YTK7Z0ORu7kSGu3cdOs2CI3gcXI",
+                    "name": "Set Variables",
+                    "title": "Publish OK",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Publish OK",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E02UGX6ERQ03LN403skIEx3GoYwiDTtAc$",
+                          "variable_value_new": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E02UGX6ERQ03LN403skIEx3GoYwiDTtAc$\n\u003ctr\u003e\u003ctd\u003e$activity.definition_activity_01E02TTT3YB5L4FHMbw4QRMDeyYphxhM5zl.output.parts[-1]$\u003c/td\u003e\u003ctd\u003e$activity.definition_activity_01E02TTT3YB5L4FHMbw4QRMDeyYphxhM5zl.output.parts[0]$\u003c/td\u003e\u003ctd\u003e\u003cfont color=\"GREEN\"\u003eOK\u003c/font\u003e\u003c/td\u003e\u003c/tr\u003e"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01E02WO3UX5AG732MOCNwmFluFmaWt4pUwi",
+                "name": "Condition Branch",
+                "title": "Warning",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": {
+                      "left_operand": "$activity.definition_activity_01E02X5VJWVUQ1zq8wvVNjPRw2cYYjiAOe6.output.days$",
+                      "operator": "lt",
+                      "right_operand": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E020VDFNYRF3S0GUn12Y9oyHyNsJTrsbM$"
+                    },
+                    "operator": "and",
+                    "right_operand": {
+                      "left_operand": "$activity.definition_activity_01E03VCW16VFE59mCzzEui8G1rvFcdnLaj6.output.result$",
+                      "operator": "gt",
+                      "right_operand": "$activity.definition_activity_01E0208Z4Q5DL3G49GXUKPjv3PWw2cB7NhR.output.start_time$"
+                    }
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Warning",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01E037GCUTM6I4feJ2bex0Eq3Ct4kglV9Ks",
+                    "name": "Set Variables",
+                    "title": "Publish WARN",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Publish WARN",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E02UGX6ERQ03LN403skIEx3GoYwiDTtAc$",
+                          "variable_value_new": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E02UGX6ERQ03LN403skIEx3GoYwiDTtAc$\n\u003ctr\u003e\u003ctd\u003e$activity.definition_activity_01E02TTT3YB5L4FHMbw4QRMDeyYphxhM5zl.output.parts[-1]$\u003c/td\u003e\u003ctd\u003e$activity.definition_activity_01E02TTT3YB5L4FHMbw4QRMDeyYphxhM5zl.output.parts[0]$\u003c/td\u003e\u003ctd\u003e\u003cfont color=\"ORANGE\"\u003eCLOSE TO EXPIRATION\u003c/font\u003e\u003c/td\u003e\u003c/tr\u003e"
+                        },
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E038XEMH0UG6lDMCKheame9KBaYBznrR7$",
+                          "variable_value_new": true
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01E037XDW2U1Y3I6gFa5emujeu6568Ynhid",
+                "name": "Condition Branch",
+                "title": "ELSE",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E03873M5OF07k3xsLQicUbXHkV73tu5VP$",
+                    "operator": "eq",
+                    "right_operand": true
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "ELSE",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01E037XEX3ATB40plChGZ3OPkoCPrmjz41F",
+                    "name": "Set Variables",
+                    "title": "Publish EXPIRE",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Publish EXPIRE",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E02UGX6ERQ03LN403skIEx3GoYwiDTtAc$",
+                          "variable_value_new": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E02UGX6ERQ03LN403skIEx3GoYwiDTtAc$\n\u003ctr\u003e\u003ctd\u003e$activity.definition_activity_01E02TTT3YB5L4FHMbw4QRMDeyYphxhM5zl.output.parts[-1]$\u003c/td\u003e\u003ctd\u003e$activity.definition_activity_01E02TTT3YB5L4FHMbw4QRMDeyYphxhM5zl.output.parts[0]$\u003c/td\u003e\u003ctd\u003e\u003cfont color=\"RED\"\u003eEXPIRED\u003c/font\u003e\u003c/td\u003e\u003c/tr\u003e"
+                        },
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E038XEMH0UG6lDMCKheame9KBaYBznrR7$",
+                          "variable_value_new": true
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01E039JCVP5174iLXhZfK9ek42sR7FAU9wm",
+        "name": "Set Variables",
+        "title": "Close Table",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Close Table",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E02UGX6ERQ03LN403skIEx3GoYwiDTtAc$",
+              "variable_value_new": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E02UGX6ERQ03LN403skIEx3GoYwiDTtAc$\n\u003c/tbody\u003e\n\u003c/table\u003e"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01E039Y2XWYIQ7kqrpjsM9dNkjUpDmKkoPK",
+        "name": "Condition Block",
+        "title": "If need link",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "If need link",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01E039Y6OJOWT1rFKCsvNJaMWjQTK9C8i8S",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E038XEMH0UG6lDMCKheame9KBaYBznrR7$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01E03ABESD8Z37BUSb4QsZ2ndQbpBo5caO9",
+                "name": "Set Variables",
+                "title": "Update email",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Update email",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E02UGX6ERQ03LN403skIEx3GoYwiDTtAc$",
+                      "variable_value_new": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E02UGX6ERQ03LN403skIEx3GoYwiDTtAc$\u003cbr/\u003e\nIt appears one or more certificates are close to expiring or expired. Please refer to this \u003ca href=\"example.com\"\u003earticle\u003c/a\u003e on steps to fix this issue. You can also open a TAC case at \u003ca href=\"https://mycase.cloudapps.cisco.com/\"\u003ehttps://mycase.cloudapps.cisco.com/\u003c/a\u003e for assistance.\u003cbr/\u003e"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01E03BL976HLV02rEboMkyrbPtiMogqW1gg",
+        "name": "Send Email",
+        "title": "Email Report",
+        "type": "email.smtp_send_email",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "body": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E02UGX6ERQ03LN403skIEx3GoYwiDTtAc$",
+          "continue_on_failure": false,
+          "display_name": "Email Report",
+          "from": "ccs-ao-alerts@cisco.com",
+          "html": true,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "subject": "Kubernetes Certifate Report - $workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.output.start_time$",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01E03CESQ5D233Jy0efPuAeavi6Go9rUlz9"
+          },
+          "to": "$workflow.definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG.local.variable_workflow_01E01XDXZYTRS6lfyFJ03bjwRcWWX8Z2xlV$"
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_01APQ1SF3EVRH4WYM1c0JtOZbGDtxU0sJQd"
+    ]
+  },
+  "categories": {
+    "category_01APQ1SF3EVRH4WYM1c0JtOZbGDtxU0sJQd": {
+      "unique_name": "category_01APQ1SF3EVRH4WYM1c0JtOZbGDtxU0sJQd",
+      "name": "AO.General.Utilities",
+      "title": "AO.General.Utilities",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "triggers": {
+    "triggerschedule_01E041TG225FB4VHnbPhVnRNPt23DXfpmVn": {
+      "workflow_id": "definition_workflow_01E01VIRWZDE24mWlsHrqCGB9xUix0f9ZxG",
+      "name": "Once per day at 1:00am UTC",
+      "title": "",
+      "lowercase_name": "schedule.once_per_day_at_1:00am_utc",
+      "type": "schedule",
+      "base_type": "trigger",
+      "ref_id": "schedule_01E0417YL8J7M4NOMU5wUM6RLWEJsSU2vtl",
+      "version": "1.0.0",
+      "disabled": false,
+      "unique_name": "triggerschedule_01E041TG225FB4VHnbPhVnRNPt23DXfpmVn",
+      "object_type": "triggerschedule"
+    }
+  },
+  "schedules": {
+    "schedule_01E0417YL8J7M4NOMU5wUM6RLWEJsSU2vtl": {
+      "unique_name": "schedule_01E0417YL8J7M4NOMU5wUM6RLWEJsSU2vtl",
+      "name": "Daily Run at 1:00am UTC",
+      "type": "basic.schedule",
+      "base_type": "schedule",
+      "properties": {
+        "calendar": "calendar_recurring_1BMfMWvgiDhSjBQ7hTSyvz3NyVZ",
+        "timezone": "Etc/GMT+0",
+        "starttime": "01:00",
+        "interval_hours": 0,
+        "interval_minutes": 0,
+        "number_of_times": 1,
+        "display_name": "Daily Run at 1:00am UTC",
+        "description": ""
+      },
+      "version": "1.0.0",
+      "object_type": "schedule"
+    }
+  },
+  "targets": {
+    "definition_target_01E02QI2W3N1T4QGWiFkq4T7sTcXKwkLkoo": {
+      "unique_name": "definition_target_01E02QI2W3N1T4QGWiFkq4T7sTcXKwkLkoo",
+      "name": "CCS Master Node",
+      "title": "CCS Master Node",
+      "type": "terminal.unix_linux_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "bash_shell": "/bin/bash",
+        "default_runtime_user_id": "definition_runtime_user_01E01Z91SSRT87kcIiQ9YQr1g9yuwrErVmt",
+        "display_name": "CCS Master Node",
+        "host": "cx-ao-dev-02.cisco.com",
+        "port": 22
+      }
+    },
+    "definition_target_01E03CESQ5D233Jy0efPuAeavi6Go9rUlz9": {
+      "unique_name": "definition_target_01E03CESQ5D233Jy0efPuAeavi6Go9rUlz9",
+      "name": "Default SMTP ",
+      "title": "Default SMTP ",
+      "type": "email.smtp_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01E03CD79NTQW7I3EBcGWT7hOUA8Uj7N10L",
+        "display_name": "Default SMTP ",
+        "no_runtime_user": false,
+        "port": 25,
+        "protocol": "SMTP",
+        "server": "outbound.cisco.com"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01E01Z91SSRT87kcIiQ9YQr1g9yuwrErVmt": {
+      "unique_name": "definition_runtime_user_01E01Z91SSRT87kcIiQ9YQr1g9yuwrErVmt",
+      "name": "Kubernetes_Master-User",
+      "title": "Kubernetes_Master-User",
+      "type": "runtime_user.terminal_password_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "description": "normally cloud-user\nyou can use password or key based",
+        "display_name": "Kubernetes_Master-User",
+        "password": "*****",
+        "user": "*****"
+      }
+    },
+    "definition_runtime_user_01E03CD79NTQW7I3EBcGWT7hOUA8Uj7N10L": {
+      "unique_name": "definition_runtime_user_01E03CD79NTQW7I3EBcGWT7hOUA8Uj7N10L",
+      "name": "Default Email User",
+      "title": "Default Email User",
+      "type": "runtime_user.email_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "Default Email User",
+        "password": "*****",
+        "sender": "*****"
+      }
+    }
+  }
+}
