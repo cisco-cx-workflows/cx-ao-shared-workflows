@@ -1,0 +1,781 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4",
+    "name": "AO.Bootcamp.Labs-Execute_Setup_Via_Terminal",
+    "title": "AO.Bootcamp.Labs-Execute_Setup_Via_Terminal",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "local",
+          "name": "local_ao_api_call_ok",
+          "type": "datatype.boolean",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BIRRLPZR2F0555sOaLnu96DvXMprnbKXe",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 600,
+          "scope": "local",
+          "name": "local_ao_call_timeout",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BIRRUA5IUNE0hfQdjAqZpNxYEgsViePS8",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "local_ao_call_running_time",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BIRRYUI602Z7gIuhBWV1eFyg0KdAvPl7v",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "10.122.169.160",
+          "scope": "input",
+          "name": "input_new_ip_address",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BHZ80RK5JGK4Ic1nEoOfzd5Yg4Dxb7BQs",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "cx-ao-bc-01-test.cisco.com",
+          "scope": "input",
+          "name": "input_new_hostname",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BHZ8GJ5ZOSA049cM59m9IsXvXK0QEZmxV",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "10.122.169.132",
+          "scope": "input",
+          "name": "input_base_ip_address",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BHZA5PVHAKW7BrtusXmjVIbanx2kxruXm",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "output_actions",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BI2GV6ECU3N2hScRyGVrNrsXM4VgQ2GOV",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "AO.Bootcamp.Labs-Execute_Setup_Via_Terminal",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "terminal.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01BHZ96KCUVYX4djVEhqrGlDbUz4UMqSQYP",
+        "name": "Execute Terminal Command(s)",
+        "title": "Change hostname",
+        "type": "terminal.command",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "command_timeout": 180,
+          "commands": "hostnamectl set-hostname $workflow.definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4.input.variable_workflow_01BHZ8GJ5ZOSA049cM59m9IsXvXK0QEZmxV$ --static",
+          "continue_on_failure": true,
+          "display_name": "Change hostname",
+          "merge_commands": false,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BHZ9L8PCJ4V4Jaqwr4Ayu7VT4p8pWvJeU",
+        "name": "Execute Terminal Command(s)",
+        "title": "Change IP Address",
+        "type": "terminal.command",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "command_timeout": 180,
+          "commands": "sed -i 's/$workflow.definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4.input.variable_workflow_01BHZA5PVHAKW7BrtusXmjVIbanx2kxruXm$/$workflow.definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4.input.variable_workflow_01BHZ80RK5JGK4Ic1nEoOfzd5Yg4Dxb7BQs$/' /etc/sysconfig/network-scripts/ifcfg-ens32",
+          "continue_on_failure": true,
+          "display_name": "Change IP Address",
+          "merge_commands": false,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BHZASMW3Z2D02X78bCR8BBbiYKuFYAg5Y",
+        "name": "Execute Terminal Command(s)",
+        "title": "Update Resolv.conf with CALO DNS",
+        "type": "terminal.command",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "command_timeout": 180,
+          "commands": "sed -i 's/search cisco.com/search cisco.com\\nnameserver 172.18.108.43\\nnameserver 172.18.108.34/' /etc/resolv.conf",
+          "continue_on_failure": true,
+          "display_name": "Update Resolv.conf with CALO DNS",
+          "merge_commands": false,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BHZBGOSXKZW3oPxzOENoUCBPWYiHzP4Si",
+        "name": "Execute Terminal Command(s)",
+        "title": "Restart Network Services",
+        "type": "terminal.command",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 30,
+          "command_timeout": 30,
+          "commands": "systemctl restart network",
+          "continue_on_failure": true,
+          "display_name": "Restart Network Services",
+          "merge_commands": false,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BI2GXNVOX2G0MgoHanlOHOs1yp9DcJZoM",
+        "name": "Set Variables",
+        "title": "New updates",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "New updates",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4.output.variable_workflow_01BI2GV6ECU3N2hScRyGVrNrsXM4VgQ2GOV$",
+              "variable_value_new": "Hostname changed to $workflow.definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4.input.variable_workflow_01BHZ8GJ5ZOSA049cM59m9IsXvXK0QEZmxV$.\nIP Address changed to $workflow.definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4.input.variable_workflow_01BHZ80RK5JGK4Ic1nEoOfzd5Yg4Dxb7BQs$ and configured DNS.\nRestarting network services...."
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BHZP7YPI008411o8CEv06rcbzEuM12iF8",
+        "name": "Start Point",
+        "title": "Target API",
+        "type": "logic.start_point",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Target API",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BI2EJL6R1W84Llgb2fMCwsoc1Y5z2ScAa",
+        "name": "Sleep",
+        "title": "Wait for Network to restart",
+        "type": "core.sleep",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Wait for Network to restart",
+          "skip_execution": false,
+          "sleep_interval": 30
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BI23XCIVWQH3A86xNIy7ih5cnIm5HdVdp",
+        "name": "Parallel Block",
+        "title": "Get IDs",
+        "type": "logic.parallel",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Get IDs",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01BI23XE8QWU048BrUbLJxCUY1AuX2uwJrO",
+            "name": "Parallel Branch",
+            "title": "Target",
+            "type": "logic.parallel_block",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Target",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01BHZKM7SCBSJ4zynili9H8mAJWu9iJq5XU",
+                "name": "HTTP Request",
+                "title": "Get Schema IDs",
+                "type": "web-service.http_request",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "allow_auto_redirect": true,
+                  "content_type": "application/json",
+                  "continue_on_error_status_code": false,
+                  "continue_on_failure": false,
+                  "display_name": "Get Schema IDs",
+                  "method": "GET",
+                  "relative_url": "/v1/schemas?base_type=target\u0026schema_type=view",
+                  "runtime_user": {
+                    "override_target_runtime_user": false,
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "override_workflow_target": true,
+                    "target_id": "definition_target_01BAHJA5I0NEC0ewT7aan8i20tbe4TFxx7l"
+                  }
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01BHZL9L7O7NL1qCsIvlXXaYKTeaebjDjrF",
+                "name": "JSONPath Query",
+                "title": "Get ID",
+                "type": "corejava.jsonpathquery",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Get ID",
+                  "input_json": "{\n \"ids\":$activity.definition_activity_01BHZKM7SCBSJ4zynili9H8mAJWu9iJq5XU.output.response_body$\n}",
+                  "jsonpath_queries": [
+                    {
+                      "jsonpath_query": "$.ids[?(@.name==\"Terminal Endpoint\")].id",
+                      "jsonpath_query_name": "id",
+                      "jsonpath_query_type": "string"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01BI23XESTPXL4wfXvHzQnvYd7TeATrBGi4",
+            "name": "Parallel Branch",
+            "title": "RTU",
+            "type": "logic.parallel_block",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "RTU",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01BI245X8TF723CRD7cXvyTE87tbzoNBG7h",
+                "name": "HTTP Request",
+                "title": "Get Schema IDs for RTU",
+                "type": "web-service.http_request",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "allow_auto_redirect": true,
+                  "content_type": "application/json",
+                  "continue_on_error_status_code": false,
+                  "continue_on_failure": false,
+                  "display_name": "Get Schema IDs for RTU",
+                  "method": "GET",
+                  "relative_url": "/v1/runtime_users?types=runtime_user.terminal_password_credentials",
+                  "runtime_user": {
+                    "override_target_runtime_user": false,
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "override_workflow_target": true,
+                    "target_id": "definition_target_01BAHJA5I0NEC0ewT7aan8i20tbe4TFxx7l"
+                  }
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01BI24JBX36QM7Jyshxt2osdkDSeNkmK1kc",
+                "name": "JSONPath Query",
+                "title": "Get RTU ID",
+                "type": "corejava.jsonpathquery",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Get RTU ID",
+                  "input_json": "{\n \"users\": $activity.definition_activity_01BI245X8TF723CRD7cXvyTE87tbzoNBG7h.output.response_body$\n}",
+                  "jsonpath_queries": [
+                    {
+                      "jsonpath_query": "$.users[?(@.name==\"Default.AO.Bootcamp.Root.User\")].id",
+                      "jsonpath_query_name": "rtu_id",
+                      "jsonpath_query_type": "string"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01BIRS15P23W24u1N2n5VhjToyVfwLQmBFa",
+        "name": "While Loop",
+        "title": "While !AO call and time_running\u003cmax",
+        "type": "logic.while",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "While !AO call and time_running\u003cmax",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01BIRS17BVW555tWPXnHAFh3eeYPoXCrH0J",
+            "name": "Condition Branch",
+            "title": "DO",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$workflow.definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4.local.variable_workflow_01BIRRLPZR2F0555sOaLnu96DvXMprnbKXe$",
+                  "operator": "eq",
+                  "right_operand": false
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$workflow.definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4.local.variable_workflow_01BIRRYUI602Z7gIuhBWV1eFyg0KdAvPl7v$",
+                  "operator": "lt",
+                  "right_operand": "$workflow.definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4.local.variable_workflow_01BIRRUA5IUNE0hfQdjAqZpNxYEgsViePS8$"
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "DO",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01BHZDFA0F38L6FYs5wnNgwMJBXt5qkwmo7",
+                "name": "HTTP Request",
+                "title": "Update Temp Target",
+                "type": "web-service.http_request",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "allow_auto_redirect": true,
+                  "body": "{\n  \"schema_id\": \"$activity.definition_activity_01BHZL9L7O7NL1qCsIvlXXaYKTeaebjDjrF.output.jsonpath_queries.id$\",\n  \"name\": \"Updated.AO.Bootcamp.SSH.Connection\",\n  \"properties\": {\n    \"default_runtime_user_id\": \"$activity.definition_activity_01BI24JBX36QM7Jyshxt2osdkDSeNkmK1kc.output.jsonpath_queries.rtu_id$\",\n    \"display_name\": \"Updated.AO.Bootcamp.SSH.Connection\",\n    \"host\": \"$workflow.definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4.input.variable_workflow_01BHZ80RK5JGK4Ic1nEoOfzd5Yg4Dxb7BQs$\",\n    \"port\": 22,\n    \"protocol\": \"ssh\",\n    \"description\": \"updated to $workflow.definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4.input.variable_workflow_01BHZ80RK5JGK4Ic1nEoOfzd5Yg4Dxb7BQs$\"\n  },\n  \"title\": \"Updated.AO.Bootcamp.SSH.Connection\"\n}",
+                  "content_type": "application/json",
+                  "continue_on_error_status_code": false,
+                  "continue_on_failure": true,
+                  "display_name": "Update Temp Target",
+                  "method": "PUT",
+                  "relative_url": "/v1/targets/01BI27150NP274uPsoefQg9FkuX2coQkul1",
+                  "runtime_user": {
+                    "override_target_runtime_user": false,
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "override_workflow_target": true,
+                    "target_id": "definition_target_01BAHJA5I0NEC0ewT7aan8i20tbe4TFxx7l"
+                  }
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01BIRSOTUYIE65AB2yWyU1nLjhbAaOmLoFO",
+                "name": "Condition Block",
+                "title": "If ok",
+                "type": "logic.if_else",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "If ok",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "blocks": [
+                  {
+                    "unique_name": "definition_activity_01BIRSOVCUFY12mFf8TA9ktTClsZxDD28We",
+                    "name": "Condition Branch",
+                    "title": "THEN",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01BHZDFA0F38L6FYs5wnNgwMJBXt5qkwmo7.output.succeeded$",
+                        "operator": "eq",
+                        "right_operand": true
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "THEN",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01BIRT38R7V1M5XWRN2gthwYcbWlP5tz6oK",
+                        "name": "Set Variables",
+                        "title": "Set ok",
+                        "type": "core.set_multiple_variables",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Set ok",
+                          "skip_execution": false,
+                          "variables_to_update": [
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4.local.variable_workflow_01BIRRLPZR2F0555sOaLnu96DvXMprnbKXe$",
+                              "variable_value_new": true
+                            }
+                          ]
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  },
+                  {
+                    "unique_name": "definition_activity_01BIRSOVZLGUS0pjTJERAK6v2E5LcDb64uz",
+                    "name": "Condition Branch",
+                    "title": "Else",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01BHZDFA0F38L6FYs5wnNgwMJBXt5qkwmo7.output.succeeded$",
+                        "operator": "eq",
+                        "right_operand": false
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "Else",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01BIRTEEIOSGX6ncuk9gXZZvuFudTqcD2Rz",
+                        "name": "Sleep",
+                        "title": "Sleep 30 seconds",
+                        "type": "core.sleep",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Sleep 30 seconds",
+                          "skip_execution": false,
+                          "sleep_interval": 30
+                        },
+                        "object_type": "definition_activity"
+                      },
+                      {
+                        "unique_name": "definition_activity_01BIRTP350PTX4kXpw1RhIPdbfyHJkWbkzI",
+                        "name": "Set Variables",
+                        "title": "Update timer",
+                        "type": "core.set_multiple_variables",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Update timer",
+                          "skip_execution": false,
+                          "variables_to_update": [
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4.local.variable_workflow_01BIRRYUI602Z7gIuhBWV1eFyg0KdAvPl7v$",
+                              "variable_value_new": "$workflow.definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4.local.variable_workflow_01BIRRYUI602Z7gIuhBWV1eFyg0KdAvPl7v$+30"
+                            }
+                          ]
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01BI2HROHAWFD0PtPMbWchyvPwnGEgS2rFA",
+        "name": "Set Variables",
+        "title": "update for API",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "update for API",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4.output.variable_workflow_01BI2GV6ECU3N2hScRyGVrNrsXM4VgQ2GOV$",
+              "variable_value_new": "$workflow.definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4.output.variable_workflow_01BI2GV6ECU3N2hScRyGVrNrsXM4VgQ2GOV$\nAO API Updated target for new IP. "
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BI2ET2DXMNP57UN5aeMSY1hXkvDUH9vDB",
+        "name": "Execute Terminal Command(s)",
+        "title": "Yum cleanup  with Updated IP",
+        "type": "terminal.command",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 600,
+          "command_timeout": 600,
+          "commands": "yum-complete-transaction --cleanup-only",
+          "continue_on_failure": true,
+          "display_name": "Yum cleanup  with Updated IP",
+          "merge_commands": false,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01BI271AKW3QV1r4FONoYtpcfY6f4rkSTeT"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BI2FATADY640RWwIQFnk2FIL1121Jfdij",
+        "name": "Execute Terminal Command(s)",
+        "title": "Yum -y update with new IP",
+        "type": "terminal.command",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 600,
+          "command_timeout": 600,
+          "commands": "yum -y update",
+          "continue_on_failure": true,
+          "display_name": "Yum -y update with new IP",
+          "merge_commands": false,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01BI271AKW3QV1r4FONoYtpcfY6f4rkSTeT"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BI2FJG8FTDA3dvPZQiANYshFGYqdQwITO",
+        "name": "Execute Terminal Command(s)",
+        "title": "Reboot node on new IP",
+        "type": "terminal.command",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 30,
+          "command_timeout": 30,
+          "commands": "shutdown -r now",
+          "continue_on_failure": true,
+          "display_name": "Reboot node on new IP",
+          "merge_commands": false,
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01BI271AKW3QV1r4FONoYtpcfY6f4rkSTeT"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BI2I4ZB8YNH52Yp3SEnIMm2RrAVxzkyyN",
+        "name": "Set Variables",
+        "title": "New IP Actions",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "New IP Actions",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4.output.variable_workflow_01BI2GV6ECU3N2hScRyGVrNrsXM4VgQ2GOV$",
+              "variable_value_new": "$workflow.definition_workflow_01BHZ7AQVUYLX0KLhE1TPQx21oEidQ2b7Y4.output.variable_workflow_01BI2GV6ECU3N2hScRyGVrNrsXM4VgQ2GOV$\nYum Cleanup executed.\nYum -y update executed.\nNode being rebooted."
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_01BHA86HNOMRH2ZotMIj3i1pqsPSoprlIrq"
+    ]
+  },
+  "categories": {
+    "category_01BHA86HNOMRH2ZotMIj3i1pqsPSoprlIrq": {
+      "unique_name": "category_01BHA86HNOMRH2ZotMIj3i1pqsPSoprlIrq",
+      "name": "AO.Bootcamp.Labs",
+      "title": "AO.Bootcamp.Labs",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "targets": {
+    "definition_target_01BAHJA5I0NEC0ewT7aan8i20tbe4TFxx7l": {
+      "unique_name": "definition_target_01BAHJA5I0NEC0ewT7aan8i20tbe4TFxx7l",
+      "name": "AO API",
+      "title": "AO API",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01BAH9BEAEBRG6TqVWqAjXCBrC9no36TC0O",
+        "disable_certificate_validation": true,
+        "display_name": "AO API",
+        "host": "cx-ao-dev-02.cisco.com",
+        "no_runtime_user": false,
+        "path": "be-console/api",
+        "port": 32096,
+        "protocol": "https"
+      }
+    },
+    "definition_target_01BI271AKW3QV1r4FONoYtpcfY6f4rkSTeT": {
+      "unique_name": "definition_target_01BI271AKW3QV1r4FONoYtpcfY6f4rkSTeT",
+      "name": "Updated.AO.Bootcamp.SSH.Connection",
+      "title": "Updated.AO.Bootcamp.SSH.Connection",
+      "type": "terminal.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01BHZ6ZL9TA3M6b0zpP95IQ2sVLoyl6kktb",
+        "description": "updated to 10.122.169.132",
+        "display_name": "Updated.AO.Bootcamp.SSH.Connection",
+        "host": "10.122.169.132",
+        "port": 22,
+        "protocol": "ssh"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01BAH9BEAEBRG6TqVWqAjXCBrC9no36TC0O": {
+      "unique_name": "definition_runtime_user_01BAH9BEAEBRG6TqVWqAjXCBrC9no36TC0O",
+      "name": "AO API User",
+      "title": "AO API User",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "auth_option": "*****",
+        "basic_password": "*****",
+        "basic_username": "*****",
+        "display_name": "AO API User"
+      }
+    },
+    "definition_runtime_user_01BHZ6ZL9TA3M6b0zpP95IQ2sVLoyl6kktb": {
+      "unique_name": "definition_runtime_user_01BHZ6ZL9TA3M6b0zpP95IQ2sVLoyl6kktb",
+      "name": "Default.AO.Bootcamp.Root.User",
+      "title": "Default.AO.Bootcamp.Root.User",
+      "type": "runtime_user.terminal_password_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "Default.AO.Bootcamp.Root.User",
+        "password": "*****",
+        "user": "*****"
+      }
+    }
+  }
+}
