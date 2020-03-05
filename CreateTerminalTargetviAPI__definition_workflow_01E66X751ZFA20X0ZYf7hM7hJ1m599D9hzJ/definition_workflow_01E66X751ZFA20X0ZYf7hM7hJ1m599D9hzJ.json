@@ -1,0 +1,688 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ",
+    "name": "AO.General-Create_Terminal_Target_via_API",
+    "title": "AO.General-Create_Terminal_Target_via_API",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "output_runtimeuser_id",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01E68AMR933HS4WyVyUhWXL89ES5Gr2NWVj",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "static",
+          "name": "static_schema_loaded",
+          "type": "datatype.boolean",
+          "description": "when set to False, will query APi for schema. When set to true will bypass schema poll.",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01E673XGGRDYA2OQ5QY6Wv2grrkq6cvarD6",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "127.0.0.1",
+          "scope": "input",
+          "name": "input_terminal_target_host_or_ip",
+          "type": "datatype.string",
+          "description": "connection via ip or hostname",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01E66XVAB0NUW72ylPRVs4SUndgcx4iZMt1",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "ssh",
+          "scope": "input",
+          "name": "input_terminal_target_protocol",
+          "type": "datatype.string",
+          "description": "protocol. currently only ssh supported",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01E679TZAPL241mlHQ0ilrxqNGIzfCsfGNV",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "output_terminal_target_id",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01E68AG0HC3GE3YL96SgWe6Bc1V6ekrsOCN",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "static",
+          "name": "static_terminal_password_runtime_user_schema_id",
+          "type": "datatype.string",
+          "description": "when grabbed, will hold schema ID for runtime users. Needs to be reset on each instance installed to",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01E674H4W557I22LAtfRll7lKofAoOm0xR1",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "22",
+          "scope": "input",
+          "name": "input_terminal_target_port",
+          "type": "datatype.string",
+          "description": "port for ssh session",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01E67ABJJR3UZ4RFjmSLUPlGHi8CZXFEKUw",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "password",
+          "scope": "input",
+          "name": "input_runtimeuser_password",
+          "type": "datatype.string",
+          "description": "password for runtime user",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01E67BPAG67JZ4m1cn6ohgYwEd82iNZBqeE",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "local_user_id",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01E67FR74ABKA5q52TyBn4mQioS0xSd8vpV",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "some term target name",
+          "scope": "input",
+          "name": "input_terminal_target_display_name",
+          "type": "datatype.string",
+          "description": "display name for target",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01E679EFMC31D5zqYK0BYoh0Tp9LoKg3pJO",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "some user",
+          "scope": "input",
+          "name": "input_runtime_user",
+          "type": "datatype.string",
+          "description": "username for runtime user",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01E67B1487PWB1djxetNsZOLyAZXhSpNj75",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "input_terminaL_target_prompt",
+          "type": "datatype.string",
+          "description": "not used yet, future.",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01E67AKRY89440QA9s7ebS4iB6A2zWXITUn",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "static",
+          "name": "static_terminal_target_schema_id",
+          "type": "datatype.string",
+          "description": "when grabbed, will hold schema ID for terminal target. Needs to be reset on each instance installed to",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01E6744WFEL4B5TqxvFtV5mhSJ8KnkegM4P",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "AO.General-Create_Terminal_Target_via_API",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01E674K19JAGX5M8DM9f0S8bu7N53XdDIKW",
+        "name": "Condition Block",
+        "title": "If need to load schema",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "If need to load schema",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01E674K40F3FM2BibHyWxDy8Kj7BcH6yxtg",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.static.variable_workflow_01E673XGGRDYA2OQ5QY6Wv2grrkq6cvarD6$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01E66Z9ZG6QME1ff13jzW30JAu0elF0yDol",
+                "name": "HTTP Request",
+                "title": "Get Target Schemas",
+                "type": "web-service.http_request",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "allow_auto_redirect": true,
+                  "content_type": "application/json",
+                  "continue_on_error_status_code": false,
+                  "continue_on_failure": false,
+                  "display_name": "Get Target Schemas",
+                  "method": "GET",
+                  "relative_url": "/v1/schemas?base_type=target\u0026schema_type=view",
+                  "runtime_user": {
+                    "override_target_runtime_user": false,
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "override_workflow_target": true,
+                    "target_id": "definition_target_01BAHJA5I0NEC0ewT7aan8i20tbe4TFxx7l"
+                  }
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01E670CPEV86M5inLBIrPdhFK0sAog36Nh9",
+                "name": "JSONPath Query",
+                "title": "Get Terminal Schema ID",
+                "type": "corejava.jsonpathquery",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Get Terminal Schema ID",
+                  "input_json": "$activity.definition_activity_01E66Z9ZG6QME1ff13jzW30JAu0elF0yDol.output.response_body$",
+                  "jsonpath_queries": [
+                    {
+                      "jsonpath_query": "$..[?(@.type=='terminal.endpoint')].id",
+                      "jsonpath_query_name": "schema_id",
+                      "jsonpath_query_type": "string"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01E675129AI4Q0H4kjAaeQWxiyNAgTC8tsK",
+                "name": "Set Variables",
+                "title": "Set Target Schema ID",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Target Schema ID",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.static.variable_workflow_01E6744WFEL4B5TqxvFtV5mhSJ8KnkegM4P$",
+                      "variable_value_new": "$activity.definition_activity_01E670CPEV86M5inLBIrPdhFK0sAog36Nh9.output.jsonpath_queries.schema_id$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.static.variable_workflow_01E673XGGRDYA2OQ5QY6Wv2grrkq6cvarD6$",
+                      "variable_value_new": true
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01E675JR1GV4K5w714PpYzNfspfrLkbyDhF",
+                "name": "HTTP Request",
+                "title": "Get RTU Schemas",
+                "type": "web-service.http_request",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "allow_auto_redirect": true,
+                  "content_type": "application/json",
+                  "continue_on_error_status_code": false,
+                  "continue_on_failure": false,
+                  "display_name": "Get RTU Schemas",
+                  "method": "GET",
+                  "relative_url": "/v1/schemas?base_type=runtime_user\u0026schema_type=view",
+                  "runtime_user": {
+                    "override_target_runtime_user": false,
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "override_workflow_target": true,
+                    "target_id": "definition_target_01BAHJA5I0NEC0ewT7aan8i20tbe4TFxx7l"
+                  }
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01E676KEFGW7B2iZBL93ncx8n7LmhPv2KvP",
+                "name": "JSONPath Query",
+                "title": "Get RTU Schema ID",
+                "type": "corejava.jsonpathquery",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Get RTU Schema ID",
+                  "input_json": "$activity.definition_activity_01E675JR1GV4K5w714PpYzNfspfrLkbyDhF.output.response_body$",
+                  "jsonpath_queries": [
+                    {
+                      "jsonpath_query": "$..[?(@.type=='runtime_user.terminal_password_credentials')].id",
+                      "jsonpath_query_name": "rtu_schema_id",
+                      "jsonpath_query_type": "string"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01E677H3OV1EN3qzHQC8g0nCDtvHAEek8uX",
+                "name": "Set Variables",
+                "title": "Set RTU Schema ID",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set RTU Schema ID",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.static.variable_workflow_01E674H4W557I22LAtfRll7lKofAoOm0xR1$",
+                      "variable_value_new": "$activity.definition_activity_01E676KEFGW7B2iZBL93ncx8n7LmhPv2KvP.output.jsonpath_queries.rtu_schema_id$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01E67CTQKUA857FKgkcpNEfBs76jAgfpJ31",
+        "name": "HTTP Request",
+        "title": "Check for Runtime User",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "display_name": "Check for Runtime User",
+          "method": "GET",
+          "relative_url": "/v1/runtime_users?types=runtime_user.terminal_password_credentials",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01BAHJA5I0NEC0ewT7aan8i20tbe4TFxx7l"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01E67D7ZMPVZV5vpEou297Kw1QoFTA1LDp2",
+        "name": "JSONPath Query",
+        "title": "Get User ID",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Get User ID",
+          "input_json": "$activity.definition_activity_01E67CTQKUA857FKgkcpNEfBs76jAgfpJ31.output.response_body$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "$..[?(@.name=='$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.input.variable_workflow_01E67B1487PWB1djxetNsZOLyAZXhSpNj75$')].id",
+              "jsonpath_query_name": "id",
+              "jsonpath_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01E67ENRHR0YT0cdDQQkcnoF7us5ELlqXD2",
+        "name": "Condition Block",
+        "title": "if user exists",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if user exists",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01E67ENU4LWXL0M7NQt36o3wXw8R3Qhu9q2",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01E67D7ZMPVZV5vpEou297Kw1QoFTA1LDp2.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01E67FTNIYR3Q22TtxYfbMBqEdPwjtetQ9m",
+                "name": "Set Variables",
+                "title": "Passthrough ID",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Passthrough ID",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.local.variable_workflow_01E67FR74ABKA5q52TyBn4mQioS0xSd8vpV$",
+                      "variable_value_new": "$activity.definition_activity_01E67D7ZMPVZV5vpEou297Kw1QoFTA1LDp2.output.jsonpath_queries.id$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01E67ENUSXHHT5kMi4qygoMvLJrTbhtUmQx",
+            "name": "Condition Branch",
+            "title": "ELSE",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01E67D7ZMPVZV5vpEou297Kw1QoFTA1LDp2.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": false,
+              "display_name": "ELSE",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01E67HY6N3CW255xcnBX96F2TsthWHKEblh",
+                "name": "HTTP Request",
+                "title": "Create runtime user",
+                "type": "web-service.http_request",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "allow_auto_redirect": true,
+                  "body": "{\n  \"schema_id\": \"$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.static.variable_workflow_01E674H4W557I22LAtfRll7lKofAoOm0xR1$\",\n  \"name\": \"$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.input.variable_workflow_01E67B1487PWB1djxetNsZOLyAZXhSpNj75$\",\n  \"title\": \"$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.input.variable_workflow_01E67B1487PWB1djxetNsZOLyAZXhSpNj75$ created by API\",\n  \"properties\": {\n    \"display_name\": \"$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.input.variable_workflow_01E67B1487PWB1djxetNsZOLyAZXhSpNj75$ created by API\",\n    \"user\": \"$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.input.variable_workflow_01E67B1487PWB1djxetNsZOLyAZXhSpNj75$\",\n    \"password\": \"$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.input.variable_workflow_01E67BPAG67JZ4m1cn6ohgYwEd82iNZBqeE$\"\n  }\n}",
+                  "content_type": "application/json",
+                  "continue_on_error_status_code": false,
+                  "continue_on_failure": false,
+                  "display_name": "Create runtime user",
+                  "method": "POST",
+                  "relative_url": "/v1/runtime_users",
+                  "runtime_user": {
+                    "override_target_runtime_user": false,
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "override_workflow_target": true,
+                    "target_id": "definition_target_01BAHJA5I0NEC0ewT7aan8i20tbe4TFxx7l"
+                  }
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01E67VHVP0LPQ2MKbJ8h28CgT0Dhh0SsUBV",
+                "name": "JSONPath Query",
+                "title": "Get RTU ID",
+                "type": "corejava.jsonpathquery",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Get RTU ID",
+                  "input_json": "$activity.definition_activity_01E67HY6N3CW255xcnBX96F2TsthWHKEblh.output.response_body$",
+                  "jsonpath_queries": [
+                    {
+                      "jsonpath_query": "$..id",
+                      "jsonpath_query_name": "rtu_id",
+                      "jsonpath_query_type": "string"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01E67XLN59RV925w347zkXfhXrOindc3JPJ",
+                "name": "Set Variables",
+                "title": "Set local RTU",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set local RTU",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.local.variable_workflow_01E67FR74ABKA5q52TyBn4mQioS0xSd8vpV$",
+                      "variable_value_new": "$activity.definition_activity_01E67VHVP0LPQ2MKbJ8h28CgT0Dhh0SsUBV.output.jsonpath_queries.rtu_id$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01E688GQCYZF31Wu6cQfYYeyg0O8PwieO4Q",
+        "name": "HTTP Request",
+        "title": "Create Term Target",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "body": "{\n  \"name\": \"$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.input.variable_workflow_01E679EFMC31D5zqYK0BYoh0Tp9LoKg3pJO$\",\n  \"title\": \"$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.input.variable_workflow_01E679EFMC31D5zqYK0BYoh0Tp9LoKg3pJO$\",\n  \"properties\": {\n    \"port\": $workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.input.variable_workflow_01E67ABJJR3UZ4RFjmSLUPlGHi8CZXFEKUw$,\n    \"protocol\": \"ssh\",\n    \"display_name\": \"$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.input.variable_workflow_01E679EFMC31D5zqYK0BYoh0Tp9LoKg3pJO$\",\n    \"default_runtime_user_id\": \"$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.local.variable_workflow_01E67FR74ABKA5q52TyBn4mQioS0xSd8vpV$\",\n    \"host\": \"$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.input.variable_workflow_01E66XVAB0NUW72ylPRVs4SUndgcx4iZMt1$\"\n  },\n  \"schema_id\": \"$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.static.variable_workflow_01E6744WFEL4B5TqxvFtV5mhSJ8KnkegM4P$\"\n}",
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "display_name": "Create Term Target",
+          "method": "POST",
+          "relative_url": "/v1/targets",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01BAHJA5I0NEC0ewT7aan8i20tbe4TFxx7l"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01E68ARVI7AG27iHmf1u1Q9zL0PuQBm3cRL",
+        "name": "JSONPath Query",
+        "title": "Get new target id",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Get new target id",
+          "input_json": "$activity.definition_activity_01E688GQCYZF31Wu6cQfYYeyg0O8PwieO4Q.output.response_body$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "$..id",
+              "jsonpath_query_name": "id",
+              "jsonpath_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01E68A8GJ0ZBW3oeS7zryP4srPZHTUO8WfJ",
+        "name": "Set Variables",
+        "title": "Set output",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set output",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.output.variable_workflow_01E68AMR933HS4WyVyUhWXL89ES5Gr2NWVj$",
+              "variable_value_new": "$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.local.variable_workflow_01E67FR74ABKA5q52TyBn4mQioS0xSd8vpV$"
+            },
+            {
+              "variable_to_update": "$workflow.definition_workflow_01E66X751ZFA20X0ZYf7hM7hJ1m599D9hzJ.output.variable_workflow_01E68AG0HC3GE3YL96SgWe6Bc1V6ekrsOCN$",
+              "variable_value_new": "$activity.definition_activity_01E68ARVI7AG27iHmf1u1Q9zL0PuQBm3cRL.output.jsonpath_queries.id$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_01APQ1SF3EVRH4WYM1c0JtOZbGDtxU0sJQd"
+    ]
+  },
+  "categories": {
+    "category_01APQ1SF3EVRH4WYM1c0JtOZbGDtxU0sJQd": {
+      "unique_name": "category_01APQ1SF3EVRH4WYM1c0JtOZbGDtxU0sJQd",
+      "name": "AO.General.Utilities",
+      "title": "AO.General.Utilities",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "targets": {
+    "definition_target_01BAHJA5I0NEC0ewT7aan8i20tbe4TFxx7l": {
+      "unique_name": "definition_target_01BAHJA5I0NEC0ewT7aan8i20tbe4TFxx7l",
+      "name": "AO API",
+      "title": "AO API",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01BAH9BEAEBRG6TqVWqAjXCBrC9no36TC0O",
+        "disable_certificate_validation": true,
+        "display_name": "AO API",
+        "host": "cx-ao-dev-02.cisco.com",
+        "no_runtime_user": false,
+        "path": "be-console/api",
+        "port": 32096,
+        "protocol": "https"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01BAH9BEAEBRG6TqVWqAjXCBrC9no36TC0O": {
+      "unique_name": "definition_runtime_user_01BAH9BEAEBRG6TqVWqAjXCBrC9no36TC0O",
+      "name": "AO API User",
+      "title": "AO API User",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "auth_option": "*****",
+        "basic_password": "*****",
+        "basic_username": "*****",
+        "display_name": "AO API User"
+      }
+    }
+  }
+}
