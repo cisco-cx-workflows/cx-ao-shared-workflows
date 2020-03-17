@@ -1,0 +1,303 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01EGCKWAZ5ZV82nKK0DzjrBDsnITW4l2Byb",
+    "name": "Get_Unique_Table_Values",
+    "title": "Get_Unique_Table_Values",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "tabletype_01EGEGSGVS20N13S1KPEz8fOy2ANAhTiYpj",
+        "properties": {
+          "scope": "output",
+          "name": "output_distinct_list",
+          "type": "datatype.table",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01EGEH0Z8POKO1JUFTZcymKpMLZobymVqvl",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "input",
+          "name": "input_build_output_table",
+          "type": "datatype.boolean",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01EGFCQNFADEX46S1H1AX9Ijwi4sKazXqLU",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "output_list_of_values",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01EGFCVMHO7RW0dQ5RfuSxeqTs4Fv9GOsXf",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "[\n  {\n    \"CSOneStatus\": \"CE Pending\",\n    \"SYNCaseStatus\": \"Assigned\"\n  },\n  {\n    \"CSOneStatus\": \"CE Pending\",\n    \"SYNCaseStatus\": \"New\"\n  },\n  {\n    \"CSOneStatus\": \"Customer Pending\",\n    \"SYNCaseStatus\": \"???\"\n  },\n  {\n    \"CSOneStatus\": \"Solution Monitoring\",\n    \"SYNCaseStatus\": \"Monitoring Recovery\"\n  },\n  {\n    \"CSOneStatus\": \"CE Pending\",\n    \"SYNCaseStatus\": \"Engineering Engaged\"\n  },\n  {\n    \"CSOneStatus\": \"CE Pending\",\n    \"SYNCaseStatus\": \"Work In Progress\"\n  }\n]",
+          "scope": "input",
+          "name": "input_table_response_object",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01EGCLLC8WDNT0YSczPXBGvmr5oioNaj9Xn",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "CSOneStatus",
+          "scope": "input",
+          "name": "input_column_wanted",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01EGCM0P290DF3sZAcQ1sEOCTlFLTzHR2Em",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Get_Unique_Table_Values",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01EGEVU877KIS1lKIacClCrrQ1lDXKAK5Vp",
+        "name": "JSONPath Query",
+        "title": "Get Out Data",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Get Out Data",
+          "input_json": "$workflow.definition_workflow_01EGCKWAZ5ZV82nKK0DzjrBDsnITW4l2Byb.input.variable_workflow_01EGCLLC8WDNT0YSczPXBGvmr5oioNaj9Xn$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "$.[*].$workflow.definition_workflow_01EGCKWAZ5ZV82nKK0DzjrBDsnITW4l2Byb.input.variable_workflow_01EGCM0P290DF3sZAcQ1sEOCTlFLTzHR2Em$",
+              "jsonpath_query_name": "column_wanted",
+              "jsonpath_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01EGEJQ4M7H0G6TUD0w6qRYkbTgk2EW3pEi",
+        "name": "Execute Python Script",
+        "title": "Find unique values",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Find unique values",
+          "script": "import json, sys\nlist1  = json.loads(sys.argv[1])\nlist_set = set(list1)\nunique = []\nunique_list = (list(list_set))\nfor x in unique_list:\n    unique.append(x)\n",
+          "script_arguments": [
+            "$activity.definition_activity_01EGEVU877KIS1lKIacClCrrQ1lDXKAK5Vp.output.jsonpath_queries.column_wanted$"
+          ],
+          "script_queries": [
+            {
+              "script_query": "unique",
+              "script_query_name": "unique",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01EGFDZGXO1666s60IV88JiGlB3DkEuzzES",
+        "name": "Replace String",
+        "title": "Replace String",
+        "type": "core.replacestring",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Replace String",
+          "input_string": "$activity.definition_activity_01EGEJQ4M7H0G6TUD0w6qRYkbTgk2EW3pEi.output.script_queries.unique$",
+          "replace_list": [
+            {
+              "replaced_string": "[",
+              "replacement_string": ""
+            },
+            {
+              "replaced_string": "]",
+              "replacement_string": ""
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01EGFEVKI24XE7FPvoHUnxldUQVVW82ZAdG",
+        "name": "Set Variables",
+        "title": "Set list Output",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set list Output",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01EGCKWAZ5ZV82nKK0DzjrBDsnITW4l2Byb.output.variable_workflow_01EGFCVMHO7RW0dQ5RfuSxeqTs4Fv9GOsXf$",
+              "variable_value_new": "$activity.definition_activity_01EGFDZGXO1666s60IV88JiGlB3DkEuzzES.output.result_string$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01EGFCY3SX3IU4Mr2fOUZykQkzpw9u35FOt",
+        "name": "Condition Block",
+        "title": "if need table",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if need table",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01EGFCY7UY3N22nMZmqWfHdP5OubTB5dU8D",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01EGCKWAZ5ZV82nKK0DzjrBDsnITW4l2Byb.input.variable_workflow_01EGFCQNFADEX46S1H1AX9Ijwi4sKazXqLU$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01EGFDLZJEYPW6Uo1aZ5gy3hhQczmRhIDqL",
+                "name": "Split String",
+                "title": "Split String",
+                "type": "core.splitstring",
+                "base_type": "activity",
+                "properties": {
+                  "boundaries": [
+                    {
+                      "boundary": ","
+                    }
+                  ],
+                  "continue_on_failure": false,
+                  "display_name": "Split String",
+                  "input_string": "$activity.definition_activity_01EGFDZGXO1666s60IV88JiGlB3DkEuzzES.output.result_string$",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01EGFED6ENEB63J0DSDGXHDPJeJpmaQsB9z",
+                "name": "For Each",
+                "title": "For Each",
+                "type": "logic.for_each",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "For Each",
+                  "skip_execution": false,
+                  "source_array": "$activity.definition_activity_01EGFDLZJEYPW6Uo1aZ5gy3hhQczmRhIDqL.output.parts$"
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01EGFEHI2ABNW4yXcy7ouyh3amFCDXarTJL",
+                    "name": "Add Row to Table",
+                    "title": "Add Value to Output",
+                    "type": "core.addrowtotable",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "display_name": "Add Value to Output",
+                      "input_table": "$workflow.definition_workflow_01EGCKWAZ5ZV82nKK0DzjrBDsnITW4l2Byb.output.variable_workflow_01EGEH0Z8POKO1JUFTZcymKpMLZobymVqvl$",
+                      "row": [
+                        {
+                          "key": "distinctvalue",
+                          "type": "string",
+                          "value": "$activity.definition_activity_01EGFED6ENEB63J0DSDGXHDPJeJpmaQsB9z.input.source_array[@]$"
+                        }
+                      ],
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_01APQ1SF3EVRH4WYM1c0JtOZbGDtxU0sJQd"
+    ]
+  },
+  "categories": {
+    "category_01APQ1SF3EVRH4WYM1c0JtOZbGDtxU0sJQd": {
+      "unique_name": "category_01APQ1SF3EVRH4WYM1c0JtOZbGDtxU0sJQd",
+      "name": "AO.General.Utilities",
+      "title": "AO.General.Utilities",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "table_types": {
+    "tabletype_01EGEGSGVS20N13S1KPEz8fOy2ANAhTiYpj": {
+      "unique_name": "tabletype_01EGEGSGVS20N13S1KPEz8fOy2ANAhTiYpj",
+      "data_type": "datatype.tabletype",
+      "display_name": "distinct_value_table",
+      "columns": [
+        {
+          "name": "distinctvalue",
+          "title": "distinctvalue",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    }
+  }
+}
