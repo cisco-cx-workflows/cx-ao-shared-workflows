@@ -7,6 +7,42 @@
     "base_type": "workflow",
     "variables": [
       {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "cx-ao-bc-01-test.cisco.com",
+          "scope": "input",
+          "name": "input_new_hostname",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BHZ8GJ5ZOSA049cM59m9IsXvXK0QEZmxV",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "10.122.169.132",
+          "scope": "input",
+          "name": "input_base_ip_address",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BHZA5PVHAKW7BrtusXmjVIbanx2kxruXm",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "output_actions",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BI2GV6ECU3N2hScRyGVrNrsXM4VgQ2GOV",
+        "object_type": "variable_workflow"
+      },
+      {
         "schema_id": "datatype.boolean",
         "properties": {
           "value": false,
@@ -53,42 +89,6 @@
         },
         "unique_name": "variable_workflow_01BHZ80RK5JGK4Ic1nEoOfzd5Yg4Dxb7BQs",
         "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "cx-ao-bc-01-test.cisco.com",
-          "scope": "input",
-          "name": "input_new_hostname",
-          "type": "datatype.string",
-          "is_required": true
-        },
-        "unique_name": "variable_workflow_01BHZ8GJ5ZOSA049cM59m9IsXvXK0QEZmxV",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "10.122.169.132",
-          "scope": "input",
-          "name": "input_base_ip_address",
-          "type": "datatype.string",
-          "is_required": true
-        },
-        "unique_name": "variable_workflow_01BHZA5PVHAKW7BrtusXmjVIbanx2kxruXm",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "output",
-          "name": "output_actions",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BI2GV6ECU3N2hScRyGVrNrsXM4VgQ2GOV",
-        "object_type": "variable_workflow"
       }
     ],
     "properties": {
@@ -96,6 +96,7 @@
         "is_atomic": false
       },
       "delete_workflow_instance": false,
+      "description": "test",
       "display_name": "AO.Bootcamp.Labs-Execute_Setup_Via_Terminal",
       "runtime_user": {
         "override_target_runtime_user": false,
