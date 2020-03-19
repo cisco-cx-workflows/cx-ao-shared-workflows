@@ -36,6 +36,7 @@
         "is_atomic": false
       },
       "delete_workflow_instance": false,
+      "description": "test",
       "display_name": "SmartSheet.API - Get_Sheet",
       "runtime_user": {
         "override_target_runtime_user": false,
