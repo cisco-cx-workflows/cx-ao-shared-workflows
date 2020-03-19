@@ -9,31 +9,7 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "local_query_string",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "output",
-          "name": "output_json_response_message",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BH1JO5IA69I46NVrSWQ0IKGQnbVmWmZaw",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "vms?filter[]=name=cx-ao-bc-03",
+          "value": "?filter[]=name=ao-bc-rtp-01",
           "scope": "input",
           "name": "input_complete_query",
           "type": "datatype.string",
@@ -44,39 +20,27 @@
         "object_type": "variable_workflow"
       },
       {
+        "schema_id": "tabletype_01BH1KABZX7NN0UxFxa7g13ZdwOWuuA8Rdy",
+        "properties": {
+          "scope": "output",
+          "name": "output_vm_list",
+          "type": "datatype.table",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BH1KFLVF2195trnMyLtWUpSzINqath6y3",
+        "object_type": "variable_workflow"
+      },
+      {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "=",
-          "scope": "local",
-          "name": "local_default_operator",
+          "value": "",
+          "scope": "input",
+          "name": "input_id",
           "type": "datatype.string",
+          "description": "Single ID to query for",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01BH1JJ1G7QPE6gPzIDhn5OdE9yOESlvZCe",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 0,
-          "scope": "output",
-          "name": "output_vm_total_count",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BH1JTW22ZRO4EmIcn0mOLDOelZe2l77sH",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 0,
-          "scope": "output",
-          "name": "output_vm_sub_count",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BH1JYRJGJGA3tG1s8RPAiANPfNs3R1V6k",
+        "unique_name": "variable_workflow_01BH1GOA0R3JI3QqCbNWGmygmPnCiAG3bKB",
         "object_type": "variable_workflow"
       },
       {
@@ -92,26 +56,50 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "tabletype_01BH1HKDVRAM45pIhPOFo6RWSCbZATpyLug",
+        "schema_id": "datatype.string",
         "properties": {
-          "scope": "input",
-          "name": "input_query_control_attributes",
-          "type": "datatype.table",
-          "description": "attributes to control the return values.\n\nPossible attributes:\n\noffset\nlimit\nattributes\nexpand\nsort_by\nsort_order\nsort_options\n\n\nNOTE: Filter[] is separate in the collectionFilter input\nNOTE: If you want multiple of one field, just make it a comma separated list... ie:\n\nipaddresses,lans,storage\n",
+          "value": "=",
+          "scope": "local",
+          "name": "local_default_operator",
+          "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01BH1IZPOXENS1RFbPyV8vL6XcVMYGzYDsM",
+        "unique_name": "variable_workflow_01BH1JJ1G7QPE6gPzIDhn5OdE9yOESlvZCe",
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "tabletype_01BH1KABZX7NN0UxFxa7g13ZdwOWuuA8Rdy",
+        "schema_id": "datatype.string",
         "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "local_query_string",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BH1J6VSLH2I1SFFz3gMDT7n0F19G3lwYe",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
           "scope": "output",
-          "name": "output_vm_list",
+          "name": "output_vm_sub_count",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BH1JYRJGJGA3tG1s8RPAiANPfNs3R1V6k",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "tabletype_01BH1I78XLS4H6i1fPKHrb0gfnnMFsIYphg",
+        "properties": {
+          "scope": "input",
+          "name": "input_query_collection_filter",
           "type": "datatype.table",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01BH1KFLVF2195trnMyLtWUpSzINqath6y3",
+        "unique_name": "variable_workflow_01BH1IN31MN6Q7FGIZLIp01AWeNGmL5qsBG",
         "object_type": "variable_workflow"
       },
       {
@@ -130,24 +118,36 @@
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
-          "scope": "input",
-          "name": "input_id",
+          "scope": "output",
+          "name": "output_json_response_message",
           "type": "datatype.string",
-          "description": "Single ID to query for",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01BH1GOA0R3JI3QqCbNWGmygmPnCiAG3bKB",
+        "unique_name": "variable_workflow_01BH1JO5IA69I46NVrSWQ0IKGQnbVmWmZaw",
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "tabletype_01BH1I78XLS4H6i1fPKHrb0gfnnMFsIYphg",
+        "schema_id": "datatype.integer",
         "properties": {
-          "scope": "input",
-          "name": "input_query_collection_filter",
-          "type": "datatype.table",
+          "value": 0,
+          "scope": "output",
+          "name": "output_vm_total_count",
+          "type": "datatype.integer",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01BH1IN31MN6Q7FGIZLIp01AWeNGmL5qsBG",
+        "unique_name": "variable_workflow_01BH1JTW22ZRO4EmIcn0mOLDOelZe2l77sH",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "tabletype_01BH1HKDVRAM45pIhPOFo6RWSCbZATpyLug",
+        "properties": {
+          "scope": "input",
+          "name": "input_query_control_attributes",
+          "type": "datatype.table",
+          "description": "attributes to control the return values.\n\nPossible attributes:\n\noffset\nlimit\nattributes\nexpand\nsort_by\nsort_order\nsort_options\n\n\nNOTE: Filter[] is separate in the collectionFilter input\nNOTE: If you want multiple of one field, just make it a comma separated list... ie:\n\nipaddresses,lans,storage\n",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BH1IZPOXENS1RFbPyV8vL6XcVMYGzYDsM",
         "object_type": "variable_workflow"
       }
     ],
@@ -651,6 +651,72 @@
         "object_type": "definition_activity"
       },
       {
+        "unique_name": "definition_activity_01BHYDEQTZBRP4XugrjHQ5vSLF7pc0WZVd4",
+        "name": "Condition Block",
+        "title": "If VM ID",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "If VM ID",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01BHYDESI81CP3Qa6yfjFBWoqBK5RgrUpVH",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.input.variable_workflow_01BH1GOA0R3JI3QqCbNWGmygmPnCiAG3bKB$",
+                "operator": "ne",
+                "right_operand": ""
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01BHYE20I9QCN56Rfpc1H9nI85xZ0pCNdXE",
+                "name": "Set Variables",
+                "title": "Pass output",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Pass output",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01BH1G79SNT833YldAeD21TCeszCg5aKEE1.output.variable_workflow_01BH1JO5IA69I46NVrSWQ0IKGQnbVmWmZaw$",
+                      "variable_value_new": "$activity.definition_activity_01BH2TAVVG4454tJtke4JxEeyLtY8ehSDw3.output.response_body$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01BHYETSWWDOU2u3tJdLY2Ro2Tvx9X6U5ZV",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "succeeded",
+                  "display_name": "Completed"
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "unique_name": "definition_activity_01BH2W70ETMYZ7ZxS6hl1nWrVqf2dBycMbq",
         "name": "Read Table from JSON",
         "title": "Get Resources",
@@ -868,11 +934,6 @@
       "description": "Collection Filter.\n\nInput as attribute,operator, value triples\n\nIf you want \"and\" input just the attribute name, ie\" name\"\nif you want \"or\" input the or with the attribute name and a space. ie \"or name\"\nSupported operators are =, !=, \u003c , \u003c=, \u003e=, and \u003e\n\nYou can search with strings in values and wildcards of % are supported by API.\nInput strings with single quotes\nInput numbers or boolean with no quotes\n\n\nSee more examples/info at \nhttp://manageiq.org/docs/reference/latest/api/overview/filtering.html",
       "columns": [
         {
-          "name": "attribute",
-          "title": "attribute",
-          "type": "string"
-        },
-        {
           "name": "operator",
           "title": "operator",
           "type": "string"
@@ -880,6 +941,11 @@
         {
           "name": "value",
           "title": "value",
+          "type": "string"
+        },
+        {
+          "name": "attribute",
+          "title": "attribute",
           "type": "string"
         }
       ],
