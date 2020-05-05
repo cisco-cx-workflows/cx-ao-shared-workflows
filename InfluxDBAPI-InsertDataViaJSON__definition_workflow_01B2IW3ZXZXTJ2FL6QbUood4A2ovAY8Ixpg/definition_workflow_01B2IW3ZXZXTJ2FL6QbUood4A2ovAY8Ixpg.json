@@ -7,6 +7,18 @@
     "base_type": "workflow",
     "variables": [
       {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 1,
+          "scope": "local",
+          "name": "ELSE",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01B2J1C9SQ8DS7MmgMZHTAWJ71PqggM651c",
+        "object_type": "variable_workflow"
+      },
+      {
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
@@ -16,18 +28,6 @@
           "is_required": false
         },
         "unique_name": "variable_workflow_01B2J4N1KQ1SH6CYZkYPGMd1VfHNDm0Brjc",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "total_api_call",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01B2IZY954P5Y57sNh6cLMEmauQVdNbav6F",
         "object_type": "variable_workflow"
       },
       {
@@ -44,15 +44,28 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.integer",
+        "schema_id": "datatype.string",
         "properties": {
-          "value": 0,
+          "value": "",
           "scope": "local",
-          "name": "local_loop_index",
-          "type": "datatype.integer",
+          "name": "local_build_api_input",
+          "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01B2JAG1I0ZM50JjO2QVtNRHr1yBaOWIqpQ",
+        "unique_name": "variable_workflow_01B2IZN3P5K5I3Ay9gnJwesSf924W1GAFHk",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "{\n \"measurements\": [\n   {\n     \"measurement\": \"shaunTesting\",\n\t \"tags\": [\n\t    {\n\t\t   \"tag\": \"workflowName\",\n\t\t   \"value\": \"some workflow\"\n\t\t},\n\t\t{\n\t\t   \"tag\": \"category\",\n\t\t   \"value\": \"some category\"\n\t\t},\n\t\t{\n\t\t   \"tag\": \"automationPack\",\n\t\t   \"value\": \"some auto pack\"\n\t\t}\n\t ],\n\t \"fields\": [\n\t    {\n\t\t   \"field\": \"actionCount\",\n\t\t   \"value\": \"100\"\n\t\t},\n\t\t{\n\t\t   \"field\": \"runTime\",\n\t\t   \"value\": \"250\"\n\t\t},\n\t\t{\n\t\t   \"field\": \"timeSaved\",\n\t\t   \"value\": \"500\"\n\t\t},\n               {\n                   \"field\": \"someStringField\",\n                   \"type\": \"string\",\n                  \"value\":\"my_string\"\n               },\n\t\t{\n\t\t   \"field\": \"ROI\",\n\t\t   \"value\": \"500.25\"\n\t\t},\n\t\t{\n\t\t   \"field\": \"costPerHour\",\n\t\t   \"value\": \"100\"\n\t\t}\n\t ]\n\t}\n  ]\n}",
+          "scope": "input",
+          "name": "Influx.measurements_json",
+          "type": "datatype.string",
+          "description": "Measurements JSON that can include multiple measurements, tags, fields. See default example. Can take in single measurement or array of measurements via JSON. Default example is an array of measurements.",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01B2IXGKS5R0B16uxrYlKGfkxtoV6yfx8Na",
         "object_type": "variable_workflow"
       },
       {
@@ -60,11 +73,11 @@
         "properties": {
           "value": "",
           "scope": "local",
-          "name": "local_temp_measurement",
+          "name": "total_api_call",
           "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01B2J044K8CQO3kM3TbW9NTSEZMklyWBiZ0",
+        "unique_name": "variable_workflow_01B2IZY954P5Y57sNh6cLMEmauQVdNbav6F",
         "object_type": "variable_workflow"
       },
       {
@@ -93,28 +106,15 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 1,
-          "scope": "local",
-          "name": "ELSE",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01B2J1C9SQ8DS7MmgMZHTAWJ71PqggM651c",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "{\n \"measurements\": [\n   {\n     \"measurement\": \"shaunTesting\",\n\t \"tags\": [\n\t    {\n\t\t   \"tag\": \"workflowName\",\n\t\t   \"value\": \"some workflow\"\n\t\t},\n\t\t{\n\t\t   \"tag\": \"category\",\n\t\t   \"value\": \"some category\"\n\t\t},\n\t\t{\n\t\t   \"tag\": \"automationPack\",\n\t\t   \"value\": \"some auto pack\"\n\t\t}\n\t ],\n\t \"fields\": [\n\t    {\n\t\t   \"field\": \"actionCount\",\n\t\t   \"value\": \"100\"\n\t\t},\n\t\t{\n\t\t   \"field\": \"runTime\",\n\t\t   \"value\": \"250\"\n\t\t},\n\t\t{\n\t\t   \"field\": \"timeSaved\",\n\t\t   \"value\": \"500\"\n\t\t},\n               {\n                   \"field\": \"someStringField\",\n                   \"type\": \"string\",\n                  \"value\":\"my_string\"\n               },\n\t\t{\n\t\t   \"field\": \"ROI\",\n\t\t   \"value\": \"500.25\"\n\t\t},\n\t\t{\n\t\t   \"field\": \"costPerHour\",\n\t\t   \"value\": \"100\"\n\t\t}\n\t ]\n\t}\n  ]\n}",
-          "scope": "input",
-          "name": "Influx.measurements_json",
+          "value": "",
+          "scope": "local",
+          "name": "local_temp_measurement",
           "type": "datatype.string",
-          "description": "Measurements JSON that can include multiple measurements, tags, fields. See default example. Can take in single measurement or array of measurements via JSON. Default example is an array of measurements.",
-          "is_required": true
+          "is_required": false
         },
-        "unique_name": "variable_workflow_01B2IXGKS5R0B16uxrYlKGfkxtoV6yfx8Na",
+        "unique_name": "variable_workflow_01B2J044K8CQO3kM3TbW9NTSEZMklyWBiZ0",
         "object_type": "variable_workflow"
       },
       {
@@ -130,15 +130,15 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.string",
+        "schema_id": "datatype.integer",
         "properties": {
-          "value": "",
+          "value": 0,
           "scope": "local",
-          "name": "local_build_api_input",
-          "type": "datatype.string",
+          "name": "local_loop_index",
+          "type": "datatype.integer",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01B2IZN3P5K5I3Ay9gnJwesSf924W1GAFHk",
+        "unique_name": "variable_workflow_01B2JAG1I0ZM50JjO2QVtNRHr1yBaOWIqpQ",
         "object_type": "variable_workflow"
       }
     ],
@@ -255,6 +255,26 @@
         ]
       },
       {
+        "unique_name": "definition_activity_01FLU3LBTBNP63k2PnB6PhEOt5Uik2Hbjoy",
+        "name": "Replace String",
+        "title": "Remove Double Double Quotes",
+        "type": "core.replacestring",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Remove Double Double Quotes",
+          "input_string": "$workflow.definition_workflow_01B2IW3ZXZXTJ2FL6QbUood4A2ovAY8Ixpg.local.variable_workflow_01B2IZR62P4910Z4K75qjILFdxAIlSU3pdQ$",
+          "replace_list": [
+            {
+              "replaced_string": "\\\"\"",
+              "replacement_string": "\\\".\""
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
         "unique_name": "definition_activity_01B2J2IQ9TS244TfjwO9CPAOThA1F7Sx4Se",
         "name": "Read Table from JSON",
         "title": "Read Measurements into Table",
@@ -264,7 +284,7 @@
           "action_timeout": 180,
           "continue_on_failure": false,
           "display_name": "Read Measurements into Table",
-          "input_json": "$workflow.definition_workflow_01B2IW3ZXZXTJ2FL6QbUood4A2ovAY8Ixpg.local.variable_workflow_01B2IZR62P4910Z4K75qjILFdxAIlSU3pdQ$",
+          "input_json": "$activity.definition_activity_01FLU3LBTBNP63k2PnB6PhEOt5Uik2Hbjoy.output.result_string$",
           "jsonpath_query": "$..measurements[*]",
           "persist_output": true,
           "populate_columns": false,
