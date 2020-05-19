@@ -11,35 +11,11 @@
         "properties": {
           "value": "",
           "scope": "local",
-          "name": "local_serialized_parent_wf_query",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FWW5R0R9MVO24WzkkIg82oTnNgPNU49Ch",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
           "name": "local_ids_to_remove",
           "type": "datatype.string",
           "is_required": false
         },
         "unique_name": "variable_workflow_01FWYISURGFJ96KQfBMIGsTczGqScGmhRiA",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "local_serialized_single_wf_query",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FWW5ZJX64UL2ITRtVVR6Q8BWtiu1x2MCb",
         "object_type": "variable_workflow"
       },
       {
@@ -55,136 +31,15 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 0,
-          "scope": "local",
-          "name": "local_next_arango_offset",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FWWUH9Y5VMI6YOwtYJurGVplUGCQSt3Jp",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 0,
-          "scope": "local",
-          "name": "local_total_ids_removed_so_far",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FWYFYRCH64D2EvhPn4oNsAUt8DMsBxPH0",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "someone@example.com",
-          "scope": "local",
-          "name": "local_admin_email",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FWUWYHP6N7S2BYyFBZSPJ6G5jfDgzkvZ4",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "FOR i in instances\nFILTER i.object_type==\"instance_workflow\"",
-          "scope": "local",
-          "name": "local_arango_plain_workflows_query",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FMSC4M2CMOY7BT8FLXVNHnShwASEF1zpE",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
           "scope": "local",
-          "name": "local_workflow_ids_to_skip",
-          "type": "datatype.string",
-          "description": "these workflow ids will not be groomed. comma delimited list like XXXX,YYYYY,ZZZZZ",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FM44KFIAZ7A2znyy8Dy7xs5PEAmWLs3WO",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 23,
-          "scope": "local",
-          "name": "local_days_back_to_groom",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FM42PDPS2W128aamdkJoju3nmsL4fSSJR",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "1000",
-          "scope": "local",
-          "name": "local_standard_arango_wf_count",
+          "name": "local_serialized_query_parent_wf_limits",
           "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01FWW1JLFR9C61uv0VxCXMpRUoOquy77CVQ",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "1",
-          "scope": "static",
-          "name": "local_tenant_id",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FM42YOTWZQ06X3UBhgR69UHovQNrhHLyD",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "local_query_single_wfs_limits",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FWYT2KB1PAN5bwP9hMWDchpyfoLVTyDcf",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "local_base_single_wf_query",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FWYALD80CAX4RXCl8QiMafoYZVXvfmgvR",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 0,
-          "scope": "local",
-          "name": "local_wf_removal_upper_bound",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FNICHIXQ9KD3zxoJnoVbcSk84ECkssL9F",
+        "unique_name": "variable_workflow_01FWYUTFNG0E71H0cGnGT1ZfsGRha81nR6s",
         "object_type": "variable_workflow"
       },
       {
@@ -204,23 +59,168 @@
         "properties": {
           "value": "",
           "scope": "local",
-          "name": "local_total_parent_wf_ids",
+          "name": "local_temp_top_single_wf_query",
           "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01FWW8ST5KJMY4CnCVzC4ciaNIyHTgJxOLx",
+        "unique_name": "variable_workflow_01FWWERXIACZ46ziyYQlntgCK6prBryAu6x",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "local_top_parent_wf_query",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FWWE9QQPXGX3d6Dih7kCnKq6qMMYYdPEE",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "local_wf_removal_loops_needed",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FMYQSQJ2SO94uUsEDJoSas8oQDTXf5epM",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "local_wf_removal_low_bound",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FNIC8IHF0EL15YgbBn8DLm1WYdoPFYTw7",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "local_lcv",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FNIB6FFWBJX2HJ8lkB2qWYHVGn3rA5DyG",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": true,
+          "scope": "local",
+          "name": "local_query_has_more",
+          "type": "datatype.boolean",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FWVRFKG06SL0rJkq5mugF9bHr28pY5x8N",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "local_serialized_single_wf_query",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FWW5ZJX64UL2ITRtVVR6Q8BWtiu1x2MCb",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "local_total_ids_to_remove",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FWYFMX8XWN61uq7UFgo0Y6XGGmNhlblx7",
         "object_type": "variable_workflow"
       },
       {
         "schema_id": "datatype.string",
         "properties": {
           "value": "0",
-          "scope": "local",
-          "name": "local_standard_arango_workflow_running_offset",
+          "scope": "static",
+          "name": "local_tenant_id",
           "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01FWW1UA6L5WP47IM3H1buUj3GKdYvr9iBN",
+        "unique_name": "variable_workflow_01FM42YOTWZQ06X3UBhgR69UHovQNrhHLyD",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "local_api_call_tries",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FXP01FIDCUI45fvrWC0HdKXAJWmr01OjY",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "local_query_parent_wf_limits",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FWYSH9968D95zxhaUKCDPgCtVWPMq2szM",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "local_workflow_ids_to_skip",
+          "type": "datatype.string",
+          "description": "these workflow ids will not be groomed. comma delimited list like XXXX,YYYYY,ZZZZZ",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FM44KFIAZ7A2znyy8Dy7xs5PEAmWLs3WO",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "local_serialized_parent_wf_query",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FWW5R0R9MVO24WzkkIg82oTnNgPNU49Ch",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "FOR i in instances\nFILTER i.object_type==\"instance_workflow\"",
+          "scope": "local",
+          "name": "local_arango_plain_workflows_query",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FMSC4M2CMOY7BT8FLXVNHnShwASEF1zpE",
         "object_type": "variable_workflow"
       },
       {
@@ -238,13 +238,13 @@
       {
         "schema_id": "datatype.integer",
         "properties": {
-          "value": 200,
+          "value": 0,
           "scope": "local",
-          "name": "local_max_wf_ids_per_submission",
+          "name": "local_total_ids_removed_so_far",
           "type": "datatype.integer",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01FMY3Z5U386S2w2EfZ3YpwZ1UFYaijsSHX",
+        "unique_name": "variable_workflow_01FWYFYRCH64D2EvhPn4oNsAUt8DMsBxPH0",
         "object_type": "variable_workflow"
       },
       {
@@ -260,30 +260,6 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 0,
-          "scope": "local",
-          "name": "local_api_call_tries",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FXP01FIDCUI45fvrWC0HdKXAJWmr01OjY",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 0,
-          "scope": "local",
-          "name": "local_wf_removal_loops_needed",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FMYQSQJ2SO94uUsEDJoSas8oQDTXf5epM",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
@@ -293,66 +269,6 @@
           "is_required": false
         },
         "unique_name": "variable_workflow_01FWYV851GWE31OBCj3RQL42srYYWNDaNdK",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "local_temp_top_single_wf_query",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FWWERXIACZ46ziyYQlntgCK6prBryAu6x",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 0,
-          "scope": "local",
-          "name": "local_wf_removal_low_bound",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FNIC8IHF0EL15YgbBn8DLm1WYdoPFYTw7",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.boolean",
-        "properties": {
-          "value": true,
-          "scope": "local",
-          "name": "local_query_has_more",
-          "type": "datatype.boolean",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FWVRFKG06SL0rJkq5mugF9bHr28pY5x8N",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 0,
-          "scope": "local",
-          "name": "local_total_ids_to_remove",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FWYFMX8XWN61uq7UFgo0Y6XGGmNhlblx7",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 3,
-          "scope": "local",
-          "name": "local_max_retries",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FXOXHLZ2WTF7ZmdxPoK4Qi0CrPzSWxwb2",
         "object_type": "variable_workflow"
       },
       {
@@ -370,13 +286,37 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "",
+          "value": "0",
           "scope": "local",
-          "name": "local_serialized_query_parent_wf_limits",
+          "name": "local_standard_arango_workflow_running_offset",
           "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01FWYUTFNG0E71H0cGnGT1ZfsGRha81nR6s",
+        "unique_name": "variable_workflow_01FWW1UA6L5WP47IM3H1buUj3GKdYvr9iBN",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "someone@example.com",
+          "scope": "local",
+          "name": "local_admin_email",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FWUWYHP6N7S2BYyFBZSPJ6G5jfDgzkvZ4",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "local_next_arango_offset",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FWWUH9Y5VMI6YOwtYJurGVplUGCQSt3Jp",
         "object_type": "variable_workflow"
       },
       {
@@ -404,15 +344,15 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.string",
+        "schema_id": "datatype.integer",
         "properties": {
-          "value": "",
+          "value": 200,
           "scope": "local",
-          "name": "local_query_parent_wf_limits",
-          "type": "datatype.string",
+          "name": "local_max_wf_ids_per_submission",
+          "type": "datatype.integer",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01FWYSH9968D95zxhaUKCDPgCtVWPMq2szM",
+        "unique_name": "variable_workflow_01FMY3Z5U386S2w2EfZ3YpwZ1UFYaijsSHX",
         "object_type": "variable_workflow"
       },
       {
@@ -428,15 +368,27 @@
         "object_type": "variable_workflow"
       },
       {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "local_query_single_wfs_limits",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FWYT2KB1PAN5bwP9hMWDchpyfoLVTyDcf",
+        "object_type": "variable_workflow"
+      },
+      {
         "schema_id": "datatype.integer",
         "properties": {
-          "value": 0,
+          "value": 3,
           "scope": "local",
-          "name": "local_lcv",
+          "name": "local_max_retries",
           "type": "datatype.integer",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01FNIB6FFWBJX2HJ8lkB2qWYHVGn3rA5DyG",
+        "unique_name": "variable_workflow_01FXOXHLZ2WTF7ZmdxPoK4Qi0CrPzSWxwb2",
         "object_type": "variable_workflow"
       },
       {
@@ -444,11 +396,59 @@
         "properties": {
           "value": "",
           "scope": "local",
-          "name": "local_top_parent_wf_query",
+          "name": "local_total_parent_wf_ids",
           "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01FWWE9QQPXGX3d6Dih7kCnKq6qMMYYdPEE",
+        "unique_name": "variable_workflow_01FWW8ST5KJMY4CnCVzC4ciaNIyHTgJxOLx",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 23,
+          "scope": "local",
+          "name": "local_days_back_to_groom",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FM42PDPS2W128aamdkJoju3nmsL4fSSJR",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "1000",
+          "scope": "local",
+          "name": "local_standard_arango_wf_count",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FWW1JLFR9C61uv0VxCXMpRUoOquy77CVQ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "local_wf_removal_upper_bound",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FNICHIXQ9KD3zxoJnoVbcSk84ECkssL9F",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "local_base_single_wf_query",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FWYALD80CAX4RXCl8QiMafoYZVXvfmgvR",
         "object_type": "variable_workflow"
       }
     ],
