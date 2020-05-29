@@ -1,0 +1,338 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01C1RN4FJH9O23WR7u1oUC9ilQMpZ1jMJ5E",
+    "name": "Cloud.Forms.API - Aquire_Auth_Token",
+    "title": "Cloud.Forms.API - Aquire_Auth_Token",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "local_query_string",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01C1RN4QLDT527h5biaa83i1LaqpKXNfTsS",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "response_message_json",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01C1RN4QLDNYG3C9BhmmCLmbMIUwBW9CwDs",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "ui",
+          "scope": "input",
+          "name": "input_requester_type",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01C1RN4QLDREZ6BpivPfR9FiVT99W54OxY0",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Cloud.Forms.API - Aquire_Auth_Token",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01C1RN4VTOGLN1Pocm2PPTO56potLJMYBKf",
+        "name": "Calculate Date Time Difference",
+        "title": "Calculate Date Time Difference",
+        "type": "core.calculate_date_time_difference",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Calculate Date Time Difference",
+          "original_date": "$workflow.definition_workflow_01C1RN4FJH9O23WR7u1oUC9ilQMpZ1jMJ5E.output.start_time$",
+          "skip_execution": false,
+          "subtract_date": "$global.variable_01BH15PBY8FQH3taGqDdPv2dHOo9ZarOGsY.global.variable_01BH15PBY8FQH3taGqDdPv2dHOo9ZarOGsY$"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01C1RN50EQL2I5SAQhcLt1Alt0RRSJZYwRW",
+        "name": "Condition Block",
+        "title": "If needs to be refreshed",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "If needs to be refreshed",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01C1RN53ZTF3M1ZdL6hZd43Ajt0K7wgGbgs",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01C1RN4VTOGLN1Pocm2PPTO56potLJMYBKf.output.total_minutes$",
+                "operator": "gt",
+                "right_operand": 50
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01C1RN58OF4IE5xlCfsONejWBZvnUllNhiE",
+                "name": "Group",
+                "title": "Create and Set Token",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Create and Set Token",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01C1RN5FWI7HH48ZGi8BVPSMpsToufH75F3",
+                    "name": "Condition Block",
+                    "title": "if requester_type set",
+                    "type": "logic.if_else",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "if requester_type set",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "blocks": [
+                      {
+                        "unique_name": "definition_activity_01C1RN5JAWRYX2qEWo4pPjYcGATRfYk3Ubr",
+                        "name": "Condition Branch",
+                        "title": "THEN",
+                        "type": "logic.condition_block",
+                        "base_type": "activity",
+                        "properties": {
+                          "condition": {
+                            "left_operand": "$workflow.definition_workflow_01C1RN4FJH9O23WR7u1oUC9ilQMpZ1jMJ5E.input.variable_workflow_01C1RN4QLDREZ6BpivPfR9FiVT99W54OxY0$",
+                            "operator": "ne",
+                            "right_operand": ""
+                          },
+                          "continue_on_failure": false,
+                          "display_name": "THEN",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity",
+                        "actions": [
+                          {
+                            "unique_name": "definition_activity_01C1RN5NEBAY72Rt5TeLu28CosecZsmpHsZ",
+                            "name": "Set Variables",
+                            "title": "Set Request_Type",
+                            "type": "core.set_multiple_variables",
+                            "base_type": "activity",
+                            "properties": {
+                              "continue_on_failure": false,
+                              "display_name": "Set Request_Type",
+                              "skip_execution": false,
+                              "variables_to_update": [
+                                {
+                                  "variable_to_update": "$workflow.definition_workflow_01C1RN4FJH9O23WR7u1oUC9ilQMpZ1jMJ5E.local.variable_workflow_01C1RN4QLDT527h5biaa83i1LaqpKXNfTsS$",
+                                  "variable_value_new": "?requester_type=$workflow.definition_workflow_01C1RN4FJH9O23WR7u1oUC9ilQMpZ1jMJ5E.input.variable_workflow_01C1RN4QLDREZ6BpivPfR9FiVT99W54OxY0$"
+                                }
+                              ]
+                            },
+                            "object_type": "definition_activity"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "unique_name": "definition_activity_01C1RN5TBP0XR46y9DiVeaervmIFthVw7yl",
+                    "name": "HTTP Request",
+                    "title": "Get Auth Token",
+                    "type": "web-service.http_request",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "allow_auto_redirect": true,
+                      "content_type": "application/json",
+                      "continue_on_error_status_code": false,
+                      "continue_on_failure": false,
+                      "display_name": "Get Auth Token",
+                      "method": "GET",
+                      "relative_url": "auth$workflow.definition_workflow_01C1RN4FJH9O23WR7u1oUC9ilQMpZ1jMJ5E.local.variable_workflow_01C1RN4QLDT527h5biaa83i1LaqpKXNfTsS$",
+                      "runtime_user": {
+                        "override_target_runtime_user": false,
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "target": {
+                        "use_workflow_target": true
+                      }
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01C1RN5YV6OFS7arTtTsNGwl4Tls9kfAcRT",
+                    "name": "JSONPath Query",
+                    "title": "JSON Path Out Auth Token",
+                    "type": "corejava.jsonpathquery",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "display_name": "JSON Path Out Auth Token",
+                      "input_json": "$activity.definition_activity_01C1RN5TBP0XR46y9DiVeaervmIFthVw7yl.output.response_body$",
+                      "jsonpath_queries": [
+                        {
+                          "jsonpath_query": "$..auth_token",
+                          "jsonpath_query_name": "auth_token",
+                          "jsonpath_query_type": "secure_string"
+                        }
+                      ],
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01C1RN649SZ125v3uALV3sN3VO3Ihdpimqy",
+                    "name": "Set Variables",
+                    "title": "Set Token and Output",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Token and Output",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01C1RN4FJH9O23WR7u1oUC9ilQMpZ1jMJ5E.output.variable_workflow_01C1RN4QLDNYG3C9BhmmCLmbMIUwBW9CwDs$",
+                          "variable_value_new": "$activity.definition_activity_01C1RN5TBP0XR46y9DiVeaervmIFthVw7yl.output.response_body$"
+                        },
+                        {
+                          "variable_to_update": "$global.variable_01BH0I4MN1OF82LuH4MFcQK3285pdZsKUdf.global.variable_01BH0I4MN1OF82LuH4MFcQK3285pdZsKUdf$",
+                          "variable_value_new": "$activity.definition_activity_01C1RN5YV6OFS7arTtTsNGwl4Tls9kfAcRT.output.jsonpath_queries.auth_token$"
+                        },
+                        {
+                          "variable_to_update": "$global.variable_01BH15PBY8FQH3taGqDdPv2dHOo9ZarOGsY.global.variable_01BH15PBY8FQH3taGqDdPv2dHOo9ZarOGsY$",
+                          "variable_value_new": "$activity.definition_activity_01C1RN4VTOGLN1Pocm2PPTO56potLJMYBKf.output.end_time$"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01C1RN6B6BJ6Y72wlctUZF3YNXOACBRy7l9",
+            "name": "Condition Branch",
+            "title": "ELSE",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01C1RN4VTOGLN1Pocm2PPTO56potLJMYBKf.output.total_minutes$",
+                "operator": "lte",
+                "right_operand": 50
+              },
+              "continue_on_failure": false,
+              "display_name": "ELSE",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01C1RN6FPWDI91GfUm9BCCNY4xSkNa0Hyuq",
+                "name": "Set Variables",
+                "title": "Set JSON Output to Already Set",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set JSON Output to Already Set",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01C1RN4FJH9O23WR7u1oUC9ilQMpZ1jMJ5E.output.variable_workflow_01C1RN4QLDNYG3C9BhmmCLmbMIUwBW9CwDs$",
+                      "variable_value_new": "{\n \"token\": \"set\"\n}"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_01BH0G2NKWYA01reVISoqWn3Wt1YYsQCZo9"
+    ]
+  },
+  "categories": {
+    "category_01BH0G2NKWYA01reVISoqWn3Wt1YYsQCZo9": {
+      "unique_name": "category_01BH0G2NKWYA01reVISoqWn3Wt1YYsQCZo9",
+      "name": "Cloud.Forms.API",
+      "title": "Cloud.Forms.API",
+      "type": "basic.category",
+      "base_type": "category",
+      "description": "cloud forms API",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "variables": {
+    "variable_01BH0I4MN1OF82LuH4MFcQK3285pdZsKUdf": {
+      "unique_name": "variable_01BH0I4MN1OF82LuH4MFcQK3285pdZsKUdf",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "Cloud.Forms.API.Auth.Token",
+        "type": "datatype.secure_string",
+        "is_required": false
+      },
+      "object_type": "variable"
+    },
+    "variable_01BH15PBY8FQH3taGqDdPv2dHOo9ZarOGsY": {
+      "unique_name": "variable_01BH15PBY8FQH3taGqDdPv2dHOo9ZarOGsY",
+      "properties": {
+        "value": "2020-05-04T13:46:46.970604183Z",
+        "scope": "global",
+        "name": "Cloud.Forms.API.Token.Generate.Time",
+        "type": "datatype.date",
+        "is_required": false
+      },
+      "object_type": "variable"
+    }
+  }
+}
