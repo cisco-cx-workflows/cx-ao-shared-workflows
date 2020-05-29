@@ -10,24 +10,75 @@
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
+          "scope": "input",
+          "name": "input_container_repo_to_compile_to",
+          "type": "datatype.string",
+          "description": "repository to use to store compiled container. If access to the internet use the default otherwise use a repo you would have access to",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BS2XD2S6ZIP3RBDBB5DVLWVG6SDk3BkGs",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "local",
+          "name": "local_bypass_schema_creation",
+          "type": "datatype.boolean",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01CA7HYIEHVAZ3HpJXB2RTEoPIUZSPUm2vo",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "python",
+          "scope": "input",
+          "name": "input_adapter_language",
+          "type": "datatype.string",
+          "description": "currently only supports python to compile. Supports anything if already compiled",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BT5ZTT4IDLK47ShHBebYBhiffXYv7nkgv",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "webexteams",
+          "scope": "input",
+          "name": "input_adapter_name",
+          "type": "datatype.string",
+          "description": "name of folder to extract to. ",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BS38EAQJ0BP4hTvGJkeRegLoqlUKA2XXF",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 1,
+          "scope": "local",
+          "name": "ELSE",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BT64RFCI5JM3u3cSF9h6wHgZo7Ce73DAp",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
           "scope": "local",
           "name": "local_json",
           "type": "datatype.string",
           "is_required": false
         },
         "unique_name": "variable_workflow_01BSX9TF35TE87i8d0RkVEmMCYzDPIGDHHq",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 0,
-          "scope": "local",
-          "name": "local_api_calls",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BSXU5U72Y481sI5Ez3zXIJ3i8oHn8KoB0",
         "object_type": "variable_workflow"
       },
       {
@@ -44,16 +95,41 @@
         "object_type": "variable_workflow"
       },
       {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 5,
+          "scope": "local",
+          "name": "local_max_api_calls",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BSXTWF6C7845x8GBOlRWkRC5flqTXBNVL",
+        "object_type": "variable_workflow"
+      },
+      {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "webexteams",
+          "value": "containers.cisco.com/ao-adapters/ad-cwt",
           "scope": "input",
-          "name": "input_adapter_name",
+          "name": "input_compiled_adapter_container_repo",
           "type": "datatype.string",
-          "description": "name of folder to extract to. ",
+          "description": "if adapter is already compiled and updated, you can just use this container repo location to install",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BT5YCCSNZ3B4wo7NrBF5O6PZvjdQAKNgM",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "cisco",
+          "scope": "input",
+          "name": "input_kubernetes_namespace_to_install_to",
+          "type": "datatype.string",
+          "description": "namespace for your AO install. ",
           "is_required": true
         },
-        "unique_name": "variable_workflow_01BS38EAQJ0BP4hTvGJkeRegLoqlUKA2XXF",
+        "unique_name": "variable_workflow_01BS33CYRKRVM65CMTV3jyVggpJI8qGxyL8",
         "object_type": "variable_workflow"
       },
       {
@@ -78,81 +154,6 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 1,
-          "scope": "local",
-          "name": "ELSE",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BT64RFCI5JM3u3cSF9h6wHgZo7Ce73DAp",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "cisco",
-          "scope": "input",
-          "name": "input_kubernetes_namespace_to_install_to",
-          "type": "datatype.string",
-          "description": "namespace for your AO install. ",
-          "is_required": true
-        },
-        "unique_name": "variable_workflow_01BS33CYRKRVM65CMTV3jyVggpJI8qGxyL8",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.boolean",
-        "properties": {
-          "value": false,
-          "scope": "local",
-          "name": "local_bypass_schema_creation",
-          "type": "datatype.boolean",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01CA7HYIEHVAZ3HpJXB2RTEoPIUZSPUm2vo",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "shaurobe/ao-webex-teams-adapter",
-          "scope": "input",
-          "name": "input_compiled_adapter_container_repo",
-          "type": "datatype.string",
-          "description": "if adapter is already compiled and updated, you can just use this container repo location to install",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BT5YCCSNZ3B4wo7NrBF5O6PZvjdQAKNgM",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 5,
-          "scope": "local",
-          "name": "local_max_api_calls",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BSXTWF6C7845x8GBOlRWkRC5flqTXBNVL",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "input_container_repo_to_compile_to",
-          "type": "datatype.string",
-          "description": "repository to use to store compiled container. If access to the internet use the default otherwise use a repo you would have access to",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BS2XD2S6ZIP3RBDBB5DVLWVG6SDk3BkGs",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.boolean",
         "properties": {
           "value": false,
@@ -165,16 +166,15 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.string",
+        "schema_id": "datatype.integer",
         "properties": {
-          "value": "python",
-          "scope": "input",
-          "name": "input_adapter_language",
-          "type": "datatype.string",
-          "description": "currently only supports python to compile. Supports anything if already compiled",
-          "is_required": true
+          "value": 0,
+          "scope": "local",
+          "name": "local_api_calls",
+          "type": "datatype.integer",
+          "is_required": false
         },
-        "unique_name": "variable_workflow_01BT5ZTT4IDLK47ShHBebYBhiffXYv7nkgv",
+        "unique_name": "variable_workflow_01BSXU5U72Y481sI5Ez3zXIJ3i8oHn8KoB0",
         "object_type": "variable_workflow"
       }
     ],
