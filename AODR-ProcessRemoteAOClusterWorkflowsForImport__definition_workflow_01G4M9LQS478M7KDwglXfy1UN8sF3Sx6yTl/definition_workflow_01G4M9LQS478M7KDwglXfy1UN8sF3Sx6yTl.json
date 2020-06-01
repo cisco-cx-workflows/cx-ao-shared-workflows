@@ -7,31 +7,6 @@
     "base_type": "workflow",
     "variables": [
       {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "DR Enabled",
-          "scope": "local",
-          "name": "ls_DR Enabled Category name",
-          "type": "datatype.string",
-          "description": "Provide the Category label used on the Primary AO Cluster which denotes workflows that need to be synchronized with the secondary\n",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01G4WCSFYFTQU1JNGcMokVtm7oGj3QOKIlP",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "ls_Processed Workflow as JSON",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01G4Q0SMWG9MZ1DhWSHLqiByhgpkxGyoWdX",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.boolean",
         "properties": {
           "value": false,
@@ -46,37 +21,13 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "",
+          "value": "AOAdmin@example.com",
           "scope": "local",
-          "name": "ls_Import Error Messages",
+          "name": "ls_Email To Addresses",
           "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01G69FEAFZGA16IFI5TcpbZ2Y8Y3MDCESE9",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.boolean",
-        "properties": {
-          "value": false,
-          "scope": "input",
-          "name": "Force Resync?",
-          "type": "datatype.boolean",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01G6B6YDFOR3O1Dt58dXwHTfiTbs1W978Gz",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 0,
-          "scope": "local",
-          "name": "li_Workflow Loop Counter",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01G4NY5NTTXI50mLxs5Iuiq8ICluf03JCtk",
+        "unique_name": "variable_workflow_01G901QUI6KRZ1myIIRDnpRox2fiBQaxBrF",
         "object_type": "variable_workflow"
       },
       {
@@ -106,6 +57,55 @@
       {
         "schema_id": "datatype.string",
         "properties": {
+          "value": "DR Enabled",
+          "scope": "local",
+          "name": "ls_DR Enabled Category name",
+          "type": "datatype.string",
+          "description": "Provide the Category label used on the Primary AO Cluster which denotes workflows that need to be synchronized with the secondary\n",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01G4WCSFYFTQU1JNGcMokVtm7oGj3QOKIlP",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "input",
+          "name": "Force Resync?",
+          "type": "datatype.boolean",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01G6B6YDFOR3O1Dt58dXwHTfiTbs1W978Gz",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "ls_Processed Workflow as JSON",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01G4Q0SMWG9MZ1DhWSHLqiByhgpkxGyoWdX",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "li_Workflow Loop Counter",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01G4NY5NTTXI50mLxs5Iuiq8ICluf03JCtk",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
           "value": "",
           "scope": "local",
           "name": "ls_EmailBody",
@@ -118,13 +118,13 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "AOAdmin@example.com",
+          "value": "",
           "scope": "local",
-          "name": "ls_Email To Addresses",
+          "name": "ls_Import Error Messages",
           "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01G901QUI6KRZ1myIIRDnpRox2fiBQaxBrF",
+        "unique_name": "variable_workflow_01G69FEAFZGA16IFI5TcpbZ2Y8Y3MDCESE9",
         "object_type": "variable_workflow"
       }
     ],
@@ -1892,7 +1892,7 @@
           "continue_if_one_address_valid": false,
           "continue_on_failure": false,
           "display_name": "Send Email",
-          "from": "AO514@rtpnml.cisco.com",
+          "from": "$workflow.definition_workflow_01G4M9LQS478M7KDwglXfy1UN8sF3Sx6yTl.local.variable_workflow_01G901DZ7M5YN2J63HssAozloaiCEMjozt8$",
           "runtime_user": {
             "override_target_runtime_user": false,
             "target_default": true
@@ -1903,7 +1903,7 @@
             "override_workflow_target": true,
             "target_id": "definition_target_01C9Y8V3GBBX64L8eqzJWAF2JgWy1GGpszs"
           },
-          "to": "jadavis@cisco.com"
+          "to": "$workflow.definition_workflow_01G4M9LQS478M7KDwglXfy1UN8sF3Sx6yTl.local.variable_workflow_01G901QUI6KRZ1myIIRDnpRox2fiBQaxBrF$"
         },
         "object_type": "definition_activity"
       }
@@ -1925,7 +1925,7 @@
         "description": "Kubernetes Master Node 1 for the local Action Orchestrator cluster instance",
         "disable_certificate_validation": true,
         "display_name": "AO Master 1 Node",
-        "host": "192.168.1.10",
+        "host": "172.31.0.122",
         "no_runtime_user": false,
         "port": 443,
         "protocol": "https"
@@ -1943,7 +1943,7 @@
         "no_runtime_user": true,
         "port": 25,
         "protocol": "SMTP",
-        "server": "mail.example.com"
+        "server": "mailman.cisco.com"
       }
     },
     "definition_target_01G3ZV7648M0L5Fh4YVse1FsdBSsgMFp8RM": {
@@ -1957,7 +1957,7 @@
         "default_runtime_user_id": "definition_runtime_user_01G7ZKGGYPLIG1v1Wp69K0TejyCHu8N2HLI",
         "disable_certificate_validation": true,
         "display_name": "Primary AO Site K8S Master Node 1",
-        "host": "192.168.1.10",
+        "host": "172.31.0.147",
         "no_runtime_user": false,
         "port": 443,
         "protocol": "https"
@@ -2028,16 +2028,6 @@
       "display_name": "DR Workflows Tracker",
       "columns": [
         {
-          "name": "Status",
-          "title": "Status",
-          "type": "string"
-        },
-        {
-          "name": "Triggers",
-          "title": "Triggers",
-          "type": "string"
-        },
-        {
           "name": "UniqueName",
           "title": "Unique Name",
           "type": "string"
@@ -2060,6 +2050,16 @@
         {
           "name": "Name",
           "title": "Name",
+          "type": "string"
+        },
+        {
+          "name": "Status",
+          "title": "Status",
+          "type": "string"
+        },
+        {
+          "name": "Triggers",
+          "title": "Triggers",
           "type": "string"
         }
       ],
