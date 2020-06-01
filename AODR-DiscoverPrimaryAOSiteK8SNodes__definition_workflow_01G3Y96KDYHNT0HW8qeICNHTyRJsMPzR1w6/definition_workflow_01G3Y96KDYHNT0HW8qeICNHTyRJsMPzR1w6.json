@@ -1,0 +1,411 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01G3Y96KDYHNT0HW8qeICNHTyRJsMPzR1w6",
+    "name": "AODR - Discover Primary AO Site K8S Nodes",
+    "title": "AODR - Discover Primary AO Site K8S Nodes",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "[\n",
+          "scope": "output",
+          "name": "o_AOnodes",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01G880FKODU8L2g74jeV95AhMaVSlic0a6d",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "Pod Loop Counter",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01G3Z0VCVUP4X3DvCHRkzzMo8uplIk2v7L9",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "AODR - Discover Primary AO Site K8S Nodes",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "terminal.unix_linux_endpoint",
+        "target_id": "definition_target_01G883YIXGPUZ4EiQbXYI0BKs0ZqQZJQDoS",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01G3YCTMPQVYS1813pm9wCG3QqjmAlLcbwk",
+        "name": "Execute Linux/Unix SSH Command",
+        "title": "Get K8S node info",
+        "type": "terminal.ssh_command",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "command": "kubectl -n cisco get nodes -o=json",
+          "command_timeout": 60,
+          "continue_on_failure": false,
+          "display_name": "Get K8S node info",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01G3YKISH7GKT1zMnsnifFI2nd9zQzw7aBI",
+        "name": "JSONPath Query",
+        "title": "JSONPath Query Node Count",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "JSONPath Query Node Count",
+          "input_json": "$activity.definition_activity_01G3YCTMPQVYS1813pm9wCG3QqjmAlLcbwk.output.response_body$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "items.length()",
+              "jsonpath_query_name": "nodes",
+              "jsonpath_query_type": "integer"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01G3Z11HDGV457Y0IcCXDsmKftQcTEwszLr",
+        "name": "While Loop",
+        "title": "While Loop",
+        "type": "logic.while",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "While Loop",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01G3Z11K038XO05V6i1Xvv6xvm9Y4cvIQz3",
+            "name": "Condition Branch",
+            "title": "Condition Branch",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01G3Y96KDYHNT0HW8qeICNHTyRJsMPzR1w6.local.variable_workflow_01G3Z0VCVUP4X3DvCHRkzzMo8uplIk2v7L9$",
+                "operator": "lt",
+                "right_operand": "$activity.definition_activity_01G3YKISH7GKT1zMnsnifFI2nd9zQzw7aBI.output.jsonpath_queries.nodes$"
+              },
+              "continue_on_failure": false,
+              "display_name": "Condition Branch",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01G3YS3JM50GH3hGS94opmBHu3RJWm6nKlf",
+                "name": "JSONPath Query",
+                "title": "JSONPath Query Addresses and Hostnames",
+                "type": "corejava.jsonpathquery",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "JSONPath Query Addresses and Hostnames",
+                  "input_json": "$activity.definition_activity_01G3YCTMPQVYS1813pm9wCG3QqjmAlLcbwk.output.response_body$",
+                  "jsonpath_queries": [
+                    {
+                      "jsonpath_query": "items[$workflow.definition_workflow_01G3Y96KDYHNT0HW8qeICNHTyRJsMPzR1w6.local.variable_workflow_01G3Z0VCVUP4X3DvCHRkzzMo8uplIk2v7L9$].status.addresses",
+                      "jsonpath_query_name": "addresses",
+                      "jsonpath_query_type": "string"
+                    },
+                    {
+                      "jsonpath_query": "items[$workflow.definition_workflow_01G3Y96KDYHNT0HW8qeICNHTyRJsMPzR1w6.local.variable_workflow_01G3Z0VCVUP4X3DvCHRkzzMo8uplIk2v7L9$].status.addresses[?(@.type == 'InternalIP')].address",
+                      "jsonpath_query_name": "IPAddress",
+                      "jsonpath_query_type": "string"
+                    },
+                    {
+                      "jsonpath_query": "items[$workflow.definition_workflow_01G3Y96KDYHNT0HW8qeICNHTyRJsMPzR1w6.local.variable_workflow_01G3Z0VCVUP4X3DvCHRkzzMo8uplIk2v7L9$].status.addresses[?(@.type == 'Hostname')].address",
+                      "jsonpath_query_name": "Hostname",
+                      "jsonpath_query_type": "string"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01G3ZFBICWESQ1RM4Q718mn32YwsCbMG8rF",
+                "name": "JSONPath Query",
+                "title": "JSONPath Query Master Node taint",
+                "type": "corejava.jsonpathquery",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": true,
+                  "display_name": "JSONPath Query Master Node taint",
+                  "input_json": "$activity.definition_activity_01G3YCTMPQVYS1813pm9wCG3QqjmAlLcbwk.output.response_body$",
+                  "jsonpath_queries": [
+                    {
+                      "jsonpath_query": "items[$workflow.definition_workflow_01G3Y96KDYHNT0HW8qeICNHTyRJsMPzR1w6.local.variable_workflow_01G3Z0VCVUP4X3DvCHRkzzMo8uplIk2v7L9$].spec.taints[*].key",
+                      "jsonpath_query_name": "taintkey",
+                      "jsonpath_query_type": "string"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01G3ZJT493ULV18uYWC2klYn2pt7aqtTGoG",
+                "name": "Condition Block",
+                "title": "Node Role",
+                "type": "logic.if_else",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Node Role",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "blocks": [
+                  {
+                    "unique_name": "definition_activity_01G3ZJT7OQ5GS5jNrt528ffG3zVpAr4o1OJ",
+                    "name": "Condition Branch",
+                    "title": "Master",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01G3ZFBICWESQ1RM4Q718mn32YwsCbMG8rF.output.succeeded$",
+                        "operator": "eq",
+                        "right_operand": true
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "Master",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01G3ZIF1QSMG35EuLQot15X1G92h3nBxk7a",
+                        "name": "Set Variables",
+                        "title": "Set o_AOnodes",
+                        "type": "core.set_multiple_variables",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Set o_AOnodes",
+                          "skip_execution": false,
+                          "variables_to_update": [
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_01G3Y96KDYHNT0HW8qeICNHTyRJsMPzR1w6.output.variable_workflow_01G880FKODU8L2g74jeV95AhMaVSlic0a6d$",
+                              "variable_value_new": "$workflow.definition_workflow_01G3Y96KDYHNT0HW8qeICNHTyRJsMPzR1w6.output.variable_workflow_01G880FKODU8L2g74jeV95AhMaVSlic0a6d$   {\n\"NodeName\": \"$activity.definition_activity_01G3YS3JM50GH3hGS94opmBHu3RJWm6nKlf.output.jsonpath_queries.Hostname$\",\n\"NodeIP\": \"$activity.definition_activity_01G3YS3JM50GH3hGS94opmBHu3RJWm6nKlf.output.jsonpath_queries.IPAddress$\",\n\"Role\": \"master\"\n},\n"
+                            }
+                          ]
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  },
+                  {
+                    "unique_name": "definition_activity_01G3ZJT8TGYXC5FqOLtqsHkWiQpguJvuRIy",
+                    "name": "Condition Branch",
+                    "title": "Worker",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01G3ZFBICWESQ1RM4Q718mn32YwsCbMG8rF.output.succeeded$",
+                        "operator": "eq",
+                        "right_operand": false
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "Worker",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01G3ZKYMP246T2kJxvHNZPYS8UsXcjUM1d1",
+                        "name": "Set Variables",
+                        "title": "Set o_AOnodes",
+                        "type": "core.set_multiple_variables",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Set o_AOnodes",
+                          "skip_execution": false,
+                          "variables_to_update": [
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_01G3Y96KDYHNT0HW8qeICNHTyRJsMPzR1w6.output.variable_workflow_01G880FKODU8L2g74jeV95AhMaVSlic0a6d$",
+                              "variable_value_new": "$workflow.definition_workflow_01G3Y96KDYHNT0HW8qeICNHTyRJsMPzR1w6.output.variable_workflow_01G880FKODU8L2g74jeV95AhMaVSlic0a6d$   {\n\"NodeName\": \"$activity.definition_activity_01G3YS3JM50GH3hGS94opmBHu3RJWm6nKlf.output.jsonpath_queries.Hostname$\",\n\"NodeIP\": \"$activity.definition_activity_01G3YS3JM50GH3hGS94opmBHu3RJWm6nKlf.output.jsonpath_queries.IPAddress$\",\n\"Role\": \"worker\"\n},\n"
+                            }
+                          ]
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01G3Z2NUFBP1C0dDszlhmAv3bY2ChcV9B7K",
+                "name": "Set Variables",
+                "title": "Increment Loop Counter",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Increment Loop Counter",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01G3Y96KDYHNT0HW8qeICNHTyRJsMPzR1w6.local.variable_workflow_01G3Z0VCVUP4X3DvCHRkzzMo8uplIk2v7L9$",
+                      "variable_value_new": "$workflow.definition_workflow_01G3Y96KDYHNT0HW8qeICNHTyRJsMPzR1w6.local.variable_workflow_01G3Z0VCVUP4X3DvCHRkzzMo8uplIk2v7L9$ + 1"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01G3ZPCSS2QH15ZwCXJRwihUlWLEpNcBXk5",
+        "name": "Replace String",
+        "title": "Replace closing JSON record",
+        "type": "core.replacestring",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Replace closing JSON record",
+          "input_string": "$workflow.definition_workflow_01G3Y96KDYHNT0HW8qeICNHTyRJsMPzR1w6.output.variable_workflow_01G880FKODU8L2g74jeV95AhMaVSlic0a6d$]",
+          "replace_list": [
+            {
+              "replaced_string": "\"\n},\n]",
+              "replacement_string": "\"\n}\n]"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01G8UXYK92VPV5wxAoCiOn3aukpOUW7iUJU",
+        "name": "Set Variables",
+        "title": "Set Global Output Var",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Global Output Var",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$global.variable_01G8UXIJCSF203NWh9m0S5EWRv8iRUqOBio.global.variable_01G8UXIJCSF203NWh9m0S5EWRv8iRUqOBio$",
+              "variable_value_new": "$activity.definition_activity_01G3ZPCSS2QH15ZwCXJRwihUlWLEpNcBXk5.output.result_string$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01G8UZZB7JYOR64TvXH3AP25MVAi6F62XsO",
+        "name": "Set Variables",
+        "title": "Set Output AONodes",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Output AONodes",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01G3Y96KDYHNT0HW8qeICNHTyRJsMPzR1w6.output.variable_workflow_01G880FKODU8L2g74jeV95AhMaVSlic0a6d$",
+              "variable_value_new": "$activity.definition_activity_01G3ZPCSS2QH15ZwCXJRwihUlWLEpNcBXk5.output.result_string$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01G883YIXGPUZ4EiQbXYI0BKs0ZqQZJQDoS": {
+      "unique_name": "definition_target_01G883YIXGPUZ4EiQbXYI0BKs0ZqQZJQDoS",
+      "name": "Primary AO Site K8S Master Node 1",
+      "title": "Primary AO Site K8S Master Node 1",
+      "type": "terminal.unix_linux_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "bash_shell": "/bin/bash",
+        "default_runtime_user_id": "definition_runtime_user_01G883NNCK4472DCOO1jYLv6JGofbW4I9hd",
+        "display_name": "Primary AO Site K8S Master Node 1",
+        "host": "172.31.0.135",
+        "port": 22
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01G883NNCK4472DCOO1jYLv6JGofbW4I9hd": {
+      "unique_name": "definition_runtime_user_01G883NNCK4472DCOO1jYLv6JGofbW4I9hd",
+      "name": "Primary AO Site K8S Master Node 1  (ccsadmin)",
+      "title": "Primary AO Site K8S Master Node 1  (ccsadmin)",
+      "type": "runtime_user.terminal_key_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "description": "SSH login user to Primary AO Site Kubernetes Master Node 1 - defined at install with username and ED25519 key info",
+        "display_name": "Primary AO Site K8S Master Node 1  (ccsadmin)",
+        "key": "*****",
+        "user": "*****"
+      }
+    }
+  },
+  "variables": {
+    "variable_01G8UXIJCSF203NWh9m0S5EWRv8iRUqOBio": {
+      "unique_name": "variable_01G8UXIJCSF203NWh9m0S5EWRv8iRUqOBio",
+      "properties": {
+        "scope": "global",
+        "name": "Primary AO Cluster Nodes JSON",
+        "type": "datatype.string",
+        "description": "JSON represetation of Primary AO Cluster Nodes data containing NodeId, IP Address and Role",
+        "is_required": false
+      },
+      "object_type": "variable"
+    }
+  }
+}
