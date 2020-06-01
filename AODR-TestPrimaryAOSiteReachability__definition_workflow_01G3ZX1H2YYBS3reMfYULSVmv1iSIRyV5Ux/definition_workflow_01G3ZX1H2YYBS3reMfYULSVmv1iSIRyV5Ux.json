@@ -534,7 +534,7 @@
         "description": "Kubernetes Master Node 1 for the local Action Orchestrator cluster instance",
         "disable_certificate_validation": true,
         "display_name": "AO Master 1 Node",
-        "host": "172.31.0.122",
+        "host": "192.168.1.10",
         "no_runtime_user": false,
         "port": 443,
         "protocol": "https"
@@ -551,7 +551,7 @@
         "default_runtime_user_id": "definition_runtime_user_01G7ZKGGYPLIG1v1Wp69K0TejyCHu8N2HLI",
         "disable_certificate_validation": true,
         "display_name": "Primary AO Site K8S Master Node 1",
-        "host": "172.31.0.147",
+        "host": "192.168.1.10",
         "no_runtime_user": false,
         "port": 443,
         "protocol": "https"
@@ -568,7 +568,7 @@
         "bash_shell": "/bin/bash",
         "default_runtime_user_id": "definition_runtime_user_01G88N3OQAD870P8J6iuC3kBLApDli22DQB",
         "display_name": "Local AO Master 1 Node",
-        "host": "172.31.0.131",
+        "host": "192.168.1.10",
         "port": 22
       }
     }
