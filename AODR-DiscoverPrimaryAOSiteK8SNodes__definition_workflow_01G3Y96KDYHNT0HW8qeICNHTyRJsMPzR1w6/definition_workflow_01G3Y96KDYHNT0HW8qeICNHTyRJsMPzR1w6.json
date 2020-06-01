@@ -374,7 +374,7 @@
         "bash_shell": "/bin/bash",
         "default_runtime_user_id": "definition_runtime_user_01G883NNCK4472DCOO1jYLv6JGofbW4I9hd",
         "display_name": "Primary AO Site K8S Master Node 1",
-        "host": "172.31.0.135",
+        "host": "192.168.1.10",
         "port": 22
       }
     }
