@@ -1,0 +1,51 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_015EQTQSJ0ZLE1BRGi22em2PzfAzMpIt08B",
+    "name": "Show Python Modules",
+    "title": "Show Python Modules",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": null,
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "description": "Shows Python modules compiled into Action Orchestrator",
+      "display_name": "Show Python Modules",
+      "favorite": false,
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_015EQTZAP8JJS0anAwTN4cqaKcv3oFSNASp",
+        "name": "Execute Python Script",
+        "title": "Execute Python Script",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Execute Python Script",
+          "script": "import sys as s\n\n#print(s.modules.keys())\nfor i in sorted (s.modules.keys()) :  \n     print(i)\n\nprint(\"Version of Python being used: \")\nprint(s.version)",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  }
+}
