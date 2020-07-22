@@ -7,18 +7,6 @@
     "base_type": "workflow",
     "variables": [
       {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "Hellö Wörld@Python",
-          "scope": "input",
-          "name": "url_to_encode",
-          "type": "datatype.string",
-          "is_required": true
-        },
-        "unique_name": "variable_workflow_01AU31H8KOLIB28uZ1lJ8AswrnL58ta7P3w",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.boolean",
         "properties": {
           "value": false,
@@ -41,6 +29,30 @@
           "is_required": false
         },
         "unique_name": "variable_workflow_01AU39S6N0TE1603a0tGhZbPiFeK2DGU9A1",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "output",
+          "name": "output_encode_length",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01G5P9958HYSC0gtHVbijc4KEnulVRPWfZf",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Hellö Wörld@Python",
+          "scope": "input",
+          "name": "url_to_encode",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01AU31H8KOLIB28uZ1lJ8AswrnL58ta7P3w",
         "object_type": "variable_workflow"
       }
     ],
@@ -74,7 +86,7 @@
           "action_timeout": 180,
           "continue_on_failure": false,
           "display_name": "Encode via URLLIB",
-          "script": "import urllib.parse, sys\nquery = sys.argv[1]\nplus_sign = sys.argv[2]\nif plus_sign:\n   output = urllib.parse.quote_plus(query)\nelse:\n   output = urllib.parse.quote(query)",
+          "script": "import urllib.parse, sys\nquery = sys.argv[1]\nplus_sign = sys.argv[2]\nif plus_sign:\n   output = urllib.parse.quote_plus(query)\nelse:\n   output = urllib.parse.quote(query)\noutput_len = len(output)",
           "script_arguments": [
             "$workflow.definition_workflow_01AU2ZDQRXHYW3sgDgyzD1u9vBLrUi9kw0r.input.variable_workflow_01AU31H8KOLIB28uZ1lJ8AswrnL58ta7P3w$",
             "$workflow.definition_workflow_01AU2ZDQRXHYW3sgDgyzD1u9vBLrUi9kw0r.input.variable_workflow_01AU321ECV7AQ4DHZyjgwfNjw3q12N9TEth$"
@@ -84,6 +96,11 @@
               "script_query": "output",
               "script_query_name": "encoded_url",
               "script_query_type": "string"
+            },
+            {
+              "script_query": "output_len",
+              "script_query_name": "output_length",
+              "script_query_type": "integer"
             }
           ],
           "skip_execution": false
@@ -104,6 +121,10 @@
             {
               "variable_to_update": "$workflow.definition_workflow_01AU2ZDQRXHYW3sgDgyzD1u9vBLrUi9kw0r.output.variable_workflow_01AU39S6N0TE1603a0tGhZbPiFeK2DGU9A1$",
               "variable_value_new": "$activity.definition_activity_01AU2ZQG2MRSL7PmUsO2L4ibpdTpwm0RkeY.output.script_queries.encoded_url$"
+            },
+            {
+              "variable_to_update": "$workflow.definition_workflow_01AU2ZDQRXHYW3sgDgyzD1u9vBLrUi9kw0r.output.variable_workflow_01G5P9958HYSC0gtHVbijc4KEnulVRPWfZf$",
+              "variable_value_new": "$activity.definition_activity_01AU2ZQG2MRSL7PmUsO2L4ibpdTpwm0RkeY.output.script_queries.output_length$"
             }
           ]
         },
