@@ -23,36 +23,11 @@
         "properties": {
           "value": "",
           "scope": "local",
-          "name": "total_api_call",
+          "name": "local_build_api_input",
           "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01B2IZY954P5Y57sNh6cLMEmauQVdNbav6F",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "s",
-          "scope": "input",
-          "name": "Influx.Precision",
-          "type": "datatype.string",
-          "description": "precision of the input to DB. Defaults to \"s\" or seconds.",
-          "is_required": true
-        },
-        "unique_name": "variable_workflow_01B2IZ219SHTO43iYwKdQ0tmbGuyBZpWC6Q",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "local_empty",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01B2J4N1KQ1SH6CYZkYPGMd1VfHNDm0Brjc",
+        "unique_name": "variable_workflow_01B2IZN3P5K5I3Ay9gnJwesSf924W1GAFHk",
         "object_type": "variable_workflow"
       },
       {
@@ -86,11 +61,48 @@
         "properties": {
           "value": "",
           "scope": "local",
-          "name": "local_build_api_input",
+          "name": "local_empty",
           "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01B2IZN3P5K5I3Ay9gnJwesSf924W1GAFHk",
+        "unique_name": "variable_workflow_01B2J4N1KQ1SH6CYZkYPGMd1VfHNDm0Brjc",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 1,
+          "scope": "local",
+          "name": "ELSE",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01B2J1C9SQ8DS7MmgMZHTAWJ71PqggM651c",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "s",
+          "scope": "input",
+          "name": "Influx.Precision",
+          "type": "datatype.string",
+          "description": "precision of the input to DB. Defaults to \"s\" or seconds.",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01B2IZ219SHTO43iYwKdQ0tmbGuyBZpWC6Q",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "local_temp_measurement",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01B2J044K8CQO3kM3TbW9NTSEZMklyWBiZ0",
         "object_type": "variable_workflow"
       },
       {
@@ -118,27 +130,15 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 1,
-          "scope": "local",
-          "name": "ELSE",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01B2J1C9SQ8DS7MmgMZHTAWJ71PqggM651c",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
           "scope": "local",
-          "name": "local_temp_measurement",
+          "name": "total_api_call",
           "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01B2J044K8CQO3kM3TbW9NTSEZMklyWBiZ0",
+        "unique_name": "variable_workflow_01B2IZY954P5Y57sNh6cLMEmauQVdNbav6F",
         "object_type": "variable_workflow"
       }
     ],
@@ -146,7 +146,7 @@
       "atomic": {
         "is_atomic": false
       },
-      "delete_workflow_instance": true,
+      "delete_workflow_instance": false,
       "description": "This workflow takes in measurements via JSON construct and formats them for InfluxDB API calls. \nIf you need strings in field keys, make sure to add type to it, like example. test\nSOURCE SYSTEM: CX-AO-DEV-02",
       "display_name": "InfluxDB.API - Insert_Data_Via_JSON",
       "runtime_user": {
