@@ -11,6 +11,32 @@
         "properties": {
           "value": "",
           "scope": "output",
+          "name": "output_body_data",
+          "type": "datatype.string",
+          "description": "encoded body to be passed into API call",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AZZ73K5IMR85XVgHaTyGpaLXh3B7xgOus",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "output_content_type_header",
+          "type": "datatype.string",
+          "description": "content type header for API",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AZZ7BK6LBB62XhXYK7EhshX40gPo9Lmax",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
           "name": "output_content_length_header",
           "type": "datatype.string",
           "description": "content length header for API",
@@ -56,32 +82,6 @@
           "is_required": true
         },
         "unique_name": "variable_workflow_01AZZ4HJZ2AMF1GM5XB456l4BicxWlom4Jh",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "output",
-          "name": "output_body_data",
-          "type": "datatype.string",
-          "description": "encoded body to be passed into API call",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01AZZ73K5IMR85XVgHaTyGpaLXh3B7xgOus",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "output",
-          "name": "output_content_type_header",
-          "type": "datatype.string",
-          "description": "content type header for API",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01AZZ7BK6LBB62XhXYK7EhshX40gPo9Lmax",
         "object_type": "variable_workflow"
       }
     ],
