@@ -20,18 +20,6 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.boolean",
-        "properties": {
-          "value": false,
-          "scope": "local",
-          "name": "local_bypass_schema_creation",
-          "type": "datatype.boolean",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01CA7HYIEHVAZ3HpJXB2RTEoPIUZSPUm2vo",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.string",
         "properties": {
           "value": "python",
@@ -45,40 +33,15 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.string",
+        "schema_id": "datatype.boolean",
         "properties": {
-          "value": "webexteams",
-          "scope": "input",
-          "name": "input_adapter_name",
-          "type": "datatype.string",
-          "description": "name of folder to extract to. ",
-          "is_required": true
-        },
-        "unique_name": "variable_workflow_01BS38EAQJ0BP4hTvGJkeRegLoqlUKA2XXF",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 1,
+          "value": false,
           "scope": "local",
-          "name": "ELSE",
-          "type": "datatype.integer",
+          "name": "local_schema_created",
+          "type": "datatype.boolean",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01BT64RFCI5JM3u3cSF9h6wHgZo7Ce73DAp",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "local_json",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BSX9TF35TE87i8d0RkVEmMCYzDPIGDHHq",
+        "unique_name": "variable_workflow_01BSXTGFF9UQZ5Zudz1uToLhtH6GPArtMq0",
         "object_type": "variable_workflow"
       },
       {
@@ -109,7 +72,44 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "containers.cisco.com/ao-adapters/ad-cwt",
+          "value": "cisco",
+          "scope": "input",
+          "name": "input_kubernetes_namespace_to_install_to",
+          "type": "datatype.string",
+          "description": "namespace for your AO install. ",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BS33CYRKRVM65CMTV3jyVggpJI8qGxyL8",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "local",
+          "name": "local_bypass_schema_creation",
+          "type": "datatype.boolean",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01CA7HYIEHVAZ3HpJXB2RTEoPIUZSPUm2vo",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 1,
+          "scope": "local",
+          "name": "ELSE",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BT64RFCI5JM3u3cSF9h6wHgZo7Ce73DAp",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "shaurobe/ao-webex-teams-adapter",
           "scope": "input",
           "name": "input_compiled_adapter_container_repo",
           "type": "datatype.string",
@@ -122,14 +122,13 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "cisco",
-          "scope": "input",
-          "name": "input_kubernetes_namespace_to_install_to",
+          "value": "",
+          "scope": "local",
+          "name": "local_json",
           "type": "datatype.string",
-          "description": "namespace for your AO install. ",
-          "is_required": true
+          "is_required": false
         },
-        "unique_name": "variable_workflow_01BS33CYRKRVM65CMTV3jyVggpJI8qGxyL8",
+        "unique_name": "variable_workflow_01BSX9TF35TE87i8d0RkVEmMCYzDPIGDHHq",
         "object_type": "variable_workflow"
       },
       {
@@ -154,18 +153,6 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.boolean",
-        "properties": {
-          "value": false,
-          "scope": "local",
-          "name": "local_schema_created",
-          "type": "datatype.boolean",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BSXTGFF9UQZ5Zudz1uToLhtH6GPArtMq0",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.integer",
         "properties": {
           "value": 0,
@@ -175,6 +162,19 @@
           "is_required": false
         },
         "unique_name": "variable_workflow_01BSXU5U72Y481sI5Ez3zXIJ3i8oHn8KoB0",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "webexteams",
+          "scope": "input",
+          "name": "input_adapter_name",
+          "type": "datatype.string",
+          "description": "name of folder to extract to. ",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01BS38EAQJ0BP4hTvGJkeRegLoqlUKA2XXF",
         "object_type": "variable_workflow"
       }
     ],
@@ -219,7 +219,7 @@
           "skip_execution": false,
           "target": {
             "override_workflow_target": true,
-            "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+            "target_id": "definition_target_01DIDNR0WYADY39E9MxMpmbS08BO83aMDe1"
           }
         },
         "object_type": "definition_activity"
@@ -306,7 +306,7 @@
                       "skip_execution": false,
                       "target": {
                         "override_workflow_target": true,
-                        "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+                        "target_id": "definition_target_01DIDNR0WYADY39E9MxMpmbS08BO83aMDe1"
                       }
                     },
                     "object_type": "definition_activity"
@@ -360,7 +360,7 @@
                           "skip_execution": false,
                           "target": {
                             "override_workflow_target": true,
-                            "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+                            "target_id": "definition_target_01DIDNR0WYADY39E9MxMpmbS08BO83aMDe1"
                           }
                         },
                         "object_type": "definition_activity"
@@ -469,7 +469,7 @@
                                   "skip_execution": false,
                                   "target": {
                                     "override_workflow_target": true,
-                                    "target_id": "definition_target_01BSXGPYQQPVI3VvwMzXt327vcQhXemIvsm"
+                                    "target_id": "definition_target_01DIDMINSU8CX2Xb4De2XeAZYtIYJfSXgJA"
                                   }
                                 },
                                 "object_type": "definition_activity"
@@ -688,7 +688,7 @@
                               "skip_execution": false,
                               "target": {
                                 "override_workflow_target": true,
-                                "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+                                "target_id": "definition_target_01DIDNR0WYADY39E9MxMpmbS08BO83aMDe1"
                               }
                             },
                             "object_type": "definition_activity"
@@ -713,7 +713,7 @@
                               "skip_execution": false,
                               "target": {
                                 "override_workflow_target": true,
-                                "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+                                "target_id": "definition_target_01DIDNR0WYADY39E9MxMpmbS08BO83aMDe1"
                               }
                             },
                             "object_type": "definition_activity"
@@ -738,7 +738,7 @@
                               "skip_execution": false,
                               "target": {
                                 "override_workflow_target": true,
-                                "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+                                "target_id": "definition_target_01DIDNR0WYADY39E9MxMpmbS08BO83aMDe1"
                               }
                             },
                             "object_type": "definition_activity"
@@ -763,7 +763,7 @@
                               "skip_execution": false,
                               "target": {
                                 "override_workflow_target": true,
-                                "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+                                "target_id": "definition_target_01DIDNR0WYADY39E9MxMpmbS08BO83aMDe1"
                               }
                             },
                             "object_type": "definition_activity"
@@ -788,7 +788,7 @@
                               "skip_execution": false,
                               "target": {
                                 "override_workflow_target": true,
-                                "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+                                "target_id": "definition_target_01DIDNR0WYADY39E9MxMpmbS08BO83aMDe1"
                               }
                             },
                             "object_type": "definition_activity"
@@ -908,7 +908,7 @@
               "skip_execution": false,
               "target": {
                 "override_workflow_target": true,
-                "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+                "target_id": "definition_target_01DIDNR0WYADY39E9MxMpmbS08BO83aMDe1"
               }
             },
             "object_type": "definition_activity"
@@ -968,7 +968,7 @@
               "skip_execution": false,
               "target": {
                 "override_workflow_target": true,
-                "target_id": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ"
+                "target_id": "definition_target_01DIDNR0WYADY39E9MxMpmbS08BO83aMDe1"
               }
             },
             "object_type": "definition_activity"
@@ -992,45 +992,45 @@
     }
   },
   "targets": {
-    "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ": {
-      "unique_name": "definition_target_01BS31JBF86JV0C9p03Knba0QoFOyqnvmqJ",
-      "name": "Default.AO.Install.Adapter.Master.Target",
-      "title": "Default.AO.Install.Adapter.Master.Target",
-      "type": "terminal.endpoint",
-      "base_type": "target",
-      "object_type": "definition_target",
-      "properties": {
-        "default_runtime_user_id": "definition_runtime_user_01BS30VDNPJDJ5OnhfT3fTnIbt9D9yAjlaz",
-        "display_name": "Default.AO.Install.Adapter.Master.Target",
-        "host": "10.122.138.194",
-        "port": 22,
-        "protocol": "ssh"
-      }
-    },
-    "definition_target_01BSXGPYQQPVI3VvwMzXt327vcQhXemIvsm": {
-      "unique_name": "definition_target_01BSXGPYQQPVI3VvwMzXt327vcQhXemIvsm",
-      "name": "AO.API.For.Adapter.Install",
-      "title": "AO.API.For.Adapter.Install",
+    "definition_target_01DIDMINSU8CX2Xb4De2XeAZYtIYJfSXgJA": {
+      "unique_name": "definition_target_01DIDMINSU8CX2Xb4De2XeAZYtIYJfSXgJA",
+      "name": "AO API - SHERLOCK",
+      "title": "AO API - SHERLOCK",
       "type": "web-service.endpoint",
       "base_type": "target",
       "object_type": "definition_target",
       "properties": {
-        "default_runtime_user_id": "definition_runtime_user_01BAH9BEAEBRG6TqVWqAjXCBrC9no36TC0O",
+        "default_runtime_user_id": "definition_runtime_user_01DIDM4FF1S0V2nBMp1YtPhI7md12HDBYop",
         "disable_certificate_validation": true,
-        "display_name": "AO.API.For.Adapter.Install",
-        "host": "cx-ao-dev-02.cisco.com",
+        "display_name": "AO API - SHERLOCK",
+        "host": "173.37.28.246",
         "no_runtime_user": false,
         "path": "be-console/api",
-        "port": 32096,
+        "port": 32421,
         "protocol": "https"
+      }
+    },
+    "definition_target_01DIDNR0WYADY39E9MxMpmbS08BO83aMDe1": {
+      "unique_name": "definition_target_01DIDNR0WYADY39E9MxMpmbS08BO83aMDe1",
+      "name": "AO SHERLOCK MASTER NODE",
+      "title": "AO SHERLOCK MASTER NODE",
+      "type": "terminal.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01DIDNM7BKZOH730FkvwMU3KyztjkDKyA2I",
+        "display_name": "AO SHERLOCK MASTER NODE",
+        "host": "173.37.28.246",
+        "port": 22,
+        "protocol": "ssh"
       }
     }
   },
   "runtime_users": {
-    "definition_runtime_user_01BAH9BEAEBRG6TqVWqAjXCBrC9no36TC0O": {
-      "unique_name": "definition_runtime_user_01BAH9BEAEBRG6TqVWqAjXCBrC9no36TC0O",
-      "name": "AO API User",
-      "title": "AO API User",
+    "definition_runtime_user_01DIDM4FF1S0V2nBMp1YtPhI7md12HDBYop": {
+      "unique_name": "definition_runtime_user_01DIDM4FF1S0V2nBMp1YtPhI7md12HDBYop",
+      "name": "AO API ADMIN",
+      "title": "AO API ADMIN",
       "type": "runtime_user.web-service_basic_credentials",
       "base_type": "runtime_user",
       "object_type": "definition_runtime_user",
@@ -1038,19 +1038,19 @@
         "auth_option": "*****",
         "basic_password": "*****",
         "basic_username": "*****",
-        "display_name": "AO API User"
+        "display_name": "AO API ADMIN"
       }
     },
-    "definition_runtime_user_01BS30VDNPJDJ5OnhfT3fTnIbt9D9yAjlaz": {
-      "unique_name": "definition_runtime_user_01BS30VDNPJDJ5OnhfT3fTnIbt9D9yAjlaz",
-      "name": "Default.AO.Install.Adapter.User",
-      "title": "Default.AO.Install.Adapter.User",
-      "type": "runtime_user.terminal_password_credentials",
+    "definition_runtime_user_01DIDNM7BKZOH730FkvwMU3KyztjkDKyA2I": {
+      "unique_name": "definition_runtime_user_01DIDNM7BKZOH730FkvwMU3KyztjkDKyA2I",
+      "name": "AO root ADMIN",
+      "title": "AO root ADMIN",
+      "type": "runtime_user.terminal_key_credentials",
       "base_type": "runtime_user",
       "object_type": "definition_runtime_user",
       "properties": {
-        "display_name": "Default.AO.Install.Adapter.User",
-        "password": "*****",
+        "display_name": "AO root ADMIN",
+        "key": "*****",
         "user": "*****"
       }
     }
