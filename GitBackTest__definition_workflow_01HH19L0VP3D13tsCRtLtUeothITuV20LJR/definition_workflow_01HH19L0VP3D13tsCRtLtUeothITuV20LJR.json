@@ -70,7 +70,29 @@
       }
     ],
     "categories": [
-      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+      "category_01DTBOVI496YR0NHN34s9GQz3JnLyXsmycQ",
+      "category_01HH8PBVDYLT40NxWHBI4wRn7eGKcRv00R7"
     ]
+  },
+  "categories": {
+    "category_01DTBOVI496YR0NHN34s9GQz3JnLyXsmycQ": {
+      "unique_name": "category_01DTBOVI496YR0NHN34s9GQz3JnLyXsmycQ",
+      "name": "Sherlock",
+      "title": "Sherlock",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    },
+    "category_01HH8PBVDYLT40NxWHBI4wRn7eGKcRv00R7": {
+      "unique_name": "category_01HH8PBVDYLT40NxWHBI4wRn7eGKcRv00R7",
+      "name": "Auto Backup",
+      "title": "Auto Backup",
+      "type": "basic.category",
+      "base_type": "category",
+      "description": "Category of workflows to be backed up automatically ",
+      "category_type": "custom",
+      "object_type": "category"
+    }
   }
 }
