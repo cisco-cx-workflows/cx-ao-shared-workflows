@@ -7,6 +7,18 @@
     "base_type": "workflow",
     "variables": [
       {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "The following workflows have a SQL select that retrieves more than 10,000 rows:\n",
+          "scope": "local",
+          "name": "report_header",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HO28G9PMDMF1AKJyPOAE1ndtmbMGwplQe",
+        "object_type": "variable_workflow"
+      },
+      {
         "schema_id": "datatype.integer",
         "properties": {
           "value": 100,
@@ -28,18 +40,6 @@
           "is_required": false
         },
         "unique_name": "variable_workflow_01HO25IEJJJU35vFpTTbGiTGJC35Rd9Lr6O",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "The following workflows have a SQL select that retrieves more than 10,000 rows:\n",
-          "scope": "local",
-          "name": "report_header",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01HO28G9PMDMF1AKJyPOAE1ndtmbMGwplQe",
         "object_type": "variable_workflow"
       }
     ],
