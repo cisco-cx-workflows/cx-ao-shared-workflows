@@ -1,0 +1,565 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01HNYWSYNYTWI6wRINNW9TvBnFq8Ov28Iqw",
+    "name": "AO - Validate SQL Row Count",
+    "title": "AO - Validate SQL Row Count",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 100,
+          "scope": "local",
+          "name": "row_count_limit",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HO1Y3HCGNPD5ICOIaHzoDgX4HScwTR8tm",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "report",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HO25IEJJJU35vFpTTbGiTGJC35Rd9Lr6O",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "The following workflows have a SQL select that retrieves more than 10,000 rows:\n",
+          "scope": "local",
+          "name": "report_header",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HO28G9PMDMF1AKJyPOAE1ndtmbMGwplQe",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "AO - Validate SQL Row Count",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "target_id": "definition_target_01DIDMINSU8CX2Xb4De2XeAZYtIYJfSXgJA",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01HNYXP9OB8K55BucJ7USIYD8KyphmaEwS3",
+        "name": "HTTP Request",
+        "title": "Get Workflows",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "display_name": "Get Workflows",
+          "method": "GET",
+          "relative_url": "v1/workflows",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01HNYYP32VH610drB5N0U1bba05EXbVZDp0",
+        "name": "Execute Python Script",
+        "title": "Extract Workflow Info",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Extract Workflow Info",
+          "script": "import json\nimport sys\n\ninputjson =  sys.argv[1]\nworkflow_json_in = json.loads(inputjson)\n\nnew_output_list = []\nfor workflow in workflow_json_in:\n    if workflow.get(\"metadata\",{}).get(\"git_info\") != None:\n        new_workflow_obj = {}\n        new_workflow_obj['id'] = workflow.get('id','')\n        new_workflow_obj['name'] = workflow.get('name', '')\n        new_workflow_obj['categories'] = ','.join(workflow.get('categories', ''))\n        new_workflow_obj['git_target_id'] = workflow.get('metadata',{}).get('git_info',{}).get('target_id','')\n        new_workflow_obj['git_file_name'] = workflow.get('metadata', {}).get('git_info', {}).get('file_name', '')\n        new_workflow_obj['git_commited_on'] = workflow.get('metadata', {}).get('git_info', {}).get('commited_on', '')\n        new_output_list.append(new_workflow_obj)\n\nresult =  str(json.dumps (new_output_list))",
+          "script_arguments": [
+            "$activity.definition_activity_01HNYXP9OB8K55BucJ7USIYD8KyphmaEwS3.output.response_body$"
+          ],
+          "script_queries": [
+            {
+              "script_query": "result",
+              "script_query_name": "result",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01HNZ0SJDB5Q24y01UhXapLT3awV8N2jKyD",
+        "name": "Read Table from JSON",
+        "title": "Read Table from JSON",
+        "type": "corejava.read_table_from_json",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Read Table from JSON",
+          "input_json": "$activity.definition_activity_01HNYYP32VH610drB5N0U1bba05EXbVZDp0.output.script_queries.result$",
+          "jsonpath_query": "$.",
+          "persist_output": false,
+          "populate_columns": false,
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "column_name": "id",
+              "column_type": "string"
+            },
+            {
+              "column_name": "name",
+              "column_type": "string"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01HNZ0W30HYIW14XwkXDr2Ql1wAr8kGmDQQ",
+        "name": "For Each",
+        "title": "For Each",
+        "type": "logic.for_each",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "For Each",
+          "skip_execution": false,
+          "source_array": "$activity.definition_activity_01HNZ0SJDB5Q24y01UhXapLT3awV8N2jKyD.output.read_table_from_json$"
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01HNZ0NX6OFQW2RJG8PQZIf4ximKfHU0dk4",
+            "name": "HTTP Request",
+            "title": "Get Workflow information",
+            "type": "web-service.http_request",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "allow_auto_redirect": true,
+              "continue_on_error_status_code": false,
+              "continue_on_failure": false,
+              "display_name": "Get Workflow information",
+              "method": "GET",
+              "relative_url": "v1/workflows/$activity.definition_activity_01HNZ0W30HYIW14XwkXDr2Ql1wAr8kGmDQQ.input.source_array[@].id$",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "use_workflow_target": true
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HO01X6X1ZTX1N8bJSqRNLmjh4f1dooUie",
+            "name": "Condition Block",
+            "title": "Do We have Select?",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Do We have Select?",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_01HO01XC1CT510NNRzjoVpCJ9Av1GSMCyrg",
+                "name": "Condition Branch",
+                "title": "Then",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01HNZ0NX6OFQW2RJG8PQZIf4ximKfHU0dk4.output.response_body$",
+                    "operator": "mw",
+                    "right_operand": "select_from_via_jdbc"
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Then",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01HNZR8UJ0M873ZClekiKQBizbxZxsnqf3c",
+                    "name": "JSONPath Query",
+                    "title": "Get Action Types",
+                    "type": "corejava.jsonpathquery",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "display_name": "Get Action Types",
+                      "input_json": "$activity.definition_activity_01HNZ0NX6OFQW2RJG8PQZIf4ximKfHU0dk4.output.response_body$",
+                      "jsonpath_queries": [
+                        {
+                          "jsonpath_query": "$.actions",
+                          "jsonpath_query_name": "actions",
+                          "jsonpath_query_type": "string"
+                        }
+                      ],
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01HNZPZHJXWYN22ehqGZ2IgVrn829AWQeJD",
+                    "name": "Execute Python Script",
+                    "title": "Get Select Actions",
+                    "type": "python3.script",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "display_name": "Get Select Actions",
+                      "script": "import json\nimport sys\n\ninputjson =  sys.argv[1]\nworkflow = json.loads(inputjson)\n\nids = set()\nresult = ''\n\ndef search_action(action):\n    print (action)\n    if action.get('type') == \"corejava.select_from_via_jdbc\":\n        ids.add(action.get('id'))\n\ndef search_blocks(bloacks):\n    search_actions(bloacks)\n\ndef search_actions (actions):\n    for action in actions:\n        search_action(action)\n        if action.get('blocks'):\n            search_blocks(action.get('blocks'))\n        if action.get('actions'):\n            search_actions(action.get('actions'))\n\nsearch_actions (workflow)\n\nresult = ','.join(list (ids))",
+                      "script_arguments": [
+                        "$activity.definition_activity_01HNZR8UJ0M873ZClekiKQBizbxZxsnqf3c.output.jsonpath_queries.actions$"
+                      ],
+                      "script_queries": [
+                        {
+                          "script_query": "result",
+                          "script_query_name": "result",
+                          "script_query_type": "string"
+                        }
+                      ],
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01HO189T3H1RC2cVe0GC58uB08Vwi1enhkJ",
+                    "name": "Split String",
+                    "title": "Split Action ID's",
+                    "type": "core.splitstring",
+                    "base_type": "activity",
+                    "properties": {
+                      "boundaries": [
+                        {
+                          "boundary": ","
+                        }
+                      ],
+                      "continue_on_failure": false,
+                      "display_name": "Split Action ID's",
+                      "input_string": "$activity.definition_activity_01HNZPZHJXWYN22ehqGZ2IgVrn829AWQeJD.output.script_queries.result$",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01HO1ETQ1ZBQG7FU5PHr2jZMxZCrh4zUt7s",
+                    "name": "For Each",
+                    "title": "For Each",
+                    "type": "logic.for_each",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "For Each",
+                      "skip_execution": false,
+                      "source_array": "$activity.definition_activity_01HO189T3H1RC2cVe0GC58uB08Vwi1enhkJ.output.parts$"
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01HO1EXQGFUPN5D0wFHGyc4LnK2DthAhcye",
+                        "name": "HTTP Request",
+                        "title": "Get Action Information",
+                        "type": "web-service.http_request",
+                        "base_type": "activity",
+                        "properties": {
+                          "action_timeout": 180,
+                          "allow_auto_redirect": true,
+                          "continue_on_error_status_code": false,
+                          "continue_on_failure": false,
+                          "display_name": "Get Action Information",
+                          "method": "GET",
+                          "relative_url": "v1/workflows/$activity.definition_activity_01HNZ0W30HYIW14XwkXDr2Ql1wAr8kGmDQQ.input.source_array[@].id$/actions/$activity.definition_activity_01HO1ETQ1ZBQG7FU5PHr2jZMxZCrh4zUt7s.input.source_array[@]$",
+                          "runtime_user": {
+                            "override_target_runtime_user": false,
+                            "target_default": true
+                          },
+                          "skip_execution": false,
+                          "target": {
+                            "override_workflow_target": true,
+                            "target_id": "definition_target_01DIDMINSU8CX2Xb4De2XeAZYtIYJfSXgJA"
+                          }
+                        },
+                        "object_type": "definition_activity"
+                      },
+                      {
+                        "unique_name": "definition_activity_01HO1VCNPEMXQ3SuALjZXfg6TYGXg5Kjl1b",
+                        "name": "JSONPath Query",
+                        "title": "Get Row Count  and Title",
+                        "type": "corejava.jsonpathquery",
+                        "base_type": "activity",
+                        "properties": {
+                          "action_timeout": 180,
+                          "continue_on_failure": false,
+                          "display_name": "Get Row Count  and Title",
+                          "input_json": "$activity.definition_activity_01HO1EXQGFUPN5D0wFHGyc4LnK2DthAhcye.output.response_body$",
+                          "jsonpath_queries": [
+                            {
+                              "jsonpath_query": "$..title",
+                              "jsonpath_query_name": "name",
+                              "jsonpath_query_type": "string"
+                            },
+                            {
+                              "jsonpath_query": "$..row_count",
+                              "jsonpath_query_name": "rowCount",
+                              "jsonpath_query_type": "integer"
+                            }
+                          ],
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity"
+                      },
+                      {
+                        "unique_name": "definition_activity_01HO33SV4R8EP57eMpIaaoZCXthMQ6k55n5",
+                        "name": "Condition Block",
+                        "title": "Condition Block",
+                        "type": "logic.if_else",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Condition Block",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity",
+                        "blocks": [
+                          {
+                            "unique_name": "definition_activity_01HO33SZY4VR74laFsScALj1T83PXmaKqhA",
+                            "name": "Condition Branch",
+                            "title": "Condition Branch",
+                            "type": "logic.condition_block",
+                            "base_type": "activity",
+                            "properties": {
+                              "condition": {
+                                "left_operand": "$activity.definition_activity_01HO1VCNPEMXQ3SuALjZXfg6TYGXg5Kjl1b.output.jsonpath_queries.rowCount$",
+                                "operator": "gt",
+                                "right_operand": 100000
+                              },
+                              "continue_on_failure": false,
+                              "display_name": "Condition Branch",
+                              "skip_execution": false
+                            },
+                            "object_type": "definition_activity",
+                            "actions": [
+                              {
+                                "unique_name": "definition_activity_01HO25QZ5R68G423G1TPtdrcqmV6LNRwgmm",
+                                "name": "Set Variables",
+                                "title": "update report",
+                                "type": "core.set_multiple_variables",
+                                "base_type": "activity",
+                                "properties": {
+                                  "continue_on_failure": false,
+                                  "display_name": "update report",
+                                  "skip_execution": false,
+                                  "variables_to_update": [
+                                    {
+                                      "variable_to_update": "$workflow.definition_workflow_01HNYWSYNYTWI6wRINNW9TvBnFq8Ov28Iqw.local.variable_workflow_01HO25IEJJJU35vFpTTbGiTGJC35Rd9Lr6O$",
+                                      "variable_value_new": "$workflow.definition_workflow_01HNYWSYNYTWI6wRINNW9TvBnFq8Ov28Iqw.local.variable_workflow_01HO25IEJJJU35vFpTTbGiTGJC35Rd9Lr6O$\nWorkflow: $activity.definition_activity_01HNZ0W30HYIW14XwkXDr2Ql1wAr8kGmDQQ.input.source_array[@].name$ Activity: $activity.definition_activity_01HO1VCNPEMXQ3SuALjZXfg6TYGXg5Kjl1b.output.jsonpath_queries.name$ Row Count:"
+                                    }
+                                  ]
+                                },
+                                "object_type": "definition_activity"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01HO03KVJP2S14eOqlWFSryPuAW1u3QBO61",
+            "name": "Sleep",
+            "title": "Sleep",
+            "type": "core.sleep",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Sleep",
+              "skip_execution": true,
+              "sleep_interval": 1
+            },
+            "object_type": "definition_activity"
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01HO20PL9EV3U6cLGfWwzR6vdoPa6eEzpfg",
+        "name": "Send Email",
+        "title": "Email Mohammed and Shaun",
+        "type": "email.smtp_send_email",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "body": "$workflow.definition_workflow_01HNYWSYNYTWI6wRINNW9TvBnFq8Ov28Iqw.local.variable_workflow_01HO28G9PMDMF1AKJyPOAE1ndtmbMGwplQe$\n\n$workflow.definition_workflow_01HNYWSYNYTWI6wRINNW9TvBnFq8Ov28Iqw.local.variable_workflow_01HO25IEJJJU35vFpTTbGiTGJC35Rd9Lr6O$",
+          "continue_if_one_address_valid": false,
+          "continue_on_failure": false,
+          "display_name": "Email Mohammed and Shaun",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "subject": "Sherlock SQL Select over 10,000 Rows",
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_016PZA99P49ES30NXLT306MtTx2uwMW6nNN"
+          },
+          "to": "mhamzeh@cisco.com"
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_01HH8PBVDYLT40NxWHBI4wRn7eGKcRv00R7"
+    ]
+  },
+  "categories": {
+    "category_01HH8PBVDYLT40NxWHBI4wRn7eGKcRv00R7": {
+      "unique_name": "category_01HH8PBVDYLT40NxWHBI4wRn7eGKcRv00R7",
+      "name": "Auto Backup",
+      "title": "Auto Backup",
+      "type": "basic.category",
+      "base_type": "category",
+      "description": "Category of workflows to be backed up automatically ",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "triggers": {
+    "triggerschedule_01HO2MNVDGLIF0hFIiKddYN4OWU3qTrGCLm": {
+      "workflow_id": "definition_workflow_01HNYWSYNYTWI6wRINNW9TvBnFq8Ov28Iqw",
+      "name": "run every 4 hours",
+      "title": "",
+      "lowercase_name": "schedule.run_every_4_hours",
+      "type": "schedule",
+      "base_type": "trigger",
+      "ref_id": "schedule_01HH2V28E2M223lZGkopV9kWaTXV5X7JRwI",
+      "version": "",
+      "disabled": false,
+      "unique_name": "triggerschedule_01HO2MNVDGLIF0hFIiKddYN4OWU3qTrGCLm",
+      "object_type": "triggerschedule"
+    }
+  },
+  "schedules": {
+    "schedule_01HH2V28E2M223lZGkopV9kWaTXV5X7JRwI": {
+      "unique_name": "schedule_01HH2V28E2M223lZGkopV9kWaTXV5X7JRwI",
+      "name": "Every Night",
+      "type": "basic.schedule",
+      "base_type": "schedule",
+      "properties": {
+        "calendar": "calendar_recurring_1BMfMWvgiDhSjBQ7hTSyvz3NyVZ",
+        "timezone": "Etc/GMT+0",
+        "starttime": "23:55",
+        "interval_hours": 0,
+        "interval_minutes": 0,
+        "number_of_times": 1,
+        "display_name": "Every Night",
+        "description": ""
+      },
+      "version": "1.0.0",
+      "object_type": "schedule"
+    }
+  },
+  "targets": {
+    "definition_target_016PZA99P49ES30NXLT306MtTx2uwMW6nNN": {
+      "unique_name": "definition_target_016PZA99P49ES30NXLT306MtTx2uwMW6nNN",
+      "name": "Sherlock.Outbound.Email",
+      "title": "Sherlock.Outbound.Email",
+      "type": "email.smtp_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_016HMYJ93M59N4DY67i6zYWqO1tmJpmFFUD",
+        "display_name": "Sherlock.Outbound.Email",
+        "no_runtime_user": false,
+        "port": 25,
+        "protocol": "SMTP",
+        "server": "outbound.cisco.com"
+      }
+    },
+    "definition_target_01DIDMINSU8CX2Xb4De2XeAZYtIYJfSXgJA": {
+      "unique_name": "definition_target_01DIDMINSU8CX2Xb4De2XeAZYtIYJfSXgJA",
+      "name": "AO API - SHERLOCK",
+      "title": "AO API - SHERLOCK",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01DIDM4FF1S0V2nBMp1YtPhI7md12HDBYop",
+        "disable_certificate_validation": true,
+        "display_name": "AO API - SHERLOCK",
+        "host": "173.37.28.246",
+        "no_runtime_user": false,
+        "path": "be-console/api",
+        "port": 32421,
+        "protocol": "https"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_016HMYJ93M59N4DY67i6zYWqO1tmJpmFFUD": {
+      "unique_name": "definition_runtime_user_016HMYJ93M59N4DY67i6zYWqO1tmJpmFFUD",
+      "name": "shaurobe",
+      "title": "shaurobe",
+      "type": "runtime_user.email_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "shaurobe",
+        "password": "*****",
+        "sender": "*****"
+      }
+    },
+    "definition_runtime_user_01DIDM4FF1S0V2nBMp1YtPhI7md12HDBYop": {
+      "unique_name": "definition_runtime_user_01DIDM4FF1S0V2nBMp1YtPhI7md12HDBYop",
+      "name": "AO API ADMIN",
+      "title": "AO API ADMIN",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "auth_option": "*****",
+        "basic_password": "*****",
+        "basic_username": "*****",
+        "display_name": "AO API ADMIN"
+      }
+    }
+  }
+}
