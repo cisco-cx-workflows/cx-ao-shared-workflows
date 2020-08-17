@@ -7,19 +7,6 @@
     "base_type": "workflow",
     "variables": [
       {
-        "schema_id": "datatype.boolean",
-        "properties": {
-          "value": false,
-          "scope": "input",
-          "name": "encode_with_plus_sign",
-          "type": "datatype.boolean",
-          "description": "select true to encode with plus sign over %20 for space",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01AU321ECV7AQ4DHZyjgwfNjw3q12N9TEth",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
@@ -53,6 +40,19 @@
           "is_required": true
         },
         "unique_name": "variable_workflow_01AU31H8KOLIB28uZ1lJ8AswrnL58ta7P3w",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "input",
+          "name": "encode_with_plus_sign",
+          "type": "datatype.boolean",
+          "description": "select true to encode with plus sign over %20 for space",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AU321ECV7AQ4DHZyjgwfNjw3q12N9TEth",
         "object_type": "variable_workflow"
       }
     ],
