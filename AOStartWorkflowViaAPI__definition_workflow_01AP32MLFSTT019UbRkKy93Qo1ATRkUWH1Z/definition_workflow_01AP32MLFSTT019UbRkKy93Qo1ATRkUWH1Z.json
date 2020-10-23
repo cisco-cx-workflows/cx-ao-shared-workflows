@@ -7,117 +7,6 @@
     "base_type": "workflow",
     "variables": [
       {
-        "schema_id": "datatype.boolean",
-        "properties": {
-          "value": false,
-          "scope": "local",
-          "name": "L_workflow_ran_ok",
-          "type": "datatype.boolean",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01H651BI09TCX7REi1xZBHisMMdbX365Tnd",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 60,
-          "scope": "local",
-          "name": "L_sync_sleep_time",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01H61L61CCLQP3ym5cDnNOxBGZtJGGCJpm3",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "local_variable_json",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01AP3PRVKDB756b5y0uT4zVksy5gBwGAqfN",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "input_override_target_id",
-          "type": "datatype.string",
-          "description": "ID of target to override with",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BBUGV1R84U45AWJgQk6DyFlxHTJuItNXC",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "input_variable_json",
-          "type": "datatype.string",
-          "description": "Inputs as a JSON serialized object\nIf not inputs, use {}",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01AP34R6234647ULcULPNDy956ARTvFsrT1",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "L_wf_id",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01GMHRWSEWRD03WDIMPwNGjmw4rhHSuuINe",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 5,
-          "scope": "local",
-          "name": "L_max_retries",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01H61MTWHQTFN7PJH32a5xXAZlBTyuypbio",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "L_WF_Instance_ID",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01H652XL1ZI175EE8qCBFT2Ka0JX7XYQBxS",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "input_override_start_point_id",
-          "type": "datatype.string",
-          "description": "Must be the ID of start point not name",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01BBUGL9DNP881Bn3VZ50EvmFWroIdhCr8A",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
@@ -128,31 +17,6 @@
           "is_required": false
         },
         "unique_name": "variable_workflow_01GMH3GUT1S170nrB0aHdElavrYaC5120uP",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "async",
-          "scope": "input",
-          "name": "execute_workflow_sync",
-          "type": "datatype.string",
-          "description": "options:\nsync\nasync",
-          "is_required": true
-        },
-        "unique_name": "variable_workflow_01AP35MNKLMW320z99VsYekapiMUxFPwMGs",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 0,
-          "scope": "local",
-          "name": "L_sync_current_tries",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01H61P32YZZWV3WFc60EkUduNs09lu7Puda",
         "object_type": "variable_workflow"
       },
       {
@@ -169,39 +33,15 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "output",
-          "name": "output_workflow_output_json",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01AP5JETB7AO96YkEqMTvOMMy2MF32ApcHF",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.boolean",
         "properties": {
           "value": false,
           "scope": "local",
-          "name": "L_workflow_in_flight",
+          "name": "L_workflow_ran_ok",
           "type": "datatype.boolean",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01HY8OYL92TKG00qfUEHYg4yBTwQXkcVx9V",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "output",
-          "name": "output_workflow_instance_id",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01APQ2T4C9NS10VygOUQ1UrqGlIi8Bh9gVq",
+        "unique_name": "variable_workflow_01H651BI09TCX7REi1xZBHisMMdbX365Tnd",
         "object_type": "variable_workflow"
       },
       {
@@ -209,11 +49,23 @@
         "properties": {
           "value": "",
           "scope": "local",
-          "name": "L_in_flight_ID",
+          "name": "local_modified_props",
           "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01HY8ZGXDUV9I3NrP5uMu05oE3bxR1Jkwur",
+        "unique_name": "variable_workflow_01AP3VWX27SDP4uWHbi0jblQUKdGnF7s36K",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "local_variable_json",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AP3PRVKDB756b5y0uT4zVksy5gBwGAqfN",
         "object_type": "variable_workflow"
       },
       {
@@ -241,15 +93,64 @@
         "object_type": "variable_workflow"
       },
       {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 1,
+          "scope": "local",
+          "name": "ELSE",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BBUN8Z2SO6O0A7hR0OJZYfW3OEsd6sQUH",
+        "object_type": "variable_workflow"
+      },
+      {
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
           "scope": "local",
-          "name": "local_modified_props",
+          "name": "L_in_flight_ID",
           "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01AP3VWX27SDP4uWHbi0jblQUKdGnF7s36K",
+        "unique_name": "variable_workflow_01HY8ZGXDUV9I3NrP5uMu05oE3bxR1Jkwur",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "L_sync_current_tries",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01H61P32YZZWV3WFc60EkUduNs09lu7Puda",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "input_override_target_id",
+          "type": "datatype.string",
+          "description": "ID of target to override with",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BBUGV1R84U45AWJgQk6DyFlxHTJuItNXC",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_wf_id",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01GMHRWSEWRD03WDIMPwNGjmw4rhHSuuINe",
         "object_type": "variable_workflow"
       },
       {
@@ -265,15 +166,114 @@
         "object_type": "variable_workflow"
       },
       {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "output_workflow_output_json",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AP5JETB7AO96YkEqMTvOMMy2MF32ApcHF",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "input_variable_json",
+          "type": "datatype.string",
+          "description": "Inputs as a JSON serialized object\nIf not inputs, use {}",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AP34R6234647ULcULPNDy956ARTvFsrT1",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "input_override_start_point_id",
+          "type": "datatype.string",
+          "description": "Must be the ID of start point not name",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BBUGL9DNP881Bn3VZ50EvmFWroIdhCr8A",
+        "object_type": "variable_workflow"
+      },
+      {
         "schema_id": "datatype.integer",
         "properties": {
-          "value": 1,
+          "value": 70,
           "scope": "local",
-          "name": "ELSE",
+          "name": "L_max_retries",
           "type": "datatype.integer",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01BBUN8Z2SO6O0A7hR0OJZYfW3OEsd6sQUH",
+        "unique_name": "variable_workflow_01H61MTWHQTFN7PJH32a5xXAZlBTyuypbio",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_WF_Instance_ID",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01H652XL1ZI175EE8qCBFT2Ka0JX7XYQBxS",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 60,
+          "scope": "local",
+          "name": "L_sync_sleep_time",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01H61L61CCLQP3ym5cDnNOxBGZtJGGCJpm3",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "local",
+          "name": "L_workflow_in_flight",
+          "type": "datatype.boolean",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HY8OYL92TKG00qfUEHYg4yBTwQXkcVx9V",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "async",
+          "scope": "input",
+          "name": "execute_workflow_sync",
+          "type": "datatype.string",
+          "description": "options:\nsync\nasync",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01AP35MNKLMW320z99VsYekapiMUxFPwMGs",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "output_workflow_instance_id",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01APQ2T4C9NS10VygOUQ1UrqGlIi8Bh9gVq",
         "object_type": "variable_workflow"
       }
     ],
@@ -281,7 +281,7 @@
       "atomic": {
         "is_atomic": false
       },
-      "delete_workflow_instance": false,
+      "delete_workflow_instance": true,
       "description": "This workflow starts a workflow via API in AO.\nSOURCE SYSTEM: CX-AO-DEV-02",
       "display_name": "AO - Run_Workflow",
       "runtime_user": {
@@ -1531,7 +1531,7 @@
                                               "condition": {
                                                 "left_operand": "$activity.definition_activity_01BAHYTZU8A641qYXU06p28TCHIeNgHAxDC.output.response_body$",
                                                 "operator": "mregex",
-                                                "right_operand": "\"state\": \"running\""
+                                                "right_operand": "\"running\""
                                               },
                                               "continue_on_failure": false,
                                               "display_name": "then",
@@ -1765,10 +1765,10 @@
                                   "action_timeout": 180,
                                   "continue_on_failure": false,
                                   "display_name": "Check Status",
-                                  "input_json": "$workflow.definition_workflow_01AP32MLFSTT019UbRkKy93Qo1ATRkUWH1Z.local.variable_workflow_01H652XL1ZI175EE8qCBFT2Ka0JX7XYQBxS$",
+                                  "input_json": "$activity.definition_activity_01HY8YK4XEB2O21nyCQabZLF3HhvjufscCG.output.response_body$",
                                   "jsonpath_queries": [
                                     {
-                                      "jsonpath_query": "$..status.state",
+                                      "jsonpath_query": "$.status.state",
                                       "jsonpath_query_name": "state",
                                       "jsonpath_query_type": "string"
                                     }
