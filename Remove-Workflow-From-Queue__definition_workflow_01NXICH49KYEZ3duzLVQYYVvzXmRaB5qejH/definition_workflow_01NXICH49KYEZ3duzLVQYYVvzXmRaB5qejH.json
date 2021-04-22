@@ -1,0 +1,124 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01NXICH49KYEZ3duzLVQYYVvzXmRaB5qejH",
+    "name": "Remove_Workflow_From_Queue",
+    "title": "Remove_Workflow_From_Queue",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_Workflow_Instance_ID",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01NXICWZ3YR1S0hijlyC1P5QlMSdhzqyuFT",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Remove_Workflow_From_Queue",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01NXIDBYK9SCD7Ox2Nu8kYQuH415KMq77Mq",
+        "name": "Delete from Table",
+        "title": "Delete from Table",
+        "type": "core.deleterowfromtable",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Delete from Table",
+          "input_table": "$global.variable_01NXHIF87YZ211nRjLmuF9bIEf5IC0Izk7m.global.variable_01NXHIF87YZ211nRjLmuF9bIEf5IC0Izk7m$",
+          "rows": {
+            "rows_matching_criteria": true,
+            "where_clause": "WorkflowInstanceID  = '$workflow.definition_workflow_01NXICH49KYEZ3duzLVQYYVvzXmRaB5qejH.input.variable_workflow_01NXICWZ3YR1S0hijlyC1P5QlMSdhzqyuFT$'"
+          },
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_01APQ1SF3EVRH4WYM1c0JtOZbGDtxU0sJQd"
+    ]
+  },
+  "categories": {
+    "category_01APQ1SF3EVRH4WYM1c0JtOZbGDtxU0sJQd": {
+      "unique_name": "category_01APQ1SF3EVRH4WYM1c0JtOZbGDtxU0sJQd",
+      "name": "AO.General.Utilities",
+      "title": "AO.General.Utilities",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "variables": {
+    "variable_01NXHIF87YZ211nRjLmuF9bIEf5IC0Izk7m": {
+      "unique_name": "variable_01NXHIF87YZ211nRjLmuF9bIEf5IC0Izk7m",
+      "schema_id": "tabletype_01NXHHM0Q89JC0ljFehvnVfXiFUNs5wsikO",
+      "properties": {
+        "scope": "global",
+        "name": "system_workflow_queue",
+        "type": "datatype.table",
+        "is_required": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "table_types": {
+    "tabletype_01NXHHM0Q89JC0ljFehvnVfXiFUNs5wsikO": {
+      "unique_name": "tabletype_01NXHHM0Q89JC0ljFehvnVfXiFUNs5wsikO",
+      "data_type": "datatype.tabletype",
+      "display_name": "workflow_queue",
+      "columns": [
+        {
+          "is_required": true,
+          "name": "Target",
+          "title": "Target",
+          "type": "string"
+        },
+        {
+          "is_required": true,
+          "name": "WorkflowInstanceID",
+          "title": "WorkflowInstanceID",
+          "type": "string"
+        },
+        {
+          "is_required": true,
+          "name": "WorkflowInstanceName",
+          "title": "WorkflowInstanceName",
+          "type": "string"
+        },
+        {
+          "name": "OptionsJSON",
+          "title": "OptionsJSON",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    }
+  }
+}
