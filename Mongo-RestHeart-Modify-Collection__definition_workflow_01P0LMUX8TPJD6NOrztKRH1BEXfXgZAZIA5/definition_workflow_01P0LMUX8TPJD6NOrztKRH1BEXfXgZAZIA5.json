@@ -1,0 +1,565 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5",
+    "name": "Modify_Collection_Properties_In_Mongo-RestHeart",
+    "title": "Modify_Collection_Properties_In_Mongo-RestHeart",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "some_db",
+          "scope": "input",
+          "name": "I_db",
+          "type": "datatype.string",
+          "description": "database to use",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0LMUVWEGJ23IB9JZ8KIYU3MrVFijdXwS",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "some_collection",
+          "scope": "input",
+          "name": "I_collection",
+          "type": "datatype.string",
+          "description": "collection to use",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0LMUVWEUTL5OrrIZT490fcSmLErFIQR0",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "input",
+          "name": "I_replace_entire_properties_set",
+          "type": "datatype.boolean",
+          "description": "set to True if you want to override and replace the entire properties set of your collection. Leave as False if you wish to just modify the input properties",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0LQ8DWJUJN6oUYgPM1DyQ1Ql8tiQxFqo",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "O_error_text",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0LMUVWEXPF4XjhdvGBsL5GeIByTIzYMh",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "output",
+          "name": "O_status_code",
+          "type": "datatype.integer",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0LMUVWETKH2yY3U7H2Y2CHuCZTNvphpg",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "output",
+          "name": "O_collection_modified_ok",
+          "type": "datatype.boolean",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0LMUVWENQ41W1GZDcTGBCYnKzC2c4yP8",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_relative_url",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0LMUVWEP707ZFaY7h3CpwU5h5Q3UmYk3",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_collection_modifications",
+          "type": "datatype.string",
+          "description": "JSON of collection modifications",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0LMUVWEQLH4HQEdiKsxAcwr9cX1zUvtA",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "MongoDB-RestHeart",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": false,
+      "description": "This action modifies a collections properties. You can fully replace them or just modify them",
+      "display_name": "Modify_Collection_Properties_In_Mongo-RestHeart",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01P0LMWCONOFN4w9ehZTBYdvHJmPsL3r48f",
+        "name": "Execute Python Script",
+        "title": "Validate JSON",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Validate JSON",
+          "script": "import json, sys\nis_this_json = str(sys.argv[1])\ntry:\n    output = json.loads(is_this_json)\nexcept json.decoder.JSONDecodeError:\n    output = \"Invalid JSON\"\nelse:\n    output = \"Valid JSON\"",
+          "script_arguments": [
+            "$workflow.definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5.input.variable_workflow_01P0LMUVWEQLH4HQEdiKsxAcwr9cX1zUvtA$"
+          ],
+          "script_queries": [
+            {
+              "script_query": "output",
+              "script_query_name": "output ",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01P0LMWUTQXIA7kGc0wadvObub3kPiTnSRQ",
+        "name": "Condition Block",
+        "title": "if bad JSON",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if bad JSON",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01P0LMXJ6NWKY5ykhS3ayNmPAeWMe0ph41L",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01P0LMWCONOFN4w9ehZTBYdvHJmPsL3r48f.output.script_queries.output $",
+                "operator": "mregex",
+                "right_operand": "Invalid JSON"
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01P0LMY60QS9K4VsJBy71XjothCDdJKtDBi",
+                "name": "Set Variables",
+                "title": "Set Error Text",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Error Text",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5.output.variable_workflow_01P0LMUVWEXPF4XjhdvGBsL5GeIByTIzYMh$",
+                      "variable_value_new": "New document JSON is invalid."
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01P0LMYO06J443qa8Wnr3Q2W6MugX9UBKEy",
+                "name": "Completed",
+                "title": "Failed - Bad JSON",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": false,
+                  "display_name": "Failed - Bad JSON",
+                  "result_message": "New document JSON is invalid.",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01P0LPK0MUMFB1f8u1IMLFWLmTAfjLfMOLD",
+        "name": "Condition Block",
+        "title": "if replace",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if replace",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01P0LPK98LBQW3K6RGeb6DxKJi6OIt0zH9i",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5.input.variable_workflow_01P0LQ8DWJUJN6oUYgPM1DyQ1Ql8tiQxFqo$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01P0LQTUTPNZT6t0XKBJnixCkavzsmDE1qp",
+                "name": "HTTP Request",
+                "title": "Replace Collection Properties",
+                "type": "web-service.http_request",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "allow_auto_redirect": true,
+                  "body": "$workflow.definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5.input.variable_workflow_01P0LMUVWEQLH4HQEdiKsxAcwr9cX1zUvtA$",
+                  "content_type": "application/json",
+                  "continue_on_error_status_code": false,
+                  "continue_on_failure": true,
+                  "display_name": "Replace Collection Properties",
+                  "method": "PUT",
+                  "relative_url": "$workflow.definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5.input.variable_workflow_01P0LMUVWEGJ23IB9JZ8KIYU3MrVFijdXwS$/$workflow.definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5.input.variable_workflow_01P0LMUVWEUTL5OrrIZT490fcSmLErFIQR0$",
+                  "runtime_user": {
+                    "override_target_runtime_user": false,
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "override_workflow_target": false,
+                    "override_workflow_target_group_criteria": false,
+                    "use_workflow_target": true,
+                    "use_workflow_target_group": false
+                  }
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01P0LUWMDN1JZ75n6sn1lASzpOUiKf5SAOG",
+                "name": "Condition Block",
+                "title": "if updates ok",
+                "type": "logic.if_else",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "if updates ok",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "blocks": [
+                  {
+                    "unique_name": "definition_activity_01P0LUWU2PR2X0NHi5HtxwJX7AbY9heamA3",
+                    "name": "Condition Branch",
+                    "title": "THEN",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01P0LQTUTPNZT6t0XKBJnixCkavzsmDE1qp.output.succeeded$",
+                        "operator": "eq",
+                        "right_operand": true
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "THEN",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01P0LUWZMK3ZO6RkFptmCuXVhe2JjIF1FhT",
+                        "name": "Set Variables",
+                        "title": "Set OK Output",
+                        "type": "core.set_multiple_variables",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Set OK Output",
+                          "skip_execution": false,
+                          "variables_to_update": [
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5.output.variable_workflow_01P0LMUVWENQ41W1GZDcTGBCYnKzC2c4yP8$",
+                              "variable_value_new": true
+                            },
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5.output.variable_workflow_01P0LMUVWETKH2yY3U7H2Y2CHuCZTNvphpg$",
+                              "variable_value_new": "$activity.definition_activity_01P0LQTUTPNZT6t0XKBJnixCkavzsmDE1qp.output.status_code$"
+                            }
+                          ]
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  },
+                  {
+                    "unique_name": "definition_activity_01P0LUX4NFBS61ZNM5EUCxBM2lR2RjOtoC1",
+                    "name": "Condition Branch",
+                    "title": "Else",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01P0LQTUTPNZT6t0XKBJnixCkavzsmDE1qp.output.succeeded$",
+                        "operator": "eq",
+                        "right_operand": false
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "Else",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01P0LUX8UTS8E0kGzQ4LxERdY11pxTTikwW",
+                        "name": "Set Variables",
+                        "title": "Set Failed Output",
+                        "type": "core.set_multiple_variables",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Set Failed Output",
+                          "skip_execution": false,
+                          "variables_to_update": [
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5.output.variable_workflow_01P0LMUVWENQ41W1GZDcTGBCYnKzC2c4yP8$",
+                              "variable_value_new": false
+                            },
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5.output.variable_workflow_01P0LMUVWEXPF4XjhdvGBsL5GeIByTIzYMh$",
+                              "variable_value_new": "$activity.definition_activity_01P0LQTUTPNZT6t0XKBJnixCkavzsmDE1qp.output.error.message$"
+                            }
+                          ]
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01P0LPKD2Q2VZ4idFspr4PyKs1IkLOWimcj",
+            "name": "Condition Branch",
+            "title": "Else",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5.input.variable_workflow_01P0LQ8DWJUJN6oUYgPM1DyQ1Ql8tiQxFqo$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": false,
+              "display_name": "Else",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01P0LN1ME0YS53zmOKeXzN7QuPavMdvLsit",
+                "name": "HTTP Request",
+                "title": "Update collection in mongo",
+                "type": "web-service.http_request",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "allow_auto_redirect": true,
+                  "body": "$workflow.definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5.input.variable_workflow_01P0LMUVWEQLH4HQEdiKsxAcwr9cX1zUvtA$",
+                  "content_type": "application/json",
+                  "continue_on_error_status_code": false,
+                  "continue_on_failure": true,
+                  "display_name": "Update collection in mongo",
+                  "method": "PATCH",
+                  "relative_url": "$workflow.definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5.input.variable_workflow_01P0LMUVWEGJ23IB9JZ8KIYU3MrVFijdXwS$/$workflow.definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5.input.variable_workflow_01P0LMUVWEUTL5OrrIZT490fcSmLErFIQR0$",
+                  "runtime_user": {
+                    "override_target_runtime_user": false,
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "override_workflow_target": false,
+                    "override_workflow_target_group_criteria": false,
+                    "use_workflow_target": true,
+                    "use_workflow_target_group": false
+                  }
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01P0LN1W0Y08I2Ac4enH95YJmsHf1VkKdMl",
+                "name": "Condition Block",
+                "title": "if updates ok",
+                "type": "logic.if_else",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "if updates ok",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "blocks": [
+                  {
+                    "unique_name": "definition_activity_01P0LN24ZPGXX3xY5ckgBz2dc5FCtGU73Oe",
+                    "name": "Condition Branch",
+                    "title": "THEN",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01P0LN1ME0YS53zmOKeXzN7QuPavMdvLsit.output.succeeded$",
+                        "operator": "eq",
+                        "right_operand": true
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "THEN",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01P0LN2HOXKR6131UgmFVC6OHYpCSut4aT8",
+                        "name": "Set Variables",
+                        "title": "Set OK Output",
+                        "type": "core.set_multiple_variables",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Set OK Output",
+                          "skip_execution": false,
+                          "variables_to_update": [
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5.output.variable_workflow_01P0LMUVWENQ41W1GZDcTGBCYnKzC2c4yP8$",
+                              "variable_value_new": true
+                            },
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5.output.variable_workflow_01P0LMUVWETKH2yY3U7H2Y2CHuCZTNvphpg$",
+                              "variable_value_new": "$activity.definition_activity_01P0LN1ME0YS53zmOKeXzN7QuPavMdvLsit.output.status_code$"
+                            }
+                          ]
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  },
+                  {
+                    "unique_name": "definition_activity_01P0LN2T3EBSV3ipLgEyDSreSc0Jxv73EvM",
+                    "name": "Condition Branch",
+                    "title": "Else",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01P0LN1ME0YS53zmOKeXzN7QuPavMdvLsit.output.succeeded$",
+                        "operator": "eq",
+                        "right_operand": false
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "Else",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01P0LN34TE2KH3xFM6tybXNK11CTe9xXBFu",
+                        "name": "Set Variables",
+                        "title": "Set Failed Output",
+                        "type": "core.set_multiple_variables",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Set Failed Output",
+                          "skip_execution": false,
+                          "variables_to_update": [
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5.output.variable_workflow_01P0LMUVWENQ41W1GZDcTGBCYnKzC2c4yP8$",
+                              "variable_value_new": false
+                            },
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_01P0LMUX8TPJD6NOrztKRH1BEXfXgZAZIA5.output.variable_workflow_01P0LMUVWEXPF4XjhdvGBsL5GeIByTIzYMh$",
+                              "variable_value_new": "$activity.definition_activity_01P0LN1ME0YS53zmOKeXzN7QuPavMdvLsit.output.error.message$"
+                            }
+                          ]
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_01P0GRJHKNK872AKqiYlKJboi5ZiJZZrq8J"
+    ]
+  },
+  "categories": {
+    "category_01P0GRJHKNK872AKqiYlKJboi5ZiJZZrq8J": {
+      "unique_name": "category_01P0GRJHKNK872AKqiYlKJboi5ZiJZZrq8J",
+      "name": "MongoDB-RestHeart",
+      "title": "MongoDB-RestHeart",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  }
+}
