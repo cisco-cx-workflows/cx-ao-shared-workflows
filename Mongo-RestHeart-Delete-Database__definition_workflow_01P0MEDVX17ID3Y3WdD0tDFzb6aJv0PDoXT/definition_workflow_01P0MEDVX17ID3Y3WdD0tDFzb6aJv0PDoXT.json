@@ -1,0 +1,283 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01P0MEDVX17ID3Y3WdD0tDFzb6aJv0PDoXT",
+    "name": "Delete_Database_In_Mongo-RestHeart",
+    "title": "Delete_Database_In_Mongo-RestHeart",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_relative_url",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0MEDUW2QZ85uUCLtzT6B8aJFd5A7qlki",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "output",
+          "name": "O_database_deleted_ok",
+          "type": "datatype.boolean",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0MEDUW2NB07F6Q3cg0ls5KKWPzEIW4mI",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "some_db",
+          "scope": "input",
+          "name": "I_db",
+          "type": "datatype.string",
+          "description": "database to use",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0MEDUW2CVY1VTT9hq1Dg4SRhpDnM98jU",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "O_error_text",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0MEDUW2PQV02OM1lHEcwnJEdWX0w6M7K",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_etag",
+          "type": "datatype.string",
+          "description": "ETag is required to complete the deletion. You can get the etag via getting the database metadata.",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0MEDUW2OIC1QHbo0jxWteq5sdQFSn0SE",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "output",
+          "name": "O_status_code",
+          "type": "datatype.integer",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0MEDUW2M061oFNdG71xrcceYyqgB5SE6",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": true,
+          "scope": "local",
+          "name": "L_ELSE",
+          "type": "datatype.boolean",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0MEDUW2K1I0rwnJcDkxWBffgPFN6Z1nI",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "MongoDB-RestHeart",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": false,
+      "description": "This action deletes a single database. ETag must be given.",
+      "display_name": "Delete_Database_In_Mongo-RestHeart",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01P0MEEP283Y90fIhitK1RlQgUZEqDyqyZk",
+        "name": "HTTP Request",
+        "title": "Delete DB in mongo",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": true,
+          "custom_headers": [
+            {
+              "name": "If-Match",
+              "value": "$workflow.definition_workflow_01P0MEDVX17ID3Y3WdD0tDFzb6aJv0PDoXT.input.variable_workflow_01P0MEDUW2OIC1QHbo0jxWteq5sdQFSn0SE$"
+            }
+          ],
+          "display_name": "Delete DB in mongo",
+          "method": "DELETE",
+          "relative_url": "$workflow.definition_workflow_01P0MEDVX17ID3Y3WdD0tDFzb6aJv0PDoXT.input.variable_workflow_01P0MEDUW2CVY1VTT9hq1Dg4SRhpDnM98jU$",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01P0MEF0NT78L5bA56Aaa8XEb2rChFzLOEp",
+        "name": "Condition Block",
+        "title": "if delete ok",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if delete ok",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01P0MEFBA0M3T2w4S221RbZzx8eFYyUTpHv",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$activity.definition_activity_01P0MEEP283Y90fIhitK1RlQgUZEqDyqyZk.output.succeeded$",
+                  "operator": "eq",
+                  "right_operand": true
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$activity.definition_activity_01P0MEEP283Y90fIhitK1RlQgUZEqDyqyZk.output.status_code$",
+                  "operator": "eq",
+                  "right_operand": 204
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01P0MEFQHEHOW0cqU0px8rLA8lTkja5gFe1",
+                "name": "Set Variables",
+                "title": "Set OK Output",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set OK Output",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P0MEDVX17ID3Y3WdD0tDFzb6aJv0PDoXT.output.variable_workflow_01P0MEDUW2NB07F6Q3cg0ls5KKWPzEIW4mI$",
+                      "variable_value_new": true
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P0MEDVX17ID3Y3WdD0tDFzb6aJv0PDoXT.output.variable_workflow_01P0MEDUW2M061oFNdG71xrcceYyqgB5SE6$",
+                      "variable_value_new": "$activity.definition_activity_01P0MEEP283Y90fIhitK1RlQgUZEqDyqyZk.output.status_code$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01P0MEG5EG80Z74UOMnKgHUrQjEvTyKyKC6",
+            "name": "Condition Branch",
+            "title": "Else",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01P0MEDVX17ID3Y3WdD0tDFzb6aJv0PDoXT.local.variable_workflow_01P0MEDUW2K1I0rwnJcDkxWBffgPFN6Z1nI$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Else",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01P0MEGI4LHZR6NB2Vh93USYeBZE2SzHM9M",
+                "name": "Set Variables",
+                "title": "Set Failed Output",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Failed Output",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P0MEDVX17ID3Y3WdD0tDFzb6aJv0PDoXT.output.variable_workflow_01P0MEDUW2NB07F6Q3cg0ls5KKWPzEIW4mI$",
+                      "variable_value_new": false
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P0MEDVX17ID3Y3WdD0tDFzb6aJv0PDoXT.output.variable_workflow_01P0MEDUW2PQV02OM1lHEcwnJEdWX0w6M7K$",
+                      "variable_value_new": "$activity.definition_activity_01P0MEEP283Y90fIhitK1RlQgUZEqDyqyZk.output.error.message$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_01P0GRJHKNK872AKqiYlKJboi5ZiJZZrq8J"
+    ]
+  },
+  "categories": {
+    "category_01P0GRJHKNK872AKqiYlKJboi5ZiJZZrq8J": {
+      "unique_name": "category_01P0GRJHKNK872AKqiYlKJboi5ZiJZZrq8J",
+      "name": "MongoDB-RestHeart",
+      "title": "MongoDB-RestHeart",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  }
+}
