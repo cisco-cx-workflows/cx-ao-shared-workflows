@@ -1,0 +1,441 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP",
+    "name": "Delete_Document_In_Mongo-RestHeart",
+    "title": "Delete_Document_In_Mongo-RestHeart",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "some_db",
+          "scope": "input",
+          "name": "I_db",
+          "type": "datatype.string",
+          "description": "database to use",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0KGFGBO0083Ly4d1nWzBTmDPwmmICPLy",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "O_error_text",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0KGFGBO3RG0Jofodso7AQG00BvoYeuUq",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "output",
+          "name": "O_status_code",
+          "type": "datatype.integer",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0KGFGBNVRH3UgRpZAVweasTnEK3cZImT",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_filter",
+          "type": "datatype.string",
+          "description": "Query filter. This is required for deleting multiple documents and is not applicable for deleting one document. Standard MongoDB filtering applies",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0KGFGBO19B5x3vgq0dI1clJx3fHEFOsZ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_relative_url",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0KGFGBNQ9S2Djy83LiToywF1ZbPn9LmA",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "60be21f821f1f8320c42ec7b",
+          "scope": "input",
+          "name": "I_document_id",
+          "type": "datatype.string",
+          "description": "ID of the document to be delete. Required for single delete. Not applicable for multiple delete. ",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0KGFGBNYLL53bE60g9zHQIHGlwSOuSve",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": true,
+          "scope": "local",
+          "name": "L_ELSE",
+          "type": "datatype.boolean",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0KV3VU4BRU3eSQ2jGyczc4zvAUwNgQ2P",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "some_collection",
+          "scope": "input",
+          "name": "I_collection",
+          "type": "datatype.string",
+          "description": "collection to use",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0KGFGBNX7W493r8LXRXx7WdIIp7zORI5",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "output",
+          "name": "O_document_deleted_ok",
+          "type": "datatype.boolean",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0KGFGBO58L5qF48w29lCGe5C4QyggJ67",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "MongoDB-RestHeart",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": false,
+      "description": "This action deletes a single document or a list of documents that meets some criteria.",
+      "display_name": "Delete_Document_In_Mongo-RestHeart",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01P0KGHN1OL5M7k33AkB4YQGSVTWR5M5or2",
+        "name": "Condition Block",
+        "title": "if single delete",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if single delete",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01P0KGHVV4FRE4Dlx2Yhnh2HAQRifA1bK4U",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP.input.variable_workflow_01P0KGFGBNYLL53bE60g9zHQIHGlwSOuSve$",
+                "operator": "ne",
+                "right_operand": ""
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01P0KGI6VA3DM21j0tBtVYMY0YayVVEXRzV",
+                "name": "Set Variables",
+                "title": "Set Single Relative URL",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Single Relative URL",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP.local.variable_workflow_01P0KGFGBNQ9S2Djy83LiToywF1ZbPn9LmA$",
+                      "variable_value_new": "$workflow.definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP.input.variable_workflow_01P0KGFGBO0083Ly4d1nWzBTmDPwmmICPLy$/$workflow.definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP.input.variable_workflow_01P0KGFGBNX7W493r8LXRXx7WdIIp7zORI5$/$workflow.definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP.input.variable_workflow_01P0KGFGBNYLL53bE60g9zHQIHGlwSOuSve$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01P0KGIH5CXLC2vdEnWlsbH2DVF0HAGDfjx",
+            "name": "Condition Branch",
+            "title": "Else If Multi-Update",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP.input.variable_workflow_01P0KGFGBO19B5x3vgq0dI1clJx3fHEFOsZ$",
+                "operator": "ne",
+                "right_operand": ""
+              },
+              "continue_on_failure": false,
+              "display_name": "Else If Multi-Update",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01P0KGISXEKDI5mXLoEFVn7JsC9npktCnfC",
+                "name": "Set Variables",
+                "title": "Set Multiple Relative URL",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Multiple Relative URL",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP.local.variable_workflow_01P0KGFGBNQ9S2Djy83LiToywF1ZbPn9LmA$",
+                      "variable_value_new": "$workflow.definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP.input.variable_workflow_01P0KGFGBO0083Ly4d1nWzBTmDPwmmICPLy$/$workflow.definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP.input.variable_workflow_01P0KGFGBNX7W493r8LXRXx7WdIIp7zORI5$/*?filter=$workflow.definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP.input.variable_workflow_01P0KGFGBO19B5x3vgq0dI1clJx3fHEFOsZ$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01P0KGJ7B5J392B27l1AfcLzJbNaTTj2pvg",
+            "name": "Condition Branch",
+            "title": "Else",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$workflow.definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP.input.variable_workflow_01P0KGFGBNYLL53bE60g9zHQIHGlwSOuSve$",
+                  "operator": "eq",
+                  "right_operand": ""
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$workflow.definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP.input.variable_workflow_01P0KGFGBO19B5x3vgq0dI1clJx3fHEFOsZ$",
+                  "operator": "eq",
+                  "right_operand": ""
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "Else",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01P0KGJKXJAST6nGjDc0gv827kiW8j06rBj",
+                "name": "Completed",
+                "title": "Failed - Missing input",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": false,
+                  "display_name": "Failed - Missing input",
+                  "result_message": "You must either input a document ID or a filter to delete documents.",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01P0KGJTHKSVB3d6lH9tFdYLbvII1UaLZNF",
+        "name": "HTTP Request",
+        "title": "Delete Documents in mongo",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": true,
+          "display_name": "Delete Documents in mongo",
+          "method": "DELETE",
+          "relative_url": "$workflow.definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP.local.variable_workflow_01P0KGFGBNQ9S2Djy83LiToywF1ZbPn9LmA$",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01P0KGK7ACXZL51G9l112HjopTOgg5X6uUg",
+        "name": "Condition Block",
+        "title": "if delete ok",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if delete ok",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01P0KGKJ3L9EE41i3jucndwmF6kDatMRO5S",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$activity.definition_activity_01P0KGJTHKSVB3d6lH9tFdYLbvII1UaLZNF.output.succeeded$",
+                  "operator": "eq",
+                  "right_operand": true
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$activity.definition_activity_01P0KGJTHKSVB3d6lH9tFdYLbvII1UaLZNF.output.status_code$",
+                  "operator": "eq",
+                  "right_operand": 204
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01P0KGKWUSEDJ5DhUGhZ5Y8qihf8HvStsYH",
+                "name": "Set Variables",
+                "title": "Set OK Output",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set OK Output",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP.output.variable_workflow_01P0KGFGBO58L5qF48w29lCGe5C4QyggJ67$",
+                      "variable_value_new": true
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP.output.variable_workflow_01P0KGFGBNVRH3UgRpZAVweasTnEK3cZImT$",
+                      "variable_value_new": "$activity.definition_activity_01P0KGJTHKSVB3d6lH9tFdYLbvII1UaLZNF.output.status_code$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01P0KGLBX7F5N5xKxIKeBUKjoHo9SkA7Cx8",
+            "name": "Condition Branch",
+            "title": "Else",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP.local.variable_workflow_01P0KV3VU4BRU3eSQ2jGyczc4zvAUwNgQ2P$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Else",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01P0KGLSBW3YD7EY3NuWrvFkBRCgwmpDu49",
+                "name": "Set Variables",
+                "title": "Set Failed Output",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Failed Output",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP.output.variable_workflow_01P0KGFGBO58L5qF48w29lCGe5C4QyggJ67$",
+                      "variable_value_new": false
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01P0KGFHD8XX63e6TZsNPWL3DlBajoNxqoP.output.variable_workflow_01P0KGFGBO3RG0Jofodso7AQG00BvoYeuUq$",
+                      "variable_value_new": "$activity.definition_activity_01P0KGJTHKSVB3d6lH9tFdYLbvII1UaLZNF.output.error.message$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_01P0GRJHKNK872AKqiYlKJboi5ZiJZZrq8J"
+    ]
+  },
+  "categories": {
+    "category_01P0GRJHKNK872AKqiYlKJboi5ZiJZZrq8J": {
+      "unique_name": "category_01P0GRJHKNK872AKqiYlKJboi5ZiJZZrq8J",
+      "name": "MongoDB-RestHeart",
+      "title": "MongoDB-RestHeart",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  }
+}
