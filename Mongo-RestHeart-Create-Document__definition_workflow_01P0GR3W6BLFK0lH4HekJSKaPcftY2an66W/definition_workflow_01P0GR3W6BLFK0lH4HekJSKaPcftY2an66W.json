@@ -7,6 +7,19 @@
     "base_type": "workflow",
     "variables": [
       {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": true,
+          "scope": "local",
+          "name": "L_ELSE",
+          "type": "datatype.boolean",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0GYAW7TSDU30EOX8dZPiRYuDFStpVaqJ",
+        "object_type": "variable_workflow"
+      },
+      {
         "schema_id": "datatype.string",
         "properties": {
           "value": "some_collection",
@@ -23,15 +36,15 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "some_db",
-          "scope": "input",
-          "name": "I_db",
+          "value": "",
+          "scope": "output",
+          "name": "O_status_text",
           "type": "datatype.string",
-          "description": "Database to publish to",
-          "is_required": true,
+          "description": "Text of web call",
+          "is_required": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_01P0GS2SYRNAD5djU4I0EmDyh4Y5moK99Mr",
+        "unique_name": "variable_workflow_01P0GWG6437WH05NPFU64MweQOoz7WUoADY",
         "object_type": "variable_workflow"
       },
       {
@@ -49,44 +62,31 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.boolean",
+        "schema_id": "datatype.string",
         "properties": {
-          "value": false,
+          "value": "",
           "scope": "output",
-          "name": "O_document_created",
-          "type": "datatype.boolean",
-          "description": "Was the document created. True/False",
+          "name": "O_new_document_id",
+          "type": "datatype.string",
+          "description": "Id of the newly created document",
           "is_required": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_01P0GWSG2JMKD7HgFHzq6sHKfIpMWvL4Aof",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.boolean",
-        "properties": {
-          "value": true,
-          "scope": "local",
-          "name": "L_ELSE",
-          "type": "datatype.boolean",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01P0GYAW7TSDU30EOX8dZPiRYuDFStpVaqJ",
+        "unique_name": "variable_workflow_01P2DB4KS8JCM7Jgvi66F5Tkcsstf2xtArm",
         "object_type": "variable_workflow"
       },
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "",
-          "scope": "output",
-          "name": "O_status_text",
+          "value": "some_db",
+          "scope": "input",
+          "name": "I_db",
           "type": "datatype.string",
-          "description": "Text of web call",
-          "is_required": false,
+          "description": "Database to publish to",
+          "is_required": true,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_01P0GWG6437WH05NPFU64MweQOoz7WUoADY",
+        "unique_name": "variable_workflow_01P0GS2SYRNAD5djU4I0EmDyh4Y5moK99Mr",
         "object_type": "variable_workflow"
       },
       {
@@ -115,6 +115,20 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01P0H0K4OH2TN5s1eVGkrBXGdNjY6uR5deU",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "output",
+          "name": "O_document_created",
+          "type": "datatype.boolean",
+          "description": "Was the document created. True/False",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0GWSG2JMKD7HgFHzq6sHKfIpMWvL4Aof",
         "object_type": "variable_workflow"
       }
     ],
@@ -305,6 +319,104 @@
             },
             "object_type": "definition_activity",
             "actions": [
+              {
+                "unique_name": "definition_activity_01P2D5MRCR5N71jlYIoJZqQFUeMoUKGhF3r",
+                "name": "For Each",
+                "title": "For Each Header",
+                "type": "logic.for_each",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "For Each Header",
+                  "skip_execution": false,
+                  "source_array": "$activity.definition_activity_01P0GSXSRA73A2YGNsb52Th3ZC5ZJYoTlf4.output.response_headers$"
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01P2D5SVOVBQE5dBxOLzfqIyvaGbseV8Rqc",
+                    "name": "Condition Block",
+                    "title": "if location",
+                    "type": "logic.if_else",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "if location",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "blocks": [
+                      {
+                        "unique_name": "definition_activity_01P2D5T2UZ5M33aTW0TJwge2yikpXmJ52rT",
+                        "name": "Condition Branch",
+                        "title": "THEN",
+                        "type": "logic.condition_block",
+                        "base_type": "activity",
+                        "properties": {
+                          "condition": {
+                            "left_operand": "$activity.definition_activity_01P2D5MRCR5N71jlYIoJZqQFUeMoUKGhF3r.input.source_array[@].name$",
+                            "operator": "eqi",
+                            "right_operand": "location"
+                          },
+                          "continue_on_failure": false,
+                          "display_name": "THEN",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity",
+                        "actions": [
+                          {
+                            "unique_name": "definition_activity_01P2D6BV32ROX5vTAzloYsTlHJzXxxAI4Pl",
+                            "name": "Match Regex",
+                            "title": "Regex out Mongo ID",
+                            "type": "core.matchregex",
+                            "base_type": "activity",
+                            "properties": {
+                              "continue_on_failure": false,
+                              "display_name": "Regex out Mongo ID",
+                              "input_regex": "[0-9a-fA-F]{24}$",
+                              "input_string": "$activity.definition_activity_01P2D5MRCR5N71jlYIoJZqQFUeMoUKGhF3r.input.source_array[@].value$",
+                              "skip_execution": false
+                            },
+                            "object_type": "definition_activity"
+                          },
+                          {
+                            "unique_name": "definition_activity_01P2DAW9NO2PX2ASXRG3OMu0SoBnbTIixt1",
+                            "name": "Set Variables",
+                            "title": "Set output ID",
+                            "type": "core.set_multiple_variables",
+                            "base_type": "activity",
+                            "properties": {
+                              "continue_on_failure": false,
+                              "display_name": "Set output ID",
+                              "skip_execution": false,
+                              "variables_to_update": [
+                                {
+                                  "variable_to_update": "$workflow.definition_workflow_01P0GR3W6BLFK0lH4HekJSKaPcftY2an66W.output.variable_workflow_01P2DB4KS8JCM7Jgvi66F5Tkcsstf2xtArm$",
+                                  "variable_value_new": "$activity.definition_activity_01P2D6BV32ROX5vTAzloYsTlHJzXxxAI4Pl.output.matching_strings[0]$"
+                                }
+                              ]
+                            },
+                            "object_type": "definition_activity"
+                          },
+                          {
+                            "unique_name": "definition_activity_01P2DAQWRAYHX6gt4HsL9OR8RSQEal8fIea",
+                            "name": "Break",
+                            "title": "Break Loop",
+                            "type": "logic.break",
+                            "base_type": "activity",
+                            "properties": {
+                              "continue_on_failure": false,
+                              "display_name": "Break Loop",
+                              "skip_execution": false
+                            },
+                            "object_type": "definition_activity"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
               {
                 "unique_name": "definition_activity_01P0GYL7E4FZF7CPFrASCbntW9v4P120rIr",
                 "name": "Set Variables",
