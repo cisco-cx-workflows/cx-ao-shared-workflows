@@ -10,13 +10,14 @@
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
-          "scope": "output",
-          "name": "O_error_text",
+          "scope": "input",
+          "name": "I_database_modifications",
           "type": "datatype.string",
-          "is_required": false,
+          "description": "JSON of database modifications",
+          "is_required": true,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_01P0M0SZXO8BY4KfOxQzWBLqEiA1T3ykPsG",
+        "unique_name": "variable_workflow_01P0M0SZXNZH55AHHJnKtNl3Juz0Rbkxas5",
         "object_type": "variable_workflow"
       },
       {
@@ -34,16 +35,43 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.integer",
+        "schema_id": "datatype.string",
         "properties": {
-          "value": 0,
-          "scope": "output",
-          "name": "O_status_code",
-          "type": "datatype.integer",
+          "value": "",
+          "scope": "local",
+          "name": "L_relative_url",
+          "type": "datatype.string",
           "is_required": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_01P0M0SZXOAXQ6lM68EkMP8HWsVGVhvbEpu",
+        "unique_name": "variable_workflow_01P0M0SZXO9OU5JFXTy0spAF8zmh4D8swoB",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "input",
+          "name": "I_bypass_json_validation",
+          "type": "datatype.boolean",
+          "description": "Change to true to bypass the internal JSON validation. Use this if you plan to include mongo functions in your document json that would make it invalid. Example: ISODate(\"01-01-2000\")",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01Q8OLXVHW7UD5Zs8T5pE8eMvB6CvN5sPGF",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "O_error_text",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0M0SZXO8BY4KfOxQzWBLqEiA1T3ykPsG",
         "object_type": "variable_workflow"
       },
       {
@@ -60,33 +88,6 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "L_relative_url",
-          "type": "datatype.string",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01P0M0SZXO9OU5JFXTy0spAF8zmh4D8swoB",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "I_database_modifications",
-          "type": "datatype.string",
-          "description": "JSON of database modifications",
-          "is_required": true,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01P0M0SZXNZH55AHHJnKtNl3Juz0Rbkxas5",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.boolean",
         "properties": {
           "value": false,
@@ -98,6 +99,19 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01P0M0SZXOETY0qx95LnVH9JaPwTJvGlKoy",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "output",
+          "name": "O_status_code",
+          "type": "datatype.integer",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01P0M0SZXOAXQ6lM68EkMP8HWsVGVhvbEpu",
         "object_type": "variable_workflow"
       }
     ],
@@ -122,54 +136,29 @@
     "object_type": "definition_workflow",
     "actions": [
       {
-        "unique_name": "definition_activity_01P0M0TSTOC2R6EcnjoUUm9e0GaNIDqXYAU",
-        "name": "Execute Python Script",
-        "title": "Validate JSON",
-        "type": "python3.script",
-        "base_type": "activity",
-        "properties": {
-          "action_timeout": 180,
-          "continue_on_failure": false,
-          "display_name": "Validate JSON",
-          "script": "import json, sys\nis_this_json = str(sys.argv[1])\ntry:\n    output = json.loads(is_this_json)\nexcept json.decoder.JSONDecodeError:\n    output = \"Invalid JSON\"\nelse:\n    output = \"Valid JSON\"",
-          "script_arguments": [
-            "$workflow.definition_workflow_01P0M0T1AH2630cp1zONcaloQFJtGAcxYpi.input.variable_workflow_01P0M0SZXNZH55AHHJnKtNl3Juz0Rbkxas5$"
-          ],
-          "script_queries": [
-            {
-              "script_query": "output",
-              "script_query_name": "output ",
-              "script_query_type": "string"
-            }
-          ],
-          "skip_execution": false
-        },
-        "object_type": "definition_activity"
-      },
-      {
-        "unique_name": "definition_activity_01P0M0U18UAFT0ZuvN41sLmonGR2MgUL6Ph",
+        "unique_name": "definition_activity_01Q8OM1OFF1A96x3ZorhTmFHNqpoMmXrhsd",
         "name": "Condition Block",
-        "title": "if bad JSON",
+        "title": "if !bypass json validation",
         "type": "logic.if_else",
         "base_type": "activity",
         "properties": {
           "continue_on_failure": false,
-          "display_name": "if bad JSON",
+          "display_name": "if !bypass json validation",
           "skip_execution": false
         },
         "object_type": "definition_activity",
         "blocks": [
           {
-            "unique_name": "definition_activity_01P0M0UB5EU9V5ok6OVneEwRgaRs7nzmzOY",
+            "unique_name": "definition_activity_01Q8OM1XDQR1773D0FHcXEYuIQmBrty4GCr",
             "name": "Condition Branch",
             "title": "THEN",
             "type": "logic.condition_block",
             "base_type": "activity",
             "properties": {
               "condition": {
-                "left_operand": "$activity.definition_activity_01P0M0TSTOC2R6EcnjoUUm9e0GaNIDqXYAU.output.script_queries.output $",
-                "operator": "mregex",
-                "right_operand": "Invalid JSON"
+                "left_operand": "$workflow.definition_workflow_01P0M0T1AH2630cp1zONcaloQFJtGAcxYpi.input.variable_workflow_01Q8OLXVHW7UD5Zs8T5pE8eMvB6CvN5sPGF$",
+                "operator": "eq",
+                "right_operand": false
               },
               "continue_on_failure": false,
               "display_name": "THEN",
@@ -178,38 +167,98 @@
             "object_type": "definition_activity",
             "actions": [
               {
-                "unique_name": "definition_activity_01P0M0UL604AW6aOM5qDaiXxmqmIABa52eJ",
-                "name": "Set Variables",
-                "title": "Set Error Text",
-                "type": "core.set_multiple_variables",
+                "unique_name": "definition_activity_01P0M0TSTOC2R6EcnjoUUm9e0GaNIDqXYAU",
+                "name": "Execute Python Script",
+                "title": "Validate JSON",
+                "type": "python3.script",
                 "base_type": "activity",
                 "properties": {
+                  "action_timeout": 180,
                   "continue_on_failure": false,
-                  "display_name": "Set Error Text",
-                  "skip_execution": false,
-                  "variables_to_update": [
+                  "display_name": "Validate JSON",
+                  "script": "import json, sys\nis_this_json = str(sys.argv[1])\ntry:\n    output = json.loads(is_this_json)\nexcept json.decoder.JSONDecodeError:\n    output = \"Invalid JSON\"\nelse:\n    output = \"Valid JSON\"",
+                  "script_arguments": [
+                    "$workflow.definition_workflow_01P0M0T1AH2630cp1zONcaloQFJtGAcxYpi.input.variable_workflow_01P0M0SZXNZH55AHHJnKtNl3Juz0Rbkxas5$"
+                  ],
+                  "script_queries": [
                     {
-                      "variable_to_update": "$workflow.definition_workflow_01P0M0T1AH2630cp1zONcaloQFJtGAcxYpi.output.variable_workflow_01P0M0SZXO8BY4KfOxQzWBLqEiA1T3ykPsG$",
-                      "variable_value_new": "New document JSON is invalid."
+                      "script_query": "output",
+                      "script_query_name": "output ",
+                      "script_query_type": "string"
                     }
-                  ]
+                  ],
+                  "skip_execution": false
                 },
                 "object_type": "definition_activity"
               },
               {
-                "unique_name": "definition_activity_01P0M0UT257U33S2lfppvQlbS4nnFHuZrg7",
-                "name": "Completed",
-                "title": "Failed - Bad JSON",
-                "type": "logic.completed",
+                "unique_name": "definition_activity_01P0M0U18UAFT0ZuvN41sLmonGR2MgUL6Ph",
+                "name": "Condition Block",
+                "title": "if bad JSON",
+                "type": "logic.if_else",
                 "base_type": "activity",
                 "properties": {
-                  "completion_type": "failed-completed",
                   "continue_on_failure": false,
-                  "display_name": "Failed - Bad JSON",
-                  "result_message": "New document JSON is invalid.",
+                  "display_name": "if bad JSON",
                   "skip_execution": false
                 },
-                "object_type": "definition_activity"
+                "object_type": "definition_activity",
+                "blocks": [
+                  {
+                    "unique_name": "definition_activity_01P0M0UB5EU9V5ok6OVneEwRgaRs7nzmzOY",
+                    "name": "Condition Branch",
+                    "title": "THEN",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01P0M0TSTOC2R6EcnjoUUm9e0GaNIDqXYAU.output.script_queries.output $",
+                        "operator": "mregex",
+                        "right_operand": "Invalid JSON"
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "THEN",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01P0M0UL604AW6aOM5qDaiXxmqmIABa52eJ",
+                        "name": "Set Variables",
+                        "title": "Set Error Text",
+                        "type": "core.set_multiple_variables",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Set Error Text",
+                          "skip_execution": false,
+                          "variables_to_update": [
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_01P0M0T1AH2630cp1zONcaloQFJtGAcxYpi.output.variable_workflow_01P0M0SZXO8BY4KfOxQzWBLqEiA1T3ykPsG$",
+                              "variable_value_new": "New document JSON is invalid."
+                            }
+                          ]
+                        },
+                        "object_type": "definition_activity"
+                      },
+                      {
+                        "unique_name": "definition_activity_01P0M0UT257U33S2lfppvQlbS4nnFHuZrg7",
+                        "name": "Completed",
+                        "title": "Failed - Bad JSON",
+                        "type": "logic.completed",
+                        "base_type": "activity",
+                        "properties": {
+                          "completion_type": "failed-completed",
+                          "continue_on_failure": false,
+                          "display_name": "Failed - Bad JSON",
+                          "result_message": "New document JSON is invalid.",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           }
