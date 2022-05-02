@@ -7,6 +7,34 @@
     "base_type": "workflow",
     "variables": [
       {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_query_string",
+          "type": "datatype.string",
+          "description": "query string to be dynamically generated",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSEETIQRUG72XuMNPt96X2aeuxhaofTPd",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": true,
+          "scope": "local",
+          "name": "L_ELSE",
+          "type": "datatype.boolean",
+          "description": "default else",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSEETIQSJT064so9RzskJKuhCVaSctwfM",
+        "object_type": "variable_workflow"
+      },
+      {
         "schema_id": "datatype.integer",
         "properties": {
           "value": 0,
@@ -23,15 +51,29 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "L_query_string",
+          "value": "Total Failure",
+          "scope": "output",
+          "name": "O_api_status_message",
           "type": "datatype.string",
-          "description": "query string to be dynamically generated",
+          "description": "Status message from API return",
           "is_required": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_01WSEETIQRUG72XuMNPt96X2aeuxhaofTPd",
+        "unique_name": "variable_workflow_01WSEETIQRM5X1vYvwcSlyvciEFeNuyZwpW",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_jwt_token",
+          "type": "datatype.secure_string",
+          "description": "JWT token for access to API. Generated via GET_JWT_TOKEN atomic",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSEETIQSS0S6Qmm5e3R181CDXArmcCLUn",
         "object_type": "variable_workflow"
       },
       {
@@ -41,10 +83,39 @@
           "scope": "output",
           "name": "O_results_json",
           "type": "datatype.string",
+          "description": "Product Alerts List",
           "is_required": false,
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01WSEETIQS3B92o7fnUIr6E8fCezMwGlupC",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_product_alert_type",
+          "type": "datatype.string",
+          "description": "type of product alert requested",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSIHC0BU5L06p2PQuQy6XueVE3c5uQkCx",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_max",
+          "type": "datatype.string",
+          "description": "Max amount of entries to return. Leave blank for all.",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSEETIQSBCL2uCwd0APG8l9JNf5H7u3kH",
         "object_type": "variable_workflow"
       },
       {
@@ -65,19 +136,6 @@
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
-          "scope": "local",
-          "name": "L_product_alert_type",
-          "type": "datatype.string",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WSIHC0BU5L06p2PQuQy6XueVE3c5uQkCx",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
           "scope": "input",
           "name": "I_offset",
           "type": "datatype.string",
@@ -86,48 +144,6 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01WSEETIQR1U21D2ci0FYfgFr2qoSRnzmGI",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.secure_string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "I_jwt_token",
-          "type": "datatype.secure_string",
-          "description": "JWT token for access to API. Generated via GET_JWT_TOKEN atomic",
-          "is_required": true,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WSEETIQSS0S6Qmm5e3R181CDXArmcCLUn",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "Total Failure",
-          "scope": "output",
-          "name": "O_api_status_message",
-          "type": "datatype.string",
-          "description": "Status message from API return",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WSEETIQRM5X1vYvwcSlyvciEFeNuyZwpW",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "I_max",
-          "type": "datatype.string",
-          "description": "Max amount of entries to return. Leave blank for all.",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WSEETIQSBCL2uCwd0APG8l9JNf5H7u3kH",
         "object_type": "variable_workflow"
       },
       {
@@ -142,20 +158,6 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01WSEL8XDG0EQ6VaBaoHOpFlEtnO4ZcK0gp",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.boolean",
-        "properties": {
-          "value": true,
-          "scope": "local",
-          "name": "L_ELSE",
-          "type": "datatype.boolean",
-          "description": "default else",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WSEETIQSJT064so9RzskJKuhCVaSctwfM",
         "object_type": "variable_workflow"
       }
     ],
