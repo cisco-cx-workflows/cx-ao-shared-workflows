@@ -13,23 +13,11 @@
           "scope": "output",
           "name": "O_jwt_token",
           "type": "datatype.secure_string",
+          "description": "JWT Token Created by Auth API",
           "is_required": false,
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01WQNAMNB706H6XvGtAYF7dtPrP5V4E9wDt",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.secure_string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "I_client_secret",
-          "type": "datatype.secure_string",
-          "is_required": true,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WQNA8K9B9214atkPifIIwzB45c8xUrFIV",
         "object_type": "variable_workflow"
       },
       {
@@ -39,10 +27,39 @@
           "scope": "output",
           "name": "O_api_status_message",
           "type": "datatype.string",
+          "description": "Status message from API return",
           "is_required": false,
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01WSCBRC2GMQX3oAuh1hK7rq3rsoVBMcGbz",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_client_id",
+          "type": "datatype.string",
+          "description": "Client id from CX Cloud API Gateway",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WQNA08RLFXN3N9ZZfvnFLnyhYXihrkJqA",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_client_secret",
+          "type": "datatype.secure_string",
+          "description": "Client Secret from CX Cloud API Gateway",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WQNA8K9B9214atkPifIIwzB45c8xUrFIV",
         "object_type": "variable_workflow"
       },
       {
@@ -52,6 +69,7 @@
           "scope": "local",
           "name": "L_ELSE",
           "type": "datatype.boolean",
+          "description": "Default ELSE ",
           "is_required": false,
           "is_invisible": false
         },
@@ -65,23 +83,11 @@
           "scope": "output",
           "name": "O_api_status_code",
           "type": "datatype.integer",
+          "description": "Status code from API return",
           "is_required": false,
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01WSCBLICY00X4Loq95ZBXlq5elqaVdxHbC",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "I_client_id",
-          "type": "datatype.string",
-          "is_required": true,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WQNA08RLFXN3N9ZZfvnFLnyhYXihrkJqA",
         "object_type": "variable_workflow"
       }
     ],
