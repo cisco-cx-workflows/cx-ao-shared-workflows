@@ -1,0 +1,302 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01WQN93WJ7O9K4jlaQXndal5qonKiHtzoKW",
+    "name": "BCS Operational Insights API - Get_JWT_Token",
+    "title": "BCS Operational Insights API - Get_JWT_Token",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "O_jwt_token",
+          "type": "datatype.secure_string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WQNAMNB706H6XvGtAYF7dtPrP5V4E9wDt",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_client_secret",
+          "type": "datatype.secure_string",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WQNA8K9B9214atkPifIIwzB45c8xUrFIV",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "O_api_status_message",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSCBRC2GMQX3oAuh1hK7rq3rsoVBMcGbz",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": true,
+          "scope": "local",
+          "name": "L_ELSE",
+          "type": "datatype.boolean",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSCFNA9L6V81KILADt8CA6tfIhuP4a85y",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "output",
+          "name": "O_api_status_code",
+          "type": "datatype.integer",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSCBLICY00X4Loq95ZBXlq5elqaVdxHbC",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_client_id",
+          "type": "datatype.string",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WQNA08RLFXN3N9ZZfvnFLnyhYXihrkJqA",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "BCS Operational Insights",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": false,
+      "description": "This returns a JWT token from the Cisco BCS Operational Insights API when given a proper client id and client secret. \n\nTarget: HTTP Endpoint for Auth for BCS Operational Insights (included)\n\nAccount Key: None. Done through client id+client secret \n\nSteps:\n[] Request creation of JWT Token\n[]\u003e if creation ok -\u003e Get Token via JSONPath and Return\n[]\u003e if creation failed -\u003e Return error codes\n\n\nMore information about this API: https://developer.cisco.com/docs/bcs-operational-insights/#!introduction",
+      "display_name": "BCS Operational Insights API - Get_JWT_Token",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "no_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01WQNBGOSVD8W4rKLnXckzN5VY8qDhy0oWP",
+        "name": "HTTP Request",
+        "title": "Get JWT Token",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "body": "{\n        \"grantType\": \"client_credentials\",\n        \"clientId\": \"0cd5d475-54f9-423d-9c71-edeb45172a6e\",\n        \"secret\": \"$workflow.definition_workflow_01WQN93WJ7O9K4jlaQXndal5qonKiHtzoKW.input.variable_workflow_01WQNA8K9B9214atkPifIIwzB45c8xUrFIV$\",\n        \"scope\": \"api.bcs.manage\"\n    }",
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": true,
+          "display_name": "Get JWT Token",
+          "method": "POST",
+          "relative_url": "token",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01WQMZAW27GHT4k2Cuz4F2ouO5d9xUCHKj1"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01WSCBYDI6BOS11z2RPrrIpUEo2l21R4tFU",
+        "name": "Condition Block",
+        "title": "if api ok",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if api ok",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01WSCBYEFAP7F19dxq05Z4sy0AEqPTOKT9T",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$activity.definition_activity_01WQNBGOSVD8W4rKLnXckzN5VY8qDhy0oWP.output.succeeded$",
+                  "operator": "eq",
+                  "right_operand": true
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$activity.definition_activity_01WQNBGOSVD8W4rKLnXckzN5VY8qDhy0oWP.output.status_code$",
+                  "operator": "eq",
+                  "right_operand": 200
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WQNF5NJUFSU1upsOKTI8gpmurN1GqkADm",
+                "name": "JSONPath Query",
+                "title": "Get Token",
+                "type": "corejava.jsonpathquery",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": true,
+                  "display_name": "Get Token",
+                  "input_json": "$activity.definition_activity_01WQNBGOSVD8W4rKLnXckzN5VY8qDhy0oWP.output.response_body$",
+                  "jsonpath_queries": [
+                    {
+                      "jsonpath_query": "$..accessToken",
+                      "jsonpath_query_name": "accessToken",
+                      "jsonpath_query_type": "secure_string"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01WQNFS56BV7X6Q7HH59KmKTMdd0c8Ztd6v",
+                "name": "Set Variables",
+                "title": "Set Output Token",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": true,
+                  "display_name": "Set Output Token",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WQN93WJ7O9K4jlaQXndal5qonKiHtzoKW.output.variable_workflow_01WQNAMNB706H6XvGtAYF7dtPrP5V4E9wDt$",
+                      "variable_value_new": "$activity.definition_activity_01WQNF5NJUFSU1upsOKTI8gpmurN1GqkADm.output.jsonpath_queries.accessToken$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WQN93WJ7O9K4jlaQXndal5qonKiHtzoKW.output.variable_workflow_01WSCBLICY00X4Loq95ZBXlq5elqaVdxHbC$",
+                      "variable_value_new": 200
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WQN93WJ7O9K4jlaQXndal5qonKiHtzoKW.output.variable_workflow_01WSCBRC2GMQX3oAuh1hK7rq3rsoVBMcGbz$",
+                      "variable_value_new": "$activity.definition_activity_01WQNBGOSVD8W4rKLnXckzN5VY8qDhy0oWP.output.status_text$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WSCBYEZDP0G5gRuW0Gz0lBtC4JVtTw1IJ",
+            "name": "Condition Branch",
+            "title": "Else",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01WQN93WJ7O9K4jlaQXndal5qonKiHtzoKW.local.variable_workflow_01WSCFNA9L6V81KILADt8CA6tfIhuP4a85y$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Else",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSCCK4WEJ924bcLIFgLpG8k24MkJrE6no",
+                "name": "Set Variables",
+                "title": "Set Output HTTP Error info",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": true,
+                  "display_name": "Set Output HTTP Error info",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WQN93WJ7O9K4jlaQXndal5qonKiHtzoKW.output.variable_workflow_01WSCBLICY00X4Loq95ZBXlq5elqaVdxHbC$",
+                      "variable_value_new": "$workflow.definition_workflow_01WQN93WJ7O9K4jlaQXndal5qonKiHtzoKW.output.variable_workflow_01WSCBLICY00X4Loq95ZBXlq5elqaVdxHbC$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WQN93WJ7O9K4jlaQXndal5qonKiHtzoKW.output.variable_workflow_01WSCBRC2GMQX3oAuh1hK7rq3rsoVBMcGbz$",
+                      "variable_value_new": "Failed to Generate JSON Web Token(JWT): $activity.definition_activity_01WQNBGOSVD8W4rKLnXckzN5VY8qDhy0oWP.output.status_text$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_01WQN9NVVJZXK2VTifmqXfsVQSqL0ZKbZ5D"
+    ]
+  },
+  "categories": {
+    "category_01WQN9NVVJZXK2VTifmqXfsVQSqL0ZKbZ5D": {
+      "unique_name": "category_01WQN9NVVJZXK2VTifmqXfsVQSqL0ZKbZ5D",
+      "name": "BCS Operational Insights API",
+      "title": "BCS Operational Insights API",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "targets": {
+    "definition_target_01WQMZAW27GHT4k2Cuz4F2ouO5d9xUCHKj1": {
+      "unique_name": "definition_target_01WQMZAW27GHT4k2Cuz4F2ouO5d9xUCHKj1",
+      "name": "BCS Operational Insights Auth API",
+      "title": "BCS Operational Insights Auth API",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": false,
+        "display_name": "BCS Operational Insights Auth API",
+        "host": "api-cx.cisco.com",
+        "ignore_proxy": false,
+        "no_runtime_user": true,
+        "path": "/torii-auth/v1/",
+        "protocol": "https"
+      }
+    }
+  }
+}
