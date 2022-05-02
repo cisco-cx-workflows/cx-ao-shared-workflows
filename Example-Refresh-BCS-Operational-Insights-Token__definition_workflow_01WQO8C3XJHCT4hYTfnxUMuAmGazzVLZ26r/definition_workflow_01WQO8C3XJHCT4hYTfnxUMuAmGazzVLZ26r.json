@@ -1,0 +1,185 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01WQO8C3XJHCT4hYTfnxUMuAmGazzVLZ26r",
+    "name": "Example - Refresh BCS Operation Insights Token",
+    "title": "Example - Refresh BCS Operation Insights Token",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": null,
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "description": "You need to fill out the global variable for BCS insights client id and client secret. This will then store your token in the global JWT token cache variable which can be passed into your atomics.",
+      "display_name": "Example - Refresh BCS Operation Insights Token",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "no_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01WQO8PH5Z5GS3g4pH65knaOiQLkfVFrqY3",
+        "name": "BCS Insights API - Get_JWT_Token",
+        "title": "BCS Insights API - Get_JWT_Token",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "BCS Insights API - Get_JWT_Token",
+          "input": {
+            "variable_workflow_01WQNA08RLFXN3N9ZZfvnFLnyhYXihrkJqA": "$global.variable_01WQO9K3LXKOM6cZUvROj2wh0iw98PGyzr5.global.variable_01WQO9K3LXKOM6cZUvROj2wh0iw98PGyzr5$",
+            "variable_workflow_01WQNA8K9B9214atkPifIIwzB45c8xUrFIV": "$global.variable_01WQO2K272ZLC2CbpUDIYawwqvCL95HvxBi.global.variable_01WQO2K272ZLC2CbpUDIYawwqvCL95HvxBi$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01WQMZAW27GHT4k2Cuz4F2ouO5d9xUCHKj1",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_01WQN93WJ7O9K4jlaQXndal5qonKiHtzoKW",
+          "workflow_name": "BCS Operational Insights - Get_JWT_Token"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01WQOAIH0LBF71DjteZby3eMoOiDYWirvP2",
+        "name": "Set Variables",
+        "title": "Store JWT in Cache",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Store JWT in Cache",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$global.variable_01WQOA3BL73W936jhW4MSdi5ppwY3l4UWxA.global.variable_01WQOA3BL73W936jhW4MSdi5ppwY3l4UWxA$",
+              "variable_value_new": "$activity.definition_activity_01WQO8PH5Z5GS3g4pH65knaOiQLkfVFrqY3.output.variable_workflow_01WQNAMNB706H6XvGtAYF7dtPrP5V4E9wDt$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_01WQN9NVVJZXK2VTifmqXfsVQSqL0ZKbZ5D"
+    ]
+  },
+  "categories": {
+    "category_01WQN9NVVJZXK2VTifmqXfsVQSqL0ZKbZ5D": {
+      "unique_name": "category_01WQN9NVVJZXK2VTifmqXfsVQSqL0ZKbZ5D",
+      "name": "BCS Operational Insights API",
+      "title": "BCS Operational Insights API",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "triggers": {
+    "triggerschedule_01WQOCBQUQNHY4F33LHuMka4vXclFiyRAdO": {
+      "workflow_id": "definition_workflow_01WQO8C3XJHCT4hYTfnxUMuAmGazzVLZ26r",
+      "name": "Run Every 30 Minutes",
+      "title": "",
+      "lowercase_name": "schedule.run_every_30_minutes",
+      "type": "schedule",
+      "base_type": "trigger",
+      "ref_id": "schedule_01WQOCA7Z5DKX1sSdiP85p14xYeeGXywM2f",
+      "version": "1.0.0",
+      "disabled": true,
+      "unique_name": "triggerschedule_01WQOCBQUQNHY4F33LHuMka4vXclFiyRAdO",
+      "object_type": "triggerschedule"
+    }
+  },
+  "schedules": {
+    "schedule_01WQOCA7Z5DKX1sSdiP85p14xYeeGXywM2f": {
+      "unique_name": "schedule_01WQOCA7Z5DKX1sSdiP85p14xYeeGXywM2f",
+      "name": "Every 30 mins",
+      "type": "basic.schedule",
+      "base_type": "schedule",
+      "properties": {
+        "calendar": "calendar_recurring_1BMfMWvgiDhSjBQ7hTSyvz3NyVZ",
+        "timezone": "Etc/GMT+0",
+        "starttime": "00:00",
+        "interval_hours": 0,
+        "interval_minutes": 30,
+        "number_of_times": 48,
+        "display_name": "Every 30 mins",
+        "description": ""
+      },
+      "version": "1.0.0",
+      "object_type": "schedule"
+    }
+  },
+  "targets": {
+    "definition_target_01WQMZAW27GHT4k2Cuz4F2ouO5d9xUCHKj1": {
+      "unique_name": "definition_target_01WQMZAW27GHT4k2Cuz4F2ouO5d9xUCHKj1",
+      "name": "BCS Operational Insights Auth API",
+      "title": "BCS Operational Insights Auth API",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": false,
+        "display_name": "BCS Operational Insights Auth API",
+        "host": "api-cx.cisco.com",
+        "ignore_proxy": false,
+        "no_runtime_user": true,
+        "path": "/torii-auth/v1/",
+        "protocol": "https"
+      }
+    }
+  },
+  "variables": {
+    "variable_01WQO2K272ZLC2CbpUDIYawwqvCL95HvxBi": {
+      "unique_name": "variable_01WQO2K272ZLC2CbpUDIYawwqvCL95HvxBi",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "BCS.Operational.Insights.Client.Secret",
+        "type": "datatype.secure_string",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    },
+    "variable_01WQO9K3LXKOM6cZUvROj2wh0iw98PGyzr5": {
+      "unique_name": "variable_01WQO9K3LXKOM6cZUvROj2wh0iw98PGyzr5",
+      "properties": {
+        "value": "**FILL ME OUT WITH YOUR CLIENT ID**",
+        "scope": "global",
+        "name": "BCS.Operational.Insights.Client.Id",
+        "type": "datatype.string",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    },
+    "variable_01WQOA3BL73W936jhW4MSdi5ppwY3l4UWxA": {
+      "unique_name": "variable_01WQOA3BL73W936jhW4MSdi5ppwY3l4UWxA",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "BCS.Operational.Insights.JWT.Token.Cache",
+        "type": "datatype.secure_string",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "atomic_workflows": [
+    "definition_workflow_01WQN93WJ7O9K4jlaQXndal5qonKiHtzoKW"
+  ],
+  "dependent_workflows": [
+    "definition_workflow_01WQN93WJ7O9K4jlaQXndal5qonKiHtzoKW"
+  ]
+}
