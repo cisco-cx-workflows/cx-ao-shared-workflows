@@ -1,0 +1,178 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01WQO0PY1BZHF73cxOnvWlVAojuT2wXeEx7",
+    "name": "Blog - Get BCS Devices of Status",
+    "title": "Blog - Get BCS Devices of Status",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "DEVICE NOT REACHABLE",
+          "scope": "input",
+          "name": "I_status",
+          "type": "datatype.string",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WQO1H8PVS0W2pzzjLKy7pKBPiaIJRodSv",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Blog - Get BCS Devices of Status",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "no_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01WQO1K8Q846H4DtkrkM7UFcPoYvfDRHsYV",
+        "name": "BCS Insights API - Get_JWT_Token",
+        "title": "BCS Insights API - Get_JWT_Token",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "BCS Insights API - Get_JWT_Token",
+          "input": {
+            "variable_workflow_01WQNA08RLFXN3N9ZZfvnFLnyhYXihrkJqA": "0cd5d475-54f9-423d-9c71-edeb45172a6e",
+            "variable_workflow_01WQNA8K9B9214atkPifIIwzB45c8xUrFIV": "$global.variable_01WQO2K272ZLC2CbpUDIYawwqvCL95HvxBi.global.variable_01WQO2K272ZLC2CbpUDIYawwqvCL95HvxBi$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01WQMZAW27GHT4k2Cuz4F2ouO5d9xUCHKj1",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_01WQN93WJ7O9K4jlaQXndal5qonKiHtzoKW",
+          "workflow_name": "BCS Operational Insights - Get_JWT_Token"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01WQO2Y9ZUZEX4ufc62ERd6okTZNZAMvGUe",
+        "name": "BCS Operational Insights - Get_Devices",
+        "title": "BCS Operational Insights - Get_Devices",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "BCS Operational Insights - Get_Devices",
+          "input": {
+            "variable_workflow_01WQNK47Z05I03pxj82BcqcMkHaH3zqh2yJ": "$activity.definition_activity_01WQO1K8Q846H4DtkrkM7UFcPoYvfDRHsYV.output.variable_workflow_01WQNAMNB706H6XvGtAYF7dtPrP5V4E9wDt$",
+            "variable_workflow_01WQNLAU0A3OA0MnqPE1kKD0sEyw7WoVwGm": "10",
+            "variable_workflow_01WQNLPFHCM1M0vjjFk6wcnMlOBQMYRPGZE": ""
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01WQN30U6JIXS4LfzRmKCd6g0zvK5uvpAR6",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_01WQNJ50D3YBZ6um026MAxdAZ28qhcgsk50",
+          "workflow_name": "BCS Operational Insights - Get_Devices"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01WQO386V68X12t3jW2t7aD9pcPGJa6zlXO",
+        "name": "JSONPath Query",
+        "title": "Get all Devices of Certain Status",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Get all Devices of Certain Status",
+          "input_json": "$activity.definition_activity_01WQO2Y9ZUZEX4ufc62ERd6okTZNZAMvGUe.output.variable_workflow_01WQNV63OGHY27QAy2rfJLYwcwLoB6k214r$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "$..items[?(@.deviceStatus== \"$workflow.definition_workflow_01WQO0PY1BZHF73cxOnvWlVAojuT2wXeEx7.input.variable_workflow_01WQO1H8PVS0W2pzzjLKy7pKBPiaIJRodSv$\")]",
+              "jsonpath_query_name": "status_items",
+              "jsonpath_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01WQMZAW27GHT4k2Cuz4F2ouO5d9xUCHKj1": {
+      "unique_name": "definition_target_01WQMZAW27GHT4k2Cuz4F2ouO5d9xUCHKj1",
+      "name": "BCS Operational Insights Auth API",
+      "title": "BCS Operational Insights Auth API",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": false,
+        "display_name": "BCS Operational Insights Auth API",
+        "host": "api-cx.cisco.com",
+        "ignore_proxy": false,
+        "no_runtime_user": true,
+        "path": "/torii-auth/v1/",
+        "protocol": "https"
+      }
+    },
+    "definition_target_01WQN30U6JIXS4LfzRmKCd6g0zvK5uvpAR6": {
+      "unique_name": "definition_target_01WQN30U6JIXS4LfzRmKCd6g0zvK5uvpAR6",
+      "name": "BCS Insights API - US",
+      "title": "BCS Insights API - US",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": false,
+        "display_name": "BCS Insights API - US",
+        "host": "api-cx.cisco.com",
+        "ignore_proxy": false,
+        "no_runtime_user": true,
+        "path": "/us/bcs/v2",
+        "protocol": "https"
+      }
+    }
+  },
+  "variables": {
+    "variable_01WQO2K272ZLC2CbpUDIYawwqvCL95HvxBi": {
+      "unique_name": "variable_01WQO2K272ZLC2CbpUDIYawwqvCL95HvxBi",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "BCS.Operational.Insights.Client.Secret",
+        "type": "datatype.secure_string",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "atomic_workflows": [
+    "definition_workflow_01WQN93WJ7O9K4jlaQXndal5qonKiHtzoKW",
+    "definition_workflow_01WQNJ50D3YBZ6um026MAxdAZ28qhcgsk50"
+  ],
+  "dependent_workflows": [
+    "definition_workflow_01WQN93WJ7O9K4jlaQXndal5qonKiHtzoKW",
+    "definition_workflow_01WQNJ50D3YBZ6um026MAxdAZ28qhcgsk50"
+  ]
+}
