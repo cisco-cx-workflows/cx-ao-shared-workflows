@@ -10,20 +10,6 @@
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
-          "scope": "input",
-          "name": "I_max",
-          "type": "datatype.string",
-          "description": "Max amount of entries to return. Leave blank for all.",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WQNLAU0A3OA0MnqPE1kKD0sEyw7WoVwGm",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
           "scope": "output",
           "name": "O_results_json",
           "type": "datatype.string",
@@ -32,6 +18,48 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01WQNV63OGHY27QAy2rfJLYwcwLoB6k214r",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "output",
+          "name": "O_api_status_code",
+          "type": "datatype.integer",
+          "description": "Status code from API return",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSCT3SFUEMO7bflhHPW0qi5gWCmGpDFmx",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_offset",
+          "type": "datatype.string",
+          "description": "Number of items to be skipped from the start. Leave blank for default of 0 (or all)",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WQNLPFHCM1M0vjjFk6wcnMlOBQMYRPGZE",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Total Failure",
+          "scope": "output",
+          "name": "O_api_status_message",
+          "type": "datatype.string",
+          "description": "Status message from API return",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSCTEURQ22G1h4kJkeen2h8m3Dj8YFrRj",
         "object_type": "variable_workflow"
       },
       {
@@ -46,6 +74,20 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01WQNK47Z05I03pxj82BcqcMkHaH3zqh2yJ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_query_string",
+          "type": "datatype.string",
+          "description": "query string to be dynamically generated",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WQNM0S7HO6B1kWY8gessTYufvSXRlMb5d",
         "object_type": "variable_workflow"
       },
       {
@@ -67,53 +109,13 @@
         "properties": {
           "value": "",
           "scope": "input",
-          "name": "I_offset",
+          "name": "I_max",
           "type": "datatype.string",
-          "description": "Number of items to be skipped from the start. Leave blank for default of 0 (or all)",
+          "description": "Max amount of entries to return. Leave blank for all.",
           "is_required": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_01WQNLPFHCM1M0vjjFk6wcnMlOBQMYRPGZE",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "L_query_string",
-          "type": "datatype.string",
-          "description": "query string to be dynamically generated",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WQNM0S7HO6B1kWY8gessTYufvSXRlMb5d",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "Total Failure",
-          "scope": "output",
-          "name": "O_api_status_message",
-          "type": "datatype.string",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WSCTEURQ22G1h4kJkeen2h8m3Dj8YFrRj",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 0,
-          "scope": "output",
-          "name": "O_api_status_code",
-          "type": "datatype.integer",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WSCT3SFUEMO7bflhHPW0qi5gWCmGpDFmx",
+        "unique_name": "variable_workflow_01WQNLAU0A3OA0MnqPE1kKD0sEyw7WoVwGm",
         "object_type": "variable_workflow"
       }
     ],
