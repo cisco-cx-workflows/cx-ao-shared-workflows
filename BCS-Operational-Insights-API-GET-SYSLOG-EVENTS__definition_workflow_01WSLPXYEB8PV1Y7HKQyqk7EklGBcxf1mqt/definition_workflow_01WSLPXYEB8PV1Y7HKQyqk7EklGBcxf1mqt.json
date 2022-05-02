@@ -1,0 +1,906 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt",
+    "name": "BCS Operational Insights - Get_Syslog_Events",
+    "title": "BCS Operational Insights - Get_Syslog_Events",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_offset",
+          "type": "datatype.string",
+          "description": "Number of items to be skipped from the start. Leave blank for default of 0 (or all)",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSLPXYNOLZ86nsn4HTNEJVxuKSuLxesAA",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Total Failure",
+          "scope": "output",
+          "name": "O_api_status_message",
+          "type": "datatype.string",
+          "description": "Status message from API return",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSLPXYNOE4Q5FaDwLXVZvDkNgFsqTcMAy",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_max",
+          "type": "datatype.string",
+          "description": "Max amount of entries to return. Leave blank for all.",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSLPXYNNG191vN6Tak6uLMw2ImSiRaP5a",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_query_string",
+          "type": "datatype.string",
+          "description": "query string to be dynamically generated",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_jwt_token",
+          "type": "datatype.secure_string",
+          "description": "JWT token for access to API. Generated via GET_JWT_TOKEN atomic",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSLPXYNNVCJ4M7upf1vj0EWnNmV3iyi9t",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_end_date",
+          "type": "datatype.string",
+          "description": "End date filter for a certain range. In the format of YYYY-MM-DDThh:mm:ss. If this is passed, then I_start_date is required. If part of date is left off (2021-08) then lowest possible value is used. Sample date: 2022-05-02T10:30:30",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSM58VJBD3H2IinIJygoewjthoex11BYb",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "output",
+          "name": "O_api_status_code",
+          "type": "datatype.integer",
+          "description": "Status code from API return",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSLPXYNPH023QE0YoK9t8Ct648hXkVyIY",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": true,
+          "scope": "local",
+          "name": "L_ELSE",
+          "type": "datatype.boolean",
+          "description": "else",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSLPXYNOT9K6OrzzJwFLnlSi3iwHFJhkC",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "O_results_json",
+          "type": "datatype.string",
+          "description": "Resultant list from API",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSLPXYNO4VG0yqDHHy0Sk3N90ER1GNVdG",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_start_date",
+          "type": "datatype.string",
+          "description": "Start date to select records between(including end date). If end date not given will be from Start Date until \"Now\". Format is YYYY-MM-DDThh:mm:ss. ie. 2020-05-02T10:30:00. Can also send date like 2021-08. The rest of the date will be the lowest possible value.",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSM48K2RACD7THdUodUw3He1PGR5B3gbZ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_exact_date",
+          "type": "datatype.string",
+          "description": "Records from the exact date to be displayed, in format YYYY-MM-DD. ie. 2022-04-30",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSM32PNHXMW5MfLRUyjyrX7Fixvj6kuyF",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "BCS Operational Insights",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": false,
+      "description": "This returns a JSON based syslog event list from BCS Operational Insights API\n\nTarget: HTTP Endpoint for BCS Operational Insights (either US or EMEA)\n\nAccount Key: None. Auth done via input token\n\nSteps:\n[] Checks if there is a need to have MAX or OFFSET in the query string\n[] Checks for date fields and handles single date or date range\n[] Makes API call to Get Syslog Events endpoint with query string\n[]\u003e If call ok -\u003e stores JSON based output\n[]\u003e if call not ok -\u003e stores errors\n\n\n\nMore information about this API: https://developer.cisco.com/docs/bcs-operational-insights/#!introduction",
+      "display_name": "BCS Operational Insights - Get_Syslog_Events",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01WSM5O029C3T5qDahZlMvxRdHwlP9V1RYK",
+        "name": "Condition Block",
+        "title": "If EndDate and No StartDate",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "If EndDate and No StartDate",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01WSM5O0FROUA2YkZroDxnC0ENi31eqrOQ9",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSM58VJBD3H2IinIJygoewjthoex11BYb$",
+                  "operator": "ne",
+                  "right_operand": ""
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSM48K2RACD7THdUodUw3He1PGR5B3gbZ$",
+                  "operator": "eq",
+                  "right_operand": ""
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSM6EN8FIOK2GtYjsPFlOcKYmqI2N7cX5",
+                "name": "Set Variables",
+                "title": "Set ERROR",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set ERROR",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.output.variable_workflow_01WSLPXYNOE4Q5FaDwLXVZvDkNgFsqTcMAy$",
+                      "variable_value_new": "Error: EndDate given with no StartDate. StartDate is required when EndDate is given."
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.output.variable_workflow_01WSLPXYNO4VG0yqDHHy0Sk3N90ER1GNVdG$",
+                      "variable_value_new": "{}"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.output.variable_workflow_01WSLPXYNPH023QE0YoK9t8Ct648hXkVyIY$",
+                      "variable_value_new": 0
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01WSM7858U2V45Bj7XaPqAM4vDi43Hbasrk",
+                "name": "Completed",
+                "title": "Bad Input - Fail",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": false,
+                  "display_name": "Bad Input - Fail",
+                  "result_message": "EndDate given with no StartDate. StartDate is required when EndDate is given.",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01WSM8Y4STZRK71ronNdBpiw1JhYqlsAtzE",
+        "name": "Set Variables",
+        "title": "Start Query String",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Start Query String",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$",
+              "variable_value_new": "?"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01WSLPY1G8F656MyiDZOkeqvLlZLV0F0t62",
+        "name": "Condition Block",
+        "title": "if offset and max",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if offset and max",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01WSLPY2Z9EZP1l08Sxw6yZzeY2DN8ODGLe",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSLPXYNNG191vN6Tak6uLMw2ImSiRaP5a$",
+                  "operator": "ne",
+                  "right_operand": ""
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSLPXYNOLZ86nsn4HTNEJVxuKSuLxesAA$",
+                  "operator": "ne",
+                  "right_operand": ""
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSLPY3YFBAR7VJhkjBy7KNHqBmJTBmihY",
+                "name": "Set Variables",
+                "title": "Set Full Query String",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Full Query String",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$",
+                      "variable_value_new": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$max=$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSLPXYNNG191vN6Tak6uLMw2ImSiRaP5a$\u0026offset=$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSLPXYNOLZ86nsn4HTNEJVxuKSuLxesAA$\u0026"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WSLPY4TJTXQ5O3OxRhFZnJT4F14zhMftc",
+            "name": "Condition Branch",
+            "title": "Elif Only Max",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSLPXYNNG191vN6Tak6uLMw2ImSiRaP5a$",
+                "operator": "ne",
+                "right_operand": ""
+              },
+              "continue_on_failure": false,
+              "display_name": "Elif Only Max",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSLPY5SR82S1BbULWXnKeugxYx1AvbzIJ",
+                "name": "Set Variables",
+                "title": "Set Query String to Max Only",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Query String to Max Only",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$",
+                      "variable_value_new": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$max=$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSLPXYNNG191vN6Tak6uLMw2ImSiRaP5a$\u0026"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WSLPY6NV2XK6FRLytJPwT2D6EhVzJmjSf",
+            "name": "Condition Branch",
+            "title": "Elif Only Offset",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSLPXYNOLZ86nsn4HTNEJVxuKSuLxesAA$",
+                "operator": "ne",
+                "right_operand": ""
+              },
+              "continue_on_failure": false,
+              "display_name": "Elif Only Offset",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSLPY7ZC2EM04629hyRRz7hEGGoS0yg8F",
+                "name": "Set Variables",
+                "title": "Set Query String to OffSet only",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Query String to OffSet only",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$",
+                      "variable_value_new": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$offset=$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSLPXYNOLZ86nsn4HTNEJVxuKSuLxesAA$\u0026"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01WSM84OPSGE46yea76K7icrsDRXWcQ93mJ",
+        "name": "Condition Block",
+        "title": "If Date + StartDate + EndDate",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "If Date + StartDate + EndDate",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01WSM84OPTF5M78F6rNwyYSxnBFTqZbVbQk",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": {
+                    "left_operand": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSM32PNHXMW5MfLRUyjyrX7Fixvj6kuyF$",
+                    "operator": "ne",
+                    "right_operand": ""
+                  },
+                  "operator": "and",
+                  "right_operand": {
+                    "left_operand": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSM48K2RACD7THdUodUw3He1PGR5B3gbZ$",
+                    "operator": "ne",
+                    "right_operand": ""
+                  }
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSM58VJBD3H2IinIJygoewjthoex11BYb$",
+                  "operator": "ne",
+                  "right_operand": ""
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSM84OPVTQB1XUlluAegUJKZP0YsshvHT",
+                "name": "Set Variables",
+                "title": "Set Full Query String",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Full Query String",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$",
+                      "variable_value_new": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$date=$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSM32PNHXMW5MfLRUyjyrX7Fixvj6kuyF$\u0026startDate=$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSM48K2RACD7THdUodUw3He1PGR5B3gbZ$\u0026endDate=$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSM58VJBD3H2IinIJygoewjthoex11BYb$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WSM84OPYPE76mcDLVzn9CSD7mGthl2kZS",
+            "name": "Condition Branch",
+            "title": "Elif date+startDate",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSM32PNHXMW5MfLRUyjyrX7Fixvj6kuyF$",
+                  "operator": "ne",
+                  "right_operand": ""
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSM48K2RACD7THdUodUw3He1PGR5B3gbZ$",
+                  "operator": "ne",
+                  "right_operand": ""
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "Elif date+startDate",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSM84OPZ6591Vk0HNHKMjRWucoOdTRF9h",
+                "name": "Set Variables",
+                "title": "Set Query String to Date+Start Date",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Query String to Date+Start Date",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$",
+                      "variable_value_new": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$date=$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSM32PNHXMW5MfLRUyjyrX7Fixvj6kuyF$\u0026startDate=$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSM48K2RACD7THdUodUw3He1PGR5B3gbZ$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WSM84OQ0VRP4s5ZzLUVhKq6VtP7kX8oUd",
+            "name": "Condition Branch",
+            "title": "Elif start date and end date",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSM48K2RACD7THdUodUw3He1PGR5B3gbZ$",
+                  "operator": "ne",
+                  "right_operand": ""
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSM58VJBD3H2IinIJygoewjthoex11BYb$",
+                  "operator": "ne",
+                  "right_operand": ""
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "Elif start date and end date",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSM84OQ1AWO3qJpXtfxlQ36sD4DlW17Yx",
+                "name": "Set Variables",
+                "title": "Set Query String to StartDate+EndDate",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Query String to StartDate+EndDate",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$",
+                      "variable_value_new": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$startDate=$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSLPXYNOLZ86nsn4HTNEJVxuKSuLxesAA$\u0026endDate=$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSM58VJBD3H2IinIJygoewjthoex11BYb$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WSMENTZ6EZS4KWPLUGeC9rsqeiE5Feoqv",
+            "name": "Condition Branch",
+            "title": "Elif just Date",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSM32PNHXMW5MfLRUyjyrX7Fixvj6kuyF$",
+                "operator": "ne",
+                "right_operand": ""
+              },
+              "continue_on_failure": false,
+              "display_name": "Elif just Date",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSMEZO3DBFJ4gHs6GAejMwAVy02XnrMQg",
+                "name": "Set Variables",
+                "title": "Set Query String to Date",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Query String to Date",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$",
+                      "variable_value_new": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$date=$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSM32PNHXMW5MfLRUyjyrX7Fixvj6kuyF$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WSMFGF3BZLI7OczUyJiSvIan6xbK4UCqU",
+            "name": "Condition Branch",
+            "title": "Else NO Dates",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNOT9K6OrzzJwFLnlSi3iwHFJhkC$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Else NO Dates",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSMGCABX7LR2qyTgLgylVXxGHbAqeOazd",
+                "name": "Execute Python Script",
+                "title": "Remove Last Character",
+                "type": "python3.script",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Remove Last Character",
+                  "script": "import sys\ninput = sys.argv[1]\nremove_last_char = input[:-1]",
+                  "script_arguments": [
+                    "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$"
+                  ],
+                  "script_queries": [
+                    {
+                      "script_query": "remove_last_char",
+                      "script_query_name": "remove_last_char",
+                      "script_query_type": "string"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01WSMH51KEROJ5HjTNte0JfRFRPN7indcyj",
+                "name": "Set Variables",
+                "title": "Save Update Query String",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Save Update Query String",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$",
+                      "variable_value_new": "$activity.definition_activity_01WSMGCABX7LR2qyTgLgylVXxGHbAqeOazd.output.script_queries.remove_last_char$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01WSM9S4PKNLH4d64vpMrloGYxqTLpuHm0K",
+        "name": "Condition Block",
+        "title": "if query string == ?",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if query string == ?",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01WSM9S55SM2Y4mmvHJQUBgQGpIPf9iEuky",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$",
+                "operator": "eq",
+                "right_operand": "?"
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSMA63N7IXJ3YXdfYXt4Zia5OAMNa58Ju",
+                "name": "Set Variables",
+                "title": "Blank out Query String",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": true,
+                  "display_name": "Blank out Query String",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$",
+                      "variable_value_new": ""
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01WSLPY8TWNKQ6cPOLZGTqWRA5DNxyegV0i",
+        "name": "HTTP Request",
+        "title": "Get Syslog Events",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "continue_on_error_status_code": true,
+          "continue_on_failure": true,
+          "custom_headers": [
+            {
+              "name": "Authorization",
+              "value": "Bearer $workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.input.variable_workflow_01WSLPXYNNVCJ4M7upf1vj0EWnNmV3iyi9t$"
+            }
+          ],
+          "display_name": "Get Syslog Events",
+          "method": "GET",
+          "relative_url": "/syslog/daily$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNP7SR40ZZ6QrIKqttGPLAhmTJXF$",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01WSLPY9L2AIN7QHCMW0HDZvQh1fe89FIsf",
+        "name": "Condition Block",
+        "title": "if API OK",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if API OK",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01WSLPYAH4SLY35X3XBZM44NlOO5fjeK9l8",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$activity.definition_activity_01WSLPY8TWNKQ6cPOLZGTqWRA5DNxyegV0i.output.succeeded$",
+                  "operator": "eq",
+                  "right_operand": true
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$activity.definition_activity_01WSLPY8TWNKQ6cPOLZGTqWRA5DNxyegV0i.output.status_code$",
+                  "operator": "eq",
+                  "right_operand": 200
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSLPYBP3VSR5XlWem0Hz2UCeTpLZ0ZkXN",
+                "name": "Set Variables",
+                "title": "Set Output JSON",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": true,
+                  "display_name": "Set Output JSON",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.output.variable_workflow_01WSLPXYNO4VG0yqDHHy0Sk3N90ER1GNVdG$",
+                      "variable_value_new": "$activity.definition_activity_01WSLPY8TWNKQ6cPOLZGTqWRA5DNxyegV0i.output.response_body$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.output.variable_workflow_01WSLPXYNPH023QE0YoK9t8Ct648hXkVyIY$",
+                      "variable_value_new": 200
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.output.variable_workflow_01WSLPXYNOE4Q5FaDwLXVZvDkNgFsqTcMAy$",
+                      "variable_value_new": "$activity.definition_activity_01WSLPY8TWNKQ6cPOLZGTqWRA5DNxyegV0i.output.status_text$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WSLPYCSYAGB44H6qo9R98HmYTXyAIJzcC",
+            "name": "Condition Branch",
+            "title": "Else Fail",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.local.variable_workflow_01WSLPXYNOT9K6OrzzJwFLnlSi3iwHFJhkC$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Else Fail",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSLPYEGEQOD5RfVg8pRMwkDBRdraYtmpu",
+                "name": "Set Variables",
+                "title": "Store Failures",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": true,
+                  "display_name": "Store Failures",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.output.variable_workflow_01WSLPXYNPH023QE0YoK9t8Ct648hXkVyIY$",
+                      "variable_value_new": "$activity.definition_activity_01WSLPY8TWNKQ6cPOLZGTqWRA5DNxyegV0i.output.status_code$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSLPXYEB8PV1Y7HKQyqk7EklGBcxf1mqt.output.variable_workflow_01WSLPXYNOE4Q5FaDwLXVZvDkNgFsqTcMAy$",
+                      "variable_value_new": "$activity.definition_activity_01WSLPY8TWNKQ6cPOLZGTqWRA5DNxyegV0i.output.status_text$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_01WQN9NVVJZXK2VTifmqXfsVQSqL0ZKbZ5D"
+    ]
+  },
+  "categories": {
+    "category_01WQN9NVVJZXK2VTifmqXfsVQSqL0ZKbZ5D": {
+      "unique_name": "category_01WQN9NVVJZXK2VTifmqXfsVQSqL0ZKbZ5D",
+      "name": "BCS Operational Insights API",
+      "title": "BCS Operational Insights API",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  }
+}
