@@ -10,28 +10,14 @@
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
-          "scope": "output",
-          "name": "O_results_json",
+          "scope": "input",
+          "name": "I_max",
           "type": "datatype.string",
-          "description": "Resultant list from API",
+          "description": "Max amount of entries to return. Leave blank for all.",
           "is_required": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_01WQNV63OGHY27QAy2rfJLYwcwLoB6k214r",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 0,
-          "scope": "output",
-          "name": "O_api_status_code",
-          "type": "datatype.integer",
-          "description": "Status code from API return",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WSCT3SFUEMO7bflhHPW0qi5gWCmGpDFmx",
+        "unique_name": "variable_workflow_01WQNLAU0A3OA0MnqPE1kKD0sEyw7WoVwGm",
         "object_type": "variable_workflow"
       },
       {
@@ -46,20 +32,6 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01WQNLPFHCM1M0vjjFk6wcnMlOBQMYRPGZE",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "Total Failure",
-          "scope": "output",
-          "name": "O_api_status_message",
-          "type": "datatype.string",
-          "description": "Status message from API return",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WSCTEURQ22G1h4kJkeen2h8m3Dj8YFrRj",
         "object_type": "variable_workflow"
       },
       {
@@ -105,17 +77,45 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.string",
+        "schema_id": "datatype.integer",
         "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "I_max",
-          "type": "datatype.string",
-          "description": "Max amount of entries to return. Leave blank for all.",
+          "value": 0,
+          "scope": "output",
+          "name": "O_api_status_code",
+          "type": "datatype.integer",
+          "description": "Status code from API return",
           "is_required": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_01WQNLAU0A3OA0MnqPE1kKD0sEyw7WoVwGm",
+        "unique_name": "variable_workflow_01WSCT3SFUEMO7bflhHPW0qi5gWCmGpDFmx",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "O_results_json",
+          "type": "datatype.string",
+          "description": "Resultant list from API",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WQNV63OGHY27QAy2rfJLYwcwLoB6k214r",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Total Failure",
+          "scope": "output",
+          "name": "O_api_status_message",
+          "type": "datatype.string",
+          "description": "Status message from API return",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSCTEURQ22G1h4kJkeen2h8m3Dj8YFrRj",
         "object_type": "variable_workflow"
       }
     ],
@@ -360,6 +360,14 @@
                     {
                       "variable_to_update": "$workflow.definition_workflow_01WQNJ50D3YBZ6um026MAxdAZ28qhcgsk50.output.variable_workflow_01WQNV63OGHY27QAy2rfJLYwcwLoB6k214r$",
                       "variable_value_new": "$activity.definition_activity_01WQNS7VU7JBM4wh6eYDOedGnDeayvh2yOz.output.response_body$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WQNJ50D3YBZ6um026MAxdAZ28qhcgsk50.output.variable_workflow_01WSCT3SFUEMO7bflhHPW0qi5gWCmGpDFmx$",
+                      "variable_value_new": 200
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WQNJ50D3YBZ6um026MAxdAZ28qhcgsk50.output.variable_workflow_01WSCTEURQ22G1h4kJkeen2h8m3Dj8YFrRj$",
+                      "variable_value_new": "$activity.definition_activity_01WQNS7VU7JBM4wh6eYDOedGnDeayvh2yOz.output.status_text$"
                     }
                   ]
                 },
