@@ -1,0 +1,438 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1",
+    "name": "BCS Operational Insights - Get_Inventory_Assets",
+    "title": "BCS Operational Insights - Get_Inventory_Assets",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_max",
+          "type": "datatype.string",
+          "description": "Max amount of entries to return. Leave blank for all.",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WQOEQ9ATN774z08fZtOxN8YPxdkeibzfM",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "O_results_json",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WQOEQ9AUA4V6Zf0prhdORifeI27oRE04T",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_offset",
+          "type": "datatype.string",
+          "description": "Number of items to be skipped from the start. Leave blank for default of 0 (or all)",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WQOEQ9AUI835LA6ewCa16mZDic2Sd0QHL",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_query_string",
+          "type": "datatype.string",
+          "description": "query string to be dynamically generated",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WQOEQ9AUQHZ3fIVPK7vKsNuJ6eqWakmVL",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": true,
+          "scope": "local",
+          "name": "L_ELSE",
+          "type": "datatype.boolean",
+          "description": "default else",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSDPFILGKN85amOqIuKyNdzJn13FALc8t",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Total Failure",
+          "scope": "output",
+          "name": "O_api_status_message",
+          "type": "datatype.string",
+          "description": "Status message from API return",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSDR02UUF8P4XhoJfkXaMS6sbI73L5hYX",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "output",
+          "name": "O_api_status_code",
+          "type": "datatype.integer",
+          "description": "Status code from API return",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSDQNYWE31A6kwtOhXJgGnLTV4mtmjhUZ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_jwt_token",
+          "type": "datatype.secure_string",
+          "description": "JWT token for access to API. Generated via GET_JWT_TOKEN atomic",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WQOEQ9AU05T3aUfMZ2RQ3VSIcapsGL3w7",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "BCS Operational Insights",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": false,
+      "description": "This returns a JSON based assets list from BCS Operational Insights API\n\nTarget: HTTP Endpoint for BCS Operational Insights (either US or EMEA)\n\nAccount Key: None. Auth done via input token\n\nSteps:\n[] Checks if there is a need to have MAX or OFFSET in the query string\n[] Makes API call to Get Assets endpoint with query string\n[]\u003e If call ok -\u003e stores JSON based output\n[]\u003e if call not ok -\u003e stores errors\n\n\n\nMore information about this API: https://developer.cisco.com/docs/bcs-operational-insights/#!introduction",
+      "display_name": "BCS Operational Insights - Get_Inventory_Assets",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01WQOEQBZ6UPA03DvSRstiSj5KdfmyFwHzD",
+        "name": "Condition Block",
+        "title": "if offset and max",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if offset and max",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01WQOEQCWDXOL4amBnTlVbd76rByChdwGkX",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.input.variable_workflow_01WQOEQ9ATN774z08fZtOxN8YPxdkeibzfM$",
+                  "operator": "ne",
+                  "right_operand": ""
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.input.variable_workflow_01WQOEQ9AUI835LA6ewCa16mZDic2Sd0QHL$",
+                  "operator": "ne",
+                  "right_operand": ""
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WQOEQDZ29DD5XtdwMDoXUhHnCGFlgzCqT",
+                "name": "Set Variables",
+                "title": "Set Full Query String",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Full Query String",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.local.variable_workflow_01WQOEQ9AUQHZ3fIVPK7vKsNuJ6eqWakmVL$",
+                      "variable_value_new": "?max=$workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.input.variable_workflow_01WQOEQ9ATN774z08fZtOxN8YPxdkeibzfM$\u0026offset=$workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.input.variable_workflow_01WQOEQ9AUI835LA6ewCa16mZDic2Sd0QHL$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WQOEQEU755U0TPnwaauB6znAuqXf2gB3K",
+            "name": "Condition Branch",
+            "title": "Elif Only Max",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.input.variable_workflow_01WQOEQ9ATN774z08fZtOxN8YPxdkeibzfM$",
+                "operator": "ne",
+                "right_operand": ""
+              },
+              "continue_on_failure": false,
+              "display_name": "Elif Only Max",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WQOEQFWR6VE03fCmG6S9NLvzQHQ37htvG",
+                "name": "Set Variables",
+                "title": "Set Query String to Max Only",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Query String to Max Only",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.local.variable_workflow_01WQOEQ9AUQHZ3fIVPK7vKsNuJ6eqWakmVL$",
+                      "variable_value_new": "?max=$workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.input.variable_workflow_01WQOEQ9ATN774z08fZtOxN8YPxdkeibzfM$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WQOEQGTWNAF7QSOY2fF4bVjAztVNGZIzN",
+            "name": "Condition Branch",
+            "title": "Elif Only Offset",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.input.variable_workflow_01WQOEQ9AUI835LA6ewCa16mZDic2Sd0QHL$",
+                "operator": "ne",
+                "right_operand": ""
+              },
+              "continue_on_failure": false,
+              "display_name": "Elif Only Offset",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WQOEQHT3OD15xELJUPdT04TZMMsNzj4UE",
+                "name": "Set Variables",
+                "title": "Set Query String to OffSet only",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Query String to OffSet only",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.local.variable_workflow_01WQOEQ9AUQHZ3fIVPK7vKsNuJ6eqWakmVL$",
+                      "variable_value_new": "?offset=$workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.input.variable_workflow_01WQOEQ9AUI835LA6ewCa16mZDic2Sd0QHL$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01WQOEQITRW6S5UaODHoNhACtziV4KlXyrB",
+        "name": "HTTP Request",
+        "title": "Get Assets",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "continue_on_error_status_code": true,
+          "continue_on_failure": true,
+          "custom_headers": [
+            {
+              "name": "Authorization",
+              "value": "Bearer $workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.input.variable_workflow_01WQOEQ9AU05T3aUfMZ2RQ3VSIcapsGL3w7$"
+            }
+          ],
+          "display_name": "Get Assets",
+          "method": "GET",
+          "relative_url": "/inventory/assets$workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.local.variable_workflow_01WQOEQ9AUQHZ3fIVPK7vKsNuJ6eqWakmVL$",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01WSDRD7OHDZV0E3QWF0XB4oxOi4sx4pxK8",
+        "name": "Condition Block",
+        "title": "if API OK",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if API OK",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01WSDRD84IQYF19nVUIoejU3Oz8orKdZ0US",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$activity.definition_activity_01WQOEQITRW6S5UaODHoNhACtziV4KlXyrB.output.succeeded$",
+                  "operator": "eq",
+                  "right_operand": true
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$activity.definition_activity_01WQOEQITRW6S5UaODHoNhACtziV4KlXyrB.output.status_code$",
+                  "operator": "eq",
+                  "right_operand": 200
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WQOEQJY5DO65LsNw6VYXIuXZc2wuhJCY6",
+                "name": "Set Variables",
+                "title": "Set Output JSON",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Output JSON",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.output.variable_workflow_01WQOEQ9AUA4V6Zf0prhdORifeI27oRE04T$",
+                      "variable_value_new": "$activity.definition_activity_01WQOEQITRW6S5UaODHoNhACtziV4KlXyrB.output.response_body$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.output.variable_workflow_01WSDQNYWE31A6kwtOhXJgGnLTV4mtmjhUZ$",
+                      "variable_value_new": 200
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.output.variable_workflow_01WSDR02UUF8P4XhoJfkXaMS6sbI73L5hYX$",
+                      "variable_value_new": "$activity.definition_activity_01WQOEQITRW6S5UaODHoNhACtziV4KlXyrB.output.status_text$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WSDRD8KRAJL5EKSOoyKmqd1AKOdBwpeSy",
+            "name": "Condition Branch",
+            "title": "ELSE",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.local.variable_workflow_01WSDPFILGKN85amOqIuKyNdzJn13FALc8t$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "ELSE",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSDW76TV5AR2twMLCNStKRypH61hYuogX",
+                "name": "Set Variables",
+                "title": "Store HTTP Errors",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Store HTTP Errors",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.output.variable_workflow_01WSDQNYWE31A6kwtOhXJgGnLTV4mtmjhUZ$",
+                      "variable_value_new": "$activity.definition_activity_01WQOEQITRW6S5UaODHoNhACtziV4KlXyrB.output.status_code$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WQOEQ8Z10JW79L4ArI2OO5OsBQrNEunj1.output.variable_workflow_01WSDR02UUF8P4XhoJfkXaMS6sbI73L5hYX$",
+                      "variable_value_new": "$activity.definition_activity_01WQOEQITRW6S5UaODHoNhACtziV4KlXyrB.output.status_text$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_01WQN9NVVJZXK2VTifmqXfsVQSqL0ZKbZ5D"
+    ]
+  },
+  "categories": {
+    "category_01WQN9NVVJZXK2VTifmqXfsVQSqL0ZKbZ5D": {
+      "unique_name": "category_01WQN9NVVJZXK2VTifmqXfsVQSqL0ZKbZ5D",
+      "name": "BCS Operational Insights API",
+      "title": "BCS Operational Insights API",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  }
+}
