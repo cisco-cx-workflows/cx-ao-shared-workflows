@@ -1,0 +1,621 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp",
+    "name": "BCS Operational Insights - Get_Configuration_Best_Practices",
+    "title": "BCS Operational Insights - Get_Configuration_Best_Practices",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_max",
+          "type": "datatype.string",
+          "description": "Max amount of entries to return. Leave blank for all.",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSJZ7OEDRCM0qKKFQMsHWXnH0tT03YmVN",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_jwt_token",
+          "type": "datatype.secure_string",
+          "description": "JWT token for access to API. Generated via GET_JWT_TOKEN atomic",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSJZ7OEFFC912oUIgEDlDQwIEgA4lVc2B",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "details|rules|rulesReference|summary",
+          "scope": "local",
+          "name": "L_regex_endpoints",
+          "type": "datatype.string",
+          "description": "List of allowed endpoints",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSJZ7OEEARZ7AAlADS47Y1lEPXSulOqxV",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_query_string",
+          "type": "datatype.string",
+          "description": "query string to be dynamically generated",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSJZ7OEF6K76jqBOdhzbhS2wxSwZnPEfc",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Total Failure",
+          "scope": "output",
+          "name": "O_api_status_message",
+          "type": "datatype.string",
+          "description": "Status message from API return",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSJZ7OEE25E73WKCC5mxQyoHNyAHRjBhU",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": true,
+          "scope": "local",
+          "name": "L_ELSE",
+          "type": "datatype.boolean",
+          "description": "default else",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSJZ7OEDH9B1o5pp9XUtzuondAWzsB8jM",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_bp_type",
+          "type": "datatype.string",
+          "description": "type of best practice requested",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSJZ7OEEYWH4VKldG8VqbwAMYX8ovFah2",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_offset",
+          "type": "datatype.string",
+          "description": "Number of items to be skipped from the start. Leave blank for default of 0 (or all)",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSJZ7OEEQ253a3MOYjzNPwOMSR0RofPvu",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "details",
+          "scope": "input",
+          "name": "I_best_practice_type",
+          "type": "datatype.string",
+          "description": "The Type of Alerts wanted, the following are the only options:\ndetails,\nrules,\nrule references,\nsummary",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSJZ7OED5J61rYW3cQJVEiOxgxWFFb95p",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "output",
+          "name": "O_api_status_code",
+          "type": "datatype.integer",
+          "description": "Status code from API return",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSJZ7OEFMSW2uyTxHt2Tle6VzQ8HgVTGo",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "O_results_json",
+          "type": "datatype.string",
+          "description": "Best Practices List",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSJZ7OEEIHH72CJMjRS6YY1qFd5BwmHjc",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "BCS Operational Insights",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": false,
+      "description": "This returns a JSON based configuration best practices list from BCS Operational Insights API. The user can input what kind of best practice they want and this will affect the endpoint accessed\n\nTarget: HTTP Endpoint for BCS Operational Insights (either US or EMEA)\n\nAccount Key: None. Auth done via input token\n\nSteps:\n[] Check if we have a viable best practice request\n[]\u003e if request is ok -\u003e proceed\n[]\u003e if request is not valid -\u003e exit\n[] Checks if there is a need to have MAX or OFFSET in the query string\n[] Makes API call to Best Practices endpoint with query string\n[]\u003e If call ok -\u003e stores JSON based output\n[]\u003e if call not ok -\u003e stores errors\n\n\n\nMore information about this API: https://developer.cisco.com/docs/bcs-operational-insights/#!introduction",
+      "display_name": "BCS Operational Insights - Get_Configuration_Best_Practices",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01WSJZ7RNY3QS37UKjsMcmjjs1JrnpFVfPV",
+        "name": "Execute Python Script",
+        "title": "Determine requested best practice",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Determine requested best practice",
+          "script": "import json, sys\ninput = sys.argv[1]\nlower_first = input[0].lower() + input[1:]\nendpoint = ''.join(lower_first.split())",
+          "script_arguments": [
+            "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.input.variable_workflow_01WSJZ7OED5J61rYW3cQJVEiOxgxWFFb95p$"
+          ],
+          "script_queries": [
+            {
+              "script_query": "endpoint",
+              "script_query_name": "endpoint ",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01WSJZ7SKUOTT21FcNgdoBUrF8nHeV5cpSf",
+        "name": "Condition Block",
+        "title": "if good endpoint",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if good endpoint",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01WSJZ7TI7H9P1iypCC3i9aU4BK6Itim7Ta",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01WSJZ7RNY3QS37UKjsMcmjjs1JrnpFVfPV.output.script_queries.endpoint $",
+                "operator": "mregex",
+                "right_operand": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.local.variable_workflow_01WSJZ7OEEARZ7AAlADS47Y1lEPXSulOqxV$"
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSJZ7UFRLDT6UgbHr1Pxi0ZnFGyl64KX6",
+                "name": "Set Variables",
+                "title": "Save BP Locally",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Save BP Locally",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.local.variable_workflow_01WSJZ7OEEYWH4VKldG8VqbwAMYX8ovFah2$",
+                      "variable_value_new": "$activity.definition_activity_01WSJZ7RNY3QS37UKjsMcmjjs1JrnpFVfPV.output.script_queries.endpoint $"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WSJZ7VE18W34MzuEfwvw4hp0wR4LhFEco",
+            "name": "Condition Branch",
+            "title": "Else",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.local.variable_workflow_01WSJZ7OEDH9B1o5pp9XUtzuondAWzsB8jM$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Else",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSJZ7WG4DP32sQrQV7VfuYu1QMKBGbQCR",
+                "name": "Set Variables",
+                "title": "Error: Bad BP Requested",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Error: Bad BP Requested",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.output.variable_workflow_01WSJZ7OEE25E73WKCC5mxQyoHNyAHRjBhU$",
+                      "variable_value_new": "Best Practice Type \"$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.input.variable_workflow_01WSJZ7OED5J61rYW3cQJVEiOxgxWFFb95p$\" does not exist. Please use one of the following:\ndetails\nrules\nrule references\nsummary"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.output.variable_workflow_01WSJZ7OEEIHH72CJMjRS6YY1qFd5BwmHjc$",
+                      "variable_value_new": "{}"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.output.variable_workflow_01WSJZ7OEFMSW2uyTxHt2Tle6VzQ8HgVTGo$",
+                      "variable_value_new": 0
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01WSJZ7X8FS0D5C69h9LmpkuVeFKxG5qxmv",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "succeeded",
+                  "continue_on_failure": false,
+                  "display_name": "Completed",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01WSJZ7Y297WG6sQPGPSExf7hMCiPJClG1m",
+        "name": "Condition Block",
+        "title": "if offset and max",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if offset and max",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01WSJZ7YUVCRO4SBpvpu04ewIXZMiZM9lxV",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.input.variable_workflow_01WSJZ7OEDRCM0qKKFQMsHWXnH0tT03YmVN$",
+                  "operator": "ne",
+                  "right_operand": ""
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.input.variable_workflow_01WSJZ7OEEQ253a3MOYjzNPwOMSR0RofPvu$",
+                  "operator": "ne",
+                  "right_operand": ""
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSJZ7ZYY7I03eKaVGbvvrdORrPEE9IkNa",
+                "name": "Set Variables",
+                "title": "Set Full Query String",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Full Query String",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.local.variable_workflow_01WSJZ7OEF6K76jqBOdhzbhS2wxSwZnPEfc$",
+                      "variable_value_new": "?max=$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.input.variable_workflow_01WSJZ7OEDRCM0qKKFQMsHWXnH0tT03YmVN$\u0026offset=$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.input.variable_workflow_01WSJZ7OEEQ253a3MOYjzNPwOMSR0RofPvu$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WSJZ818W6B91sqgqIcgEShthvSV7xoYsi",
+            "name": "Condition Branch",
+            "title": "Elif Only Max",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.input.variable_workflow_01WSJZ7OEDRCM0qKKFQMsHWXnH0tT03YmVN$",
+                "operator": "ne",
+                "right_operand": ""
+              },
+              "continue_on_failure": false,
+              "display_name": "Elif Only Max",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSJZ82NG2RD5fvjrJKDPGDCReuvLO3Oi8",
+                "name": "Set Variables",
+                "title": "Set Query String to Max Only",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Query String to Max Only",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.local.variable_workflow_01WSJZ7OEF6K76jqBOdhzbhS2wxSwZnPEfc$",
+                      "variable_value_new": "?max=$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.input.variable_workflow_01WSJZ7OEDRCM0qKKFQMsHWXnH0tT03YmVN$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WSJZ83M3XUN41z4A6KighpYgh90Gjz8NL",
+            "name": "Condition Branch",
+            "title": "Elif Only Offset",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.input.variable_workflow_01WSJZ7OEEQ253a3MOYjzNPwOMSR0RofPvu$",
+                "operator": "ne",
+                "right_operand": ""
+              },
+              "continue_on_failure": false,
+              "display_name": "Elif Only Offset",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSJZ84J37LO6ycqcacNmDuJQBcvy6FPEN",
+                "name": "Set Variables",
+                "title": "Set Query String to OffSet only",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Query String to OffSet only",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.local.variable_workflow_01WSJZ7OEF6K76jqBOdhzbhS2wxSwZnPEfc$",
+                      "variable_value_new": "?offset=$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.input.variable_workflow_01WSJZ7OEEQ253a3MOYjzNPwOMSR0RofPvu$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01WSJZ85FQ7HV2HZFQuUw4mJg57mLFYLogr",
+        "name": "HTTP Request",
+        "title": "Get Best Practices",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "continue_on_error_status_code": true,
+          "continue_on_failure": true,
+          "custom_headers": [
+            {
+              "name": "Authorization",
+              "value": "Bearer $workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.input.variable_workflow_01WSJZ7OEFFC912oUIgEDlDQwIEgA4lVc2B$"
+            }
+          ],
+          "display_name": "Get Best Practices",
+          "method": "GET",
+          "relative_url": "/configBestPractices/$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.local.variable_workflow_01WSJZ7OEEYWH4VKldG8VqbwAMYX8ovFah2$$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.local.variable_workflow_01WSJZ7OEF6K76jqBOdhzbhS2wxSwZnPEfc$",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01WSJZ86EP8ZB4Tp5yidWNJNeaFcusa7cj7",
+        "name": "Condition Block",
+        "title": "if API OK",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if API OK",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01WSJZ87RGDIQ4BCLkI5RDsEMhymISQ5brn",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$activity.definition_activity_01WSJZ85FQ7HV2HZFQuUw4mJg57mLFYLogr.output.succeeded$",
+                  "operator": "eq",
+                  "right_operand": true
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$activity.definition_activity_01WSJZ85FQ7HV2HZFQuUw4mJg57mLFYLogr.output.status_code$",
+                  "operator": "eq",
+                  "right_operand": 200
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSJZ88YYADO6NKnrNUsqKFiEysOkq6dvA",
+                "name": "Set Variables",
+                "title": "Set Output JSON",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Output JSON",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.output.variable_workflow_01WSJZ7OEEIHH72CJMjRS6YY1qFd5BwmHjc$",
+                      "variable_value_new": "$activity.definition_activity_01WSJZ85FQ7HV2HZFQuUw4mJg57mLFYLogr.output.response_body$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.output.variable_workflow_01WSJZ7OEFMSW2uyTxHt2Tle6VzQ8HgVTGo$",
+                      "variable_value_new": 200
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.output.variable_workflow_01WSJZ7OEE25E73WKCC5mxQyoHNyAHRjBhU$",
+                      "variable_value_new": "$activity.definition_activity_01WSJZ85FQ7HV2HZFQuUw4mJg57mLFYLogr.output.status_text$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WSJZ8A35TQM28QqoMW5GOhTOJTA3TQUm4",
+            "name": "Condition Branch",
+            "title": "ELSE",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.local.variable_workflow_01WSJZ7OEDH9B1o5pp9XUtzuondAWzsB8jM$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "ELSE",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WSJZ8BAD0BA1Rf6ZzjWghE5cmqPWdpEqj",
+                "name": "Set Variables",
+                "title": "Store HTTP Errors",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Store HTTP Errors",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.output.variable_workflow_01WSJZ7OEFMSW2uyTxHt2Tle6VzQ8HgVTGo$",
+                      "variable_value_new": "$activity.definition_activity_01WSJZ85FQ7HV2HZFQuUw4mJg57mLFYLogr.output.status_code$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.output.variable_workflow_01WSJZ7OEE25E73WKCC5mxQyoHNyAHRjBhU$",
+                      "variable_value_new": "$activity.definition_activity_01WSJZ85FQ7HV2HZFQuUw4mJg57mLFYLogr.output.status_text$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_01WQN9NVVJZXK2VTifmqXfsVQSqL0ZKbZ5D"
+    ]
+  },
+  "categories": {
+    "category_01WQN9NVVJZXK2VTifmqXfsVQSqL0ZKbZ5D": {
+      "unique_name": "category_01WQN9NVVJZXK2VTifmqXfsVQSqL0ZKbZ5D",
+      "name": "BCS Operational Insights API",
+      "title": "BCS Operational Insights API",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  }
+}
