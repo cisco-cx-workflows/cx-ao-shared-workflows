@@ -10,6 +10,34 @@
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
+          "scope": "output",
+          "name": "O_results_json",
+          "type": "datatype.string",
+          "description": "Best Practices List",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSJZ7OEEIHH72CJMjRS6YY1qFd5BwmHjc",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Total Failure",
+          "scope": "output",
+          "name": "O_api_status_message",
+          "type": "datatype.string",
+          "description": "Status message from API return",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSJZ7OEE25E73WKCC5mxQyoHNyAHRjBhU",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
           "scope": "input",
           "name": "I_max",
           "type": "datatype.string",
@@ -18,20 +46,6 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01WSJZ7OEDRCM0qKKFQMsHWXnH0tT03YmVN",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.secure_string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "I_jwt_token",
-          "type": "datatype.secure_string",
-          "description": "JWT token for access to API. Generated via GET_JWT_TOKEN atomic",
-          "is_required": true,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WSJZ7OEFFC912oUIgEDlDQwIEgA4lVc2B",
         "object_type": "variable_workflow"
       },
       {
@@ -51,6 +65,20 @@
       {
         "schema_id": "datatype.string",
         "properties": {
+          "value": "details",
+          "scope": "input",
+          "name": "I_best_practice_type",
+          "type": "datatype.string",
+          "description": "The Type of Alerts wanted, the following are the only options:\ndetails,\nrules,\nrule references,\nsummary",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSJZ7OED5J61rYW3cQJVEiOxgxWFFb95p",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
           "value": "",
           "scope": "local",
           "name": "L_query_string",
@@ -60,48 +88,6 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01WSJZ7OEF6K76jqBOdhzbhS2wxSwZnPEfc",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "Total Failure",
-          "scope": "output",
-          "name": "O_api_status_message",
-          "type": "datatype.string",
-          "description": "Status message from API return",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WSJZ7OEE25E73WKCC5mxQyoHNyAHRjBhU",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.boolean",
-        "properties": {
-          "value": true,
-          "scope": "local",
-          "name": "L_ELSE",
-          "type": "datatype.boolean",
-          "description": "default else",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WSJZ7OEDH9B1o5pp9XUtzuondAWzsB8jM",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "L_bp_type",
-          "type": "datatype.string",
-          "description": "type of best practice requested",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WSJZ7OEEYWH4VKldG8VqbwAMYX8ovFah2",
         "object_type": "variable_workflow"
       },
       {
@@ -119,20 +105,6 @@
         "object_type": "variable_workflow"
       },
       {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "details",
-          "scope": "input",
-          "name": "I_best_practice_type",
-          "type": "datatype.string",
-          "description": "The Type of Alerts wanted, the following are the only options:\ndetails,\nrules,\nrule references,\nsummary",
-          "is_required": true,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WSJZ7OED5J61rYW3cQJVEiOxgxWFFb95p",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.integer",
         "properties": {
           "value": 0,
@@ -147,17 +119,45 @@
         "object_type": "variable_workflow"
       },
       {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_jwt_token",
+          "type": "datatype.secure_string",
+          "description": "JWT token for access to API. Generated via GET_JWT_TOKEN atomic",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSJZ7OEFFC912oUIgEDlDQwIEgA4lVc2B",
+        "object_type": "variable_workflow"
+      },
+      {
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
-          "scope": "output",
-          "name": "O_results_json",
+          "scope": "local",
+          "name": "L_bp_type",
           "type": "datatype.string",
-          "description": "Best Practices List",
+          "description": "type of best practice requested",
           "is_required": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_01WSJZ7OEEIHH72CJMjRS6YY1qFd5BwmHjc",
+        "unique_name": "variable_workflow_01WSJZ7OEEYWH4VKldG8VqbwAMYX8ovFah2",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": true,
+          "scope": "local",
+          "name": "L_ELSE",
+          "type": "datatype.boolean",
+          "description": "default else",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WSJZ7OEDH9B1o5pp9XUtzuondAWzsB8jM",
         "object_type": "variable_workflow"
       }
     ],
@@ -575,6 +575,25 @@
             },
             "object_type": "definition_activity",
             "actions": [
+              {
+                "unique_name": "definition_activity_01WT5MY1GVHXN0PNscHkYib1uU9rikNNH0H",
+                "name": "Set Variables",
+                "title": "Try to set JSON output",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": true,
+                  "display_name": "Try to set JSON output",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WSJZ7O5TFGL6Ij6K6OBKP2wJrMUYpIqQp.output.variable_workflow_01WSJZ7OEEIHH72CJMjRS6YY1qFd5BwmHjc$",
+                      "variable_value_new": "$activity.definition_activity_01WSJZ85FQ7HV2HZFQuUw4mJg57mLFYLogr.output.response_body$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              },
               {
                 "unique_name": "definition_activity_01WSJZ8BAD0BA1Rf6ZzjWghE5cmqPWdpEqj",
                 "name": "Set Variables",
