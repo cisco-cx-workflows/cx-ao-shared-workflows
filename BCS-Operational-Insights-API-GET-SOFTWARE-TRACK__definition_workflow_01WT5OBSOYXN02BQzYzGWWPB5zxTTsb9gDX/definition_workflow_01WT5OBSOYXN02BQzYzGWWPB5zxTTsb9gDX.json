@@ -9,15 +9,15 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "I_offset",
+          "value": "members|softwareMaintenanceUpgradeCompliance|softwareMaintenanceUpgradeRecommendations|summary",
+          "scope": "local",
+          "name": "L_regex_endpoints",
           "type": "datatype.string",
-          "description": "Number of items to be skipped from the start. Leave blank for default of 0 (or all)",
+          "description": "List of allowed endpoints",
           "is_required": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_01WT5OBSVQTMI2vMOWJoX0ZcbekmGAzzSEc",
+        "unique_name": "variable_workflow_01WT5OBSVRKGU6fubCmJYAU5amCZJIkKbFS",
         "object_type": "variable_workflow"
       },
       {
@@ -51,34 +51,6 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "Members|Software Maintenance Upgrade Compliance|Software Maintenance Upgrade Recommendations|Summary",
-          "scope": "local",
-          "name": "L_regex_endpoints",
-          "type": "datatype.string",
-          "description": "List of allowed endpoints",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WT5OBSVRKGU6fubCmJYAU5amCZJIkKbFS",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "L_software_track_type",
-          "type": "datatype.string",
-          "description": "type of sw track requested",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WT5OBSVRS5S7bhMprmBtQ1j1cnjGw17Um",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
           "value": "Total Failure",
           "scope": "output",
           "name": "O_api_status_message",
@@ -88,6 +60,34 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01WT5OBSVS7WS2HfeiXYBkLHNowDtqemkmj",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_query_string",
+          "type": "datatype.string",
+          "description": "query string to be dynamically generated",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WT5OBSVSN9F259iqqVJxKJUcPxJGC1TFD",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": true,
+          "scope": "local",
+          "name": "L_ELSE",
+          "type": "datatype.boolean",
+          "description": "default else",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WT5OBSVT33V2bIMifhHSxUNfknMnY4ayo",
         "object_type": "variable_workflow"
       },
       {
@@ -108,42 +108,14 @@
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
-          "scope": "local",
-          "name": "L_query_string",
-          "type": "datatype.string",
-          "description": "query string to be dynamically generated",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WT5OBSVSN9F259iqqVJxKJUcPxJGC1TFD",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.secure_string",
-        "properties": {
-          "value": "",
           "scope": "input",
-          "name": "I_jwt_token",
-          "type": "datatype.secure_string",
-          "description": "JWT token for access to API. Generated via GET_JWT_TOKEN atomic",
-          "is_required": true,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WT5OBSVSFE31kMiEMlV83DxuqNmNTteFY",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.boolean",
-        "properties": {
-          "value": true,
-          "scope": "local",
-          "name": "L_ELSE",
-          "type": "datatype.boolean",
-          "description": "default else",
+          "name": "I_offset",
+          "type": "datatype.string",
+          "description": "Number of items to be skipped from the start. Leave blank for default of 0 (or all)",
           "is_required": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_01WT5OBSVT33V2bIMifhHSxUNfknMnY4ayo",
+        "unique_name": "variable_workflow_01WT5OBSVQTMI2vMOWJoX0ZcbekmGAzzSEc",
         "object_type": "variable_workflow"
       },
       {
@@ -158,6 +130,34 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01WT5OBSVSVUK2AMSb3MXxQPl2bWQT4Cwz4",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_software_track_type",
+          "type": "datatype.string",
+          "description": "type of sw track requested",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WT5OBSVRS5S7bhMprmBtQ1j1cnjGw17Um",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_jwt_token",
+          "type": "datatype.secure_string",
+          "description": "JWT token for access to API. Generated via GET_JWT_TOKEN atomic",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WT5OBSVSFE31kMiEMlV83DxuqNmNTteFY",
         "object_type": "variable_workflow"
       }
     ],
