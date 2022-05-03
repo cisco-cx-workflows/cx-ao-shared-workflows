@@ -1,0 +1,668 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0",
+    "name": "BCS Operational Insights - Get_Device_Reset_Information",
+    "title": "BCS Operational Insights - Get_Device_Reset_Information",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_query_string",
+          "type": "datatype.string",
+          "description": "query string to be dynamically generated",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WT5XJ0O3B6K3OYDqDRvvlmlan10gf8DOH",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_device_reset_type",
+          "type": "datatype.string",
+          "description": "type of device reset info requested",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WT5XJ0O5CA01HdbGUq6LEIpAwEbptoNPz",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "O_results_json",
+          "type": "datatype.string",
+          "description": "Resultant JSON List",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WT5XJ0O5RA66ifqt1QNTgR1W90yJ0uBUo",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_offset",
+          "type": "datatype.string",
+          "description": "Number of items to be skipped from the start. Leave blank for default of 0 (or all)",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WT5XJ0O3Z5J6XgPow4HItE7wKTYkDiJHS",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Total Failure",
+          "scope": "output",
+          "name": "O_api_status_message",
+          "type": "datatype.string",
+          "description": "Status message from API return",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WT5XJ0O4GPI7ZJ1pEV4ICT69c3NSkEW5J",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "output",
+          "name": "O_api_status_code",
+          "type": "datatype.integer",
+          "description": "Status code from API return",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WT5XJ0O540C33dVMy9peFLIFZPnDVSbWn",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": true,
+          "scope": "local",
+          "name": "L_ELSE",
+          "type": "datatype.boolean",
+          "description": "default else",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WT5XJ0O4OJY3GPc5y4i1h4lT0yoD0xONb",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "lastResetDetails|resetCount|resetHistory",
+          "scope": "local",
+          "name": "L_regex_endpoints",
+          "type": "datatype.string",
+          "description": "List of allowed endpoints",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WT5XJ0O48QF34OcFBZM3GUuSpQv5NvPtf",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_max",
+          "type": "datatype.string",
+          "description": "Max amount of entries to return. Leave blank for all.",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WT5XJ0O5JRH5Bnw6Sa2EYsgj3XRJCURM1",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Last Reset Details",
+          "scope": "input",
+          "name": "I_device_reset_type",
+          "type": "datatype.string",
+          "description": "The Type of Software Track wanted, the following are the only options:\nLast Reset Details,\nReset Count,\nReset History",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WT5XJ0O3NCC72sntmbqgv6WuAEwYZeepd",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_type_of_reset",
+          "type": "datatype.string",
+          "description": "Type of reset. Supported values are \"crash\" and \"reload\". If not given then both are shown",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WT61MIUJTZJ7C22V6ZaIab4jmPGK1kogc",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_days",
+          "type": "datatype.string",
+          "description": "Days to look backward when getting data. If nothing is given, then default is 365 days.",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WT620U3R50G5hPQWf58bDC3qi50GTC2q8",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_jwt_token",
+          "type": "datatype.secure_string",
+          "description": "JWT token for access to API. Generated via GET_JWT_TOKEN atomic",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WT5XJ0O4VJA6AwcmCDkd3JvdR4GkdQ8fl",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "BCS Operational Insights",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": false,
+      "description": "This returns a JSON based list from BCS Operational Insights API which provides insights into device crashes and reloads. The user can input what kind of reload information they want and this will affect the endpoint accessed. NOTE: Reset Count only supports the Days input, all others will be ignored. \n\nTarget: HTTP Endpoint for BCS Operational Insights (either US or EMEA)\n\nAccount Key: None. Auth done via input token\n\nSteps:\n[] Check if we have a viable device reset request\n[]\u003e if request is ok -\u003e proceed\n[]\u003e if request is not valid -\u003e exit\n[] Checks if there is a need to have MAX, OFFSET, DAYS, TYPE in the query string\n[] Makes API call to Get Device Reset endpoint with query string\n[]\u003e If call ok -\u003e stores JSON based output\n[]\u003e if call not ok -\u003e stores errors\n\n\n\nMore information about this API: https://developer.cisco.com/docs/bcs-operational-insights/#!introduction",
+      "display_name": "BCS Operational Insights - Get_Device_Reset_Information",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01WT5XJ3X3PGI5jIP4XZAXzgYQgUvIECV5o",
+        "name": "Execute Python Script",
+        "title": "Determine requested device reset info",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Determine requested device reset info",
+          "script": "import json, sys\ninput = sys.argv[1]\nlower_first = input[0].lower() + input[1:]\nendpoint = ''.join(lower_first.split())",
+          "script_arguments": [
+            "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.input.variable_workflow_01WT5XJ0O3NCC72sntmbqgv6WuAEwYZeepd$"
+          ],
+          "script_queries": [
+            {
+              "script_query": "endpoint",
+              "script_query_name": "endpoint ",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01WT5XJ4S9B8N52v35igOTnnx4jwwkBkmgA",
+        "name": "Condition Block",
+        "title": "if good endpoint",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if good endpoint",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01WT5XJ5PFX042oXxsOFBl6RrpVxsus4tQB",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01WT5XJ3X3PGI5jIP4XZAXzgYQgUvIECV5o.output.script_queries.endpoint $",
+                "operator": "mregex",
+                "right_operand": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.local.variable_workflow_01WT5XJ0O48QF34OcFBZM3GUuSpQv5NvPtf$"
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WT5XJ79W25O214EHJuE7UlpI23mpMoZyN",
+                "name": "Set Variables",
+                "title": "Save Device Reset Request Locally",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Save Device Reset Request Locally",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.local.variable_workflow_01WT5XJ0O5CA01HdbGUq6LEIpAwEbptoNPz$",
+                      "variable_value_new": "$activity.definition_activity_01WT5XJ3X3PGI5jIP4XZAXzgYQgUvIECV5o.output.script_queries.endpoint $"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WT5XJ8TZ6M643AjkIRsGG4XHgb3BZVyyF",
+            "name": "Condition Branch",
+            "title": "Else",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.local.variable_workflow_01WT5XJ0O4OJY3GPc5y4i1h4lT0yoD0xONb$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Else",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WT5XJA67QX70El7Koc5O4Ttbdouv88qx3",
+                "name": "Set Variables",
+                "title": "Error: Bad Type Requested",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Error: Bad Type Requested",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.output.variable_workflow_01WT5XJ0O4GPI7ZJ1pEV4ICT69c3NSkEW5J$",
+                      "variable_value_new": "Device Reset Type \"$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.input.variable_workflow_01WT5XJ0O3NCC72sntmbqgv6WuAEwYZeepd$\" does not exist. Please use one of the following:\nLast Reset Details\nReset Count\nReset History"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.output.variable_workflow_01WT5XJ0O5RA66ifqt1QNTgR1W90yJ0uBUo$",
+                      "variable_value_new": "{}"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.output.variable_workflow_01WT5XJ0O540C33dVMy9peFLIFZPnDVSbWn$",
+                      "variable_value_new": 0
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01WT5XJBFJ1141cOGlW1YRzGdRtwid9MGGc",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "succeeded",
+                  "continue_on_failure": false,
+                  "display_name": "Completed",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01WT5XJC8DPK90UvVDDBytPfpJYwFJkoElK",
+        "name": "Condition Block",
+        "title": "if offset and max",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if offset and max",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01WT5XJD2E6915piPIhicfJP1b2ybrOQcXP",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.input.variable_workflow_01WT5XJ0O5JRH5Bnw6Sa2EYsgj3XRJCURM1$",
+                  "operator": "ne",
+                  "right_operand": ""
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.input.variable_workflow_01WT5XJ0O3Z5J6XgPow4HItE7wKTYkDiJHS$",
+                  "operator": "ne",
+                  "right_operand": ""
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WT5XJEA5PKD6ywcztI0mXsi9EJl3IuVQT",
+                "name": "Set Variables",
+                "title": "Set Full Query String",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Full Query String",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.local.variable_workflow_01WT5XJ0O3B6K3OYDqDRvvlmlan10gf8DOH$",
+                      "variable_value_new": "?max=$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.input.variable_workflow_01WT5XJ0O5JRH5Bnw6Sa2EYsgj3XRJCURM1$\u0026offset=$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.input.variable_workflow_01WT5XJ0O3Z5J6XgPow4HItE7wKTYkDiJHS$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WT5XJF70GF64wSqGRHBZ6G7XMDO5gRKGJ",
+            "name": "Condition Branch",
+            "title": "Elif Only Max",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.input.variable_workflow_01WT5XJ0O5JRH5Bnw6Sa2EYsgj3XRJCURM1$",
+                "operator": "ne",
+                "right_operand": ""
+              },
+              "continue_on_failure": false,
+              "display_name": "Elif Only Max",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WT5XJG4HVNR4wZTtwrb6pNvNAKcCOdVbc",
+                "name": "Set Variables",
+                "title": "Set Query String to Max Only",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Query String to Max Only",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.local.variable_workflow_01WT5XJ0O3B6K3OYDqDRvvlmlan10gf8DOH$",
+                      "variable_value_new": "?max=$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.input.variable_workflow_01WT5XJ0O5JRH5Bnw6Sa2EYsgj3XRJCURM1$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WT5XJH1Y3H1377cHDqSUik3r1nB30h3T0",
+            "name": "Condition Branch",
+            "title": "Elif Only Offset",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.input.variable_workflow_01WT5XJ0O3Z5J6XgPow4HItE7wKTYkDiJHS$",
+                "operator": "ne",
+                "right_operand": ""
+              },
+              "continue_on_failure": false,
+              "display_name": "Elif Only Offset",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WT5XJI2YCP80JZGcTrUw7V1h8fdoq3UTm",
+                "name": "Set Variables",
+                "title": "Set Query String to OffSet only",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Query String to OffSet only",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.local.variable_workflow_01WT5XJ0O3B6K3OYDqDRvvlmlan10gf8DOH$",
+                      "variable_value_new": "?offset=$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.input.variable_workflow_01WT5XJ0O3Z5J6XgPow4HItE7wKTYkDiJHS$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01WT5XJJ1R5952oZDwj2x08ieydUCnoe9oY",
+        "name": "HTTP Request",
+        "title": "Get Device Reset Information",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "continue_on_error_status_code": true,
+          "continue_on_failure": true,
+          "custom_headers": [
+            {
+              "name": "Authorization",
+              "value": "Bearer $workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.input.variable_workflow_01WT5XJ0O4VJA6AwcmCDkd3JvdR4GkdQ8fl$"
+            }
+          ],
+          "display_name": "Get Device Reset Information",
+          "method": "GET",
+          "relative_url": "/deviceReset/$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.local.variable_workflow_01WT5XJ0O5CA01HdbGUq6LEIpAwEbptoNPz$$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.local.variable_workflow_01WT5XJ0O3B6K3OYDqDRvvlmlan10gf8DOH$",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01WT5XJK0L3UX4o1tlf8z4SzrwqU1xu1hfw",
+        "name": "Condition Block",
+        "title": "if API OK",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "if API OK",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01WT5XJKW1MSE2IVTuk1K3QCqW6AEQVqGlj",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$activity.definition_activity_01WT5XJJ1R5952oZDwj2x08ieydUCnoe9oY.output.succeeded$",
+                  "operator": "eq",
+                  "right_operand": true
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$activity.definition_activity_01WT5XJJ1R5952oZDwj2x08ieydUCnoe9oY.output.status_code$",
+                  "operator": "eq",
+                  "right_operand": 200
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WT5XJMQ1HP96oOqq8EV5KuMHuBpxmazmm",
+                "name": "Set Variables",
+                "title": "Set Output JSON",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Output JSON",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.output.variable_workflow_01WT5XJ0O5RA66ifqt1QNTgR1W90yJ0uBUo$",
+                      "variable_value_new": "$activity.definition_activity_01WT5XJJ1R5952oZDwj2x08ieydUCnoe9oY.output.response_body$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.output.variable_workflow_01WT5XJ0O540C33dVMy9peFLIFZPnDVSbWn$",
+                      "variable_value_new": 200
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.output.variable_workflow_01WT5XJ0O4GPI7ZJ1pEV4ICT69c3NSkEW5J$",
+                      "variable_value_new": "$activity.definition_activity_01WT5XJJ1R5952oZDwj2x08ieydUCnoe9oY.output.status_text$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01WT5XJNY7CHB5Wsn2NEKpoy601UYE4oZRX",
+            "name": "Condition Branch",
+            "title": "ELSE",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.local.variable_workflow_01WT5XJ0O4OJY3GPc5y4i1h4lT0yoD0xONb$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "ELSE",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01WT5XJOWXL957HVyPmB78xUESdUkNRHm3J",
+                "name": "Set Variables",
+                "title": "Try to Store Output JSON",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": true,
+                  "display_name": "Try to Store Output JSON",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.output.variable_workflow_01WT5XJ0O5RA66ifqt1QNTgR1W90yJ0uBUo$",
+                      "variable_value_new": "$activity.definition_activity_01WT5XJJ1R5952oZDwj2x08ieydUCnoe9oY.output.response_body$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01WT5XJQ1TR375slqdSr6TJOo9BVxIXcFkW",
+                "name": "Set Variables",
+                "title": "Store HTTP Errors",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Store HTTP Errors",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.output.variable_workflow_01WT5XJ0O540C33dVMy9peFLIFZPnDVSbWn$",
+                      "variable_value_new": "$activity.definition_activity_01WT5XJJ1R5952oZDwj2x08ieydUCnoe9oY.output.status_code$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01WT5XJ0DM2E52iF77mRxKuj7Pf9zBh3en0.output.variable_workflow_01WT5XJ0O4GPI7ZJ1pEV4ICT69c3NSkEW5J$",
+                      "variable_value_new": "$activity.definition_activity_01WT5XJJ1R5952oZDwj2x08ieydUCnoe9oY.output.status_text$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_01WQN9NVVJZXK2VTifmqXfsVQSqL0ZKbZ5D"
+    ]
+  },
+  "categories": {
+    "category_01WQN9NVVJZXK2VTifmqXfsVQSqL0ZKbZ5D": {
+      "unique_name": "category_01WQN9NVVJZXK2VTifmqXfsVQSqL0ZKbZ5D",
+      "name": "BCS Operational Insights API",
+      "title": "BCS Operational Insights API",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  }
+}
