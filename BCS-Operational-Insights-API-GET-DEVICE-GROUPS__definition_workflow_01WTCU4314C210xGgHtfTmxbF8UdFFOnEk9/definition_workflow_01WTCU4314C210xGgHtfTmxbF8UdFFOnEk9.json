@@ -9,15 +9,15 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "Total Failure",
+          "value": "",
           "scope": "output",
-          "name": "O_api_status_message",
+          "name": "O_results_json",
           "type": "datatype.string",
-          "description": "Status message from API return",
+          "description": "Product Alerts List",
           "is_required": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_01WTCU43ADKVW0V80M324PfCDZ5KNZ4CvBt",
+        "unique_name": "variable_workflow_01WTCU43ADSJA1cez9KjoASRveayo6kdbis",
         "object_type": "variable_workflow"
       },
       {
@@ -32,76 +32,6 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01WTCU43AE0152VBkSyuYGBejg4lQZeWSI4",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.boolean",
-        "properties": {
-          "value": true,
-          "scope": "local",
-          "name": "L_ELSE",
-          "type": "datatype.boolean",
-          "description": "default else",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WTCU43AEEG02vbkBOOrdnHtgKCOeMOZ9i",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "I_offset",
-          "type": "datatype.string",
-          "description": "Number of items to be skipped from the start. Leave blank for default of 0 (or all)",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WTCU43ADCYH70Tqc67dQat03GzTUeiBf0",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "output",
-          "name": "O_results_json",
-          "type": "datatype.string",
-          "description": "Product Alerts List",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WTCU43ADSJA1cez9KjoASRveayo6kdbis",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "L_group_type",
-          "type": "datatype.string",
-          "description": "type of group requested",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WTCU43ACU1J5dAN5uL0W7RgJBX5UdmjFG",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "L_query_string",
-          "type": "datatype.string",
-          "description": "query string to be dynamically generated",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WTCU43ACMY86PW1htlsTSgeq84bsCUoLM",
         "object_type": "variable_workflow"
       },
       {
@@ -121,6 +51,34 @@
       {
         "schema_id": "datatype.string",
         "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_offset",
+          "type": "datatype.string",
+          "description": "Number of items to be skipped from the start. Leave blank for default of 0 (or all)",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WTCU43ADCYH70Tqc67dQat03GzTUeiBf0",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": true,
+          "scope": "local",
+          "name": "L_ELSE",
+          "type": "datatype.boolean",
+          "description": "default else",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WTCU43AEEG02vbkBOOrdnHtgKCOeMOZ9i",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
           "value": "groupMembers|groups",
           "scope": "local",
           "name": "L_regex_endpoints",
@@ -130,6 +88,20 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01WTCU43AE7GU1X6S6oDqzJ5V1JytZtLYTK",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_query_string",
+          "type": "datatype.string",
+          "description": "query string to be dynamically generated",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WTCU43ACMY86PW1htlsTSgeq84bsCUoLM",
         "object_type": "variable_workflow"
       },
       {
@@ -159,6 +131,34 @@
         },
         "unique_name": "variable_workflow_01WTCU43ACEJU3x5eFHy6XtQY4jBLLRYw0E",
         "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_group_type",
+          "type": "datatype.string",
+          "description": "type of group requested",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WTCU43ACU1J5dAN5uL0W7RgJBX5UdmjFG",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Total Failure",
+          "scope": "output",
+          "name": "O_api_status_message",
+          "type": "datatype.string",
+          "description": "Status message from API return",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WTCU43ADKVW0V80M324PfCDZ5KNZ4CvBt",
+        "object_type": "variable_workflow"
       }
     ],
     "properties": {
@@ -167,7 +167,7 @@
         "is_atomic": true
       },
       "delete_workflow_instance": false,
-      "description": "This returns a JSON based list from BCS Operational Insights API that is related to logical device groups. The user can input what kind of devices they want and this will affect the endpoint accessed\n\nTarget: HTTP Endpoint for BCS Operational Insights (either US or EMEA)\n\nAccount Key: None. Auth done via input token\n\nSteps:\n[] Check if we have a viable risk mitigation request\n[]\u003e if request is ok -\u003e proceed\n[]\u003e if request is not valid -\u003e exit\n[] Checks if there is a need to have MAX or OFFSET in the query string\n[] Makes API call to Get Risk Mitigation endpoint with query string\n[]\u003e If call ok -\u003e stores JSON based output\n[]\u003e if call not ok -\u003e stores errors\n\n\n\nMore information about this API: https://developer.cisco.com/docs/bcs-operational-insights/#!introduction",
+      "description": "This returns a JSON based list from BCS Operational Insights API that is related to logical device groups. The user can input what kind of devices they want and this will affect the endpoint accessed\n\nTarget: HTTP Endpoint for BCS Operational Insights (either US or EMEA)\n\nAccount Key: None. Auth done via input token\n\nSteps:\n[] Check if we have a viable group request\n[]\u003e if request is ok -\u003e proceed\n[]\u003e if request is not valid -\u003e exit\n[] Checks if there is a need to have MAX or OFFSET in the query string\n[] Makes API call to Get Device Groups endpoint with query string\n[]\u003e If call ok -\u003e stores JSON based output\n[]\u003e if call not ok -\u003e stores errors\n\n\n\nMore information about this API: https://developer.cisco.com/docs/bcs-operational-insights/#!introduction",
       "display_name": "BCS Operational Insights - Get_Device_Groups",
       "runtime_user": {
         "target_default": true
