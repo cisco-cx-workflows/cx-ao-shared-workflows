@@ -7,118 +7,6 @@
     "base_type": "workflow",
     "variables": [
       {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "Total Failure",
-          "scope": "output",
-          "name": "O_api_status_message",
-          "type": "datatype.string",
-          "description": "Status message from API return",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WTCLMR3WYNW3TIxmaX1WH3ArkBK7GoLiK",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "I_max",
-          "type": "datatype.string",
-          "description": "Max amount of entries to return. Leave blank for all.",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WTCLMR3Y8BJ5oqHPMUpHHAiWyszURnXjt",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "details|summary",
-          "scope": "local",
-          "name": "L_regex_endpoints",
-          "type": "datatype.string",
-          "description": "List of allowed endpoints",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WTCLMR3VU290QUHdc4J84OP7NTypLbzL0",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "L_query_string",
-          "type": "datatype.string",
-          "description": "query string to be dynamically generated",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WTCLMR3XQ2H1O785VGbFa13ldlTyuOfPH",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
-          "name": "L_risk_mitigation_type",
-          "type": "datatype.string",
-          "description": "type of risk mitigation requested",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WTCLMR3V9A94E9112rVR2hRHUubwsFda5",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.boolean",
-        "properties": {
-          "value": true,
-          "scope": "local",
-          "name": "L_ELSE",
-          "type": "datatype.boolean",
-          "description": "default else",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WTCLMR3VL8G67MJUo3fQPktcOZpaI9c1f",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "I_offset",
-          "type": "datatype.string",
-          "description": "Number of items to be skipped from the start. Leave blank for default of 0 (or all)",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WTCLMR3WGWX39LnRt7OCztvTVGwjwKKPS",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "Field Notices",
-          "scope": "input",
-          "name": "I_risk_mitigation_type",
-          "type": "datatype.string",
-          "description": "The Type of Risk Mitigation wanted, the following are the only options:\nDetails\nSummary",
-          "is_required": true,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01WTCLMR3Y0870oldzgiuN6Ym5OZcQzsEHx",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.secure_string",
         "properties": {
           "value": "",
@@ -147,6 +35,104 @@
         "object_type": "variable_workflow"
       },
       {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_max",
+          "type": "datatype.string",
+          "description": "Max amount of entries to return. Leave blank for all.",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WTCLMR3Y8BJ5oqHPMUpHHAiWyszURnXjt",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Total Failure",
+          "scope": "output",
+          "name": "O_api_status_message",
+          "type": "datatype.string",
+          "description": "Status message from API return",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WTCLMR3WYNW3TIxmaX1WH3ArkBK7GoLiK",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_query_string",
+          "type": "datatype.string",
+          "description": "query string to be dynamically generated",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WTCLMR3XQ2H1O785VGbFa13ldlTyuOfPH",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": true,
+          "scope": "local",
+          "name": "L_ELSE",
+          "type": "datatype.boolean",
+          "description": "default else",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WTCLMR3VL8G67MJUo3fQPktcOZpaI9c1f",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Summmary",
+          "scope": "input",
+          "name": "I_risk_mitigation_type",
+          "type": "datatype.string",
+          "description": "The Type of Risk Mitigation wanted, the following are the only options:\nDetails\nSummary",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WTCLMR3Y0870oldzgiuN6Ym5OZcQzsEHx",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "details|summary",
+          "scope": "local",
+          "name": "L_regex_endpoints",
+          "type": "datatype.string",
+          "description": "List of allowed endpoints",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WTCLMR3VU290QUHdc4J84OP7NTypLbzL0",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "I_offset",
+          "type": "datatype.string",
+          "description": "Number of items to be skipped from the start. Leave blank for default of 0 (or all)",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WTCLMR3WGWX39LnRt7OCztvTVGwjwKKPS",
+        "object_type": "variable_workflow"
+      },
+      {
         "schema_id": "datatype.integer",
         "properties": {
           "value": 0,
@@ -158,6 +144,20 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01WTCLMR3WPI15rXZzJjoMH5aXWyWoh8GZf",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "L_risk_mitigation_type",
+          "type": "datatype.string",
+          "description": "type of risk mitigation requested",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01WTCLMR3V9A94E9112rVR2hRHUubwsFda5",
         "object_type": "variable_workflow"
       }
     ],
