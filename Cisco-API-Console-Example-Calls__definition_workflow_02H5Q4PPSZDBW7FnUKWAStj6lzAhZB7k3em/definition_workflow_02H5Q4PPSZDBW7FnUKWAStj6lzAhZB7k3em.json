@@ -1,0 +1,197 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_02H5Q4PPSZDBW7FnUKWAStj6lzAhZB7k3em",
+    "name": "Cisco API Console - Example",
+    "title": "Cisco API Console - Example",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": null,
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Cisco API Console - Example",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "no_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_02H5QBXINSNMT68llrbDIQ7UUOOWlxhZ1M5",
+        "name": "Cisco API Console - Get_Access_Token",
+        "title": "Cisco API Console - Get_Access_Token",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Cisco API Console - Get_Access_Token",
+          "input": {
+            "variable_workflow_02H5P5DC2D6CH4H3nvQt7HFqTVu1FFQFIzp": "$global.variable_02H5P4F9T8BQG3h27mSnRy2uD4Clx7MJnOL.global.variable_02H5P4F9T8BQG3h27mSnRy2uD4Clx7MJnOL$",
+            "variable_workflow_02H5P5HZ8TA3F5LxbIsgywZFMsHFr0Q2VbZ": "$global.variable_02H5P4NWUNZK43tbqdKPDLcqluwNODriJK6.global.variable_02H5P4NWUNZK43tbqdKPDLcqluwNODriJK6$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_02H5PBTODPZK30oQBceJhI2EjyDCXb9Wlhu",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_02H5P4SAE8L233n2VzPM8aCLHTXOAunAeII",
+          "workflow_name": "Cisco API Console - Get_Access_Token"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_02H5Q6A0PQQBW36RLphKOYQrSYfoR7XNwjM",
+        "name": "Cisco API Console - Get_Bug_Details_By_ID",
+        "title": "Cisco API Console - Get_Bug_Details_By_ID",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Cisco API Console - Get_Bug_Details_By_ID",
+          "input": {
+            "variable_workflow_02H5PI49MLS7X5Dxi0QulPdounhRP1sCyGp": "CSCdr21997,CSCdr72939",
+            "variable_workflow_02H5PIXYGDKV33uuOc94UvtOc3aPf3H9zjN": "$activity.definition_activity_02H5QBXINSNMT68llrbDIQ7UUOOWlxhZ1M5.output.variable_workflow_02H5PGJPQ461X4vg5Et9Kv11fblPXQq5MJX$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_02H5PE3F8IF8Y0XDduXhCYNHQDlRHSFasSD",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_02H5PHDWIF02Z4JFCNLtk29sNnixy6HmQEo",
+          "workflow_name": "Cisco API Console - Get_Bug_Details_By_ID"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_02H5Q6IKSVYMU19KXPH1FoCgvWEJMnqtny1",
+        "name": "Cisco API Console - Get_Case_Details",
+        "title": "Cisco API Console - Get_Case_Details",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Cisco API Console - Get_Case_Details",
+          "input": {
+            "variable_workflow_02H5PT2TMRPJE1BOGCfUj46tNu28K1OQggu": "682299374,682299374",
+            "variable_workflow_02H5PT9PJYQSR3U6mKrTrE5yUqlHbzEt3Ck": "$activity.definition_activity_02H5QBXINSNMT68llrbDIQ7UUOOWlxhZ1M5.output.variable_workflow_02H5PGJPQ461X4vg5Et9Kv11fblPXQq5MJX$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_02H5PE3F8IF8Y0XDduXhCYNHQDlRHSFasSD",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_02H5PSLTHYJ0V0Gbk40ZUWneLoPYGvpvw60",
+          "workflow_name": "Cisco API Console - Get_Case_Summary"
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_02H5P56ZOSH6D1Cj5Kp5f4f1CdTlP0ZW2BU"
+    ]
+  },
+  "categories": {
+    "category_02H5P56ZOSH6D1Cj5Kp5f4f1CdTlP0ZW2BU": {
+      "unique_name": "category_02H5P56ZOSH6D1Cj5Kp5f4f1CdTlP0ZW2BU",
+      "name": "Cisco API Console",
+      "title": "Cisco API Console",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "targets": {
+    "definition_target_02H5PBTODPZK30oQBceJhI2EjyDCXb9Wlhu": {
+      "unique_name": "definition_target_02H5PBTODPZK30oQBceJhI2EjyDCXb9Wlhu",
+      "name": "Cisco.API.Console.Authentication.Endpoint",
+      "title": "Cisco.API.Console.Authentication.Endpoint",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": true,
+        "display_name": "Cisco.API.Console.Authentication.Endpoint",
+        "host": "id.cisco.com",
+        "ignore_proxy": false,
+        "no_runtime_user": true,
+        "path": "/oauth2/default/v1/",
+        "port": 443,
+        "protocol": "https"
+      }
+    },
+    "definition_target_02H5PE3F8IF8Y0XDduXhCYNHQDlRHSFasSD": {
+      "unique_name": "definition_target_02H5PE3F8IF8Y0XDduXhCYNHQDlRHSFasSD",
+      "name": "Cisco.API.Console",
+      "title": "Cisco.API.Console",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "description": "",
+        "disable_certificate_validation": true,
+        "display_name": "Cisco.API.Console",
+        "host": "apix.cisco.com",
+        "ignore_proxy": false,
+        "no_runtime_user": true,
+        "port": 443,
+        "protocol": "https"
+      }
+    }
+  },
+  "variables": {
+    "variable_02H5P4F9T8BQG3h27mSnRy2uD4Clx7MJnOL": {
+      "unique_name": "variable_02H5P4F9T8BQG3h27mSnRy2uD4Clx7MJnOL",
+      "properties": {
+        "value": "ENTER YOUR CLIENT ID HERE",
+        "scope": "global",
+        "name": "API.Console.Client.ID",
+        "type": "datatype.string",
+        "is_required": false,
+        "display_on_wizard": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    },
+    "variable_02H5P4NWUNZK43tbqdKPDLcqluwNODriJK6": {
+      "unique_name": "variable_02H5P4NWUNZK43tbqdKPDLcqluwNODriJK6",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "API.Console.Client.Secret",
+        "type": "datatype.secure_string",
+        "is_required": false,
+        "display_on_wizard": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "atomic_workflows": [
+    "definition_workflow_02H5P4SAE8L233n2VzPM8aCLHTXOAunAeII",
+    "definition_workflow_02H5PHDWIF02Z4JFCNLtk29sNnixy6HmQEo",
+    "definition_workflow_02H5PSLTHYJ0V0Gbk40ZUWneLoPYGvpvw60"
+  ],
+  "dependent_workflows": [
+    "definition_workflow_02H5P4SAE8L233n2VzPM8aCLHTXOAunAeII",
+    "definition_workflow_02H5PHDWIF02Z4JFCNLtk29sNnixy6HmQEo",
+    "definition_workflow_02H5PSLTHYJ0V0Gbk40ZUWneLoPYGvpvw60"
+  ]
+}
