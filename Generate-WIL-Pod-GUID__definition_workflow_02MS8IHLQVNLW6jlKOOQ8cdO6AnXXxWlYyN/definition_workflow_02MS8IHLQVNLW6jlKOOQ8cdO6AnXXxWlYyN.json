@@ -1,0 +1,110 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_02MS8IHLQVNLW6jlKOOQ8cdO6AnXXxWlYyN",
+    "name": "RUN ME FIRST – Generate Pod GUID",
+    "title": "RUN ME FIRST – Generate Pod GUID",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "O_POD_NUMBER",
+          "type": "datatype.string",
+          "description": "This is your pod number!",
+          "is_required": false,
+          "display_on_wizard": false,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_02MS8JAFVJDFR2C54jof0848Xj0x0a9zLTa",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "RUN ME FIRST – Generate Pod GUID",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "no_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_02MS8IMUMBC8476h3QybqzEBf3eAt4rdtWj",
+        "name": "Execute Python Script",
+        "title": "Generate GUID",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Generate GUID",
+          "script": "import random, string, sys\n\nexisting_guids = sys.argv[1]\nfound_new_guid = False\nnew_guid = ''\n\n\ndef generate_guid(length=6):\n    chars = string.ascii_uppercase + string.digits + string.ascii_lowercase\n    return ''.join(random.choices(chars, k=length))\n\nwhile not found_new_guid:\n  guid = generate_guid()\n  if guid not in existing_guids:\n    new_guid = guid\n    found_new_guid = True\n",
+          "script_arguments": [
+            "$global.variable_02MS8I17QSFFO4kX5c0qrlJuebidfVhzelT.global.variable_02MS8I17QSFFO4kX5c0qrlJuebidfVhzelT$"
+          ],
+          "script_queries": [
+            {
+              "script_query": "new_guid",
+              "script_query_name": "new_guid",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_02MS8JH06XZBM216gnqqh29cNYE0EYvtAf2",
+        "name": "Set Variables",
+        "title": "Setup Output GUID",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Setup Output GUID",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_02MS8IHLQVNLW6jlKOOQ8cdO6AnXXxWlYyN.output.variable_workflow_02MS8JAFVJDFR2C54jof0848Xj0x0a9zLTa$",
+              "variable_value_new": "$activity.definition_activity_02MS8IMUMBC8476h3QybqzEBf3eAt4rdtWj.output.script_queries.new_guid$"
+            },
+            {
+              "variable_to_update": "$global.variable_02MS8I17QSFFO4kX5c0qrlJuebidfVhzelT.global.variable_02MS8I17QSFFO4kX5c0qrlJuebidfVhzelT$",
+              "variable_value_new": "$global.variable_02MS8I17QSFFO4kX5c0qrlJuebidfVhzelT.global.variable_02MS8I17QSFFO4kX5c0qrlJuebidfVhzelT$,$activity.definition_activity_02MS8IMUMBC8476h3QybqzEBf3eAt4rdtWj.output.script_queries.new_guid$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "variables": {
+    "variable_02MS8I17QSFFO4kX5c0qrlJuebidfVhzelT": {
+      "unique_name": "variable_02MS8I17QSFFO4kX5c0qrlJuebidfVhzelT",
+      "properties": {
+        "value": "g5brPo,CqBG98",
+        "scope": "global",
+        "name": "Cisco.Live.GUID.Used.List",
+        "type": "datatype.string",
+        "is_required": false,
+        "display_on_wizard": false,
+        "is_invisible": false,
+        "variable_string_format": "text"
+      },
+      "object_type": "variable"
+    }
+  }
+}
